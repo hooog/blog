@@ -45,3 +45,83 @@ tags:
 
 6、由于之前用`Github`托管造成百度站长抓取网站一直失败，显示服务器被拒绝。后来利用给百度指定`Coding`专线的方式才解决该问题。
 ![png](/images/hexo/4.png)
+
+7、将网站链接提交到百度
+百度提供三种验证方式，以Html标签为例，在themes\next\layout\_partials\head.swing中添加验证代码：
+```<meta name="baidu-site-verification" content="s8Pe1TBqyy" />```
+同理将链接提交到Google和搜狗
+
+8、给站点添加sitemap
+
+- hexo安装sitemap
+```
+npm install hexo-generator-sitemap --save #sitemap.xml适合提交给谷歌搜素引擎
+npm install hexo-generator-baidu-sitemap --save #baidusitemap.xml适合提交百度搜索引擎
+```
+
+- 在主题配置文件`_config.yml`中找到`sitemap`添加以下代码
+```
+# 自动生成sitemap
+sitemap:
+	path: sitemap.xml
+baidusitemap:
+	path: baidusitemap.xml
+```
+
+- 修改站点`_config`
+```
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://www.ihoge.cn
+```
+
+9、添加蜘蛛协议robots.txt
+新建robots.txt文件，添加以下文件内容，把robots.txt放在hexo站点的source文件下。
+```
+User-agent: *
+Allow: /
+
+Sitemap: http://www.ihoge.cn/sitemap.xml
+Sitemap: http://www.ihoge.cn/baidusitemap.xml
+```
+
+hexo d -g 提交后到百度站长平台找到Robots检测并更新查看是否生效。
+
+10、keywords 和 description
+在\scaffolds\post.md中添加如下代码，用于生成的文章中添加关键字和描述。
+```
+keywords: 
+description: 
+```
+在\themes\next\layout\_partials\head.swig有如下代码，用于生成文章的keywords。暂时还没找到生成description的位置。
+```
+{% if page.keywords %}
+  <meta name="keywords" content="{{ page.keywords }}" />
+{% elif page.tags and page.tags.length %}
+  <meta name="keywords" content="{% for tag in page.tags %}{{ tag.name }},{% endfor %}" />
+{% elif theme.keywords %}
+  <meta name="keywords" content="{{ theme.keywords }}" />
+{% endif %}
+```
+
+然后在\themes\next\layout\_macro\post.swig中找到并去掉以下代码，否则首页的文章摘要就会变成文章的description。
+```
+{% if post.description %}
+  {{ post.description }}
+  <div class="post-more-link text-center">
+    <a class="btn" href="{{ url_for(post.path) }}">
+      {{ __('post.read_more') }} &raquo;
+    </a>
+  </div>
+```
+（这里未操作）
+
+11、修改文章链接
+HEXO默认的文章链接形式为`domain/year/month/day/postname`，默认就是一个四级url，并且可能造成url过长，对搜索引擎是十分不友好的，我们可以改成 domain/postname 的形式。编辑站点`_config.yml`文件，修改其中的`permalink`字段改为`permalink: :year/:title/`即可。
+
+
+
+
+
+
+
