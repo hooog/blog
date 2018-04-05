@@ -93,27 +93,6 @@ hexo d -g 提交后到百度站长平台找到Robots检测并更新查看是否�
 keywords: 
 description: 
 ```
-在\themes\next\layout\_partials\head.swig有如下代码，用于生成文章的keywords。暂时还没找到生成description的位置。
-```
-{% if page.keywords %}
-  <meta name="keywords" content="{{ page.keywords }}" />
-{% elif page.tags and page.tags.length %}
-  <meta name="keywords" content="{% for tag in page.tags %}{{ tag.name }},{% endfor %}" />
-{% elif theme.keywords %}
-  <meta name="keywords" content="{{ theme.keywords }}" />
-{% endif %}
-```
-
-然后在\themes\next\layout\_macro\post.swig中找到并去掉以下代码，否则首页的文章摘要就会变成文章的description。
-```
-{% if post.description %}
-  {{ post.description }}
-  <div class="post-more-link text-center">
-    <a class="btn" href="{{ url_for(post.path) }}">
-      {{ __('post.read_more') }} &raquo;
-    </a>
-  </div>
-```
 （这里未操作）
 
 11、修改文章链接
