@@ -381,11 +381,11 @@ from sklearn.model_selection import GridSearchCV
 entropy_thresholds = np.linspace(0, 1, 100)
 gini_thresholds = np.linspace(0, 0.2, 100)
 #设置参数矩阵：
-param_grid = [{'cruterion': ['entropy'], 'min_impurity_decrease': entropy_thresholds},
-              {'cruterion': ['gini'], 'min_impurity_decrease': gini_thresholds},
+param_grid = [{'criterion': ['entropy'], 'min_impurity_decrease': entropy_thresholds},
+              {'criterion': ['gini'], 'min_impurity_decrease': gini_thresholds},
               {'max_depth': np.arange(2,10)},
               {'min_samples_split': np.arange(2,30,2)}]
-cfl = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5)
+clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5)
 clf.fit(X, y)
 print("best param:{0}\nbest score:{1}".format(clf.best_params_, clf.best_score_))
 ```
