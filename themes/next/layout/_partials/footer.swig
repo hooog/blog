@@ -22,9 +22,9 @@
 </div>
 
 {% if theme.footer.powered %}
-  <div class="powered-by">{#
-  #}{{ __('footer.powered', '<a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a>') }}{#
-#}</div>
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
 {% endif %}
 
 {% if theme.footer.powered and theme.footer.theme.enable %}
