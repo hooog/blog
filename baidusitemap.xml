@@ -365,26 +365,6 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/hive.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hive使用Mysql作为元数据库报错的bug解决办法</title>
-        <pubTime>2018-03-25T09:05:59.000Z</pubTime>
-        
-        <tag>Hive</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/hexo-github.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
@@ -407,11 +387,11 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/hivebug1.html</loc>
+    <loc>http://www.ihoge.cn/2018/hive.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>Hive提交MapReduce任务失败The auxService:mapreduce_shuffle does not exist</title>
+        <title>Hive使用Mysql作为元数据库报错的bug解决办法</title>
         <pubTime>2018-03-25T09:05:59.000Z</pubTime>
         
         <tag>Hive</tag>
@@ -433,6 +413,26 @@
         <display>
         <title>Hive-2.2.0启动webui端口</title>
         <pubTime>2018-03-25T16:28:59.000Z</pubTime>
+        
+        <tag>Hive</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/hivebug1.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hive提交MapReduce任务失败The auxService:mapreduce_shuffle does not exist</title>
+        <pubTime>2018-03-25T09:05:59.000Z</pubTime>
         
         <tag>Hive</tag>
          
@@ -543,12 +543,12 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/sklearn1.html</loc>
+    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>支持向量机、学习曲线、查准率和召回率</title>
-        <pubTime>2018-03-28T09:05:59.000Z</pubTime>
+        <title>KNN-糖尿病预测-学习曲线的应用</title>
+        <pubTime>2018-03-29T09:05:59.000Z</pubTime>
         
         <tag>scikit-learn</tag>
          
@@ -563,12 +563,12 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
+    <loc>http://www.ihoge.cn/2018/sklearn1.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>KNN-糖尿病预测-学习曲线的应用</title>
-        <pubTime>2018-03-29T09:05:59.000Z</pubTime>
+        <title>支持向量机、学习曲线、查准率和召回率</title>
+        <pubTime>2018-03-28T09:05:59.000Z</pubTime>
         
         <tag>scikit-learn</tag>
          
@@ -611,26 +611,6 @@
         <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
         <tag>MLlib</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习scikit-learn 中的设置以及预估对象</title>
-        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
          
          
            
@@ -693,6 +673,26 @@
         <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
         <tag>MLlib</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习scikit-learn 中的设置以及预估对象</title>
+        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
          
          
            

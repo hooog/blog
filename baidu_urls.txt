@@ -17,8 +17,8 @@ http://www.ihoge.cn/2018/KNN.html
 http://www.ihoge.cn/2018/sklearn1.html
 http://www.ihoge.cn/2018/hadoop.html
 http://www.ihoge.cn/2018/hivewebhui.html
-http://www.ihoge.cn/2018/hivebug1.html
 http://www.ihoge.cn/2018/hive.html
+http://www.ihoge.cn/2018/hivebug1.html
 http://www.ihoge.cn/2018/监督学习.html
 http://www.ihoge.cn/2018/Hbaseproblom.html
 http://www.ihoge.cn/2018/Pyhive.html
@@ -31,9 +31,9 @@ http://www.ihoge.cn/2018/JavaMysql.html
 http://www.ihoge.cn/2018/分布式集群架构实验手册.html
 http://www.ihoge.cn/2018/hexo-github.html
 http://www.ihoge.cn/2018/MLlib基本数据类型.html
-http://www.ihoge.cn/2018/利用逻辑回归创建工作流.html
 http://www.ihoge.cn/2018/基本统计工具.html
 http://www.ihoge.cn/2018/推荐算法.html
+http://www.ihoge.cn/2018/利用逻辑回归创建工作流.html
 http://www.ihoge.cn/2018/mllib分类与回归.html
 http://www.ihoge.cn/2018/朴素贝叶斯.html
 http://www.ihoge.cn/2018/Java面向对象+内存原理+内存优化1.html
