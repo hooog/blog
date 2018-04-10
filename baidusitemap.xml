@@ -4,88 +4,8 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/test.html</loc>
-    <lastmod>2018-04-10T07:13:52.537Z</lastmod>
-    <data>
-        <display>
-        <title>test</title>
-        <pubTime>2018-04-10T07:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/PCA+SVM%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.html</loc>
-    <lastmod>2018-04-09T17:04:19.000Z</lastmod>
-    <data>
-        <display>
-        <title>PCA主成分分析+SVM人脸识别准确率97%+</title>
-        <pubTime>2018-04-09T17:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/MultinomialNB.html</loc>
-    <lastmod>2018-04-09T11:24:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>朴素贝叶斯--文档分类</title>
-        <pubTime>2018-04-09T12:10:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/SVM%E7%BB%98%E5%9B%BE.html</loc>
-    <lastmod>2018-04-08T16:41:37.000Z</lastmod>
-    <data>
-        <display>
-        <title>SVM绘图</title>
-        <pubTime>2018-04-08T17:10:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/sklearn-ensemble.html</loc>
-    <lastmod>2018-04-08T16:40:58.000Z</lastmod>
+    <lastmod>2018-04-10T10:01:44.986Z</lastmod>
     <data>
         <display>
         <title>sklearn聚合算法整理</title>
@@ -104,8 +24,68 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/SVM%E7%BB%98%E5%9B%BE.html</loc>
+    <lastmod>2018-04-10T10:01:40.957Z</lastmod>
+    <data>
+        <display>
+        <title>SVM绘图</title>
+        <pubTime>2018-04-08T17:10:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/MultinomialNB.html</loc>
+    <lastmod>2018-04-10T10:01:37.805Z</lastmod>
+    <data>
+        <display>
+        <title>朴素贝叶斯--文档分类</title>
+        <pubTime>2018-04-09T12:10:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/PCA+SVM%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.html</loc>
+    <lastmod>2018-04-10T10:01:34.819Z</lastmod>
+    <data>
+        <display>
+        <title>PCA主成分分析+SVM人脸识别准确率97%+</title>
+        <pubTime>2018-04-09T17:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BASVC.html</loc>
-    <lastmod>2018-04-08T16:39:22.000Z</lastmod>
+    <lastmod>2018-04-10T10:01:23.892Z</lastmod>
     <data>
         <display>
         <title>SVM支持向量机SVC实现</title>
@@ -185,11 +165,31 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/mllib%E5%88%86%E7%B1%BB%E4%B8%8E%E5%9B%9E%E5%BD%92.html</loc>
+    <loc>http://www.ihoge.cn/2018/hivewebhui.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>MLlib分类与回归</title>
+        <title>Hive-2.2.0启动webui端口</title>
+        <pubTime>2018-03-25T16:28:59.000Z</pubTime>
+        
+        <tag>Hive</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/MLlib%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>MLlib基本数据类型</title>
         <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
         <tag>MLlib</tag>
@@ -205,19 +205,19 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/Hbaseproblom.html</loc>
+    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>Hbase启动后进程丢失的原因分析</title>
-        <pubTime>2018-03-21T03:59:21.000Z</pubTime>
+        <title>scikit-learn逻辑回归</title>
+        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
         
-        <tag>Hbase</tag>
+        <tag>scikit-learn</tag>
          
          
            
              
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
           
         </display>
     </data>
@@ -247,6 +247,24 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
+        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/Recursive.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
@@ -267,33 +285,15 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/JavaExtends.html</loc>
+    <loc>http://www.ihoge.cn/2018/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1+%E5%86%85%E5%AD%98%E5%8E%9F%E7%90%86+%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%961.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>Java的继承、多态、抽象</title>
-        <pubTime>2018-03-16T02:05:59.000Z</pubTime>
+        <title>Java面向对象编程思想+Java内存原理+Java读写优化</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
         <tag>Java</tag>
          
-         
-           
-             
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
-        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
-        
          
            
              
@@ -407,26 +407,6 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/hivewebhui.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hive-2.2.0启动webui端口</title>
-        <pubTime>2018-03-25T16:28:59.000Z</pubTime>
-        
-        <tag>Hive</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/hivebug1.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
@@ -447,17 +427,39 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/JavaMysql.html</loc>
+    <loc>http://www.ihoge.cn/2018/Hbaseproblom.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>JavaMysql</title>
-        <pubTime>2018-03-15T17:05:59.000Z</pubTime>
+        <title>Hbase启动后进程丢失的原因分析</title>
+        <pubTime>2018-03-21T03:59:21.000Z</pubTime>
         
+        <tag>Hbase</tag>
+         
          
            
              
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/mllib%E5%88%86%E7%B1%BB%E4%B8%8E%E5%9B%9E%E5%BD%92.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>MLlib分类与回归</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        
+        <tag>MLlib</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
           
         </display>
     </data>
@@ -505,33 +507,13 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/scala1.html</loc>
+    <loc>http://www.ihoge.cn/2018/JavaMysql.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>Scala数据类型及基础语法</title>
-        <pubTime>2018-03-31T16:28:59.000Z</pubTime>
+        <title>JavaMysql</title>
+        <pubTime>2018-03-15T17:05:59.000Z</pubTime>
         
-         
-           
-             
-              <breadCrumb title="Scala" url="http://www.ihoge.cn/categories/Scala/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1+%E5%86%85%E5%AD%98%E5%8E%9F%E7%90%86+%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%961.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Java面向对象编程思想+Java内存原理+Java读写优化</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
          
            
              
@@ -543,19 +525,17 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
+    <loc>http://www.ihoge.cn/2018/scala1.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>KNN-糖尿病预测-学习曲线的应用</title>
-        <pubTime>2018-03-29T09:05:59.000Z</pubTime>
+        <title>Scala数据类型及基础语法</title>
+        <pubTime>2018-03-31T16:28:59.000Z</pubTime>
         
-        <tag>scikit-learn</tag>
-         
          
            
              
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+              <breadCrumb title="Scala" url="http://www.ihoge.cn/categories/Scala/"/>
           
         </display>
     </data>
@@ -583,12 +563,12 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
+    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>scikit-learn逻辑回归</title>
-        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
+        <title>KNN-糖尿病预测-学习曲线的应用</title>
+        <pubTime>2018-03-29T09:05:59.000Z</pubTime>
         
         <tag>scikit-learn</tag>
          
@@ -611,6 +591,26 @@
         <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
         <tag>MLlib</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习scikit-learn 中的设置以及预估对象</title>
+        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
          
          
            
@@ -685,31 +685,11 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>机器学习scikit-learn 中的设置以及预估对象</title>
-        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/MLlib%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>MLlib基本数据类型</title>
+        <title>DStream的基本操作</title>
         <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
         <tag>MLlib</tag>
@@ -745,14 +725,14 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0.html</loc>
+    <loc>http://www.ihoge.cn/2018/%E9%99%8D%E7%BB%B4%E6%93%8D%E4%BD%9C.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</title>
-        <pubTime>2018-03-24T09:05:59.000Z</pubTime>
+        <title>MLlib降维操作</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
-        <tag>scikit-learn</tag>
+        <tag>MLlib</tag>
          
          
            
@@ -785,14 +765,14 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/%E9%99%8D%E7%BB%B4%E6%93%8D%E4%BD%9C.html</loc>
+    <loc>http://www.ihoge.cn/2018/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>MLlib降维操作</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</title>
+        <pubTime>2018-03-24T09:05:59.000Z</pubTime>
         
-        <tag>MLlib</tag>
+        <tag>scikit-learn</tag>
          
          
            
@@ -825,19 +805,19 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
+    <loc>http://www.ihoge.cn/2018/JavaExtends.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>DStream的基本操作</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        <title>Java的继承、多态、抽象</title>
+        <pubTime>2018-03-16T02:05:59.000Z</pubTime>
         
-        <tag>MLlib</tag>
+        <tag>Java</tag>
          
          
            
              
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
           
         </display>
     </data>
