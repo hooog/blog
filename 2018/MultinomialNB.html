@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="scikit-learn," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="把文档转换成向量TF-IDF是一种统计方法，用以评估一个词语对于一份文档的重要程度。  TF表示词频， 即：词语在一片文档中出现的次数 ÷ 词语总数 IDF表示一个词的逆向文档频率指数， 即：对（总文档数目÷包含该词语的文档的数目）的商取对数  $log(m / m_{i-in-m})$  基础原理：词语的重要性随着它在文档中出现的次数成正比例增加，但同时会随着它在语料库中出现的频率呈反比下降。">
+<meta name="keywords" content="scikit-learn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="朴素贝叶斯--文档分类">
+<meta property="og:url" content="http://www.ihoge.cn/2018/MultinomialNB.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="把文档转换成向量TF-IDF是一种统计方法，用以评估一个词语对于一份文档的重要程度。  TF表示词频， 即：词语在一片文档中出现的次数 ÷ 词语总数 IDF表示一个词的逆向文档频率指数， 即：对（总文档数目÷包含该词语的文档的数目）的商取对数  $log(m / m_{i-in-m})$  基础原理：词语的重要性随着它在文档中出现的次数成正比例增加，但同时会随着它在语料库中出现的频率呈反比下降。">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fq6g2bkj9sj30hf09lta4.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fq6kdjano8j30gq0hegm8.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fq6kc4ryv9j30h00gu0tm.jpg">
+<meta property="og:updated_time" content="2018-04-09T11:24:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="朴素贝叶斯--文档分类">
+<meta name="twitter:description" content="把文档转换成向量TF-IDF是一种统计方法，用以评估一个词语对于一份文档的重要程度。  TF表示词频， 即：词语在一片文档中出现的次数 ÷ 词语总数 IDF表示一个词的逆向文档频率指数， 即：对（总文档数目÷包含该词语的文档的数目）的商取对数  $log(m / m_{i-in-m})$  基础原理：词语的重要性随着它在文档中出现的次数成正比例增加，但同时会随着它在语料库中出现的频率呈反比下降。">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fq6g2bkj9sj30hf09lta4.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/MultinomialNB.html"/>
+
+
+
+
+
+  <title>朴素贝叶斯--文档分类 | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/MultinomialNB.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">朴素贝叶斯--文档分类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-09T20:10:59+08:00">
+                2018-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="把文档转换成向量"><a href="#把文档转换成向量" class="headerlink" title="把文档转换成向量"></a>把文档转换成向量</h3><p>TF-IDF是一种统计方法，用以评估一个词语对于一份文档的重要程度。</p>
+<ul>
+<li>TF表示词频， 即：词语在一片文档中出现的次数 ÷ 词语总数</li>
+<li>IDF表示一个词的<strong>逆向文档频率指数</strong>， 即：对（总文档数目÷包含该词语的文档的数目）的商取对数  $log(m / m_{i-in-m})$</li>
+</ul>
+<p>基础原理：词语的重要性随着它在文档中出现的次数成正比例增加，但同时会随着它在语料库中出现的频率呈反比下降。</p>
+<p>sklearn中有包实现了把文档转换成向量的过程，首先把训练用额语料库读入内存：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time </span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_files</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t = time()</span><br><span class="line">news_train = load_files(<span class="string">'code/datasets/mlcomp/379/train'</span>)</span><br><span class="line">print(len(news_train.data), <span class="string">"\n"</span>,len(news_train.target_names))</span><br><span class="line">print(<span class="string">"done in &#123;&#125; seconds"</span>.format(time() - t))</span><br></pre></td></tr></table></figure>
+<pre><code>13180 
+ 20
+done in 6.034918308258057 seconds
+</code></pre><p>news_train.data是一个数组，包含了所有文档的文本信息。<br>news_train.target_names也是一个数组，包含了所有文档的属性类别，对应的是读取train文件夹时，train文件夹下所有的子文件夹名称。</p>
+<p>该语料库总共有13180个文档，其中分成20个类别，接着需要转换成由TF-IDF表达的权重信息构成向量。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fq6g2bkj9sj30hf09lta4.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"></span><br><span class="line">t = time()</span><br><span class="line">vectorizer  = TfidfVectorizer(encoding = <span class="string">'latin-1'</span>)</span><br><span class="line">X_train = vectorizer.fit_transform((d <span class="keyword">for</span>  d <span class="keyword">in</span> news_train.data))</span><br><span class="line">print(<span class="string">"文档 [&#123;0&#125;]特征值的非零个数:&#123;1&#125;"</span>.format(news_train.filenames[<span class="number">0</span>] , X_train[<span class="number">0</span>].getnnz()))</span><br><span class="line">print(<span class="string">"训练集："</span>,X_train.shape)</span><br><span class="line">print(<span class="string">"耗时： &#123;0&#125; s."</span>.format(time() - t))</span><br></pre></td></tr></table></figure>
+<pre><code>文档 [code/datasets/mlcomp/379/train/talk.politics.misc/17860-178992]特征值的非零个数:108
+训练集： (13180, 130274)
+耗时： 3.740567207336426 s.
+</code></pre><p><strong>TfidfVectorizer</strong>类是用来把所有的文档转换成矩阵，该矩阵每一行都代表一个文档，一行中的每个元素代表一个对应的词语的重要性，词语的重要性由TF-IDF来表示。其<code>fit_transform()</code>方法是<code>fit()</code>和<code>transform()</code>的结合,<code>fit()</code>先完成语料库分析，提取词典等操作<code>transform()</code>把每篇文档转换为向量，最终构成一个矩阵，保存在<code>X_train</code>里。</p>
+<p>程序输出可以看到该词典总共有130274个词语，即每篇文档都可以转换成一个13274维的向量组。第一篇文档中只有108个非零元素，即这篇文档由108个不重复的单词组成，在这篇文档中出现的这108个单词次的<strong>TF-IDF</strong>会被计算出来，保存在向量的指定位置。这里的到X_train是一个纬度为12180 x 130274的系数矩阵。</p>
+<h3 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> MultinomialNB</span><br><span class="line"></span><br><span class="line">t = time()</span><br><span class="line">y_train = news_train.target</span><br><span class="line">clf = MultinomialNB(alpha=<span class="number">0.001</span>)  <span class="comment">#alpga表示平滑参数，越小越容易造成过拟合；越大越容易欠拟合。</span></span><br><span class="line">clf.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"train_score:"</span>, clf.score(X_train, y_train))</span><br><span class="line">print(<span class="string">"耗时：&#123;0&#125;s"</span>.format(time() - t))</span><br></pre></td></tr></table></figure>
+<pre><code>train_score: 0.9974203338391502
+耗时：0.23757004737854004s
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载测试集检验结果</span></span><br><span class="line">news_test = load_files(<span class="string">'code/datasets/mlcomp/379/test'</span>)</span><br><span class="line">print(len(news_test.data))</span><br><span class="line">print(len(news_test.target_names))</span><br></pre></td></tr></table></figure>
+<pre><code>5648
+20
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把测试集文档数学向量化</span></span><br><span class="line">t = time()</span><br><span class="line"><span class="comment"># vectorizer  = TfidfVectorizer(encoding = 'latin-1')  # 这里注意vectorizer这条语句上文已经生成执行，这里不可重复执行</span></span><br><span class="line">X_test = vectorizer.transform((d <span class="keyword">for</span>  d <span class="keyword">in</span> news_test.data))</span><br><span class="line">y_test = news_test.target</span><br><span class="line"></span><br><span class="line">print(<span class="string">"测试集："</span>,X_test.shape)</span><br><span class="line">print(<span class="string">"耗时： &#123;0&#125; s."</span>.format(time() - t))</span><br></pre></td></tr></table></figure>
+<pre><code>测试集： (5648, 130274)
+耗时： 1.64164400100708 s.
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">y_pred = clf.predict(X_test)</span><br><span class="line">print(<span class="string">"Train_score:"</span>, clf.score(X_train, y_train))</span><br><span class="line">print(<span class="string">"Test_score:"</span>, clf.score(X_test, y_test))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    r = np.random.randint(X_test.shape[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">if</span> clf.predict(X_test[r]) == y_test[r]:</span><br><span class="line">        print(<span class="string">"√：&#123;0&#125;"</span>.format(r))</span><br><span class="line">    <span class="keyword">else</span>:print(<span class="string">"X：&#123;0&#125;"</span>.format(r))</span><br></pre></td></tr></table></figure>
+<pre><code>Train_score: 0.9974203338391502
+Test_score: 0.9123583569405099
+√：1874
+√：2214
+√：2579
+√：1247
+√：375
+√：5384
+√：5029
+√：1951
+√：4885
+√：1980
+</code></pre><h3 id="评价模型："><a href="#评价模型：" class="headerlink" title="评价模型："></a>评价模型：</h3><h4 id="classification-report-查看查准率、召回率、F1"><a href="#classification-report-查看查准率、召回率、F1" class="headerlink" title="classification_report()查看查准率、召回率、F1"></a><code>classification_report()</code>查看查准率、召回率、F1</h4><p>使用<code>classification_report()</code>函数查看针对每个类别的预测准确性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line"></span><br><span class="line">print(clf)</span><br><span class="line">print(<span class="string">"查看针对每个类别的预测准确性："</span>)</span><br><span class="line">print(classification_report(y_test, y_pred, </span><br><span class="line">                            target_names = news_test.target_names))</span><br></pre></td></tr></table></figure>
+<pre><code>MultinomialNB(alpha=0.001, class_prior=None, fit_prior=True)
+查看针对每个类别的预测准确性：
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.90      0.92      0.91       245
+           comp.graphics       0.80      0.90      0.84       298
+ comp.os.ms-windows.misc       0.85      0.80      0.82       292
+comp.sys.ibm.pc.hardware       0.81      0.82      0.81       301
+   comp.sys.mac.hardware       0.90      0.92      0.91       256
+          comp.windows.x       0.89      0.88      0.88       297
+            misc.forsale       0.88      0.82      0.85       290
+               rec.autos       0.93      0.93      0.93       324
+         rec.motorcycles       0.97      0.97      0.97       294
+      rec.sport.baseball       0.97      0.96      0.97       315
+        rec.sport.hockey       0.97      0.99      0.98       302
+               sci.crypt       0.96      0.95      0.96       297
+         sci.electronics       0.91      0.85      0.88       313
+                 sci.med       0.96      0.96      0.96       277
+               sci.space       0.95      0.97      0.96       305
+  soc.religion.christian       0.93      0.96      0.94       293
+      talk.politics.guns       0.90      0.96      0.93       246
+   talk.politics.mideast       0.95      0.98      0.97       296
+      talk.politics.misc       0.91      0.89      0.90       236
+      talk.religion.misc       0.89      0.77      0.82       171
+
+             avg / total       0.91      0.91      0.91      5648
+</code></pre><h4 id="confusion-matrix混淆矩阵"><a href="#confusion-matrix混淆矩阵" class="headerlink" title="confusion_matrix混淆矩阵"></a><code>confusion_matrix</code>混淆矩阵</h4><p>通过<code>confusion_matrix</code>函数生成混淆矩阵，观察每种类别别错误分类的情况。例如，这些被错误分类的文档是被错误分类到哪些类别里。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line"></span><br><span class="line">cm = confusion_matrix(y_test, y_pred)</span><br><span class="line">print(cm)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一行表示类别0的文档被正确分类的由255个，其中有2、5、13个错误分类被分到了14、15、19类中了。</span></span><br></pre></td></tr></table></figure>
+<pre><code>[[225   0   0   0   0   0   0   0   0   0   0   0   0   0   2   5   0   0   0  13]
+ [  1 267   6   4   2   8   1   1   0   0   0   2   3   2   1   0   0   0   0   0]
+ [  1  12 233  26   4   9   3   0   0   0   0   0   2   1   0   0   0   0   1   0]
+ [  0   9  16 246   7   3  10   1   0   0   1   0   8   0   0   0   0   0   0   0]
+ [  0   2   3   5 236   2   2   1   0   0   0   3   1   0   1   0   0   0   0   0]
+ [  0  22   6   3   0 260   0   0   0   2   0   1   0   0   1   0   2   0   0   0]
+ [  0   2   5  11   3   1 238   9   2   3   1   0   7   0   1   0   2   2   3   0]
+ [  0   1   0   0   1   0   7 302   4   1   0   0   1   2   3   0   2   0   0   0]
+ [  0   0   0   0   0   2   2   3 285   0   0   0   1   0   0   0   0   0   0   1]
+ [  0   1   0   0   1   1   1   2   0 302   6   0   0   1   0   0   0   0   0   0]
+ [  0   0   0   0   0   0   0   0   2   1 299   0   0   0   0   0   0   0   0   0]
+ [  0   1   2   1   1   1   2   0   0   0   0 283   1   0   0   0   2   1   2   0]
+ [  0  11   2   6   5   2   4   5   1   1   1   3 267   1   3   0   0   0   1   0]
+ [  1   1   0   1   1   1   0   0   0   0   0   1   1 265   2   1   0   0   2   0]
+ [  0   3   0   0   1   0   0   0   0   0   0   1   1   1 296   0   1   0   1   0]
+ [  3   1   0   1   0   0   0   0   0   0   1   0   0   2   0 281   0   1   2   1]
+ [  1   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0 237   1   4   1]
+ [  1   0   0   0   0   1   0   0   0   0   0   0   0   0   0   3   0 290   1   0]
+ [  1   1   0   0   1   1   0   1   0   0   0   0   0   0   0   1  12   7 210   1]
+ [ 16   1   0   0   0   0   0   0   0   0   0   0   0   0   0  12   5   2   4 131]]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">6</span>, <span class="number">6</span>), dpi=<span class="number">120</span>)</span><br><span class="line">plt.title(<span class="string">'Confusion matrix of the classifier'</span>)</span><br><span class="line">ax = plt.gca()                                  </span><br><span class="line">ax.spines[<span class="string">'right'</span>].set_color(<span class="string">'none'</span>)            </span><br><span class="line">ax.spines[<span class="string">'top'</span>].set_color(<span class="string">'none'</span>)</span><br><span class="line">ax.spines[<span class="string">'bottom'</span>].set_color(<span class="string">'none'</span>)</span><br><span class="line">ax.spines[<span class="string">'left'</span>].set_color(<span class="string">'none'</span>)</span><br><span class="line">ax.xaxis.set_ticks_position(<span class="string">'none'</span>)</span><br><span class="line">ax.yaxis.set_ticks_position(<span class="string">'none'</span>)</span><br><span class="line">ax.set_xticklabels([])</span><br><span class="line">ax.set_yticklabels([])</span><br><span class="line">plt.matshow(cm, fignum=<span class="number">1</span>, cmap=<span class="string">'gray'</span>)</span><br><span class="line">plt.colorbar();</span><br><span class="line"></span><br><span class="line"><span class="comment"># 除对角线外，颜色越浅说明错误越多</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fq6kdjano8j30gq0hegm8.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上图不直观，重新画图</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> HeatMap</span><br><span class="line"></span><br><span class="line">x_axis = np.arange(<span class="number">20</span>)</span><br><span class="line">y_axis = np.arange(<span class="number">20</span>)</span><br><span class="line">data = [[i, j, cm[i][j]] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>) <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">20</span>)]</span><br><span class="line">heatmap = HeatMap()</span><br><span class="line">heatmap.add(<span class="string">"混淆矩阵"</span>, x_axis, y_axis, data, is_visualmap=<span class="keyword">True</span>,</span><br><span class="line">            visual_text_color=<span class="string">"#fff"</span>, visual_orient=<span class="string">'horizontal'</span>)</span><br><span class="line"><span class="comment"># heatmap.render()</span></span><br><span class="line"><span class="comment"># heatmap</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fq6kc4ryv9j30h00gu0tm.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/scikit-learn/" rel="tag"><i class="fa fa-tag"></i> scikit-learn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/SVM绘图.html" rel="next" title="SVM绘图">
+                <i class="fa fa-chevron-left"></i> SVM绘图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/PCA+SVM人脸识别.html" rel="prev" title="PCA主成分分析+SVM人脸识别准确率97%+">
+                PCA主成分分析+SVM人脸识别准确率97%+ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#把文档转换成向量"><span class="nav-number">1.</span> <span class="nav-text">把文档转换成向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练模型"><span class="nav-number">2.</span> <span class="nav-text">训练模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评价模型："><span class="nav-number">3.</span> <span class="nav-text">评价模型：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#classification-report-查看查准率、召回率、F1"><span class="nav-number">3.1.</span> <span class="nav-text">classification_report()查看查准率、召回率、F1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#confusion-matrix混淆矩阵"><span class="nav-number">3.2.</span> <span class="nav-text">confusion_matrix混淆矩阵</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

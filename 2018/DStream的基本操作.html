@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MLlib," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本文参考- Machine learning with Scala by CDA 吴昊天 一、转换操作1.概述DStream转换操作包括无状态转换和有状态转换  无状态转换：每个批次的处理不依赖于之前批次的数据； 有状态转换：当前批次的处理需要使用之前批次的数据或者中间结果。有状态转换包括基于滑动窗口的转换和追踪状态变化的转换(updateStateByKey)。  2.DStream无状态转换">
+<meta name="keywords" content="MLlib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DStream的基本操作">
+<meta property="og:url" content="http://www.ihoge.cn/2018/DStream的基本操作.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="本文参考- Machine learning with Scala by CDA 吴昊天 一、转换操作1.概述DStream转换操作包括无状态转换和有状态转换  无状态转换：每个批次的处理不依赖于之前批次的数据； 有状态转换：当前批次的处理需要使用之前批次的数据或者中间结果。有状态转换包括基于滑动窗口的转换和追踪状态变化的转换(updateStateByKey)。  2.DStream无状态转换">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/uploads/2016/11/SparkStreaming%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C.png">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/26.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/27.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/28.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/29.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/30.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/31.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/32.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/33.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/34.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/35.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/36.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/37.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/39.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/40.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20Streaming部分/42.jpg">
+<meta property="og:updated_time" content="2018-04-06T17:31:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DStream的基本操作">
+<meta name="twitter:description" content="本文参考- Machine learning with Scala by CDA 吴昊天 一、转换操作1.概述DStream转换操作包括无状态转换和有状态转换  无状态转换：每个批次的处理不依赖于之前批次的数据； 有状态转换：当前批次的处理需要使用之前批次的数据或者中间结果。有状态转换包括基于滑动窗口的转换和追踪状态变化的转换(updateStateByKey)。  2.DStream无状态转换">
+<meta name="twitter:image" content="http://dblab.xmu.edu.cn/blog/wp-content/uploads/2016/11/SparkStreaming%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/DStream的基本操作.html"/>
+
+
+
+
+
+  <title>DStream的基本操作 | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/DStream的基本操作.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DStream的基本操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T11:59:21+08:00">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p>本文参考- Machine learning with Scala by CDA 吴昊天</p>
+<h2 id="一、转换操作"><a href="#一、转换操作" class="headerlink" title="一、转换操作"></a>一、转换操作</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h3><p>DStream转换操作包括无状态转换和有状态转换</p>
+<ul>
+<li>无状态转换：每个批次的处理不依赖于之前批次的数据；</li>
+<li>有状态转换：当前批次的处理需要使用之前批次的数据或者中间结果。有状态转换包括基于滑动窗口的转换和追踪状态变化的转换(updateStateByKey)。</li>
+</ul>
+<h3 id="2-DStream无状态转换操作"><a href="#2-DStream无状态转换操作" class="headerlink" title="2.DStream无状态转换操作"></a>2.DStream无状态转换操作</h3><p>下面给出一些无状态转换操作的含义：</p>
+<ul>
+<li>map(func) ：对源DStream的每个元素，采用func函数进行转换，得到一个新的DStream；</li>
+<li>flatMap(func)： 与map相似，但是每个输入项可用被映射为0个或者多个输出项；</li>
+<li>filter(func)： 返回一个新的DStream，仅包含源DStream中满足函数func的项；</li>
+<li>repartition(numPartitions)： 通过创建更多或者更少的分区改变DStream的并行程度；</li>
+<li>union(otherStream)： 返回一个新的DStream，包含源DStream和其他DStream的元素；</li>
+<li>count()：统计源DStream中每个RDD的元素数量；</li>
+<li>reduce(func)：利用函数func聚集源DStream中每个RDD的元素，返回一个包含单元素RDDs的新DStream；</li>
+<li>countByValue()：应用于元素类型为K的DStream上，返回一个（K，V）键值对类型的新DStream，每个键的值是在原DStream的每个RDD中的出现次数；</li>
+<li>reduceByKey(func, [numTasks])：当在一个由(K,V)键值对组成的DStream上执行该操作时，返回一个新的由(K,V)键值对组成的DStream，每一个key的值均由给定的recuce函数（func）聚集起来；</li>
+<li>join(otherStream, [numTasks])：当应用于两个DStream（一个包含（K,V）键值对,一个包含(K,W)键值对），返回一个包含(K, (V, W))键值对的新DStream；</li>
+<li>cogroup(otherStream, [numTasks])：当应用于两个DStream（一个包含（K,V）键值对,一个包含(K,W)键值对），返回一个包含(K, Seq[V], Seq[W])的元组；</li>
+<li>transform(func)：通过对源DStream的每个RDD应用RDD-to-RDD函数，创建一个新的DStream。支持在新的DStream中做任何RDD操作。</li>
+</ul>
+<p>无状态转换操作实例：我们之前套接字流部分介绍的词频统计，就是采用无状态转换，每次统计，都是只统计当前批次到达的单词的词频，和之前批次无关，不会进行累计。</p>
+<h3 id="3-DStream有状态转换操作"><a href="#3-DStream有状态转换操作" class="headerlink" title="3.DStream有状态转换操作"></a>3.DStream有状态转换操作</h3><h4 id="3-1-概述"><a href="#3-1-概述" class="headerlink" title="3.1 概述"></a>3.1 概述</h4><p>​    对于DStream有状态转换操作而言，当前批次的处理需要使用之前批次的数据或者中间结果。有状态转换包括基于滑动窗口的转换和追踪状态变化(updateStateByKey)的转换。</p>
+<h4 id="3-2-滑动窗口转换操作基本概念"><a href="#3-2-滑动窗口转换操作基本概念" class="headerlink" title="3.2 滑动窗口转换操作基本概念"></a>3.2 滑动窗口转换操作基本概念</h4><p>​    滑动窗口转换操作的计算过程如下图所示，我们可以事先设定一个滑动窗口的长度（也就是窗口的持续时间），并且设定滑动窗口的时间间隔（每隔多长时间执行一次计算），然后，就可以让窗口按照指定时间间隔在源DStream上滑动，每次窗口停放的位置上，都会有一部分DStream被框入窗口内，形成一个小段的DStream，这时，就可以启动对这个小段DStream的计算。</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/uploads/2016/11/SparkStreaming%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C.png" alt="sparkstreaming滑动窗口"></p>
+<p>下面给给出一些窗口转换操作的含义：</p>
+<ul>
+<li>window(windowLength, slideInterval) 基于源DStream产生的窗口化的批数据，计算得到一个新的DStream；</li>
+<li>countByWindow(windowLength, slideInterval) 返回流中元素的一个滑动窗口数；</li>
+<li>reduceByWindow(func, windowLength, slideInterval) 返回一个单元素流。利用函数func聚集滑动时间间隔的流的元素创建这个单元素流。函数func必须满足结合律，从而可以支持并行计算；</li>
+<li>reduceByKeyAndWindow(func, windowLength, slideInterval, [numTasks]) 应用到一个(K,V)键值对组成的DStream上时，会返回一个由(K,V)键值对组成的新的DStream。每一个key的值均由给定的reduce函数(func函数)进行聚合计算。注意：在默认情况下，这个算子利用了Spark默认的并发任务数去分组。可以通过numTasks参数的设置来指定不同的任务数；</li>
+<li>reduceByKeyAndWindow(func, invFunc, windowLength, slideInterval, [numTasks]) 更加高效的reduceByKeyAndWindow，每个窗口的reduce值，是基于先前窗口的reduce值进行增量计算得到的；它会对进入滑动窗口的新数据进行reduce操作，并对离开窗口的老数据进行“逆向reduce”操作。但是，只能用于“可逆reduce函数”，即那些reduce函数都有一个对应的“逆向reduce函数”（以InvFunc参数传入）；</li>
+<li>countByValueAndWindow(windowLength, slideInterval, [numTasks]) 当应用到一个(K,V)键值对组成的DStream上，返回一个由(K,V)键值对组成的新的DStream。每个key的值都是它们在滑动窗口中出现的频率。</li>
+</ul>
+<h4 id="3-3-窗口转换操作实例："><a href="#3-3-窗口转换操作实例：" class="headerlink" title="3.3 窗口转换操作实例："></a>3.3 窗口转换操作实例：</h4><p>​    在之前的Apache Kafka作为DStream数据源内容中，在我们已经使用了窗口转换操作，也就是，在KafkaWordCount.scala代码中，你可以找到下面这一行：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> wordCounts = pair.reduceByKeyAndWindow(_ + _,_ - _,<span class="type">Minutes</span>(<span class="number">2</span>),<span class="type">Seconds</span>(<span class="number">10</span>),<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>​    这行代码中就是一个窗口转换操作reduceByKeyAndWindow，其中，Minutes(2)是滑动窗口长度，Seconds(10)是滑动窗口时间间隔（每隔多长时间滑动一次窗口）。reduceByKeyAndWindow中就使用了加法和减法这两个reduce函数，加法和减法这两种reduce函数都是“可逆的reduce函数”，也就是说，当滑动窗口到达一个新的位置时，原来之前被窗口框住的部分数据离开了窗口，又有新的数据被窗口框住，但是，这时计算窗口内单词的词频时，不需要对当前窗口内的所有单词全部重新执行统计，而是只要把窗口内新增进来的元素，增量加入到统计结果中，把离开窗口的元素从统计结果中减去，这样，就大大提高了统计的效率。尤其对于窗口长度较大时，这种“逆函数”带来的效率的提高是很明显的。</p>
+<h4 id="3-4-updateStateByKey操作"><a href="#3-4-updateStateByKey操作" class="headerlink" title="3.4 updateStateByKey操作"></a>3.4 updateStateByKey操作</h4><p>​    当我们需要在跨批次之间维护状态时，就必须使用updateStateByKey操作。下面我们就给出一个具体实例。我们还是以前面在套接字流部分讲过的NetworkWordCount为例子来介绍，在之前的套接字流的介绍中，我们统计单词词频采用的是无状态转换操作，也就是说，每个批次的单词发送给NetworkWordCount程序处理时，NetworkWordCount只对本批次内的单词进行词频统计，不会考虑之前到达的批次的单词，所以，不同批次的单词词频都是独立统计的。<br>​    对于有状态转换操作而言，本批次的词频统计，会在之前批次的词频统计结果的基础上进行不断累加，所以，最终统计得到的词频，是所有批次的单词的总的词频统计结果。下面，我们来改造一下在套接字流介绍过的NetworkWordCount程序。在master上执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode                           </span><br><span class="line">mkdir -p ./stateful/src/main/scala                   # 创建项目结构</span><br><span class="line">cd ./stateful/src/main/scala/</span><br><span class="line">vim NetworkWordCountStateful.scala                   # 创建代码文件</span><br></pre></td></tr></table></figure>
+<p>输入以下代码：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.storage.<span class="type">StorageLevel</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">NetworkWordCountStateful</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">    <span class="comment">//定义状态更新函数</span></span><br><span class="line">    <span class="keyword">val</span> updateFunc = (values: <span class="type">Seq</span>[<span class="type">Int</span>], state: <span class="type">Option</span>[<span class="type">Int</span>]) =&gt; &#123;</span><br><span class="line">      <span class="keyword">val</span> currentCount = values.foldLeft(<span class="number">0</span>)(_ + _)</span><br><span class="line">      <span class="keyword">val</span> previousCount = state.getOrElse(<span class="number">0</span>)</span><br><span class="line">      <span class="type">Some</span>(currentCount + previousCount)</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="type">StreamingExamples</span>.setStreamingLogLevels()  <span class="comment">//设置log4j日志级别</span></span><br><span class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">"local[2]"</span>).setAppName(<span class="string">"NetworkWordCountStateful"</span>)</span><br><span class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(conf, <span class="type">Seconds</span>(<span class="number">5</span>))</span><br><span class="line">    sc.checkpoint(<span class="string">"file:///home/hadoop/mycode/stateful/"</span>)    <span class="comment">//设置检查点，检查点具有容错机制</span></span><br><span class="line">    <span class="keyword">val</span> lines = sc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</span><br><span class="line">    <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line">    <span class="keyword">val</span> wordDstream = words.map(x =&gt; (x, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">val</span> stateDstream = wordDstream.updateStateByKey[<span class="type">Int</span>](updateFunc)</span><br><span class="line">    stateDstream.print()</span><br><span class="line">    sc.start()</span><br><span class="line">    sc.awaitTermination()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>保存并退出<br>​    这里要对这段代码中新增的updataStateByKey稍微解释一下。Spark Streaming的updateStateByKey可以把DStream中的数据按key做reduce操作，然后对各个批次的数据进行累加。注意，wordDstream.updateStateByKey[Int]每次传递给updateFunc函数两个参数，其中，第一个参数是某个key（即某个单词）的当前批次的一系列值的列表（Seq[Int]形式）,updateFunc函数中 val currentCount = values.foldLeft(0)(_ + _)的作用，就是计算这个被传递进来的与某个key对应的当前批次的所有值的总和，也就是当前批次某个单词的出现次数，保存在变量currentCount中。传递给updateFunc函数的第二个参数是某个key的历史状态信息，也就是某个单词历史批次的词频汇总结果。实际上，某个单词的历史词频应该是一个Int类型，这里为什么要采用Option[Int]呢？<br>​    Option[Int]是类型 Int的容器，更确切地说，你可以把它看作是某种集合，这个特殊的集合要么只包含一个元素（即单词的历史词频），要么就什么元素都没有（这个单词历史上没有出现过，所以没有历史词频信息）。之所以采用 Option[Int]保存历史词频信息，这是因为，历史词频可能不存在，很多时候，在值不存在时，需要进行回退，或者提供一个默认值，Scala 为Option类型提供了getOrElse方法，以应对这种情况。 state.getOrElse(0)的含义是，如果该单词没有历史词频统计汇总结果，那么，就取值为0，如果有历史词频统计结果，就取历史结果，然后赋值给变量previousCount。最后，当前值和历史值进行求和，并包装在Some中返回。</p>
+<p>然后，再次使用vim编辑器新建一个StreamingExamples.scala文件，用于设置log4j日志级别，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim StreamingExamples.scala</span><br></pre></td></tr></table></figure>
+<p>代码如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">Logging</span></span><br><span class="line"><span class="keyword">import</span> org.apache.log4j.&#123;<span class="type">Level</span>, <span class="type">Logger</span>&#125;</span><br><span class="line"><span class="comment">/** Utility functions for Spark Streaming examples. */</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">StreamingExamples</span> <span class="keyword">extends</span> <span class="title">Logging</span> </span>&#123;</span><br><span class="line">  <span class="comment">/** Set reasonable logging levels for streaming if the user has not configured log4j. */</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">setStreamingLogLevels</span></span>() &#123;</span><br><span class="line">    <span class="keyword">val</span> log4jInitialized = <span class="type">Logger</span>.getRootLogger.getAllAppenders.hasMoreElements</span><br><span class="line">    <span class="keyword">if</span> (!log4jInitialized) &#123;</span><br><span class="line">      <span class="comment">// We first log something to initialize Spark's default logging, then we override the</span></span><br><span class="line">      <span class="comment">// logging level.</span></span><br><span class="line">      logInfo(<span class="string">"Setting log level to [WARN] for streaming example."</span> +</span><br><span class="line">        <span class="string">" To override add a custom log4j.properties to the classpath."</span>)</span><br><span class="line">      <span class="type">Logger</span>.getRootLogger.setLevel(<span class="type">Level</span>.<span class="type">WARN</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>退出vim编辑器。然后创建工程文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/stateful</span><br><span class="line">vim simple.sbt</span><br></pre></td></tr></table></figure>
+<p>在simple.sbt中输入以下内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name := <span class="string">"Simple Project"</span></span><br><span class="line">version := <span class="string">"1.0"</span></span><br><span class="line">scalaVersion := <span class="string">"2.10.4"</span></span><br><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> %% <span class="string">"spark-streaming"</span> % <span class="string">"1.4.0"</span></span><br></pre></td></tr></table></figure>
+<p>保存并退出，然后查看项目结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/stateful</span><br><span class="line">find .</span><br></pre></td></tr></table></figure>
+<p><img src="G:\屏幕截图\Spark Streaming部分\26.jpg" alt="26"></p>
+<p>然后进行打包编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/stateful</span><br><span class="line">/usr/local/sbt/sbt package</span><br></pre></td></tr></table></figure>
+<p>打包成功以后，就可以输入以下命令启动这个程序：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/stateful</span><br><span class="line">/usr/local/spark/bin/spark-submit --class "NetworkWordCountStateful" /home/hadoop/mycode/stateful/target/scala-2.10/simple-project_2.10-1.0.jar</span><br></pre></td></tr></table></figure>
+<p>执行上面命令后，就进入了监听状态</p>
+<p><img src="G:\屏幕截图\Spark Streaming部分\27.jpg" alt="27"></p>
+<p>然后再开一个窗口作为nc窗口，启动nc程序：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lk 9999</span><br></pre></td></tr></table></figure>
+<p>随机输入一些信息</p>
+<p><img src="G:\屏幕截图\Spark Streaming部分\28.jpg" alt="28"></p>
+<p>然后，你切换到刚才的监听窗口，就会发现此时的计数是累计计数</p>
+<p><img src="G:\屏幕截图\Spark Streaming部分\29.jpg" alt="29"></p>
+<p>至此，操作成功。</p>
+<h2 id="二、输出操作"><a href="#二、输出操作" class="headerlink" title="二、输出操作"></a>二、输出操作</h2><p>​    在Spark应用中，外部系统经常需要使用到Spark DStream处理后的数据，因此，需要采用输出操作把DStream的数据输出到数据库或者文件系统中，此过程即成为DStream的输出操作。我们仍然以上述转换操作所举的例子进行后续操作。</p>
+<h3 id="1-把DStream输出到文本文件中"><a href="#1-把DStream输出到文本文件中" class="headerlink" title="1.把DStream输出到文本文件中"></a>1.把DStream输出到文本文件中</h3><p>为了不破坏以前的代码，我们将转换操作中涉及代码复制一份，然后针对副本进行修改。在master执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode</span><br><span class="line">mkdir -p ./dstreamOutput/src/main/scala                                        # 创建项目结构</span><br><span class="line">cp ~/mycode/stateful/src/main/scala/* ~/mycode/dstreamOutput/src/main/scala/</span><br><span class="line">cp ~/mycode/stateful/simple.sbt ~/mycode/dstreamOutput</span><br></pre></td></tr></table></figure>
+<p>查看项目结构，确认没有出现误操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/dstreamOutput</span><br><span class="line">find .</span><br></pre></td></tr></table></figure>
+<p><img src="G:\屏幕截图\Spark Streaming部分\30.jpg" alt="30"></p>
+<p>然后在这个新的dstreamoutput文件夹中进行程序修改。<br>首先，我们尝试把DStream内容保存到文本文件中，可以使用如下语句：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stateDstream.saveAsTextFiles(<span class="string">"file:///home/hadoop/mycode/dstreamOutput/output.txt"</span>)</span><br></pre></td></tr></table></figure>
+<p>然后修改NetworkWordCountStateful.scala代码文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/dstreamOutput/src/main/scala/</span><br><span class="line">vim NetworkWordCountStateful.scala</span><br></pre></td></tr></table></figure>
+<p>我们要把这条保存数据的语句stateDstream.saveAsTextFiles()放入到NetworkWordCountStateful.scala代码中，修改后的代码如下（也可以把NetworkWordCountStateful.scala原来的代码内容全部删除，直接把下面修改后的代码复制进去）：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.storage.<span class="type">StorageLevel</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">NetworkWordCountStateful</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">    <span class="comment">//定义状态更新函数</span></span><br><span class="line">    <span class="keyword">val</span> updateFunc = (values: <span class="type">Seq</span>[<span class="type">Int</span>], state: <span class="type">Option</span>[<span class="type">Int</span>]) =&gt; &#123;</span><br><span class="line">      <span class="keyword">val</span> currentCount = values.foldLeft(<span class="number">0</span>)(_ + _)</span><br><span class="line">      <span class="keyword">val</span> previousCount = state.getOrElse(<span class="number">0</span>)</span><br><span class="line">      <span class="type">Some</span>(currentCount + previousCount)</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="type">StreamingExamples</span>.setStreamingLogLevels()  <span class="comment">//设置log4j日志级别</span></span><br><span class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">"local[2]"</span>).setAppName(<span class="string">"NetworkWordCountStateful"</span>)</span><br><span class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(conf, <span class="type">Seconds</span>(<span class="number">5</span>))</span><br><span class="line">    sc.checkpoint(<span class="string">"file:///home/hadoop/mycode/dstreamOutput/"</span>)    <span class="comment">//设置检查点，检查点具有容错机制</span></span><br><span class="line">    <span class="keyword">val</span> lines = sc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</span><br><span class="line">    <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line">    <span class="keyword">val</span> wordDstream = words.map(x =&gt; (x, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">val</span> stateDstream = wordDstream.updateStateByKey[<span class="type">Int</span>](updateFunc)</span><br><span class="line">    stateDstream.print()</span><br><span class="line">        <span class="comment">//下面是新增的语句，把DStream保存到文本文件中</span></span><br><span class="line">        stateDstream.saveAsTextFiles(<span class="string">"file:///home/hadoop/mycode/dstreamOutput/output.txt"</span>)</span><br><span class="line">    sc.start()</span><br><span class="line">    sc.awaitTermination()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后进行打包编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/dstreamOutput</span><br><span class="line">/usr/local/sbt/sbt package</span><br></pre></td></tr></table></figure>
+<p>打包成功以后，请运行程序：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/dstreamOutput</span><br><span class="line">/usr/local/spark/bin/spark-submit --class "NetworkWordCountStateful" /home/hadoop/mycode/dstreamOutput/target/scala-2.10/simple-project_2.10-1.0.jar</span><br></pre></td></tr></table></figure>
+<p>成功运行即可进入监听状态</p>
+<p><img src="G:\屏幕截图\Spark Streaming部分\31.jpg" alt="31"></p>
+<p>然后再打开一个终端作为输入源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lk 9999</span><br></pre></td></tr></table></figure>
+<p><img src="G:\屏幕截图\Spark Streaming部分\32.jpg" alt="32"></p>
+<p>然后监听窗口将显示词频累计统计结果</p>
+<p><img src="G:\屏幕截图\Spark Streaming部分\33.jpg" alt="33"></p>
+<p>然后停止运行，查看输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/dstreamOutput/</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+<p><img src="G:\屏幕截图\Spark Streaming部分\34.jpg" alt="34"></p>
+<p>​    由于我们在代码中有一句<code>val sc = new StreamingContext(conf, Seconds(5))</code>，也就是说，每隔5秒钟统计一次词频，所以，每隔5秒钟就会生成一次词频统计结果，并输出到<code>~/mycode/dstreamOutput/output.txt</code>中，每次生成的output.txt后面会自动被加上时间标记（比如1516790460000）。这里要注意，虽然我们把DStream输出到<code>~/mycode/dstreamOutput/output.txt</code>中，output.txt的命名看起来像一个文件，但是，实际上，spark会生成名称为output.txt的目录，而不是文件。<br>我们可以查看一下某个output.txt下面的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/dstreamOutput</span><br><span class="line">cat output.txt-1516790460000/*</span><br></pre></td></tr></table></figure>
+<p><img src="G:\屏幕截图\Spark Streaming部分\35.jpg" alt="35"></p>
+<p>和监听时显示结果相同，说明我们已经成功地把DStream输出到文本文件了。</p>
+<h3 id="2-把DStream写入到MySQL数据库中"><a href="#2-把DStream写入到MySQL数据库中" class="headerlink" title="2.把DStream写入到MySQL数据库中"></a>2.把DStream写入到MySQL数据库中</h3><p>接下来，练习将DStream数据写入MySQL数据库中相关操作，首先，打开MySQL服务，创建响应数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<p>然后创建数据库及对应的表，用于接下来的数据存储</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create database spark;</span><br><span class="line">show databases;</span><br><span class="line">use spark;</span><br><span class="line">create table wordcount (word char(20), count int(4));</span><br><span class="line">show tables;</span><br><span class="line">select * from wordcount;</span><br></pre></td></tr></table></figure>
+<p>可以看到，表wordcount目前为空；</p>
+<p><img src="G:\屏幕截图\Spark Streaming部分\36.jpg" alt="36"></p>
+<p>再开一个命令行，创建工程相关代码和文档结构</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode</span><br><span class="line">mkdir -p ./dstreamOutput1/src/main/scala</span><br><span class="line">cd ./dstreamOutput1/src/main/scala</span><br></pre></td></tr></table></figure>
+<p>接下来，编辑代码文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim NetworkWordCountStateful.scala</span><br></pre></td></tr></table></figure>
+<p>输入下述代码：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.&#123;<span class="type">PreparedStatement</span>, <span class="type">Connection</span>, <span class="type">DriverManager</span>&#125;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.atomic.<span class="type">AtomicInteger</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkConf</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming.&#123;<span class="type">Seconds</span>, <span class="type">StreamingContext</span>&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.streaming.<span class="type">StreamingContext</span>._</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.storage.<span class="type">StorageLevel</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">NetworkWordCountStateful</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">    <span class="comment">//定义状态更新函数</span></span><br><span class="line">    <span class="keyword">val</span> updateFunc = (values: <span class="type">Seq</span>[<span class="type">Int</span>], state: <span class="type">Option</span>[<span class="type">Int</span>]) =&gt; &#123;</span><br><span class="line">      <span class="keyword">val</span> currentCount = values.foldLeft(<span class="number">0</span>)(_ + _)</span><br><span class="line">      <span class="keyword">val</span> previousCount = state.getOrElse(<span class="number">0</span>)</span><br><span class="line">      <span class="type">Some</span>(currentCount + previousCount)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">StreamingExamples</span>.setStreamingLogLevels()  <span class="comment">//设置log4j日志级别</span></span><br><span class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">"local[2]"</span>).setAppName(<span class="string">"NetworkWordCountStateful"</span>)</span><br><span class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(conf, <span class="type">Seconds</span>(<span class="number">5</span>))</span><br><span class="line">    sc.checkpoint(<span class="string">"file:///home/hadoop/mycode/dstreamOutput1/"</span>)    <span class="comment">//设置检查点，检查点具有容错机制</span></span><br><span class="line">    <span class="keyword">val</span> lines = sc.socketTextStream(<span class="string">"localhost"</span>, <span class="number">9999</span>)</span><br><span class="line">    <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line">    <span class="keyword">val</span> wordDstream = words.map(x =&gt; (x, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">val</span> stateDstream = wordDstream.updateStateByKey[<span class="type">Int</span>](updateFunc)</span><br><span class="line">    stateDstream.print()</span><br><span class="line">        <span class="comment">//下面是新增的语句，把DStream保存到MySQL数据库中     </span></span><br><span class="line">     stateDstream.foreachRDD(rdd =&gt; &#123;</span><br><span class="line">      <span class="comment">//内部函数</span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">func</span></span>(records: <span class="type">Iterator</span>[(<span class="type">String</span>,<span class="type">Int</span>)]) &#123;</span><br><span class="line">        <span class="keyword">var</span> conn: <span class="type">Connection</span> = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> stmt: <span class="type">PreparedStatement</span> = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">val</span> url = <span class="string">"jdbc:mysql://localhost:3306/spark"</span></span><br><span class="line">          <span class="keyword">val</span> user = <span class="string">"root"</span></span><br><span class="line">          <span class="keyword">val</span> password = <span class="string">"1"</span>  <span class="comment">//输入自己的用户密码</span></span><br><span class="line">          conn = <span class="type">DriverManager</span>.getConnection(url, user, password)</span><br><span class="line">          records.foreach(p =&gt; &#123;</span><br><span class="line">            <span class="keyword">val</span> sql = <span class="string">"insert into wordcount(word,count) values (?,?)"</span></span><br><span class="line">            stmt = conn.prepareStatement(sql);</span><br><span class="line">            stmt.setString(<span class="number">1</span>, p._1.trim)</span><br><span class="line">                        stmt.setInt(<span class="number">2</span>,p._2.toInt)</span><br><span class="line">            stmt.executeUpdate()</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">          <span class="keyword">case</span> e: <span class="type">Exception</span> =&gt; e.printStackTrace()</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (stmt != <span class="literal">null</span>) &#123;</span><br><span class="line">            stmt.close()</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (conn != <span class="literal">null</span>) &#123;</span><br><span class="line">            conn.close()</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">val</span> repartitionedRDD = rdd.repartition(<span class="number">3</span>)</span><br><span class="line">      repartitionedRDD.foreachPartition(func)</span><br><span class="line">    &#125;)</span><br><span class="line">    sc.start()</span><br><span class="line">    sc.awaitTermination()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>保存并退出，先运行程序，后面我们会对代码进行解释。同时，由于我们在NetworkWordCountStateful.scala代码中加入了Spark SQL的操作，所以在编写工程文件时需要添加Spark SQL依赖包。然后创建StreamingExamples.scala用于设置log4j格式，直接复制之前已经编好的代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode</span><br><span class="line">cp ./dstreamOutput/src/main/scala/StreamingExamples.scala ./dstreamOutput1/src/main/scala/</span><br></pre></td></tr></table></figure>
+<p>然后创建工程文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/dstreamOutput1</span><br><span class="line">vim simple.sbt</span><br></pre></td></tr></table></figure>
+<p>输入下述内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">name := <span class="string">"Simple Project"</span></span><br><span class="line">version := <span class="string">"1.0"</span></span><br><span class="line">scalaVersion := <span class="string">"2.10.4"</span></span><br><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> %% <span class="string">"spark-core"</span> % <span class="string">"1.4.0"</span></span><br><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> % <span class="string">"spark-streaming_2.10"</span> % <span class="string">"1.4.0"</span></span><br><span class="line">libraryDependencies += <span class="string">"org.apache.spark"</span> %% <span class="string">"spark-sql"</span> % <span class="string">"1.4.0"</span></span><br></pre></td></tr></table></figure>
+<p>保存并退出，然后执行下面命令打包编译：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/mycode/dstreamOutput1</span><br><span class="line">/usr/local/sbt/sbt package</span><br></pre></td></tr></table></figure>
+<p>打包编译成功后，就可以执行下面命令运行NetworkWordCountStateful程序进行词频统计，但是，需要注意，因为需要通过JDBC连接MySQL数据库，所以需要在spark-submit命令中提供外部jar包，告诉spark程序可以在哪里找到mysql驱动程序，我们直接从<code>下载</code>文件夹中导入jar包，命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/spark/bin/spark-submit --class "NetworkWordCountStateful" --jars /home/hadoop/下载/mysql-connector-java-5.1.26-bin.jar /home/hadoop/mycode/dstreamOutput1/target/scala-2.10/simple-project_2.10-1.0.jar</span><br></pre></td></tr></table></figure>
+<p>执行上面命令以后，就进入监听状态</p>
+<p><img src="G:\屏幕截图\Spark Streaming部分\37.jpg" alt="37"></p>
+<p>再开另外一个终端，运行下面命令产生单词提供给NetworkWordCountStateful进行词频统计：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lk 9999</span><br></pre></td></tr></table></figure>
+<p><img src="G:\屏幕截图\Spark Streaming部分\39.jpg" alt="39"></p>
+<p>输入一些单词以后，就可以按Ctrl+Z停止nc程序。然后切换到刚才运行NetworkWordCountStateful程序的监听窗口，也按Ctrl+Z停止NetworkWordCountStateful程序运行。</p>
+<p><img src="G:\屏幕截图\Spark Streaming部分\40.jpg" alt="40"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from wordcount;</span><br></pre></td></tr></table></figure>
+<p><img src="G:\屏幕截图\Spark Streaming部分\42.jpg" alt="42"></p>
+<p>简单解释本段代码含义</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">stateDstream.foreachRDD(rdd =&gt; &#123;</span><br><span class="line">     <span class="comment">//内部函数</span></span><br><span class="line">     <span class="function"><span class="keyword">def</span> <span class="title">func</span></span>(records: <span class="type">Iterator</span>[(<span class="type">String</span>,<span class="type">Int</span>)]) &#123;</span><br><span class="line">       <span class="keyword">var</span> conn: <span class="type">Connection</span> = <span class="literal">null</span></span><br><span class="line">       <span class="keyword">var</span> stmt: <span class="type">PreparedStatement</span> = <span class="literal">null</span></span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">val</span> url = <span class="string">"jdbc:mysql://localhost:3306/spark"</span></span><br><span class="line">         <span class="keyword">val</span> user = <span class="string">"root"</span></span><br><span class="line">         <span class="keyword">val</span> password = <span class="string">"1"</span></span><br><span class="line">         conn = <span class="type">DriverManager</span>.getConnection(url, user, password)</span><br><span class="line">         records.foreach(p =&gt; &#123;</span><br><span class="line">           <span class="keyword">val</span> sql = <span class="string">"insert into wordcount(word,count) values (?,?)"</span></span><br><span class="line">           stmt = conn.prepareStatement(sql)</span><br><span class="line">           stmt.setString(<span class="number">1</span>, p._1.trim)</span><br><span class="line">                       stmt.setInt(<span class="number">2</span>,p._2.toInt)</span><br><span class="line">           stmt.executeUpdate()</span><br><span class="line">         &#125;)</span><br><span class="line">       &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">         <span class="keyword">case</span> e: <span class="type">Exception</span> =&gt; e.printStackTrace()</span><br><span class="line">       &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">         <span class="keyword">if</span> (stmt != <span class="literal">null</span>) &#123;</span><br><span class="line">           stmt.close()</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">if</span> (conn != <span class="literal">null</span>) &#123;</span><br><span class="line">           conn.close()</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">val</span> repartitionedRDD = rdd.repartition(<span class="number">3</span>)</span><br><span class="line">     repartitionedRDD.foreachPartition(func)</span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure>
+<p>也就是说，对于stateDstream，为了把它保存到MySQL数据库中，我们采用了如下的形式：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stateDstream.foreachRDD(function)</span><br></pre></td></tr></table></figure>
+<p>其中，function就是一个RDD[T]=&gt;Unit类型的函数，对于本程序而言，就是RDD[(String,Int)]=&gt;Unit类型的函数，也就是说，stateDstream中的每个RDD都是RDD[(String,Int)]类型（即统计结果的形式是(“hadoop”,3)）。这样，对stateDstream中的每个RDD都会执行function中的操作（即把该RDD保存到MySQL的操作）。</p>
+<p>下面解释function的处理逻辑，在function部分，函数体要执行的处理逻辑实际上是下面的形式：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span></span>(records: <span class="type">Iterator</span>[(<span class="type">String</span>,<span class="type">Int</span>)])&#123;……&#125;</span><br><span class="line"><span class="keyword">val</span> repartitionedRDD = rdd.repartition(<span class="number">3</span>)</span><br><span class="line">repartitionedRDD.foreachPartition(func)</span><br></pre></td></tr></table></figure>
+<p>也就是说，这里定义了一个内部函数func，它的功能是，接收records，然后把records保存到MySQL中。到这里，你可能会有疑问，为什么不是把stateDstream中的每个RDD直接拿去保存到MySQL中，还要调用rdd.repartition(3)对这些RDD重新设置分区数为3呢。这是因为，每次保存RDD到MySQL中，都需要启动数据库连接，如果RDD分区数量太大，那么就会带来多次数据库连接开销，为了减少开销，就有必要把RDD的分区数量控制在较小的范围内，所以，这里就把RDD的分区数量重新设置为3。然后，对于每个RDD分区，就调用repartitionedRDD.foreachPartition(func)，把每个分区的数据通过func保存到MySQL中，这时，传递给func的输入参数就是Iterator[(String,Int)]类型的records。如果你不好理解下面这种调用形式：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repartitionedRDD.foreachPartition(func)</span><br></pre></td></tr></table></figure>
+<p>这种形式func没有带任何参数，可能不太好理解，不是那么直观，实际上，这句语句和下面的语句是等价的，或许有助于理解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repartitionedRDD.foreachPartition(records =&gt; func(records))</span><br></pre></td></tr></table></figure>
+<p>上面这种等价的形式比较直观，为func()函数传入了一个records参数，这就正好和 def func(records: Iterator[(String,Int)])定义对应起来了，方便理解。</p>
+<p>接下来，解释func()函数的功能，我们再单独把func()函数的代码提取出来</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span></span>(records: <span class="type">Iterator</span>[(<span class="type">String</span>,<span class="type">Int</span>)]) &#123;</span><br><span class="line">        <span class="keyword">var</span> conn: <span class="type">Connection</span> = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">var</span> stmt: <span class="type">PreparedStatement</span> = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">val</span> url = <span class="string">"jdbc:mysql://localhost:3306/spark"</span></span><br><span class="line">          <span class="keyword">val</span> user = <span class="string">"root"</span></span><br><span class="line">          <span class="keyword">val</span> password = <span class="string">"hadoop"</span></span><br><span class="line">          conn = <span class="type">DriverManager</span>.getConnection(url, user, password)</span><br><span class="line">          records.foreach(p =&gt; &#123;</span><br><span class="line">            <span class="keyword">val</span> sql = <span class="string">"insert into wordcount(word,count) values (?,?)"</span></span><br><span class="line">            stmt = conn.prepareStatement(sql)</span><br><span class="line">            stmt.setString(<span class="number">1</span>, p._1.trim)</span><br><span class="line">                        stmt.setInt(<span class="number">2</span>,p._2.toInt)</span><br><span class="line">            stmt.executeUpdate()</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">          <span class="keyword">case</span> e: <span class="type">Exception</span> =&gt; e.printStackTrace()</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (stmt != <span class="literal">null</span>) &#123;</span><br><span class="line">            stmt.close()</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (conn != <span class="literal">null</span>) &#123;</span><br><span class="line">            conn.close()</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>​    可以看出，上面这段代码的功能是，创建数据库连接conn，然后调用records.foreach()，对于records中的每条记录p，都把p插入到MySQL数据库中。这里要注意，数据库连接conn的创建，是在records.foreach()方法之前，这样可以大大减小数据库连接开销。否则，如果把数据库连接conn的创建放在records.foreach()方法之后，那么，每条记录p都需要建立一次数据库连接，这样做会导致开销会增加，对数据库连接资源会造成很大的压力，并不可取。<br>​    对于prepareStatement中的语句。stmt.setString(1, p._1.trim)，是指，为val sql = “insert into wordcount(word,count) values (?,?)” 中的第一个问号设置具体的值，也就是给word字段设置值；stmt.setInt(2,p._2.toInt)是指，为第2个问号赋值，也就是给count字段设置值。很显然，每条记录p的形式是类似(“hadoop”,3)这种形式，所以，需要用p._1获取到”hadoop”（只是举例，每次获取到的值都会不同），需要用p._2获取到3（只是举例，每次获取到的值都会不同）。p._1.trim中调用了trim函数，是为了去掉字符串头尾可能存在的空格。p._2.toInt是为了把获取的3，转换成整型。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MLlib/" rel="tag"><i class="fa fa-tag"></i> MLlib</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/基本统计工具.html" rel="next" title="MLlib基本统计工具">
+                <i class="fa fa-chevron-left"></i> MLlib基本统计工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/Java面向对象+内存原理+内存优化1.html" rel="prev" title="Java面向对象编程思想+Java内存原理+Java读写优化">
+                Java面向对象编程思想+Java内存原理+Java读写优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、转换操作"><span class="nav-number">1.</span> <span class="nav-text">一、转换操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概述"><span class="nav-number">1.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-DStream无状态转换操作"><span class="nav-number">1.2.</span> <span class="nav-text">2.DStream无状态转换操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-DStream有状态转换操作"><span class="nav-number">1.3.</span> <span class="nav-text">3.DStream有状态转换操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-概述"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-滑动窗口转换操作基本概念"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 滑动窗口转换操作基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-窗口转换操作实例："><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 窗口转换操作实例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-updateStateByKey操作"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 updateStateByKey操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、输出操作"><span class="nav-number">2.</span> <span class="nav-text">二、输出操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-把DStream输出到文本文件中"><span class="nav-number">2.1.</span> <span class="nav-text">1.把DStream输出到文本文件中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-把DStream写入到MySQL数据库中"><span class="nav-number">2.2.</span> <span class="nav-text">2.把DStream写入到MySQL数据库中</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

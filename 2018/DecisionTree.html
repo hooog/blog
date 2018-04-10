@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="scikit-learn," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="利用信息墒判定先对那个特征进行分裂信息墒是衡量信息不确定性的指标，信息墒公式：$$H\left( X \right)=-\sum_{x\in X}^{}{P\left( x \right)\log_{2}P\left( x \right)}$$其中$P(x)$表示事件$x$出现的概率。回到决策树的构建问题上，我们遍历所有特征，分别计算，使用这个公式划分数据集前后信息墒的变化值，然后选择信息墒变化">
+<meta name="keywords" content="scikit-learn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DecisionTree决策树大全">
+<meta property="og:url" content="http://www.ihoge.cn/2018/DecisionTree.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="利用信息墒判定先对那个特征进行分裂信息墒是衡量信息不确定性的指标，信息墒公式：$$H\left( X \right)=-\sum_{x\in X}^{}{P\left( x \right)\log_{2}P\left( x \right)}$$其中$P(x)$表示事件$x$出现的概率。回到决策树的构建问题上，我们遍历所有特征，分别计算，使用这个公式划分数据集前后信息墒的变化值，然后选择信息墒变化">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fq3frlhc9vj30ii0c6jsa.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fq3frwqn2fj30hx0c7aac.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fq3fs68mvsj30i70cr3zb.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fq3fe05mm1j31kw0zfgqd.jpg">
+<meta property="og:updated_time" content="2018-04-07T12:52:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DecisionTree决策树大全">
+<meta name="twitter:description" content="利用信息墒判定先对那个特征进行分裂信息墒是衡量信息不确定性的指标，信息墒公式：$$H\left( X \right)=-\sum_{x\in X}^{}{P\left( x \right)\log_{2}P\left( x \right)}$$其中$P(x)$表示事件$x$出现的概率。回到决策树的构建问题上，我们遍历所有特征，分别计算，使用这个公式划分数据集前后信息墒的变化值，然后选择信息墒变化">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fq3frlhc9vj30ii0c6jsa.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/DecisionTree.html"/>
+
+
+
+
+
+  <title>DecisionTree决策树大全 | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/DecisionTree.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DecisionTree决策树大全</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-07T01:05:59+08:00">
+                2018-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="利用信息墒判定先对那个特征进行分裂"><a href="#利用信息墒判定先对那个特征进行分裂" class="headerlink" title="利用信息墒判定先对那个特征进行分裂"></a>利用信息墒判定先对那个特征进行分裂</h2><p>信息墒是衡量信息不确定性的指标，信息墒公式：<br>$$H\left( X \right)=-\sum_{x\in X}^{}{P\left( x \right)\log_{2}P\left( x \right)}$$<br>其中$P(x)$表示事件$x$出现的概率。回到决策树的构建问题上，我们遍历所有特征，分别计算，使用这个公式划分数据集前后信息墒的变化值，然后选择信息墒变化幅度最大的那个特征来作为数据集划分依据。即：选择<strong>信息增益</strong>最大的特征作为分裂节点。</p>
+<p>这里以概率$P(X)$为横坐标，以信息墒$Entropy$为纵坐标把信息墒和概率的函数关系$\mbox{E}ntropy=-P\left( x \right)\log_{2}P\left( x \right)$在二维坐标上画出来，可以看出，当概率$P(X)$越接近0或越接近1时，信息墒的值越小。当概率值为1时信息墒为0，此时数据是最“纯净”的。我们在选择特征时，选择信息增益最大的特征，物理上即让数据尽量往更纯净的方向上变换。因此<strong>信息增益</strong>是用来衡量数据变得更有序更纯净的程度的指标。</p>
+<p><em>延伸一下：如写博客或者看书的过程，是减熵的过程。通过阅读和写作减少了不确定的信息，从而实现减熵。人生价值的实现，在于消费资源（增熵过程）来获取能量，经过自己的劳动付出（减熵过程），让世界变得更加纯净有序，<code>信息增益 = 减熵量 - 增熵量</code>即是衡量人生价值的尺度</em>。</p>
+<h2 id="决策树的创建"><a href="#决策树的创建" class="headerlink" title="决策树的创建"></a>决策树的创建</h2><p>决策树的构建过程，就是从训练集中归纳出一组分类规则，使它与熟练数据矛盾较小的同时具有较强的泛化能力。基本分为以下几步：</p>
+<ul>
+<li>计算数据集划分钱的信息墒</li>
+<li>遍历所有为作为划分条件的特征，分别计算根据每个特征划分数据集后的信息墒。</li>
+<li>选择信息增益最大的特征，并使用这个特镇作为数据划分节点来划分数据。</li>
+<li>递归地处理被划分后的所子数据集，从未被选择的特征里继续重复以上步骤，选择出最优数据划分特征来划分子数据集…</li>
+</ul>
+<p>这里递归结束的条件一般有两个：<strong>一是所有特征都用完了，二是划分后的信息墒增益足够小了</strong>。针对这个停止条件，需要实现选择信息增益的门限值来作为递归结束条件。</p>
+<p>使用信息增益作为特征选择指标的决策树构建算法，称为<strong>ID3算法</strong></p>
+<p>1、离散化</p>
+<p>当特征数据是连续值时，就需要先对数据进行离散化处理。（如考试得分0～100，1～59为不及格，60～80为达标，80～100为优秀）这样离散处理后的数据就可以用来构建决策树了。</p>
+<p>2、<strong>正则项（重要）</strong></p>
+<p>最大化信息增益来选择特征，在决策树的构建过程中，容易造成优先选择类别最多的特征进行分裂，因为这样划分后的子数据集最“纯净”，其信息增益最大。但这不是我们想看到的结果。解决办法如下：</p>
+<ul>
+<li><p><strong>计算划分后的子数据集的信息墒时，加上一个与类别个数成正比的正则项来作为最后的信息墒</strong>：这样当算法选择的某个类别较多的特征，使信息墒较小时，由于受到正则项的“惩罚”，导致最终的信息墒也较大。这样通过合适的参数可以使算法训练得到某种程度的平衡。</p>
+</li>
+<li><p><strong>使用信息增益比</strong>来作为特征选择的标准。</p>
+</li>
+</ul>
+<p>3、基尼不纯度</p>
+<p>信息墒是横量信息不确定性的指标，实际上也是衡量信息“纯度”的指标。</p>
+<p>基尼不纯度<code>(Gini impurity)</code>也是衡量信息不纯度的指标，公式如下：</p>
+<p>$$Gini\left( D \right)=\sum_{x\in X}^{_ {_ {\;}}}{P\left( x \right)\left( 1-P\left( x \right) \right)=1-}\sum_{x\in X}^{_ {_ {\; }}}{P\left( x \right)^{2}}$$<br>同样，这里以概率$P(X)$为横坐标，以信息墒$Gini(x)$为纵坐标把信息墒和概率的函数关系在二维坐标上画出来，可以看出其形状几乎和信息墒的形状一样。<code>CART</code>算法使用基尼不纯度来作为特征选择标准，<code>GART</code>也是一种决策树构建算法。</p>
+<h2 id="剪枝算法"><a href="#剪枝算法" class="headerlink" title="剪枝算法"></a>剪枝算法</h2><p>使用决策树模型拟合数据时，容易产生过拟合。解决办法是对决策树进行剪枝处理。决策树剪枝有两种思路：</p>
+<p>1、<strong>前剪枝</strong><code>（Pre-Pruning）</code></p>
+<p>在构造决策树的同时进行剪枝。在决策树构建中，如果无法进一步降低信息墒的情况下就会停止创建分支。为了避免过拟合，可以设定一个阀值，信息墒见效的数量小于这个阀值，即是还可以继续降低熵也停止继续创建分支。这种方法就是前剪枝。</p>
+<p>2、<strong>后剪枝</strong><code>（Post-Pruning）</code></p>
+<p>后剪枝是指决策树构造完成后进行剪枝。剪枝的过程是对拥有同样符节点的一组节点进行检查，判断如果将其合并，信息墒的增加量是否小于某一阀值。如果小于阀值即可合并分支。</p>
+<p>后剪枝是目前比较普遍的做法。后剪枝的过程就是删除一些子树，然后用子树的根节点代替作为新的叶子节点。这个新叶子所标示的类别通过大多数原则来确定。即把这个叶子节点里样本最多的类别，作为这个叶子节点的类别。</p>
+<p>后剪枝的算法有很多种，其中常见的一种称为<strong>减低错误率剪枝法（Reduced-Errorpruning）</strong>。其思路是自底向上，从已经构建好的完全决策树中找出一个子树，然后用子树的根节点代替这颗子树，作为新的叶子节点。叶子节点所表示的类别通过大多数原则确定，这样就构建出一个简化版决策树。然后使用交叉验证数据集来测试简化版本的决策树，看看其错误率是不是降低了。如果错误率降低了，则可以用这个简化版的决策树来代替完全决策树，否则还采用原来的决策树。通过遍历所有的子树，直到针对交叉验证数据集无法进一步降低错误率为止。</p>
+<h2 id="sklearn种决策树的算法参数"><a href="#sklearn种决策树的算法参数" class="headerlink" title="sklearn种决策树的算法参数"></a>sklearn种决策树的算法参数</h2><h3 id="1、模型参数"><a href="#1、模型参数" class="headerlink" title="1、模型参数"></a>1、模型参数</h3><p>sklern中使用<code>sklearn.tree.DecisionTreeClassifier</code>类来实现决策树分类算法。其实几个典型的参数解释如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:center">功能</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">criterion</td>
+<td style="text-align:center">特征选择标准</td>
+<td style="text-align:left">‘gini’ or ‘entropy’ (default=”gini”)，前者是基尼系数，后者是信息熵。两种算法差异不大对准确率无影响，信息墒云孙效率低一点，因为它有对数运算.一般说使用默认的基尼系数”gini”就可以了，即CART算法。除非你更喜欢类似ID3, C4.5的最优特征选择方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">splitter</td>
+<td style="text-align:center">特征划分标准</td>
+<td style="text-align:left">‘best’ or ‘random’ (default=”best”) 前者在特征的所有划分点中找出最优的划分点。后者是随机的在部分划分点中找局部最优的划分点。 默认的”best”适合样本量不大的时候，而如果样本数据量非常大，此时决策树构建推荐”random” 。</td>
+</tr>
+<tr>
+<td style="text-align:left">max_depth</td>
+<td style="text-align:center">决策树最大深度</td>
+<td style="text-align:left">int or None, optional (default=None) 一般来说，数据少或者特征少的时候可以不管这个值。如果模型样本量多，特征也多的情况下，推荐限制这个最大深度，具体的取值取决于数据的分布。常用的可以取值10-100之间。常用来解决过拟合</td>
+</tr>
+<tr>
+<td style="text-align:left">min_impurity_decrease</td>
+<td style="text-align:center">节点划分最小不纯度</td>
+<td style="text-align:left">float, optional (default=0.) 这个值限制了决策树的增长，如果某节点的不纯度(基尼系数，信息增益，均方差，绝对差)小于这个阈值，则该节点不再生成子节点。 sklearn 0.19.1版本之前叫 min_impurity_split</td>
+</tr>
+<tr>
+<td style="text-align:left">min_samples_split</td>
+<td style="text-align:center">内部节点再划分所需最小样本数</td>
+<td style="text-align:left">int, float, optional (default=2) 如果是 int，则取传入值本身作为最小样本数； 如果是 float，则去 ceil(min_samples_split * 样本数量) 的值作为最小样本数，即向上取整。</td>
+</tr>
+<tr>
+<td style="text-align:left">min_samples_leaf</td>
+<td style="text-align:center">叶子节点最少样本数</td>
+<td style="text-align:left">如果是 int，则取传入值本身作为最小样本数； 如果是 float，则去 ceil(min_samples_leaf * 样本数量) 的值作为最小样本数，即向上取整。 这个值限制了叶子节点最少的样本数，如果某叶子节点数目小于样本数，则会和兄弟节点一起被剪枝。</td>
+</tr>
+<tr>
+<td style="text-align:left">max_leaf_nodes</td>
+<td style="text-align:center">最大叶子节点数</td>
+<td style="text-align:left">int or None, optional (default=None) 通过限制最大叶子节点数，可以防止过拟合，默认是”None”，即不限制最大的叶子节点数。如果加了限制，算法会建立在最大叶子节点数内最优的决策树。如果特征不多，可以不考虑这个值，但是如果特征分成多的话，可以加以限制，具体的值可以通过交叉验证得到。</td>
+</tr>
+<tr>
+<td style="text-align:left">min_impurity_split</td>
+<td style="text-align:center">信息增益的阀值</td>
+<td style="text-align:left">决策树在创建分支时，信息增益必须大于这个阀值，否则不分裂</td>
+</tr>
+<tr>
+<td style="text-align:left">min_weight_fraction_leaf</td>
+<td style="text-align:center">叶子节点最小的样本权重和</td>
+<td style="text-align:left">float, optional (default=0.) 这个值限制了叶子节点所有样本权重和的最小值，如果小于这个值，则会和兄弟节点一起被剪枝。 默认是0，就是不考虑权重问题。一般来说，如果我们有较多样本有缺失值，或者分类树样本的分布类别偏差很大，就会引入样本权重，这时我们就要注意这个值了。</td>
+</tr>
+<tr>
+<td style="text-align:left">class_weight</td>
+<td style="text-align:center">类别权重</td>
+<td style="text-align:left">dict, list of dicts, “balanced” or None, default=None 指定样本各类别的的权重，主要是为了防止训练集某些类别的样本过多，导致训练的决策树过于偏向这些类别。这里可以自己指定各个样本的权重，或者用“balanced”，如果使用“balanced”，则算法会自己计算权重，样本量少的类别所对应的样本权重会高。当然，如果你的样本类别分布没有明显的偏倚，则可以不管这个参数，选择默认的”None” 不适用于回归树 sklearn.tree.DecisionTreeRegressor</td>
+</tr>
+</tbody>
+</table>
+<h3 id="模型调参注意事项："><a href="#模型调参注意事项：" class="headerlink" title="模型调参注意事项："></a>模型调参注意事项：</h3><ul>
+<li>当样本少数量但是样本特征非常多的时候，决策树很容易过拟合，一般来说，样本数比特征数多一些会比较容易建立健壮的模型</li>
+<li>如果样本数量少但是样本特征非常多，在拟合决策树模型前，推荐先做维度规约，比如主成分分析（PCA），特征选择（Losso）或者独立成分分析（ICA）。这样特征的维度会大大减小。再来拟合决策树模型效果会好。</li>
+<li>推荐多用决策树的可视化，同时先限制决策树的深度（比如最多3层），这样可以先观察下生成的决策树里数据的初步拟合情况，然后再决定是否要增加深度。</li>
+<li>在训练模型先，注意观察样本的类别情况（主要指分类树），如果类别分布非常不均匀，就要考虑用class_weight来限制模型过于偏向样本多的类别。</li>
+<li>决策树的数组使用的是numpy的float32类型，如果训练数据不是这样的格式，算法会先做copy再运行。</li>
+<li>如果输入的样本矩阵是稀疏的，推荐在拟合前调用csc_matrix稀疏化，在预测前调用csr_matrix稀疏化。</li>
+</ul>
+<h2 id="实例：预测泰坦尼克号幸存者"><a href="#实例：预测泰坦尼克号幸存者" class="headerlink" title="实例：预测泰坦尼克号幸存者"></a>实例：预测泰坦尼克号幸存者</h2><p>数据预处理前期工作：</p>
+<ul>
+<li>筛选特征值，丢掉不需要的特征数据</li>
+<li>对性别进行二值化处理（转换为0和1）</li>
+<li>港口转换成数值型数据</li>
+<li>处理缺失值（如年龄，有很多缺失值）</li>
+</ul>
+<p>1、首先读取数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_dataset</span><span class="params">(fname)</span>:</span></span><br><span class="line"><span class="comment">#     指定第一列作为行索引</span></span><br><span class="line">    data = pd.read_csv(fname, index_col=<span class="number">0</span>)</span><br><span class="line"><span class="comment">#     丢弃无用数据</span></span><br><span class="line">    data.drop([<span class="string">'Name'</span>, <span class="string">'Ticket'</span>, <span class="string">'Cabin'</span>], axis=<span class="number">1</span>, inplace=<span class="keyword">True</span>)</span><br><span class="line"><span class="comment">#     处理性别数据</span></span><br><span class="line">    lables = data[<span class="string">'Sex'</span>].unique().tolist()</span><br><span class="line">    data[<span class="string">'Sex'</span>] = [*map(<span class="keyword">lambda</span> x: lables.index(x) , data[<span class="string">'Sex'</span>])]</span><br><span class="line"><span class="comment">#     处理登船港口数据</span></span><br><span class="line">    lables = data[<span class="string">'Embarked'</span>].unique().tolist()</span><br><span class="line">    data[<span class="string">'Embarked'</span>] = data[<span class="string">'Embarked'</span>].apply(<span class="keyword">lambda</span> n: lables.index(n))</span><br><span class="line"><span class="comment">#     处理缺失数据填充0</span></span><br><span class="line">    data = data.fillna(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line">train = read_dataset(<span class="string">'code/datasets/titanic/train.csv'</span>)</span><br></pre></td></tr></table></figure>
+<p>2、拆分数据集</p>
+<p>把<code>Survived</code>列提取出来作为标签，然后在元数据集中将其丢弃。同时拆分数据集和交叉验证数据集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">y = train[<span class="string">'Survived'</span>].values</span><br><span class="line">X = train.drop([<span class="string">'Survived'</span>], axis=<span class="number">1</span>).values</span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>)</span><br><span class="line">print(<span class="string">"X_train_shape:"</span>, X_train.shape, <span class="string">" y_train_shape:"</span>, y_train.shape)</span><br><span class="line">print(<span class="string">"X_test_shape:"</span>, X_test.shape,<span class="string">"  y_test_shape:"</span>, y_test.shape)</span><br></pre></td></tr></table></figure>
+<pre><code>X_train_shape: (712, 7)  y_train_shape: (712,)
+X_test_shape: (179, 7)   y_test_shape: (179,)
+</code></pre><p>3、拟合数据集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"></span><br><span class="line">clf = DecisionTreeClassifier()</span><br><span class="line">clf.fit(X_train, y_train)</span><br><span class="line">print(<span class="string">"train score:"</span>, clf.score(X_train, y_train))</span><br><span class="line">print(<span class="string">"test score:"</span>, clf.score(X_test, y_test))</span><br></pre></td></tr></table></figure>
+<pre><code>train score: 0.9845505617977528
+test score: 0.7597765363128491
+</code></pre><h2 id="优化模型参数"><a href="#优化模型参数" class="headerlink" title="优化模型参数"></a>优化模型参数</h2><h3 id="1、通过max-depth参数来优化模型"><a href="#1、通过max-depth参数来优化模型" class="headerlink" title="1、通过max_depth参数来优化模型"></a>1、通过<code>max_depth</code>参数来优化模型</h3><p>从以上输出数据可以看出，针对训练样本评分很高，但针对测试数据集评分较低。很明显这是过拟合的特征。解决决策树过拟合的方法是剪枝，包括前剪枝和后剪枝。但是<code>sklearn</code>不支持后剪枝，这里通过<code>max_depth</code>参数限定决策树深度，在一定程度上避免过拟合。</p>
+<p>这里先创建一个函数使用不同的模型深度训练模型，并计算评分数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cv_score</span><span class="params">(d)</span>:</span></span><br><span class="line">    clf = DecisionTreeClassifier(max_depth=d)</span><br><span class="line">    clf.fit(X_train, y_train)</span><br><span class="line">    <span class="keyword">return</span>(clf.score(X_train, y_train), clf.score(X_test, y_test))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>)</span><br><span class="line">depths = np.arange(<span class="number">1</span>,<span class="number">10</span>)</span><br><span class="line">scores = [cv_score(d) <span class="keyword">for</span> d <span class="keyword">in</span> depths]</span><br><span class="line">tr_scores = [s[<span class="number">0</span>] <span class="keyword">for</span> s <span class="keyword">in</span> scores]</span><br><span class="line">te_scores = [s[<span class="number">1</span>] <span class="keyword">for</span> s <span class="keyword">in</span> scores]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 找出交叉验证数据集评分最高的索引</span></span><br><span class="line">tr_best_index = np.argmax(tr_scores)</span><br><span class="line">te_best_index = np.argmax(te_scores)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"bestdepth:"</span>, te_best_index+<span class="number">1</span>, <span class="string">" bestdepth_score:"</span>, te_scores[te_best_index], <span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>bestdepth: 5  bestdepth_score: 0.8603351955307262 
+</code></pre><p><strong>这里由于以上<code>train_test_split</code>方法对数据切分是随机打散的，造成每次用不同的数据集训练模型总得到不同的最佳深度。</strong>这里写个循环反复测试，最终验证这里看到最佳的分支深度为5出现的频率最高，初步确定5为深度模型最佳。</p>
+<p>把模型参数和对应的评分画出来：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line">depths = np.arange(<span class="number">1</span>,<span class="number">10</span>)</span><br><span class="line">plt.figure(figsize=(<span class="number">6</span>,<span class="number">4</span>), dpi=<span class="number">120</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.xlabel(<span class="string">'max depth of decison tree'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Scores'</span>)</span><br><span class="line">plt.plot(depths, te_scores, label=<span class="string">'test_scores'</span>)</span><br><span class="line">plt.plot(depths, tr_scores, label=<span class="string">'train_scores'</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fq3frlhc9vj30ii0c6jsa.jpg" alt=""></p>
+<h3 id="2、通过min-impurity-decrease来优化模型"><a href="#2、通过min-impurity-decrease来优化模型" class="headerlink" title="2、通过min_impurity_decrease来优化模型"></a>2、通过<code>min_impurity_decrease</code>来优化模型</h3><p>这个参数用来指定信息墒或者基尼不纯度的阀值，当决策树分裂后，其信息增益低于这个阀值时则不再分裂。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minsplit_score</span><span class="params">(val)</span>:</span></span><br><span class="line">    clf = DecisionTreeClassifier(criterion=<span class="string">'gini'</span>, min_impurity_decrease=val)</span><br><span class="line">    clf.fit(X_train, y_train)</span><br><span class="line">    <span class="keyword">return</span> (clf.score(X_train, y_train), clf.score(X_test, y_test), )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定参数范围，分别训练模型并计算得分</span></span><br><span class="line"></span><br><span class="line">vals = np.linspace(<span class="number">0</span>, <span class="number">0.2</span>, <span class="number">100</span>)</span><br><span class="line">scores = [minsplit_score(v) <span class="keyword">for</span> v <span class="keyword">in</span> vals]</span><br><span class="line">tr_scores = [s[<span class="number">0</span>] <span class="keyword">for</span> s <span class="keyword">in</span> scores]</span><br><span class="line">te_scores = [s[<span class="number">1</span>] <span class="keyword">for</span> s <span class="keyword">in</span> scores]</span><br><span class="line"></span><br><span class="line">bestmin_index = np.argmax(te_scores)</span><br><span class="line">bestscore = te_scores[bestmin_index]</span><br><span class="line">print(<span class="string">"bestmin:"</span>, vals[bestmin_index])</span><br><span class="line">print(<span class="string">"bestscore:"</span>, bestscore)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">6</span>,<span class="number">4</span>), dpi=<span class="number">120</span>)</span><br><span class="line">plt.grid()</span><br><span class="line">plt.xlabel(<span class="string">"min_impurity_decrease"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"Scores"</span>)</span><br><span class="line">plt.plot(vals, te_scores, label=<span class="string">'test_scores'</span>)</span><br><span class="line">plt.plot(vals, tr_scores, label=<span class="string">'train_scores'</span>)</span><br><span class="line"></span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+<pre><code>bestmin: 0.00202020202020202
+bestscore: 0.7988826815642458
+</code></pre><p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fq3frwqn2fj30hx0c7aac.jpg" alt=""></p>
+<p><strong>问题：每次使用不同随机切割的数据集得出最佳参数为0.002很接近0，该怎么解读？</strong></p>
+<p>值此为我们找到了两个参数,最佳深度depth=5 和最佳min_impurity_decrease=0.002，下面我来用两个参数简历模型进行测试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>)</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics </span><br><span class="line"></span><br><span class="line">model = DecisionTreeClassifier(max_depth=<span class="number">5</span>, min_impurity_decrease=<span class="number">0.002</span>)</span><br><span class="line">model.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"tees_score:"</span>, model.score(X_test, y_test))</span><br><span class="line"></span><br><span class="line">y_pred = model.predict(X_test)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"查准率:"</span>,metrics.precision_score(y_test, y_pred))</span><br><span class="line">print(<span class="string">"召回率:"</span>,metrics.recall_score(y_test, y_pred))</span><br><span class="line">print(<span class="string">"F1_score:"</span>,metrics.f1_score(y_test, y_pred))</span><br></pre></td></tr></table></figure>
+<pre><code>tees_score: 0.7821229050279329
+查准率: 0.8461538461538461
+召回率: 0.5866666666666667
+F1_score: 0.6929133858267718
+</code></pre><h2 id="模型参数选择工具包"><a href="#模型参数选择工具包" class="headerlink" title="模型参数选择工具包"></a>模型参数选择工具包</h2><p>至此发现以上两种模型优化方法有两问题：</p>
+<ul>
+<li><p>1、数据不稳定：–&gt; 每次重新分配训练集测试集，原参数就不是最优了。 解决办法是多次计算求平均值。</p>
+</li>
+<li><p>2、不能一次选择多个参数：–&gt; 想考察max_depth和min_impurity_decrease两者结合起来的最优参数就没法实现。</p>
+</li>
+</ul>
+<p>所幸<code>scikit-learn</code>在<code>sklearn.model_selection</code>包提供了大量的模型选择和评估的工具供我们使用。针对该问题可以使用<code>GridSearchCV</code>类来解决。</p>
+<h3 id="利用GridSearchCV求最优参数"><a href="#利用GridSearchCV求最优参数" class="headerlink" title="利用GridSearchCV求最优参数"></a>利用<code>GridSearchCV</code>求最优参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"></span><br><span class="line">thresholds = np.linspace(<span class="number">0</span>, <span class="number">0.2</span>, <span class="number">50</span>)</span><br><span class="line">param_grid = &#123;<span class="string">'min_impurity_decrease'</span>:thresholds&#125;</span><br><span class="line"></span><br><span class="line">clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=<span class="number">5</span>)</span><br><span class="line">clf.fit(X,y)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"best_parms:&#123;0&#125;\nbest_score:&#123;1&#125;"</span>.format(clf.best_params_, clf.best_score_))</span><br></pre></td></tr></table></figure>
+<pre><code>best_parms:{&apos;min_impurity_decrease&apos;: 0.00816326530612245}
+best_score:0.8114478114478114
+</code></pre><p>模型解读：<br>1、关键字参数<code>param_grid</code>是一个字典，字典的关键字对应的值是一个列表。<code>GridSearchCV</code>会枚举列表里所有值来构建模型多次计算训练模型，并计算模型评分，最终得出指定参数值的平均评分及标准差。</p>
+<p>2、关键参数<code>sv</code>，用来指定交叉验证数据集的生成规则。这里sv=5表示每次计算都把数据集分成5份，拿其中一份作为交叉验证数据集，其他作为训练集。最终得出最优参数及最优评分保存在<code>clf.best_params_</code>和<code>clf.best_score_</code>里。</p>
+<p>3、此外<code>clf.cv_results_</code>里保存了计算过程的所有中间结果。</p>
+<h3 id="画出学习曲线："><a href="#画出学习曲线：" class="headerlink" title="画出学习曲线："></a>画出学习曲线：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_curve</span><span class="params">(train_sizes, cv_results, xlabel)</span>:</span></span><br><span class="line">    train_scores_mean = cv_results[<span class="string">'mean_train_score'</span>]</span><br><span class="line">    train_scores_std = cv_results[<span class="string">'std_train_score'</span>]</span><br><span class="line">    test_scores_mean = cv_results[<span class="string">'mean_test_score'</span>]</span><br><span class="line">    test_scores_std = cv_results[<span class="string">'std_test_score'</span>]</span><br><span class="line">    plt.figure(figsize=(<span class="number">6</span>, <span class="number">4</span>), dpi=<span class="number">120</span>)</span><br><span class="line">    plt.title(<span class="string">'parameters turning'</span>)</span><br><span class="line">    plt.grid()</span><br><span class="line">    plt.xlabel(xlabel)</span><br><span class="line">    plt.ylabel(<span class="string">'score'</span>)</span><br><span class="line">    plt.fill_between(train_sizes, </span><br><span class="line">                     train_scores_mean - train_scores_std,</span><br><span class="line">                     train_scores_mean + train_scores_std, </span><br><span class="line">                     alpha=<span class="number">0.1</span>, color=<span class="string">"r"</span>)</span><br><span class="line">    plt.fill_between(train_sizes, </span><br><span class="line">                     test_scores_mean - test_scores_std,</span><br><span class="line">                     test_scores_mean + test_scores_std, </span><br><span class="line">                     alpha=<span class="number">0.1</span>, color=<span class="string">"g"</span>)</span><br><span class="line">    plt.plot(train_sizes, train_scores_mean, <span class="string">'.--'</span>, color=<span class="string">"r"</span>,</span><br><span class="line">             label=<span class="string">"Training score"</span>)</span><br><span class="line">    plt.plot(train_sizes, test_scores_mean, <span class="string">'.-'</span>, color=<span class="string">"g"</span>,</span><br><span class="line">             label=<span class="string">"Cross-validation score"</span>)</span><br><span class="line"></span><br><span class="line">    plt.legend(loc=<span class="string">"best"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"></span><br><span class="line">thresholds = np.linspace(<span class="number">0</span>, <span class="number">0.2</span>, <span class="number">50</span>)</span><br><span class="line"><span class="comment"># Set the parameters by cross-validation</span></span><br><span class="line">param_grid = &#123;<span class="string">'min_impurity_decrease'</span>: thresholds&#125;</span><br><span class="line"></span><br><span class="line">clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=<span class="number">5</span>)</span><br><span class="line">clf.fit(X, y)</span><br><span class="line">print(<span class="string">"best param: &#123;0&#125;\nbest score: &#123;1&#125;"</span>.format(clf.best_params_, </span><br><span class="line">                                                clf.best_score_))</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot_curve(thresholds, clf.cv_results_, xlabel='gini thresholds')</span></span><br></pre></td></tr></table></figure>
+<pre><code>best param: {&apos;min_impurity_decrease&apos;: 0.00816326530612245}
+best score: 0.8114478114478114
+</code></pre><p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fq3fs68mvsj30i70cr3zb.jpg" alt=""></p>
+<h3 id="多组参数之间选择最优参数："><a href="#多组参数之间选择最优参数：" class="headerlink" title="多组参数之间选择最优参数："></a>多组参数之间选择最优参数：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"></span><br><span class="line">entropy_thresholds = np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">100</span>)</span><br><span class="line">gini_thresholds = np.linspace(<span class="number">0</span>, <span class="number">0.2</span>, <span class="number">100</span>)</span><br><span class="line"><span class="comment">#设置参数矩阵：</span></span><br><span class="line">param_grid = [&#123;<span class="string">'criterion'</span>: [<span class="string">'entropy'</span>], <span class="string">'min_impurity_decrease'</span>: entropy_thresholds&#125;,</span><br><span class="line">              &#123;<span class="string">'criterion'</span>: [<span class="string">'gini'</span>], <span class="string">'min_impurity_decrease'</span>: gini_thresholds&#125;,</span><br><span class="line">              &#123;<span class="string">'max_depth'</span>: np.arange(<span class="number">2</span>,<span class="number">10</span>)&#125;,</span><br><span class="line">              &#123;<span class="string">'min_samples_split'</span>: np.arange(<span class="number">2</span>,<span class="number">30</span>,<span class="number">2</span>)&#125;]</span><br><span class="line">clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=<span class="number">5</span>)</span><br><span class="line">clf.fit(X, y)</span><br><span class="line">print(<span class="string">"best param:&#123;0&#125;\nbest score:&#123;1&#125;"</span>.format(clf.best_params_, clf.best_score_))</span><br></pre></td></tr></table></figure>
+<pre><code>best param:{&apos;min_impurity_decrease&apos;: 0.00816326530612245}
+best score:0.8114478114478114
+</code></pre><p><code>结果1、{&#39;criterion&#39;: &#39;gini&#39;, &#39;min_impurity_decrease&#39;: 0.00816326530612245} -&gt;6</code></p>
+<p><code>结果2、{&#39;min_samples_split&#39;: 22} -&gt;10</code></p>
+<p><code>结果3、{&#39;min_samples_split&#39;: 20} -&gt;4</code></p>
+<p><strong>结果波动很大，这里做了20次测试，对应结果1出现6次，结果2出现10次，结果3出现4次。</strong></p>
+<p><strong>代码解读</strong>：<br>关键部分还是<code>param_grid</code>参数，他是一个列表。很对列表的第一个字典，选择信息墒<code>（entropy）</code>作为判断标准，取值0～1范围50等分；</p>
+<p>第二个字典选择基尼系数，<code>min_impurity_decrease</code>取值0～0.2范围50等分。</p>
+<p><code>GridSearchCV</code>会针对列表中的每个字典进行迭代，最终比较列表中每个字典所对应的参数组合，选择出最优的参数。</p>
+<h3 id="生成决策树图形"><a href="#生成决策树图形" class="headerlink" title="生成决策树图形"></a>生成决策树图形</h3><p>下面代码可以生成.dot文件，需要电脑上安装<code>graphviz</code>才能把文件转换成图片格式。</p>
+<p><code>Mac</code>上可以使用<code>brew install graphviz</code>命令来安装，它会同时安装8个依赖包。这里一定注意<code>Mac</code>环境下的权限问题：由于<code>Homebrew</code>默认是安装在<code>/usr/local</code>下，而<code>Mac</code>有强制保护不支持<code>sudo chown -R uname local</code>对<code>local</code>文件夹进行权限修改。 </p>
+<p>这里的解决方式是把<code>local</code>下<code>bin</code>,<code>lib</code>,<code>Cellar</code>等所需单个文件夹下进行赋权，即可成功安装。</p>
+<ol>
+<li>在电脑上安装 graphviz</li>
+<li>运行 <code>dot -Tpng tree.dot -o filename.png</code></li>
+<li>在当前目录查看生成的决策树 filename.png</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier </span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"></span><br><span class="line">clf = DecisionTreeClassifier(min_samples_split=<span class="number">22</span>)</span><br><span class="line">clf = clf.fit(X_train, y_train)</span><br><span class="line">train_score = clf.score(X_train, y_train)</span><br><span class="line">test_score = clf.score(X_test, y_test)</span><br><span class="line">print(<span class="string">'train score: &#123;0&#125;; test score: &#123;1&#125;'</span>.format(train_score, test_score))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出 titanic.dot 文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"tree.dot"</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f = tree.export_graphviz(clf, out_file=f)</span><br></pre></td></tr></table></figure>
+<pre><code>train score: 0.8834269662921348; test score: 0.8268156424581006
+</code></pre><p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fq3fe05mm1j31kw0zfgqd.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/scikit-learn/" rel="tag"><i class="fa fa-tag"></i> scikit-learn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/Logistic-regression.html" rel="next" title="scikit-learn逻辑回归">
+                <i class="fa fa-chevron-left"></i> scikit-learn逻辑回归
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/SVM.html" rel="prev" title="SVM支持向量机原理及核函数">
+                SVM支持向量机原理及核函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#利用信息墒判定先对那个特征进行分裂"><span class="nav-number">1.</span> <span class="nav-text">利用信息墒判定先对那个特征进行分裂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树的创建"><span class="nav-number">2.</span> <span class="nav-text">决策树的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剪枝算法"><span class="nav-number">3.</span> <span class="nav-text">剪枝算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sklearn种决策树的算法参数"><span class="nav-number">4.</span> <span class="nav-text">sklearn种决策树的算法参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、模型参数"><span class="nav-number">4.1.</span> <span class="nav-text">1、模型参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型调参注意事项："><span class="nav-number">4.2.</span> <span class="nav-text">模型调参注意事项：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例：预测泰坦尼克号幸存者"><span class="nav-number">5.</span> <span class="nav-text">实例：预测泰坦尼克号幸存者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化模型参数"><span class="nav-number">6.</span> <span class="nav-text">优化模型参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、通过max-depth参数来优化模型"><span class="nav-number">6.1.</span> <span class="nav-text">1、通过max_depth参数来优化模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、通过min-impurity-decrease来优化模型"><span class="nav-number">6.2.</span> <span class="nav-text">2、通过min_impurity_decrease来优化模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型参数选择工具包"><span class="nav-number">7.</span> <span class="nav-text">模型参数选择工具包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用GridSearchCV求最优参数"><span class="nav-number">7.1.</span> <span class="nav-text">利用GridSearchCV求最优参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#画出学习曲线："><span class="nav-number">7.2.</span> <span class="nav-text">画出学习曲线：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多组参数之间选择最优参数："><span class="nav-number">7.3.</span> <span class="nav-text">多组参数之间选择最优参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成决策树图形"><span class="nav-number">7.4.</span> <span class="nav-text">生成决策树图形</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

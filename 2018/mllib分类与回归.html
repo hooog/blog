@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MLlib," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本文参考- Machine learning with Scala by CDA 吴昊天 一、分类算法概述​    分类是一种重要的机器学习和数据挖掘技术。分类的目的是根据数据集的特点构造一个分类函数或分类模型(也常常称作分类器)，该模型能把未知类别的样本映射到给定类别中的一种技术。 分类的具体规则可描述如下：给定一组训练数据的集合T(Training set)，T的每一条记录包含若干条属性（F">
+<meta name="keywords" content="MLlib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MLlib分类与回归">
+<meta property="og:url" content="http://www.ihoge.cn/2018/mllib分类与回归.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="本文参考- Machine learning with Scala by CDA 吴昊天 一、分类算法概述​    分类是一种重要的机器学习和数据挖掘技术。分类的目的是根据数据集的特点构造一个分类函数或分类模型(也常常称作分类器)，该模型能把未知类别的样本映射到给定类别中的一种技术。 分类的具体规则可描述如下：给定一组训练数据的集合T(Training set)，T的每一条记录包含若干条属性（F">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/uploads/2016/12/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7-2016-12-12-%E4%B8%8B%E5%8D%888.13.43.png">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9f354d64015b505f718cd9ec4f98890e_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-5e9ba7a182194723ea58568d27bb2301_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-75c83eedd5141ba143a525ba7949c2ae_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9df94356151401c13b3565eab38aa533_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-f711bdb612e16efa1e06ed33178a159d_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-52866ddba463128c071bba7cfdc18c46_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-4a760e6ab4e5a799ec3cb12f96c044b3_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9df94356151401c13b3565eab38aa533_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/uploads/2016/12/6d96cc41gw1etfkt9bbhwj20c603xmx4.jpg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-0fbac46d9cb25d3da0c5e0ce2491aa6e_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-44fa7f0601e3607fabfda93ae964be51_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-477e1cd490f7330c49621f5e744e5038_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-fcb9be84a0978a9b5f986ea8e23c1de4_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-f645be27f6922dcf5e963e9d3d41d4fb_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-a8f70fd9541936adb9a5dbefb48231e4_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-f5d63ea80a9fd78a9f6a3841b41b955c_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-7b5b46100544dfadefe100d2f5ce9736_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-71661cb137bd34c6ab95ab635582a958_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-356e473b3185b432024c4643855f1b9d_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-7f455e08dfaae9ec9caba851ba310853_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-bc325ed92774ae3c02215c8b3f0df281_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-5e34864d2036f06dceb0fc344df6ef8d_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-d6a3162e051baab08b5f008e55d3b1b6_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-7cb9a49dc7e23a4812e6dd357f6cce10_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-7f455e08dfaae9ec9caba851ba310853_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-8af01987546ded14a9504596fdb86603_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-4f53c71e52f9e202140279fe444b56b8_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-283d43a09f3d01239c839119ca540392_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-0a14c8d9009f64ff6011ea57052e19e0_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-7b06955be44dc54e541b867eea64b5cf_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-8abbaa336774e0ca68d817c7a6e6978e_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-a7b403272785da327a65e67b3abd260c_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-ead5c2e2af1dbcc7231b994683d5ddc2_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-095e997ee46e6271f962c1745b8cec82_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-afcbbec24bcbda1b1521842acdf3186d_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9257e6e35d3269c35abbe174de34e5a6_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9257e6e35d3269c35abbe174de34e5a6_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9257e6e35d3269c35abbe174de34e5a6_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-afcbbec24bcbda1b1521842acdf3186d_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9e01c94f75124de404135eab68009560_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9257e6e35d3269c35abbe174de34e5a6_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9e01c94f75124de404135eab68009560_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9257e6e35d3269c35abbe174de34e5a6_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9e01c94f75124de404135eab68009560_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/uploads/2016/12/svm.png">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-449556e56e383176183a533644819e9a_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-8ae60887563a37e93c1666a0426a198e_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-8d050f8d4bbe5840bcd49262ae5ba918_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9c2601179e19ecd5f28305e8c9ed83dc_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-d696bea1276912917a52faebe707dd7b_l3.svg">
+<meta property="og:image" content="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-12f65de211c6a5d7a326102066edc214_l3.svg">
+<meta property="og:updated_time" content="2018-04-06T17:31:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MLlib分类与回归">
+<meta name="twitter:description" content="本文参考- Machine learning with Scala by CDA 吴昊天 一、分类算法概述​    分类是一种重要的机器学习和数据挖掘技术。分类的目的是根据数据集的特点构造一个分类函数或分类模型(也常常称作分类器)，该模型能把未知类别的样本映射到给定类别中的一种技术。 分类的具体规则可描述如下：给定一组训练数据的集合T(Training set)，T的每一条记录包含若干条属性（F">
+<meta name="twitter:image" content="http://dblab.xmu.edu.cn/blog/wp-content/uploads/2016/12/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7-2016-12-12-%E4%B8%8B%E5%8D%888.13.43.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/mllib分类与回归.html"/>
+
+
+
+
+
+  <title>MLlib分类与回归 | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/mllib分类与回归.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MLlib分类与回归</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T11:59:21+08:00">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p>本文参考- Machine learning with Scala by CDA 吴昊天</p>
+<h2 id="一、分类算法概述"><a href="#一、分类算法概述" class="headerlink" title="一、分类算法概述"></a>一、分类算法概述</h2><p>​    分类是一种重要的机器学习和数据挖掘技术。分类的目的是根据数据集的特点构造一个分类函数或分类模型(也常常称作分类器)，该模型能把未知类别的样本映射到给定类别中的一种技术。</p>
+<p>分类的具体规则可描述如下：给定一组训练数据的集合T(Training set)，T的每一条记录包含若干条属性（Features）组成一个特征向量，用矢量</p>
+<p>$x=(x_1,x_2,x_3·····x_n)$</p>
+<p>表示。</p>
+<p>$x_i$</p>
+<p>可以有不同的值域，当一属性的值域为连续域时，该属性为连续属性(Numerical Attribute)，否则为离散属性(Discrete Attribute)。用</p>
+<p>$C = （c_1,c_2,c_3·····c_k）$</p>
+<p>表示类别属性，即数据集有k个不同的类别。那么，T就隐含了一个从矢量X到类别属性C的映射函数：</p>
+<p>$f(X)-&gt;$</p>
+<p>。分类的目的就是分析输入数据，通过在训练集中的数据表现出来的特性，为每一个类找到一种准确的描述或者模型，采用该种方法(模型)将隐含函数表示出来。</p>
+<p>​    构造分类模型的过程一般分为训练和测试两个阶段。在构造模型之前，将数据集随机地分为训练数据集和测试数据集。先使用训练数据集来构造分类模型，然后使用测试数据集来评估模型的分类准确率。如果认为模型的准确率可以接受，就可以用该模型对其它数据元组进分类。一般来说，测试阶段的代价远低于训练阶段。</p>
+<h2 id="二、spark-mllib分类算法"><a href="#二、spark-mllib分类算法" class="headerlink" title="二、spark.mllib分类算法"></a>二、spark.mllib分类算法</h2><p>​    分类算法基于不同的思想，算法也不尽相同，例如支持向量机SVM、决策树算法、贝叶斯算法、KNN算法等。<code>spark.mllib</code>包支持各种分类方法，主要包含 <a href="http://en.wikipedia.org/wiki/Binary_classification" target="_blank" rel="noopener">二分类</a>， <a href="http://en.wikipedia.org/wiki/Multiclass_classification" target="_blank" rel="noopener">多分类</a>和 <a href="http://en.wikipedia.org/wiki/Regression_analysis" target="_blank" rel="noopener">回归分析</a>。下表列出了每种类型的问题支持的算法。</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/uploads/2016/12/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7-2016-12-12-%E4%B8%8B%E5%8D%888.13.43.png" alt="img"></p>
+<h2 id="三、逻辑斯蒂回归的分类器"><a href="#三、逻辑斯蒂回归的分类器" class="headerlink" title="三、逻辑斯蒂回归的分类器"></a>三、逻辑斯蒂回归的分类器</h2><h3 id="1-方法简介"><a href="#1-方法简介" class="headerlink" title="1.方法简介"></a>1.方法简介</h3><p> 逻辑斯蒂回归（logistic regression）是统计学习中的经典分类方法，属于对数线性模型。logistic回归的因变量可以是二分类的，也可以是多分类的。</p>
+<h3 id="2-基本原理"><a href="#2-基本原理" class="headerlink" title="2.基本原理"></a>2.基本原理</h3><h4 id="2-1-logistic分布"><a href="#2-1-logistic分布" class="headerlink" title="2.1 logistic分布"></a>2.1 logistic分布</h4><p> 设X是连续随机变量，X服从logistic分布是指X具有下列分布函数和密度函数：</p>
+<p>​                                                      <img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9f354d64015b505f718cd9ec4f98890e_l3.svg" alt="img"></p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-5e9ba7a182194723ea58568d27bb2301_l3.svg" alt="img"></p>
+<p> 其中，</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-75c83eedd5141ba143a525ba7949c2ae_l3.svg" alt="img"></p>
+<p>为位置参数，</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9df94356151401c13b3565eab38aa533_l3.svg" alt="img"></p>
+<p>为形状参数。</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-f711bdb612e16efa1e06ed33178a159d_l3.svg" alt="img"></p>
+<p>与</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-52866ddba463128c071bba7cfdc18c46_l3.svg" alt="img"></p>
+<p>图像如下，其中分布函数是以</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-4a760e6ab4e5a799ec3cb12f96c044b3_l3.svg" alt="img"></p>
+<p>为中心对阵，</p>
+<p>​                                                                                <img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9df94356151401c13b3565eab38aa533_l3.svg" alt="img"></p>
+<p>越小曲线变化越快。</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/uploads/2016/12/6d96cc41gw1etfkt9bbhwj20c603xmx4.jpg" alt="img"></p>
+<h4 id="2-2-二项logistic回归模型："><a href="#2-2-二项logistic回归模型：" class="headerlink" title="2.2 二项logistic回归模型："></a>2.2 二项logistic回归模型：</h4><p> 二项logistic回归模型如下：</p>
+<p>​                                                        <img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-0fbac46d9cb25d3da0c5e0ce2491aa6e_l3.svg" alt="img"></p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-44fa7f0601e3607fabfda93ae964be51_l3.svg" alt="img"></p>
+<p> 其中，</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-477e1cd490f7330c49621f5e744e5038_l3.svg" alt="img"></p>
+<p>是输入，</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-fcb9be84a0978a9b5f986ea8e23c1de4_l3.svg" alt="img"></p>
+<p>是输出，w称为权值向量，b称为偏置，</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-f645be27f6922dcf5e963e9d3d41d4fb_l3.svg" alt="img"></p>
+<p>为w和x的内积。</p>
+<h4 id="2-3-参数估计"><a href="#2-3-参数估计" class="headerlink" title="2.3 参数估计"></a>2.3 参数估计</h4><p> 假设： </p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-a8f70fd9541936adb9a5dbefb48231e4_l3.svg" alt="img"></p>
+<p> 则采用“极大似然法”来估计w和b。似然函数为:</p>
+<p>​                                                         <img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-f5d63ea80a9fd78a9f6a3841b41b955c_l3.svg" alt="img"></p>
+<p> 为方便求解，对其“对数似然”进行估计：</p>
+<p>​                                             <img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-7b5b46100544dfadefe100d2f5ce9736_l3.svg" alt="\[L(w) = \sum_{i=1}^N [y_i \log{\pi(x_i)} + (1-y_i) \log{(1 - \pi(x_i)})]\]"></p>
+<p> 从而对</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-71661cb137bd34c6ab95ab635582a958_l3.svg" alt="img"></p>
+<p>求极大值，得到</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-356e473b3185b432024c4643855f1b9d_l3.svg" alt="img"></p>
+<p>的估计值。求极值的方法可以是梯度下降法，梯度上升法等。</p>
+<h3 id="3-基本操作"><a href="#3-基本操作" class="headerlink" title="3.基本操作"></a>3.基本操作</h3><p>​    我们仍然以iris数据集为例进行分析。iris以鸢尾花的特征作为数据来源，数据集包含150个数据集，分为3类，每类50个数据，每个数据包含4个属性，是在数据挖掘、数据分类中非常常用的测试集、训练集。</p>
+<h4 id="3-1-导入需要的包"><a href="#3-1-导入需要的包" class="headerlink" title="3.1  导入需要的包"></a>3.1  导入需要的包</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkConf</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.<span class="type">SparkContext</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.classification.&#123;<span class="type">LogisticRegressionWithLBFGS</span>, <span class="type">LogisticRegressionModel</span>&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.evaluation.<span class="type">MulticlassMetrics</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.regression.<span class="type">LabeledPoint</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.&#123;<span class="type">Vectors</span>,<span class="type">Vector</span>&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-读取数据："><a href="#3-2-读取数据：" class="headerlink" title="3.2 读取数据："></a>3.2 读取数据：</h4><p>​    首先，读取Spark自带数据集，同样，采用LIBSVM格式导入数据</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> data = <span class="type">MLUtils</span>.loadLibSVMFile(sc, <span class="string">"data/mllib/sample_libsvm_data.txt"</span>)</span><br></pre></td></tr></table></figure>
+<p> 然后，把数据打印看一下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.collect()</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-构建模型"><a href="#3-3-构建模型" class="headerlink" title="3.3 构建模型"></a>3.3 构建模型</h4><p> 接下来，首先进行数据集的划分，这里划分60%的训练集和40%的测试集：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> splits = data.randomSplit(<span class="type">Array</span>(<span class="number">0.6</span>, <span class="number">0.4</span>), seed = <span class="number">11</span>L)</span><br><span class="line"><span class="keyword">val</span> training = splits(<span class="number">0</span>).cache()</span><br><span class="line"><span class="keyword">val</span> test = splits(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>然后，构建逻辑斯蒂模型，用set的方法设置参数，比如说分类的数目，这里可以实现多分类逻辑斯蒂模型：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> model = <span class="keyword">new</span> <span class="type">LogisticRegressionWithLBFGS</span>()</span><br><span class="line">  .setNumClasses(<span class="number">10</span>)</span><br><span class="line">  .run(training)</span><br></pre></td></tr></table></figure>
+<p>接下来，调用多分类逻辑斯蒂模型用的predict方法对测试数据进行预测，并把结果保存在MulticlassMetrics中。这里的模型全名为LogisticRegressionWithLBFGS，加上了LBFGS，表示<strong>Limited-memory BFGS</strong>。其中，BFGS是求解非线性优化问题（L(w)求极大值）的方法，是一种秩-2更新，以其发明者Broyden, Fletcher, Goldfarb和Shanno的姓氏首字母命名</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> predictionAndLabels = test.map &#123; <span class="keyword">case</span> <span class="type">LabeledPoint</span>(label, features) =&gt;</span><br><span class="line">  <span class="keyword">val</span> prediction = model.predict(features)</span><br><span class="line">  (prediction, label)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里，采用了test部分的数据每一行都分为标签label和特征features，然后利用map方法，对每一行的数据进行model.predict(features)操作，获得预测值。并把预测值和真正的标签放到predictionAndLabels中。我们可以打印出具体的结果数据来看一下.可以看出，大部分的预测是对的。但第4行的预测与实际标签不同。</p>
+<h4 id="3-4-模型评估"><a href="#3-4-模型评估" class="headerlink" title="3.4 模型评估"></a>3.4 模型评估</h4><p> 最后，我们把模型预测的准确性打印出来：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> metrics = <span class="keyword">new</span> <span class="type">MulticlassMetrics</span>(predictionAndLabels)</span><br><span class="line"><span class="keyword">val</span> accuracy = metrics.accuracy</span><br><span class="line">println(<span class="string">s"Accuracy = <span class="subst">$accuracy</span>"</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-模型保存与使用"><a href="#3-5-模型保存与使用" class="headerlink" title="3.5 模型保存与使用"></a>3.5 模型保存与使用</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model.save(sc, <span class="string">"file:///home/hadoop/target/tmp/scalaLogisticRegressionWithLBFGSModel"</span>)</span><br><span class="line"><span class="keyword">val</span> sameModel = <span class="type">LogisticRegressionModel</span>.load(sc,</span><br><span class="line">  <span class="string">"file:///home/hadoop/target/tmp/scalaLogisticRegressionWithLBFGSModel"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="四、决策树分类器"><a href="#四、决策树分类器" class="headerlink" title="四、决策树分类器"></a>四、决策树分类器</h2><h3 id="1-方法简介-1"><a href="#1-方法简介-1" class="headerlink" title="1.方法简介"></a>1.方法简介</h3><p> 决策树（decision tree）是一种基本的分类与回归方法，这里主要介绍用于分类的决策树。决策树模式呈树形结构，其中每个内部节点表示一个属性上的测试，每个分支代表一个测试输出，每个叶节点代表一种类别。学习时利用训练数据，根据损失函数最小化的原则建立决策树模型；预测时，对新的数据，利用决策树模型进行分类。</p>
+<h3 id="2-基本原理-1"><a href="#2-基本原理-1" class="headerlink" title="2.基本原理"></a>2.基本原理</h3><p>决策树学习通常包括3个步骤：特征选择、决策树的生成和决策树的剪枝。</p>
+<h4 id="2-1-特征选择"><a href="#2-1-特征选择" class="headerlink" title="2.1 特征选择"></a>2.1 特征选择</h4><p>​    特征选择在于选取对训练数据具有分类能力的特征，这样可以提高决策树学习的效率。通常特征选择的准则是信息增益（或信息增益比、基尼指数等），每次计算每个特征的信息增益，并比较它们的大小，选择信息增益最大（信息增益比最大、基尼指数最小）的特征。下面我们重点介绍一下特征选择的准则：信息增益。</p>
+<p>​    首先定义信息论中广泛使用的一个度量标准——熵（entropy），它是表示随机变量不确定性的度量。熵越大，随机变量的不确定性就越大。而信息增益（informational entropy）表示得知某一特征后使得信息的不确定性减少的程度。简单的说，一个属性的信息增益就是由于使用这个属性分割样例而导致的期望熵降低。信息增益、信息增益比和基尼指数的具体定义如下：</p>
+<p><strong>信息增益</strong>：特征A对训练数据集D的信息增益</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-7f455e08dfaae9ec9caba851ba310853_l3.svg" alt="img"></p>
+<p>，定义为集合D的经验熵</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-bc325ed92774ae3c02215c8b3f0df281_l3.svg" alt="img"></p>
+<p>与特征A给定条件下D的经验条件熵</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-5e34864d2036f06dceb0fc344df6ef8d_l3.svg" alt="img"></p>
+<p>之差，即</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-d6a3162e051baab08b5f008e55d3b1b6_l3.svg" alt="img"></p>
+<p> <strong>信息增益比</strong>：特征A对训练数据集D的信息增益比</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-7cb9a49dc7e23a4812e6dd357f6cce10_l3.svg" alt="img"></p>
+<p>定义为其信息增益</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-7f455e08dfaae9ec9caba851ba310853_l3.svg" alt="img"></p>
+<p>与训练数据集D关于特征A的值的熵</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-8af01987546ded14a9504596fdb86603_l3.svg" alt="img"></p>
+<p>之比，即</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-4f53c71e52f9e202140279fe444b56b8_l3.svg" alt="img"></p>
+<p>其中，</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-283d43a09f3d01239c839119ca540392_l3.svg" alt="img"></p>
+<p>，n是特征A取值的个数。</p>
+<p><strong>基尼指数</strong>：分类问题中，假设有K个类，样本点属于第K类的概率为</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-0a14c8d9009f64ff6011ea57052e19e0_l3.svg" alt="img"></p>
+<p>，则概率分布的基尼指数定义为</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-7b06955be44dc54e541b867eea64b5cf_l3.svg" alt="img"></p>
+<h4 id="2-2-决策树的生成"><a href="#2-2-决策树的生成" class="headerlink" title="2.2 决策树的生成"></a>2.2 决策树的生成</h4><p>​    从根结点开始，对结点计算所有可能的特征的信息增益，选择信息增益最大的特征作为结点的特征，由该特征的不同取值建立子结点，再对子结点递归地调用以上方法，构建决策树；直到所有特征的信息增均很小或没有特征可以选择为止，最后得到一个决策树。</p>
+<p>​    决策树需要有停止条件来终止其生长的过程。一般来说最低的条件是：当该节点下面的所有记录都属于同一类，或者当所有的记录属性都具有相同的值时。这两种条件是停止决策树的必要条件，也是最低的条件。在实际运用中一般希望决策树提前停止生长，限定叶节点包含的最低数据量，以防止由于过度生长造成的过拟合问题。</p>
+<h4 id="2-3决策树的剪枝"><a href="#2-3决策树的剪枝" class="headerlink" title="2.3决策树的剪枝"></a>2.3决策树的剪枝</h4><p>​    决策树生成算法递归地产生决策树，直到不能继续下去为止。这样产生的树往往对训练数据的分类很准确，但对未知的测试数据的分类却没有那么准确，即出现过拟合现象。解决这个问题的办法是考虑决策树的复杂度，对已生成的决策树进行简化，这个过程称为剪枝。</p>
+<p>​    决策树的剪枝往往通过极小化决策树整体的损失函数来实现。一般来说，损失函数可以进行如下的定义：</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-8abbaa336774e0ca68d817c7a6e6978e_l3.svg" alt="img"></p>
+<p> 其中，T为任意子树，</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-a7b403272785da327a65e67b3abd260c_l3.svg" alt="img"></p>
+<p>为对训练数据的预测误差（如基尼指数），</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-ead5c2e2af1dbcc7231b994683d5ddc2_l3.svg" alt="img"></p>
+<p>为子树的叶结点个数，</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-095e997ee46e6271f962c1745b8cec82_l3.svg" alt="img"></p>
+<p>为参数，</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-afcbbec24bcbda1b1521842acdf3186d_l3.svg" alt="img"></p>
+<p>为参数是</p>
+<p> <img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9257e6e35d3269c35abbe174de34e5a6_l3.svg" alt="img"></p>
+<p>时的子树T的整体损失，参数</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9257e6e35d3269c35abbe174de34e5a6_l3.svg" alt="img"></p>
+<p>权衡训练数据的拟合程度与模型的复杂度。对于固定的</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9257e6e35d3269c35abbe174de34e5a6_l3.svg" alt="img"></p>
+<p>，一定存在使损失函数</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-afcbbec24bcbda1b1521842acdf3186d_l3.svg" alt="img"></p>
+<p>最小的子树，将其表示为</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9e01c94f75124de404135eab68009560_l3.svg" alt="img"></p>
+<p>。当</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9257e6e35d3269c35abbe174de34e5a6_l3.svg" alt="img"></p>
+<p>大的时候，最优子树</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9e01c94f75124de404135eab68009560_l3.svg" alt="img"></p>
+<p>偏小；当</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9257e6e35d3269c35abbe174de34e5a6_l3.svg" alt="img"></p>
+<p>小的时候，最优子树</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9e01c94f75124de404135eab68009560_l3.svg" alt="img"></p>
+<p>偏大。</p>
+<h3 id="3-基本操作-1"><a href="#3-基本操作-1" class="headerlink" title="3.基本操作"></a>3.基本操作</h3><p>​    我们以iris数据集为例进行分析。iris以鸢尾花的特征作为数据来源，数据集包含150个数据集，分为3类，每类50个数据，每个数据包含4个属性，是在数据挖掘、数据分类中非常常用的测试集、训练集。</p>
+<h4 id="3-1-导入需要的包："><a href="#3-1-导入需要的包：" class="headerlink" title="3.1 导入需要的包："></a>3.1 导入需要的包：</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.tree.<span class="type">DecisionTree</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.tree.model.<span class="type">DecisionTreeModel</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.util.<span class="type">MLUtils</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-2-读取数据：-1"><a href="#3-2-读取数据：-1" class="headerlink" title="3.2 读取数据："></a>3.2 读取数据：</h4><p>​    还是先读取数据</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> data = <span class="type">MLUtils</span>.loadLibSVMFile(sc, <span class="string">"data/mllib/sample_libsvm_data.txt"</span>)</span><br></pre></td></tr></table></figure>
+<p> 然后，我们把数据打印看一下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.foreach &#123; x =&gt; println(x) &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-构建模型-1"><a href="#3-3-构建模型-1" class="headerlink" title="3.3 构建模型"></a>3.3 构建模型</h4><p> 接下来，首先进行数据集的划分，这里划分70%的训练集和30%的测试集：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> splits = data.randomSplit(<span class="type">Array</span>(<span class="number">0.7</span>, <span class="number">0.3</span>))</span><br><span class="line"><span class="keyword">val</span> (trainingData, testData) = (splits(<span class="number">0</span>), splits(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>然后，调用决策树的trainClassifier方法构建决策树模型，设置参数，比如分类数、信息增益的选择、树的最大深度等：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> numClasses = <span class="number">2</span></span><br><span class="line"><span class="keyword">val</span> categoricalFeaturesInfo = <span class="type">Map</span>[<span class="type">Int</span>, <span class="type">Int</span>]()</span><br><span class="line"><span class="keyword">val</span> impurity = <span class="string">"gini"</span></span><br><span class="line"><span class="keyword">val</span> maxDepth = <span class="number">5</span></span><br><span class="line"><span class="keyword">val</span> maxBins = <span class="number">32</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> model = <span class="type">DecisionTree</span>.trainClassifier(trainingData, numClasses, categoricalFeaturesInfo,</span><br><span class="line">  impurity, maxDepth, maxBins)</span><br></pre></td></tr></table></figure>
+<p> 接下来我们调用决策树模型的predict方法对测试数据集进行预测</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> labelAndPreds = testData.map &#123; point =&gt;</span><br><span class="line">  <span class="keyword">val</span> prediction = model.predict(point.features)</span><br><span class="line">  (point.label, prediction)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-模型评估-1"><a href="#3-4-模型评估-1" class="headerlink" title="3.4 模型评估"></a>3.4 模型评估</h4><p> 最后，我们把模型预测的准确性打印出来：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> testErr = labelAndPreds.filter(r =&gt; r._1 != r._2).count().toDouble / testData.count()</span><br><span class="line">println(<span class="string">"Test Error = "</span> + testErr)</span><br><span class="line">println(<span class="string">"Learned classification tree model:\n"</span> + model.toDebugString)</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-模型保存与使用-1"><a href="#3-5-模型保存与使用-1" class="headerlink" title="3.5 模型保存与使用"></a>3.5 模型保存与使用</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model.save(sc, <span class="string">"file:///home/hadoop/target/tmp/myDecisionTreeClassificationModel"</span>)</span><br><span class="line"><span class="keyword">val</span> sameModel = <span class="type">DecisionTreeModel</span>.load(sc, <span class="string">"file:///home/hadoop/target/tmp/myDecisionTreeClassificationModel"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="五、支持向量机SVM分类器"><a href="#五、支持向量机SVM分类器" class="headerlink" title="五、支持向量机SVM分类器"></a>五、支持向量机SVM分类器</h2><h3 id="1-方法简介-2"><a href="#1-方法简介-2" class="headerlink" title="1.方法简介"></a>1.方法简介</h3><p>​    支持向量机SVM是一种二分类模型。它的基本模型是定义在特征空间上的间隔最大的线性分类器。支持向量机学习方法包含3种模型：线性可分支持向量机、线性支持向量机及非线性支持向量机。当训练数据线性可分时，通过硬间隔最大化，学习一个线性的分类器，即线性可分支持向量机；当训练数据近似线性可分时，通过软间隔最大化，也学习一个线性的分类器，即线性支持向量机；当训练数据线性不可分时，通过使用核技巧及软间隔最大化，学习非线性支持向量机。线性支持向量机支持L1和L2的正则化变型。</p>
+<h3 id="2-基本原理-2"><a href="#2-基本原理-2" class="headerlink" title="2.基本原理"></a>2.基本原理</h3><p>​    支持向量机，因其英文名为support vector machine，故一般简称SVM。SVM从线性可分情况下的最优分类面发展而来。最优分类面就是要求分类线不但能将两类正确分开(训练错误率为0)，且使分类间隔最大。SVM考虑寻找一个满足分类要求的超平面，并且使训练集中的点距离分类面尽可能的远，也就是寻找一个分类面使它两侧的空白区域(margin)最大。这两类样本中离分类面最近，且平行于最优分类面的超平面上的点，就叫做支持向量（下图中红色的点）。</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/uploads/2016/12/svm.png" alt="svm">svm</p>
+<p>假设超平面可描述为：</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-449556e56e383176183a533644819e9a_l3.svg" alt="img"></p>
+<p>其分类间隔等于</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-8ae60887563a37e93c1666a0426a198e_l3.svg" alt="img"></p>
+<p>。其学习策略是使数据间的间隔最大化，最终可转化为一个凸二次规划问题的求解。</p>
+<p>分类器的损失函数（hinge loss铰链损失）如下所示：</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-8d050f8d4bbe5840bcd49262ae5ba918_l3.svg" alt="img"></p>
+<p>默认情况下，线性SVM是用L2 正则化来训练的，但也支持L1正则化。在这种情况下，这个问题就变成了一个线性规划。</p>
+<p> 线性SVM算法输出一个SVM模型。给定一个新的数据点，比如说</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-9c2601179e19ecd5f28305e8c9ed83dc_l3.svg" alt="img"></p>
+<p>，这个模型就会根据</p>
+<p><img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-d696bea1276912917a52faebe707dd7b_l3.svg" alt="img"></p>
+<p>的值来进行预测。默认情况下，如果</p>
+<p> <img src="http://dblab.xmu.edu.cn/blog/wp-content/ql-cache/quicklatex.com-12f65de211c6a5d7a326102066edc214_l3.svg" alt="img"></p>
+<p>，则输出预测结果为正（因为我们想要损失函数最小，如果预测为负，则会导致损失函数大于1），反之则预测为负。</p>
+<h3 id="2-基本操作"><a href="#2-基本操作" class="headerlink" title="2.基本操作"></a>2.基本操作</h3><p>​    接下来，我们将用SVM对训练数据进行训练，然后用训练得到的模型对测试集进行预测，并计算错误率。仍然以iris数据集为例进行分析。iris以鸢尾花的特征作为数据来源，数据集包含150个数据集，分为3类，每类50个数据，每个数据包含4个属性，是在数据挖掘、数据分类中非常常用的测试集、训练集。</p>
+<h4 id="2-1-导入需要的包："><a href="#2-1-导入需要的包：" class="headerlink" title="2.1 导入需要的包："></a>2.1 导入需要的包：</h4><p> 首先，我们导入需要的包：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.tree.<span class="type">DecisionTree</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.tree.model.<span class="type">DecisionTreeModel</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.util.<span class="type">MLUtils</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-2-读取数据："><a href="#2-2-读取数据：" class="headerlink" title="2.2 读取数据："></a>2.2 读取数据：</h4><p>​    然后，导入数据</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> data = <span class="type">MLUtils</span>.loadLibSVMFile(sc, <span class="string">"file:///usr/local/spark/data/mllib/sample_libsvm_data.txt"</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-构建模型"><a href="#2-3-构建模型" class="headerlink" title="2.3 构建模型"></a>2.3 构建模型</h4><p>​    因为SVM只支持2分类，所以我们要进行一下数据抽取，这里我们通过filter过滤掉第2类的数据，只选取第0类和第1类的数据。然后，我们把数据集划分成两部分，其中训练集占60%，测试集占40%：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> splits = data.randomSplit(<span class="type">Array</span>(<span class="number">0.6</span>, <span class="number">0.4</span>), seed = <span class="number">11</span>L)</span><br><span class="line"><span class="keyword">val</span> training = splits(<span class="number">0</span>).cache()</span><br><span class="line"><span class="keyword">val</span> test = splits(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p> 接下来，通过训练集构建模型SVMWithSGD。这里的SGD即著名的随机梯度下降算法（Stochastic Gradient Descent）。设置迭代次数为1000，除此之外还有stepSize（迭代步伐大小），regParam（regularization正则化控制参数），miniBatchFraction（每次迭代参与计算的样本比例），initialWeights（weight向量初始值）等参数可以进行设置。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> numIterations = <span class="number">100</span></span><br><span class="line"><span class="keyword">val</span> model = <span class="type">SVMWithSGD</span>.train(training, numIterations)</span><br></pre></td></tr></table></figure>
+<h4 id="2-4-模型评估"><a href="#2-4-模型评估" class="headerlink" title="2.4 模型评估"></a>2.4 模型评估</h4><p> 接下来，我们清除默认阈值，这样会输出原始的预测评分，即带有确信度的结果。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">model.clearThreshold()           <span class="comment">// 清空阈值</span></span><br><span class="line"><span class="keyword">val</span> scoreAndLabels = test.map &#123; point =&gt;</span><br><span class="line">  <span class="keyword">val</span> score = model.predict(point.features)</span><br><span class="line">  (score, point.label)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 那如果设置了阈值，则会把大于阈值的结果当成正预测，小于阈值的结果当成负预测。 最后，我们构建评估矩阵，把模型预测的准确性打印出来：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> metrics = <span class="keyword">new</span> <span class="type">BinaryClassificationMetrics</span>(scoreAndLabels)</span><br><span class="line"><span class="keyword">val</span> auROC = metrics.areaUnderROC()</span><br><span class="line">println(<span class="string">"Area under ROC = "</span> + auROC)</span><br></pre></td></tr></table></figure>
+<p>其中， <code>SVMWithSGD.train()</code> 方法默认的通过把正则化参数设为1来执行来范数。如果我们想配置这个算法，可以通过创建一个新的 <code>SVMWithSGD</code>对象然后调用他的setter方法来进行重新配置。下面这个例子，我们构建了一个正则化参数为0.1的L1正则化SVM方法 ，然后迭代这个训练算法2000次。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.optimization.<span class="type">L1Updater</span></span><br><span class="line"><span class="keyword">val</span> svmAlg = <span class="keyword">new</span> <span class="type">SVMWithSGD</span>()</span><br><span class="line">svmAlg.optimizer.</span><br><span class="line">     |       setNumIterations(<span class="number">2000</span>).</span><br><span class="line">     |       setRegParam(<span class="number">0.1</span>).</span><br><span class="line">     |       setUpdater(<span class="keyword">new</span> <span class="type">L1Updater</span>)</span><br><span class="line"><span class="keyword">val</span> modelL1 = svmAlg.run(training)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MLlib/" rel="tag"><i class="fa fa-tag"></i> MLlib</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/朴素贝叶斯.html" rel="next" title="MLlib朴素叶贝斯">
+                <i class="fa fa-chevron-left"></i> MLlib朴素叶贝斯
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/推荐算法.html" rel="prev" title="MLlib推荐算法">
+                MLlib推荐算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、分类算法概述"><span class="nav-number">1.</span> <span class="nav-text">一、分类算法概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、spark-mllib分类算法"><span class="nav-number">2.</span> <span class="nav-text">二、spark.mllib分类算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、逻辑斯蒂回归的分类器"><span class="nav-number">3.</span> <span class="nav-text">三、逻辑斯蒂回归的分类器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-方法简介"><span class="nav-number">3.1.</span> <span class="nav-text">1.方法简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-基本原理"><span class="nav-number">3.2.</span> <span class="nav-text">2.基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-logistic分布"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.1 logistic分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-二项logistic回归模型："><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2 二项logistic回归模型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-参数估计"><span class="nav-number">3.2.3.</span> <span class="nav-text">2.3 参数估计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-基本操作"><span class="nav-number">3.3.</span> <span class="nav-text">3.基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-导入需要的包"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.1  导入需要的包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-读取数据："><span class="nav-number">3.3.2.</span> <span class="nav-text">3.2 读取数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-构建模型"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.3 构建模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-模型评估"><span class="nav-number">3.3.4.</span> <span class="nav-text">3.4 模型评估</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-模型保存与使用"><span class="nav-number">3.3.5.</span> <span class="nav-text">3.5 模型保存与使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、决策树分类器"><span class="nav-number">4.</span> <span class="nav-text">四、决策树分类器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-方法简介-1"><span class="nav-number">4.1.</span> <span class="nav-text">1.方法简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-基本原理-1"><span class="nav-number">4.2.</span> <span class="nav-text">2.基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-特征选择"><span class="nav-number">4.2.1.</span> <span class="nav-text">2.1 特征选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-决策树的生成"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.2 决策树的生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3决策树的剪枝"><span class="nav-number">4.2.3.</span> <span class="nav-text">2.3决策树的剪枝</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-基本操作-1"><span class="nav-number">4.3.</span> <span class="nav-text">3.基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-导入需要的包："><span class="nav-number">4.3.1.</span> <span class="nav-text">3.1 导入需要的包：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-读取数据：-1"><span class="nav-number">4.3.2.</span> <span class="nav-text">3.2 读取数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-构建模型-1"><span class="nav-number">4.3.3.</span> <span class="nav-text">3.3 构建模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-模型评估-1"><span class="nav-number">4.3.4.</span> <span class="nav-text">3.4 模型评估</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-模型保存与使用-1"><span class="nav-number">4.3.5.</span> <span class="nav-text">3.5 模型保存与使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、支持向量机SVM分类器"><span class="nav-number">5.</span> <span class="nav-text">五、支持向量机SVM分类器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-方法简介-2"><span class="nav-number">5.1.</span> <span class="nav-text">1.方法简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-基本原理-2"><span class="nav-number">5.2.</span> <span class="nav-text">2.基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-基本操作"><span class="nav-number">5.3.</span> <span class="nav-text">2.基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-导入需要的包："><span class="nav-number">5.3.1.</span> <span class="nav-text">2.1 导入需要的包：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-读取数据："><span class="nav-number">5.3.2.</span> <span class="nav-text">2.2 读取数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-构建模型"><span class="nav-number">5.3.3.</span> <span class="nav-text">2.3 构建模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-模型评估"><span class="nav-number">5.3.4.</span> <span class="nav-text">2.4 模型评估</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MLlib," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本文参考- Machine learning with Scala by CDA 吴昊天 一、本地向量（Local Vector）1.基本概念​    本地向量仅支持单机存储，其元素值类型为浮点型，索引值为整型，且从零开始进行索引。总的来说，本地向量的创建形式可分为密集向量（DenseVector）和系数向量（SparseVector）。  密集向量 用一个人双精度浮点型数组来表示其中每个元素，">
+<meta name="keywords" content="MLlib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MLlib基本数据类型">
+<meta property="og:url" content="http://www.ihoge.cn/2018/MLlib基本数据类型.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="本文参考- Machine learning with Scala by CDA 吴昊天 一、本地向量（Local Vector）1.基本概念​    本地向量仅支持单机存储，其元素值类型为浮点型，索引值为整型，且从零开始进行索引。总的来说，本地向量的创建形式可分为密集向量（DenseVector）和系数向量（SparseVector）。  密集向量 用一个人双精度浮点型数组来表示其中每个元素，">
+<meta property="og:image" content="g:/屏幕截图/Spark%20MLlib/1.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20MLlib/2.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20MLlib/3.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20MLlib/4.jpg">
+<meta property="og:image" content="g:/屏幕截图/Spark%20MLlib/5.png">
+<meta property="og:updated_time" content="2018-04-06T17:31:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MLlib基本数据类型">
+<meta name="twitter:description" content="本文参考- Machine learning with Scala by CDA 吴昊天 一、本地向量（Local Vector）1.基本概念​    本地向量仅支持单机存储，其元素值类型为浮点型，索引值为整型，且从零开始进行索引。总的来说，本地向量的创建形式可分为密集向量（DenseVector）和系数向量（SparseVector）。  密集向量 用一个人双精度浮点型数组来表示其中每个元素，">
+<meta name="twitter:image" content="g:/屏幕截图/Spark%20MLlib/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/MLlib基本数据类型.html"/>
+
+
+
+
+
+  <title>MLlib基本数据类型 | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/MLlib基本数据类型.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MLlib基本数据类型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T11:59:21+08:00">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p>本文参考- Machine learning with Scala by CDA 吴昊天</p>
+<h2 id="一、本地向量（Local-Vector）"><a href="#一、本地向量（Local-Vector）" class="headerlink" title="一、本地向量（Local Vector）"></a>一、本地向量（Local Vector）</h2><h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><p>​    本地向量仅支持单机存储，其元素值类型为浮点型，索引值为整型，且从零开始进行索引。总的来说，本地向量的创建形式可分为密集向量（DenseVector）和系数向量（SparseVector）。</p>
+<ul>
+<li><p>密集向量</p>
+<p>用一个人双精度浮点型数组来表示其中每个元素，如向量<code>(1,0,3)</code>的密集型向量表示形式为<code>[1.0,0.0,3.0]</code>。</p>
+</li>
+<li><p>稀疏向量</p>
+<p>用一个整型索引数组和一个双精度浮点型的值数组来表达每个向量，如向量<code>(1,0,3)</code>的稀疏型向量表示形式为<code>(3,[0,2],[1.0,3.0])</code>，其中3表示向量长度，[0,2]表示其中非零元素的索引值，[1.0,3.0]则是按索引值排列的向量中非零元素的值。</p>
+</li>
+</ul>
+<h3 id="2-创建操作"><a href="#2-创建操作" class="headerlink" title="2.创建操作"></a>2.创建操作</h3><ul>
+<li><p>导入基本类</p>
+<p>接下来尝试创建本地向量，可在Zeppelin或Spark-Shell中进行</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.&#123;<span class="type">Vector</span>, <span class="type">Vectors</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>所有本地向量都以<code>org.apache.spark.mllib.linalg.Vector</code>为基类，<code>DenseVector</code>和<code>SparseVector</code>分别是它的两个实现类，故推荐使用<code>Vectors</code>工具类下定义的工厂方法来创建本地向量。同时需要注意的是，Scala会默认引入<code>scala.collection.immutable.Vector</code>，我们要显式地引入<code>org.apache.spark.mllib.linalg.Vector</code>来使用MLlib提供的向量类型。</p>
+</li>
+<li><p>创建密集向量</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> dv: <span class="type">Vector</span> = <span class="type">Vectors</span>.dense(<span class="number">2.0</span>, <span class="number">0.0</span>, <span class="number">8.0</span>)</span><br></pre></td></tr></table></figure>
+<p>输入println查看结果</p>
+</li>
+<li><p>创建稀疏向量</p>
+<p>首先采用Array分别两个参数位置中输入非零值索引和非零值元素值</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sv1: <span class="type">Vector</span> = <span class="type">Vectors</span>.sparse(<span class="number">3</span>, <span class="type">Array</span>(<span class="number">0</span>, <span class="number">2</span>), <span class="type">Array</span>(<span class="number">2.0</span>, <span class="number">8.0</span>))</span><br></pre></td></tr></table></figure>
+<p>然后我们采用另一种创建稀疏向量的方法，将第二个参数设为一个序列，其中每个元素都是非零值的元组(index,elem)</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sv2: <span class="type">Vector</span> = <span class="type">Vectors</span>.sparse(<span class="number">3</span>, <span class="type">Seq</span>((<span class="number">0</span>, <span class="number">2.0</span>), (<span class="number">2</span>, <span class="number">8.0</span>)))</span><br></pre></td></tr></table></figure>
+<p>输入println查看结果，可查看两种创建方式实际上都对应着一个向量形式</p>
+<p><img src="G:\屏幕截图\Spark MLlib\1.jpg" alt="1"></p>
+</li>
+</ul>
+<h2 id="二、标注点（Labeled-Point）"><a href="#二、标注点（Labeled-Point）" class="headerlink" title="二、标注点（Labeled Point）"></a>二、标注点（Labeled Point）</h2><h3 id="1-基本概念-1"><a href="#1-基本概念-1" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><p><strong>标注点</strong><code>LabeledPoint</code>是一种带有<strong>标签（Label/Response）</strong>的本地向量，它可以是稠密或者是稀疏的。在MLlib中，标注点在监督学习算法中被使用。由于标签是用双精度浮点型来存储的，故标注点类型在<strong>回归（Regression）</strong>和<strong>分类（Classification）</strong>问题上均可使用。例如，对于二分类问题，标签选择时，<strong>正样本</strong>的标签为<code>1</code>，<strong>负样本</strong>的标签为<code>0</code>，而对于多类别的分类问题来说，标签可以是一个以0开始的索引序列:<code>0, 1, 2 ...</code></p>
+<h3 id="2-创建操作-1"><a href="#2-创建操作-1" class="headerlink" title="2.创建操作"></a>2.创建操作</h3><ul>
+<li><p>导入基本类</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.<span class="type">Vectors</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.regression.<span class="type">LabeledPoint</span></span><br></pre></td></tr></table></figure>
+<p>标注点的实现类是<code>org.apache.spark.mllib.regression.LabeledPoint</code>，请注意它与前面介绍的本地向量不同，并不位于linalg包下</p>
+</li>
+<li><p>创建向量标注点</p>
+<p>稠密向量表现形式时</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> pos = <span class="type">LabeledPoint</span>(<span class="number">1.0</span>, <span class="type">Vectors</span>.dense(<span class="number">2.0</span>, <span class="number">0.0</span>, <span class="number">8.0</span>))</span><br></pre></td></tr></table></figure>
+<p>注，第一个参数为标注点，第二个参数为向量</p>
+<p>稀疏向量表现形式时</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> neg = <span class="type">LabeledPoint</span>(<span class="number">0.0</span>, <span class="type">Vectors</span>.sparse(<span class="number">3</span>, <span class="type">Array</span>(<span class="number">0</span>, <span class="number">2</span>), <span class="type">Array</span>(<span class="number">2.0</span>, <span class="number">8.0</span>)))</span><br></pre></td></tr></table></figure>
+<p>可用println查看结果</p>
+</li>
+<li><p>读取LIBSVM格式数据</p>
+<p>在实际的机器学习问题中，稀疏向量数据是非常常见的，很多时候我们会遇到LIBSVM格式数据，如Spark自带的一个样例。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/spark/data/mllib</span><br><span class="line">cat sample_libsvm_data.txt</span><br></pre></td></tr></table></figure>
+<p>该数据格式一般形式为<code>label index1:value1 index2:value2 index3:value3 ...</code>，其中<code>label</code>是该样本点的标签值，一系列<code>index:value</code>对则代表了该样本向量中所有非零元素的索引和元素值。这里需要特别注意的是，index是以1开始并递增的。</p>
+<p>首先，导入基本类，MLlib在<code>org.apache.spark.mllib.util.MLUtils</code>工具类中提供了读取<strong>LIBSVM</strong>格式的方法<code>loadLibSVMFile</code>，其使用非常方便。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.util.<span class="type">MLUtils</span></span><br></pre></td></tr></table></figure>
+<p>然后进行读取</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> examples = <span class="type">MLUtils</span>.loadLibSVMFile(sc, <span class="string">"file:///usr/local/spark/data/mllib/sample_libsvm_data.txt"</span>)</span><br></pre></td></tr></table></figure>
+<p>接下来，我们可以查看下加载进来的标注点的值</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">examples.collect().head</span><br></pre></td></tr></table></figure>
+<p><img src="G:\屏幕截图\Spark MLlib\2.jpg" alt="2"></p>
+</li>
+</ul>
+<h2 id="三、本地矩阵（Local-Matrix）"><a href="#三、本地矩阵（Local-Matrix）" class="headerlink" title="三、本地矩阵（Local Matrix）"></a>三、本地矩阵（Local Matrix）</h2><h3 id="1-基本概念-2"><a href="#1-基本概念-2" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><p>​    <strong>本地矩阵</strong>具有整型的行、列索引值和双精度浮点型的元素值，它存储在单机上。MLlib支持<strong>密集矩阵</strong><code>DenseMatrix</code>和<strong>稀疏矩阵</strong><code>Sparse Matrix</code>两种本地矩阵，<strong>稠密矩阵</strong>将所有元素的值存储在一个<strong>列优先（Column-major）</strong>的双精度型数组中，而<strong>稀疏矩阵</strong>则将非零元素以列优先的<strong>CSC（Compressed Sparse Column）</strong>模式进行存储。这里所谓的优先，是指在不显示说明的情况下，参数优先表示列，或者非零元素。</p>
+<h3 id="2-创建操作-2"><a href="#2-创建操作-2" class="headerlink" title="2.创建操作"></a>2.创建操作</h3><ul>
+<li><p>导入基本类</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.&#123;<span class="type">Matrix</span>, <span class="type">Matrices</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>本地矩阵的基类是<code>org.apache.spark.mllib.linalg.Matrix</code>，<code>DenseMatrix</code>和<code>SparseMatrix</code>均是它的实现类，和本地向量类似，MLlib也为本地矩阵提供了相应的工具类<code>Matrices</code>，调用工厂方法即可创建实例。</p>
+</li>
+<li><p>创建密集矩阵</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> dm: <span class="type">Matrix</span> = <span class="type">Matrices</span>.dense(<span class="number">3</span>, <span class="number">2</span>, <span class="type">Array</span>(<span class="number">1.0</span>, <span class="number">3.0</span>, <span class="number">5.0</span>, <span class="number">2.0</span>, <span class="number">4.0</span>, <span class="number">6.0</span>))</span><br></pre></td></tr></table></figure>
+<p>创建了一个三行两列的矩阵，且元素排列方式是按照列进行的排列</p>
+<p><img src="G:\屏幕截图\Spark MLlib\3.jpg" alt="3"></p>
+</li>
+<li><p>创建稀疏矩阵</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sm: <span class="type">Matrix</span> = <span class="type">Matrices</span>.sparse(<span class="number">3</span>, <span class="number">2</span>, <span class="type">Array</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>), <span class="type">Array</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>), <span class="type">Array</span>(<span class="number">9</span>, <span class="number">6</span>, <span class="number">8</span>))</span><br></pre></td></tr></table></figure>
+<p>这里创建一个3行2列的稀疏矩阵[ [9.0,0.0], [0.0,8.0], [0.0,6.0]]。Matrices.sparse的参数中，3表示行数，2表示列数。第1个数组参数表示列指针，即每一列元素的开始索引值， 第二个数组参数表示行索引，即对应的元素是属于哪一行；第三个数组即是按列先序排列的所有非零元素，通过列指针和行索引即可判断每个元素所在的位置。比如取每个数组的第2个元素为2,1,6，表示第2列第1行的元素值是6.0。</p>
+<p><img src="G:\屏幕截图\Spark MLlib\4.jpg" alt="4"></p>
+</li>
+</ul>
+<h2 id="四、分布式矩阵（Distributed-Matrix）"><a href="#四、分布式矩阵（Distributed-Matrix）" class="headerlink" title="四、分布式矩阵（Distributed Matrix）"></a>四、分布式矩阵（Distributed Matrix）</h2><h3 id="1-综述"><a href="#1-综述" class="headerlink" title="1.综述"></a>1.综述</h3><p>​    分布式矩阵由长整型的行列索引值和双精度浮点型的元素值组成。它可以分布式地存储在一个或多个RDD上，MLlib提供了三种分布式矩阵的存储方案：<strong>行矩阵</strong><code>RowMatrix</code>，<strong>索引行矩阵</strong><code>IndexedRowMatrix</code>、<strong>坐标矩阵</strong><code>CoordinateMatrix</code>和分块矩阵<code>Block Matrix</code>。它们都属于<code>org.apache.spark.mllib.linalg.distributed</code>包。</p>
+<h3 id="2-行矩阵（RowMatrix）"><a href="#2-行矩阵（RowMatrix）" class="headerlink" title="2.行矩阵（RowMatrix）"></a>2.行矩阵（RowMatrix）</h3><h4 id="2-1-基本概念"><a href="#2-1-基本概念" class="headerlink" title="2.1 基本概念"></a>2.1 基本概念</h4><p>​    <strong>行矩阵</strong><code>RowMatrix</code>是最基础的分布式矩阵类型。每行是一个本地向量，行索引无实际意义（即无法直接使用）。数据存储在一个由行组成的RDD中，其中每一行都使用一个本地向量来进行存储。由于行是通过本地向量来实现的，故列数（即行的维度）被限制在普通整型（<code>integer</code>）的范围内。在实际使用时，由于单机处理本地向量的存储和通信代价，行维度更是需要被控制在一个更小的范围之内。<code>RowMatrix</code>可通过一个<code>RDD[Vector]</code>的实例来创建。</p>
+<h4 id="2-2-创建操作"><a href="#2-2-创建操作" class="headerlink" title="2.2 创建操作"></a>2.2 创建操作</h4><ul>
+<li><p>导入基本类</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.rdd.<span class="type">RDD</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.&#123;<span class="type">Vector</span>,<span class="type">Vectors</span>&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.distributed.<span class="type">RowMatrix</span></span><br></pre></td></tr></table></figure>
+<p>​    此处，由于要通过本地向量来创建向量组成的RDD，从而进一步通过RDD来创建行矩阵，因此需要进行上述导入工作。</p>
+</li>
+<li><p>创建本地向量</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> dv1 : <span class="type">Vector</span> = <span class="type">Vectors</span>.dense(<span class="number">1.0</span>,<span class="number">2.0</span>,<span class="number">3.0</span>)</span><br><span class="line"><span class="keyword">val</span> dv2 : <span class="type">Vector</span> = <span class="type">Vectors</span>.dense(<span class="number">2.0</span>,<span class="number">3.0</span>,<span class="number">4.0</span>)</span><br></pre></td></tr></table></figure>
+<p>创建两个本地密集型向量。</p>
+</li>
+<li><p>利用本地向量创建RDD</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> rows : <span class="type">RDD</span>[<span class="type">Vector</span>] = sc.parallelize(<span class="type">Array</span>(dv1,dv2))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过RDD创建一个行矩阵</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> mat : <span class="type">RowMatrix</span> = <span class="keyword">new</span> <span class="type">RowMatrix</span>(rows)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获得部分统计指标</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获得行数</span></span><br><span class="line">mat.numRows()</span><br><span class="line"><span class="comment">// 获得列数</span></span><br><span class="line">mat.numCols()</span><br></pre></td></tr></table></figure>
+<p>对于<code>RowMatrix</code>的实例，我们可以通过其自带的<code>computeColumnSummaryStatistics()</code>方法获取该矩阵的一些统计摘要信息，并可以对其进行<em>QR分解</em>，<em>SVD分解</em>和<em>PCA分解</em>，这一部分内容将在特征降维的章节详细解说。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过computeColumnSummaryStatistics()方法获取统计摘要</span></span><br><span class="line"><span class="keyword">val</span> summary = mat.computeColumnSummaryStatistics()</span><br><span class="line"><span class="comment">// 可以通过summary实例来获取矩阵的相关统计信息，例如行数</span></span><br><span class="line">summary.count</span><br><span class="line"><span class="comment">// 最大向量</span></span><br><span class="line">summary.max</span><br><span class="line"><span class="comment">// 方差向量</span></span><br><span class="line">summary.variance</span><br><span class="line"><span class="comment">// 平均向量</span></span><br><span class="line">summary.mean</span><br><span class="line"><span class="comment">// L1范数向量</span></span><br><span class="line">summary.normL1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-索引行矩阵（IndexedRowMatrix）"><a href="#3-索引行矩阵（IndexedRowMatrix）" class="headerlink" title="3.索引行矩阵（IndexedRowMatrix）"></a>3.索引行矩阵（IndexedRowMatrix）</h3><h4 id="3-1-基本概念"><a href="#3-1-基本概念" class="headerlink" title="3.1 基本概念"></a>3.1 基本概念</h4><p>​    <strong>索引行矩阵</strong><code>IndexedRowMatrix</code>与<code>RowMatrix</code>相似，但它的每一行都带有一个有意义的行索引值，这个索引值可以被用来识别不同行，或是进行诸如<strong>join</strong>之类的操作。其数据存储在一个由<code>IndexedRow</code>组成的RDD里，即每一行都是一个带长整型索引的本地向量。</p>
+<h4 id="3-2-创建操作"><a href="#3-2-创建操作" class="headerlink" title="3.2 创建操作"></a>3.2 创建操作</h4><ul>
+<li><p>导入基本类</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.distributed.&#123;<span class="type">IndexedRow</span>, <span class="type">IndexedRowMatrix</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>与<code>RowMatrix</code>类似，<code>IndexedRowMatrix</code>的实例可以通过<code>RDD[IndexedRow]</code>实例来创建。下列操作承接行矩阵代码。</p>
+</li>
+<li><p>利用本地向量创建IndexedRow</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> idxr1 = <span class="type">IndexedRow</span>(<span class="number">1</span>,dv1)</span><br><span class="line"><span class="keyword">val</span> idxr2 = <span class="type">IndexedRow</span>(<span class="number">2</span>,dv2)</span><br></pre></td></tr></table></figure>
+<p>此处Index即为行索引。</p>
+</li>
+<li><p>利用IndexedRow创建RDD[IndexedRow]</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> idxrows = sc.parallelize(<span class="type">Array</span>(idxr1,idxr2))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过RDD[IndexedRow]创建一个索引行矩阵</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> idxmat: <span class="type">IndexedRowMatrix</span> = <span class="keyword">new</span> <span class="type">IndexedRowMatrix</span>(idxrows)</span><br><span class="line">idxmat.rows.foreach(println)</span><br></pre></td></tr></table></figure>
+<p>查看输出结果，矩阵会根据索引顺序生成。</p>
+</li>
+</ul>
+<h3 id="4-坐标矩阵（Coordinate-Matrix）"><a href="#4-坐标矩阵（Coordinate-Matrix）" class="headerlink" title="4.坐标矩阵（Coordinate Matrix）"></a>4.坐标矩阵（Coordinate Matrix）</h3><h4 id="4-1-基本概念"><a href="#4-1-基本概念" class="headerlink" title="4.1 基本概念"></a>4.1 基本概念</h4><p>​    <strong>坐标矩阵</strong><code>CoordinateMatrix</code>是一个基于<strong>矩阵项</strong>构成的RDD的分布式矩阵。每一个<strong>矩阵项</strong><code>MatrixEntry</code>都是一个三元组：<code>(i: Long, j: Long, value: Double)</code>，其中<code>i</code>是行索引，<code>j</code>是列索引，<code>value</code>是该位置的值。坐标矩阵一般在矩阵的两个维度都很大，且矩阵非常稀疏的时候使用。</p>
+<h4 id="4-2-创建操作"><a href="#4-2-创建操作" class="headerlink" title="4.2 创建操作"></a>4.2 创建操作</h4><ul>
+<li><p>导入基本类</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.distributed.&#123;<span class="type">CoordinateMatrix</span>, <span class="type">MatrixEntry</span>&#125;</span><br></pre></td></tr></table></figure>
+<p><code>CoordinateMatrix</code>实例可通过<code>RDD[MatrixEntry]</code>实例来创建，其中每一个矩阵项都是一个(rowIndex, colIndex, elem)的三元组。</p>
+</li>
+<li><p>创建矩阵项</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> ent1 = <span class="keyword">new</span> <span class="type">MatrixEntry</span>(<span class="number">0</span>,<span class="number">1</span>,<span class="number">0.5</span>)</span><br><span class="line"><span class="keyword">val</span> ent2 = <span class="keyword">new</span> <span class="type">MatrixEntry</span>(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1.8</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建RDD[MatrixEntry]</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> entries : <span class="type">RDD</span>[<span class="type">MatrixEntry</span>] = sc.parallelize(<span class="type">Array</span>(ent1,ent2))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过RDD[MatrixEntry]创建一个坐标矩阵</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> coordMat: <span class="type">CoordinateMatrix</span> = <span class="keyword">new</span> <span class="type">CoordinateMatrix</span>(entries)</span><br><span class="line">coordMat.entries.foreach(println)</span><br></pre></td></tr></table></figure>
+<p>查看输出结果，矩阵会根据RDD中矩阵项排列顺序生成。</p>
+</li>
+<li><p>其他操作</p>
+<p>​    坐标矩阵可以通过<code>transpose()</code>方法对矩阵进行转置操作，并可以通过自带的<code>toIndexedRowMatrix()</code>方法转换成<strong>索引行矩阵</strong><code>IndexedRowMatrix</code>。但目前暂不支持<code>CoordinateMatrix</code>的其他计算操作。</p>
+<ul>
+<li><p>转置操作</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> transMat: <span class="type">CoordinateMatrix</span> = coordMat.transpose()</span><br><span class="line">transMat.entries.foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>变成行索引矩阵</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> indexedRowMatrix = transMat.toIndexedRowMatrix()</span><br><span class="line">indexedRowMatrix.rows.foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-分块矩阵-Block-Matrix"><a href="#4-分块矩阵-Block-Matrix" class="headerlink" title="4.分块矩阵(Block Matrix)"></a>4.分块矩阵(Block Matrix)</h3><p><strong>分块矩阵</strong>是基于<strong>矩阵块</strong><code>MatrixBlock</code>构成的RDD的分布式矩阵，其中每一个矩阵块<code>MatrixBlock</code>都是一个元组<code>((Int, Int), Matrix)</code>，其中<code>(Int, Int)</code>是块的索引，而<code>Matrix</code>则是在对应位置的<strong>子矩阵（sub-matrix）</strong>，其尺寸由<code>rowsPerBlock</code>和<code>colsPerBlock</code>决定，默认值均为<em>1024</em>。分块矩阵支持和另一个分块矩阵进行加法操作和乘法操作，并提供了一个支持方法<code>validate()</code>来确认分块矩阵是否创建成功。</p>
+<p><strong>分块矩阵</strong>可由<strong>索引行矩阵</strong><code>IndexedRowMatrix</code>或<strong>坐标矩阵</strong><code>CoordinateMatrix</code>调用<code>toBlockMatrix()</code>方法来进行转换，该方法将矩阵划分成尺寸默认为<em>1024×1024</em>的分块，可以在调用<code>toBlockMatrix(rowsPerBlock, colsPerBlock)</code>方法时传入参数来调整分块的尺寸。<br>下面以矩阵A（如图）为例，先利用矩阵项<code>MatrixEntry</code>将其构造成坐标矩阵，再转化成如图所示的4个分块矩阵，最后对矩阵A与其转置进行乘法运算：</p>
+<p><img src="G:\屏幕截图\Spark MLlib\5.png" alt="5"></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.distributed.&#123;<span class="type">CoordinateMatrix</span>, <span class="type">MatrixEntry</span>&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.mllib.linalg.distributed.<span class="type">BlockMatrix</span></span><br><span class="line"><span class="comment">// 创建8个矩阵项，每一个矩阵项都是由索引和值构成的三元组</span></span><br><span class="line"><span class="keyword">val</span> ent1 = <span class="keyword">new</span> <span class="type">MatrixEntry</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line"><span class="keyword">val</span> ent2 = <span class="keyword">new</span> <span class="type">MatrixEntry</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="keyword">val</span> ent3 = <span class="keyword">new</span> <span class="type">MatrixEntry</span>(<span class="number">2</span>,<span class="number">0</span>,<span class="number">-1</span>)</span><br><span class="line"><span class="keyword">val</span> ent4 = <span class="keyword">new</span> <span class="type">MatrixEntry</span>(<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line"><span class="keyword">val</span> ent5 = <span class="keyword">new</span> <span class="type">MatrixEntry</span>(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line"><span class="keyword">val</span> ent6 = <span class="keyword">new</span> <span class="type">MatrixEntry</span>(<span class="number">3</span>,<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line"><span class="keyword">val</span> ent7 = <span class="keyword">new</span> <span class="type">MatrixEntry</span>(<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="keyword">val</span> ent8 = <span class="keyword">new</span> <span class="type">MatrixEntry</span>(<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line"><span class="comment">// 创建RDD[MatrixEntry]</span></span><br><span class="line"><span class="keyword">val</span> entries : <span class="type">RDD</span>[<span class="type">MatrixEntry</span>] = sc.parallelize(<span class="type">Array</span>(ent1,ent2,ent3,ent4,ent5,ent6,ent7,ent8))</span><br><span class="line"><span class="comment">// 通过RDD[MatrixEntry]创建一个坐标矩阵</span></span><br><span class="line"><span class="keyword">val</span> coordMat: <span class="type">CoordinateMatrix</span> = <span class="keyword">new</span> <span class="type">CoordinateMatrix</span>(entries)</span><br><span class="line"><span class="comment">// 将坐标矩阵转换成2x2的分块矩阵并存储，尺寸通过参数传入</span></span><br><span class="line"><span class="keyword">val</span> matA: <span class="type">BlockMatrix</span> = coordMat.toBlockMatrix(<span class="number">2</span>,<span class="number">2</span>).cache()</span><br><span class="line"><span class="comment">// 可以用validate()方法判断是否分块成功</span></span><br><span class="line">matA.validate()</span><br></pre></td></tr></table></figure>
+<p>构建成功后，可通过toLocalMatrix转换成本地矩阵，并查看其分块情况：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">matA.toLocalMatrix</span><br><span class="line"><span class="comment">// 查看其分块情况</span></span><br><span class="line">matA.numColBlocks</span><br><span class="line">matA.numRowBlocks</span><br><span class="line"><span class="comment">// 计算矩阵A和其转置矩阵的积矩阵</span></span><br><span class="line"><span class="keyword">val</span> ata = matA.transpose.multiply(matA)</span><br><span class="line">ata.toLocalMatrix</span><br></pre></td></tr></table></figure>
+<p>分块矩阵<code>BlockMatrix</code>将矩阵分成一系列矩阵块，底层由矩阵块构成的RDD来进行数据存储。值得指出的是，用于生成分布式矩阵的底层RDD必须是已经确定（Deterministic）的，因为矩阵的尺寸将被存储下来，所以使用未确定的RDD将会导致错误。而且，不同类型的分布式矩阵之间的转换需要进行一个全局的<strong>shuffle</strong>操作，非常耗费资源。所以，根据数据本身的性质和应用需求来选取恰当的分布式矩阵存储类型是非常重要的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MLlib/" rel="tag"><i class="fa fa-tag"></i> MLlib</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/聚类分析.html" rel="next" title="MLlib聚类算法">
+                <i class="fa fa-chevron-left"></i> MLlib聚类算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/朴素贝叶斯.html" rel="prev" title="MLlib朴素叶贝斯">
+                MLlib朴素叶贝斯 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、本地向量（Local-Vector）"><span class="nav-number">1.</span> <span class="nav-text">一、本地向量（Local Vector）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">1.基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建操作"><span class="nav-number">1.2.</span> <span class="nav-text">2.创建操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、标注点（Labeled-Point）"><span class="nav-number">2.</span> <span class="nav-text">二、标注点（Labeled Point）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本概念-1"><span class="nav-number">2.1.</span> <span class="nav-text">1.基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建操作-1"><span class="nav-number">2.2.</span> <span class="nav-text">2.创建操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、本地矩阵（Local-Matrix）"><span class="nav-number">3.</span> <span class="nav-text">三、本地矩阵（Local Matrix）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本概念-2"><span class="nav-number">3.1.</span> <span class="nav-text">1.基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建操作-2"><span class="nav-number">3.2.</span> <span class="nav-text">2.创建操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、分布式矩阵（Distributed-Matrix）"><span class="nav-number">4.</span> <span class="nav-text">四、分布式矩阵（Distributed Matrix）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-综述"><span class="nav-number">4.1.</span> <span class="nav-text">1.综述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-行矩阵（RowMatrix）"><span class="nav-number">4.2.</span> <span class="nav-text">2.行矩阵（RowMatrix）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-基本概念"><span class="nav-number">4.2.1.</span> <span class="nav-text">2.1 基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-创建操作"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.2 创建操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-索引行矩阵（IndexedRowMatrix）"><span class="nav-number">4.3.</span> <span class="nav-text">3.索引行矩阵（IndexedRowMatrix）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-基本概念"><span class="nav-number">4.3.1.</span> <span class="nav-text">3.1 基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-创建操作"><span class="nav-number">4.3.2.</span> <span class="nav-text">3.2 创建操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-坐标矩阵（Coordinate-Matrix）"><span class="nav-number">4.4.</span> <span class="nav-text">4.坐标矩阵（Coordinate Matrix）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-基本概念"><span class="nav-number">4.4.1.</span> <span class="nav-text">4.1 基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-创建操作"><span class="nav-number">4.4.2.</span> <span class="nav-text">4.2 创建操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-分块矩阵-Block-Matrix"><span class="nav-number">4.5.</span> <span class="nav-text">4.分块矩阵(Block Matrix)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

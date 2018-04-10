@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://www.ihoge.cn/sitemap.xml
+Sitemap: http://www.ihoge.cn/baidusitemap.xml

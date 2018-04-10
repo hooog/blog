@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="递归," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="最近在读魏老师推荐的算法图解这本书。该书内容很有趣，把枯燥无味的算法用一个个日常生活的小案例诠释的清晰易懂，很适合作为业余读物。在读到关于递归算法的时候，本着打破砂锅问到底的精神大致研究了下递归算法和递归进阶 —&amp;gt; 尾递归。后来发现Python的解释器不支持尾递归算法优化，而且Python之父曾经明确表示Python将不会支持尾递归优化！T T…不过看我华夏泱泱大国，人才济济，还是有哥们写">
+<meta name="keywords" content="递归">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归、尾递归、循环的比较及Python尾递归的优化">
+<meta property="og:url" content="http://www.ihoge.cn/2018/Recursive.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="最近在读魏老师推荐的算法图解这本书。该书内容很有趣，把枯燥无味的算法用一个个日常生活的小案例诠释的清晰易懂，很适合作为业余读物。在读到关于递归算法的时候，本着打破砂锅问到底的精神大致研究了下递归算法和递归进阶 —&amp;gt; 尾递归。后来发现Python的解释器不支持尾递归算法优化，而且Python之父曾经明确表示Python将不会支持尾递归优化！T T…不过看我华夏泱泱大国，人才济济，还是有哥们写">
+<meta property="og:updated_time" content="2018-04-06T17:31:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="递归、尾递归、循环的比较及Python尾递归的优化">
+<meta name="twitter:description" content="最近在读魏老师推荐的算法图解这本书。该书内容很有趣，把枯燥无味的算法用一个个日常生活的小案例诠释的清晰易懂，很适合作为业余读物。在读到关于递归算法的时候，本着打破砂锅问到底的精神大致研究了下递归算法和递归进阶 —&amp;gt; 尾递归。后来发现Python的解释器不支持尾递归算法优化，而且Python之父曾经明确表示Python将不会支持尾递归优化！T T…不过看我华夏泱泱大国，人才济济，还是有哥们写">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/Recursive.html"/>
+
+
+
+
+
+  <title>递归、尾递归、循环的比较及Python尾递归的优化 | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/Recursive.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">递归、尾递归、循环的比较及Python尾递归的优化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T03:05:59+08:00">
+                2018-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p>最近在读魏老师推荐的算法图解这本书。该书内容很有趣，把枯燥无味的算法用一个个日常生活的小案例诠释的清晰易懂，很适合作为业余读物。<br>在读到关于递归算法的时候，本着打破砂锅问到底的精神大致研究了下递归算法和递归进阶 —&gt; <strong>尾递归</strong>。<br>后来发现Python的解释器不支持尾递归算法优化，而且<strong>Python之父曾经明确表示Python将不会支持尾递归优化！T T…</strong><br>不过看我华夏泱泱大国，人才济济，还是有哥们写出了Python上对尾递归爆栈问题的解决办法。</p>
+<h2 id="什么是递归"><a href="#什么是递归" class="headerlink" title="什么是递归"></a>什么是递归</h2><p>一言概之： <strong>递归是一种优雅的问题解决办法。</strong> 它将程序员分为了三个截然不同的阵营：恨它的、爱它的、爱了几年以及恨了几年后又爱上它的。初接触时我对这句话是怀疑的，为什么我感觉递归让解决方案变得更绕了呢？ 直到认真去看了几个用递归思想解决问题的例子之后方才发现此话所言非虚。<br>粗略的说，递归就是让函数调用自己。它让解决方案更清晰，但并没有性能上的优势。正如Leigh Caldwell在Stack Overflow上说过一句话：“如果使用循环，程序的性能可能更高，如果使用递归，程序可能更容易理解。如何选择要看什么对你来说更重要”（这一点下面会详细说明）。由于递归函数调用自己，因此编写递归函数时，必须告诉它何时停止递归否则会陷入无限循环。所以每个递归函数都必须有两部分：<strong>基准条件和递归条件</strong></p>
+<p>使用递归必须要理解 <strong>调用栈</strong> 这个概念。栈是一种简单的数据结构，遵循先进后出的原则。计算机在内部使用被称为 调用栈 的栈。</p>
+<p>在递归的过程中，当计算机调用一个递归函数 A 的时候首先为该函数分配一块内存，并将函数调用涉及到的方法和所有变量的值存储到内存 a 中。递归函数 A 调用自己产生函数 B ，同样计算机会给函数 B 分配一块新的内存 b 用于存储 B 所涉及到的所有变量及方法，并压在 a 上。然后递归函数 B 继续调用自身生成函数 C 并分配内存块 c 压在 内存块 b上。只要递归函数未触发基准条件函数将一直循环调用并生成一个个新的内存块压在上一个内存块上面。这个操作叫 <strong>push（压栈）</strong>。</p>
+<p>计算机使用一个 <strong>（栈）</strong> 来表示这些内存块，其中内存块 b 位于 a 内存块上面 c 在  b 上面（栈顶的内存块就是函数的当前活跃部分）。假设函数 C 触发了递归函数的基准条件，在执行完函数 C 后，栈顶的内存块 c 被弹出，这个操作被称作 <strong>pop（弹栈）</strong></p>
+<p>这里在执行函数 B 和 C 时，函数 A 只执行了一部分。这是一个很重要的概念： <strong>调用另一个函数时，当前函数暂停并处于未完成状态</strong>。 该变量的所有变量值都还在内存中。 执行完函数 C 后，会又回到函数 B ，B 执行完毕又返回 A 并从离开的地方接着往下执行。 这个 <strong>栈</strong> 用于存放对多个函数的变量， 被称为 <strong>调用栈</strong>。</p>
+<p>使用 <strong>栈</strong> 很方便，但是也要付出代价：存储先进的信息会占用大量的内存。每个函数调用都要占用一定的内存，如果栈很高，就意味着计算机存储了大量函数调用的信息。 而且 <strong>调用栈</strong> 的高度是有限制的（如Python中默认的最高层数时1000）。若递归层数超过一定阀值则会造成 <strong>栈溢出</strong> 也叫 <strong>爆栈</strong> 在这种情况下有三种选择：</p>
+<ul>
+<li>增大阀值</li>
+<li>重新编写代码</li>
+<li>使用 <strong>尾递归</strong></li>
+</ul>
+<h2 id="什么是尾递归"><a href="#什么是尾递归" class="headerlink" title="什么是尾递归"></a>什么是尾递归</h2><p>关于尾递归，百度百科解释的算是很清晰明了了：</p>
+<p>当编译器检测到一个函数调用是尾递归的时候，它就覆盖当前的活动记录而不是在栈中去创建一个新的。编译器可以做到这点，因为递归调用是当前活跃期内最后一条待执行的语句，于是当这个调用返回时栈帧中并没有其他事情可做，因此也就没有保存栈帧的必要了。通过覆盖当前的栈帧而不是在其之上重新添加一个，这样所使用的栈空间就大大缩减了，这使得实际的运行效率会变得更高。</p>
+<ul>
+<li><p><strong>尾递归就是把当前的运算结果（或路径）放在参数里传给下层函数</strong></p>
+</li>
+<li><p><strong>如果在递归函数中，递归调用返回的结果总被直接返回，则称为尾部递归。</strong> </p>
+</li>
+</ul>
+<h2 id="递归、尾递归、循环的比较"><a href="#递归、尾递归、循环的比较" class="headerlink" title="递归、尾递归、循环的比较"></a>递归、尾递归、循环的比较</h2><p>下面是我分别用普通递归、尾递归、循环实现阶乘的小程序，这个是我能想到最简洁直观的例子了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置允许递归的深度</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.setrecursionlimit(<span class="number">10000</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 普通递归阶乘</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    <span class="keyword">return</span> n * fun(n<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 尾递归阶乘</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact_iter</span><span class="params">(n, num)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> num</span><br><span class="line">    <span class="keyword">return</span> fact_iter(n - <span class="number">1</span>, n * num)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环阶乘</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact_loop</span><span class="params">(n)</span>:</span></span><br><span class="line">    num = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n):</span><br><span class="line">        num = num * i</span><br><span class="line">    <span class="keyword">return</span> num</span><br></pre></td></tr></table></figure>
+<h2 id="尾递归的Python优化"><a href="#尾递归的Python优化" class="headerlink" title="尾递归的Python优化"></a>尾递归的Python优化</h2><p>Python的爸爸已经明确表示Python将不会支持尾递归优化了。但是我先是在网上查相关资料的时候发现了两种方法对尾递归的优化：</p>
+<h3 id="方式一：实现一个-tail-call-optimized-装饰器"><a href="#方式一：实现一个-tail-call-optimized-装饰器" class="headerlink" title="方式一：实现一个 tail_call_optimized 装饰器"></a>方式一：实现一个 tail_call_optimized 装饰器</h3><p><a href="http://code.activestate.com/recipes/474088/" target="_blank" rel="noopener">源码：点这里</a></p>
+<p>为了更清晰的展示开启尾递归优化前、后调用栈的变化和tail_call_optimized装饰器抛异常退出递归调用栈的作用, 一个牛人利用pudb调试工具做了动图。<br><a href="http://python.jobbole.com/86937/" target="_blank" rel="noopener">动图：点这里</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TailRecurseException</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, args, kwargs)</span>:</span></span><br><span class="line">        self.args = args</span><br><span class="line">        self.kwargs = kwargs</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tail_call_optimized</span><span class="params">(g)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    This function decorates a function with tail call</span></span><br><span class="line"><span class="string">    optimization. It does this by throwing an exception</span></span><br><span class="line"><span class="string">    if it is it's own grandparent, and catching such</span></span><br><span class="line"><span class="string">    exceptions to fake the tail call optimization.</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">    This function fails if the decorated</span></span><br><span class="line"><span class="string">    function recurses in a non-tail context.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        f = sys._getframe()</span><br><span class="line">        <span class="comment"># 为什么是grandparent, 函数默认的第一层递归是父调用,</span></span><br><span class="line">        <span class="comment"># 对于尾递归, 不希望产生新的函数调用(即:祖父调用),</span></span><br><span class="line">        <span class="comment"># 所以这里抛出异常, 拿到参数, 退出被修饰函数的递归调用栈!</span></span><br><span class="line">        <span class="keyword">if</span> f.f_back <span class="keyword">and</span> f.f_back.f_back \</span><br><span class="line">            <span class="keyword">and</span> f.f_back.f_back.f_code == f.f_code:</span><br><span class="line">            <span class="comment"># 抛出异常</span></span><br><span class="line">            <span class="keyword">raise</span> TailRecurseException(args, kwargs)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    <span class="keyword">return</span> g(*args, **kwargs)</span><br><span class="line">                <span class="keyword">except</span> (TailRecurseException, e):</span><br><span class="line">                    <span class="comment"># 捕获异常, 拿到参数, 退出被修饰函数的递归调用栈</span></span><br><span class="line">                    args = e.args</span><br><span class="line">                    kwargs = e.kwargs</span><br><span class="line">    func.__doc__ = g.__doc__</span><br><span class="line">    <span class="keyword">return</span> func</span><br><span class="line"> </span><br><span class="line"><span class="meta">@tail_call_optimized</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span><span class="params">(n, acc=<span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="string">"calculate a factorial"</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> acc</span><br><span class="line">    <span class="keyword">return</span> factorial(n<span class="number">-1</span>, n*acc)</span><br><span class="line"> </span><br><span class="line">print(factorial(<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+<p>因为尾递归没有调用栈的嵌套, 所以Python也不会报RuntimeError: maximum recursion depth exceeded错误了!</p>
+<p>但是对于这种发发是否真正意义上实现了完美的优化呢？ 针对这个方法有个知乎大神发话了：</p>
+<p>TCO，tail-call optimization，其实有多种解读方式</p>
+<p>最常见的解读方式是：对于尾调用的函数调用，不要浪费栈空间，而要复用调用者的栈空间。这样的结果就是一长串尾调用不会爆栈，而没有TCO的话同样的调用就会爆栈。从这个意义上说，如上方法的那个recipe确实达到了TCO的部分目的：</p>
+<ul>
+<li>通过stack introspection查看调用链上的调用者之中有没有自己</li>
+<li>有的话，通过抛异常来迫使栈回退（stack unwind）到之前的一个自己的frame</li>
+<li>在回退到的frame接住异常，拿出后来调用的参数，用新参数再次调用自己</li>
+</ul>
+<p>这样就可以让尾递归不爆栈。但这样做性能是没保证的…而且对于完全没递归过的一般尾调用也不起作用。一种对TCO的常见误解是：由编译器或运行时系统把尾调用/尾递归实现得很快。这不是TCO真正要强调的事情——不爆栈才是最重要的。也就是说其实重点不在“优化”，而在于“尾调用不爆栈”这个语义保证。“proper tail-call”的叫法远比“tail-call optimization”来得合适。因而像这种种做法，可以算部分TCO，但算不上“性能优化”意义上的优化。</p>
+<h3 id="方式二：pattern-matching"><a href="#方式二：pattern-matching" class="headerlink" title="方式二：pattern-matching"></a>方式二：pattern-matching</h3><p>关于尾递归实现：</p>
+<p> 很简单，永远不要在函数内部去调用自己，甚至不要调用任何东西。每一次调用，都让外层一个agent来做。保证函数栈深永远不超过2或3即可。</p>
+<p>这哥们更牛逼了，直接做了个Python的模式匹配库，包含了尾递归的优化，实现了coroutine。</p>
+<p>把需要优化的函数的return改成yield，外面套个装饰器，就叫tail_call_opm。装饰器最内层的逻辑是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while True:</span><br><span class="line">    try:</span><br><span class="line">        ret=next(ret) </span><br><span class="line">    except:</span><br><span class="line">        return ret</span><br></pre></td></tr></table></figure></p>
+<p>这个应该没有复用释放的空间…但刷题时换了这个就不爆栈了。返回闭包的话情况应该会更复杂一些。<br><a href="https://github.com/Xython/pattern-matching" target="_blank" rel="noopener">pattern-matching参考GitHub地址</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/递归/" rel="tag"><i class="fa fa-tag"></i> 递归</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/sklearnLiner.html" rel="next" title="一个自编译线性回归的案例">
+                <i class="fa fa-chevron-left"></i> 一个自编译线性回归的案例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/githubhexocodingbaidu.html" rel="prev" title="使用Github和Coding共同托管hexo博客解决无法被百度收录的问题">
+                使用Github和Coding共同托管hexo博客解决无法被百度收录的问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是递归"><span class="nav-number">1.</span> <span class="nav-text">什么是递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是尾递归"><span class="nav-number">2.</span> <span class="nav-text">什么是尾递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归、尾递归、循环的比较"><span class="nav-number">3.</span> <span class="nav-text">递归、尾递归、循环的比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尾递归的Python优化"><span class="nav-number">4.</span> <span class="nav-text">尾递归的Python优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式一：实现一个-tail-call-optimized-装饰器"><span class="nav-number">4.1.</span> <span class="nav-text">方式一：实现一个 tail_call_optimized 装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式二：pattern-matching"><span class="nav-number">4.2.</span> <span class="nav-text">方式二：pattern-matching</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
