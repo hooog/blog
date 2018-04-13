@@ -18,8 +18,8 @@
   
   <entry>
     <title>使用aconda3-5.1.0（Python3.6.4） 搭建pyspark远程部署</title>
-    <link href="http://www.ihoge.cn/2018/%E4%BD%BF%E7%94%A8aconda3-5.1.0%EF%BC%88Python3.6.4%EF%BC%89%20%E6%90%AD%E5%BB%BApyspark%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2.html"/>
-    <id>http://www.ihoge.cn/2018/使用aconda3-5.1.0（Python3.6.4） 搭建pyspark远程部署.html</id>
+    <link href="http://www.ihoge.cn/2018/anacondaPyspark.html"/>
+    <id>http://www.ihoge.cn/2018/anacondaPyspark.html</id>
     <published>2018-04-13T17:59:21.000Z</published>
     <updated>2018-04-13T16:44:12.099Z</updated>
     
@@ -44,8 +44,8 @@
   
   <entry>
     <title>Hive集成Spark+Sql</title>
-    <link href="http://www.ihoge.cn/2018/Hive%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C.html"/>
-    <id>http://www.ihoge.cn/2018/Hive操作手册.html</id>
+    <link href="http://www.ihoge.cn/2018/HiveSpark.html"/>
+    <id>http://www.ihoge.cn/2018/HiveSpark.html</id>
     <published>2018-04-13T03:59:21.000Z</published>
     <updated>2018-04-13T08:18:16.776Z</updated>
     
