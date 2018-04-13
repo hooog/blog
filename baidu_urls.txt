@@ -1,3 +1,4 @@
+http://www.ihoge.cn/2018/使用aconda3-5.1.0（Python3.6.4） 搭建pyspark远程部署.html
 http://www.ihoge.cn/2018/Hive操作手册.html
 http://www.ihoge.cn/2018/DataMining.html
 http://www.ihoge.cn/2018/PCA+SVM人脸识别.html
@@ -32,12 +33,12 @@ http://www.ihoge.cn/2018/JavaMysql.html
 http://www.ihoge.cn/2018/分布式集群架构实验手册.html
 http://www.ihoge.cn/2018/hexo-github.html
 http://www.ihoge.cn/2018/朴素贝叶斯.html
-http://www.ihoge.cn/2018/基本统计工具.html
-http://www.ihoge.cn/2018/利用逻辑回归创建工作流.html
-http://www.ihoge.cn/2018/推荐算法.html
 http://www.ihoge.cn/2018/mllib分类与回归.html
-http://www.ihoge.cn/2018/Java面向对象+内存原理+内存优化1.html
-http://www.ihoge.cn/2018/MLlib基本数据类型.html
+http://www.ihoge.cn/2018/基本统计工具.html
+http://www.ihoge.cn/2018/推荐算法.html
+http://www.ihoge.cn/2018/利用逻辑回归创建工作流.html
 http://www.ihoge.cn/2018/聚类分析.html
+http://www.ihoge.cn/2018/MLlib基本数据类型.html
 http://www.ihoge.cn/2018/降维操作.html
+http://www.ihoge.cn/2018/Java面向对象+内存原理+内存优化1.html
 http://www.ihoge.cn/2018/DStream的基本操作.html
