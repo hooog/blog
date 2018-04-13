@@ -225,14 +225,56 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/hivewebhui.html</loc>
+    <loc>http://www.ihoge.cn/2018/hivebug1.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>Hive-2.2.0启动webui端口</title>
-        <pubTime>2018-03-25T16:28:59.000Z</pubTime>
+        <title>Hive提交MapReduce任务失败The auxService:mapreduce_shuffle does not exist</title>
+        <pubTime>2018-03-25T09:05:59.000Z</pubTime>
         
         <tag>Hive</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>DStream的基本操作</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        
+        <tag>MLlib</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/Pyhive.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>利用Pyhive实现Python连接Hive数据仓库</title>
+        <pubTime>2018-03-21T02:05:59.000Z</pubTime>
+        
+        <tag>Hive</tag>
+         
+        <tag>Pyhive</tag>
          
          
            
@@ -285,19 +327,17 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
+    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>DStream的基本操作</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
+        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
         
-        <tag>MLlib</tag>
-         
          
            
              
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
           
         </display>
     </data>
@@ -305,12 +345,12 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <loc>http://www.ihoge.cn/2018/JavaMysql.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
-        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
+        <title>JavaMysql</title>
+        <pubTime>2018-03-15T17:05:59.000Z</pubTime>
         
          
            
@@ -338,24 +378,6 @@
            
              
               <breadCrumb title="Hexo" url="http://www.ihoge.cn/categories/Hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/JavaMysql.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>JavaMysql</title>
-        <pubTime>2018-03-15T17:05:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
           
         </display>
     </data>
@@ -443,26 +465,6 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/hivebug1.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hive提交MapReduce任务失败The auxService:mapreduce_shuffle does not exist</title>
-        <pubTime>2018-03-25T09:05:59.000Z</pubTime>
-        
-        <tag>Hive</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1+%E5%86%85%E5%AD%98%E5%8E%9F%E7%90%86+%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%961.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
@@ -483,19 +485,19 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/pymysql.html</loc>
+    <loc>http://www.ihoge.cn/2018/hivewebhui.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>利用Pyecharts连接Mysql并对数据进行可视化</title>
-        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
+        <title>Hive-2.2.0启动webui端口</title>
+        <pubTime>2018-03-25T16:28:59.000Z</pubTime>
         
-        <tag>Pyecharts</tag>
+        <tag>Hive</tag>
          
          
            
              
-              <breadCrumb title="Python" url="http://www.ihoge.cn/categories/Python/"/>
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
           
         </display>
     </data>
@@ -516,6 +518,26 @@
            
              
               <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/pymysql.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>利用Pyecharts连接Mysql并对数据进行可视化</title>
+        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
+        
+        <tag>Pyecharts</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://www.ihoge.cn/categories/Python/"/>
           
         </display>
     </data>
@@ -601,14 +623,14 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/MLlib%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html</loc>
+    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>MLlib基本数据类型</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        <title>scikit-learn逻辑回归</title>
+        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
         
-        <tag>MLlib</tag>
+        <tag>scikit-learn</tag>
          
          
            
@@ -723,11 +745,11 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF.html</loc>
+    <loc>http://www.ihoge.cn/2018/MLlib%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>MLlib朴素叶贝斯</title>
+        <title>MLlib基本数据类型</title>
         <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
         <tag>MLlib</tag>
@@ -743,36 +765,14 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/Pyhive.html</loc>
+    <loc>http://www.ihoge.cn/2018/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>利用Pyhive实现Python连接Hive数据仓库</title>
-        <pubTime>2018-03-21T02:05:59.000Z</pubTime>
+        <title>MLlib朴素叶贝斯</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
-        <tag>Hive</tag>
-         
-        <tag>Pyhive</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>scikit-learn逻辑回归</title>
-        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
+        <tag>MLlib</tag>
          
          
            
