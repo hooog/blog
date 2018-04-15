@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="pyspark," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="RDD的内部运行方式RDD不仅是一组不可变的JVM（Java虚拟机）对象的分布集，而且是Spark的核心，可以让任务执行高速运算。 RDD将跟踪（计入日记）应用于每个快的所有转换，以加速计算速度，并在发生错误和部分数据丢失时提供回退（容错机制）。 RDD采用并行的运行方式，也就是每个转换操作并行执行，从而提高速度。RDD有两种并行操作：  转换操作（返回指向新的RDD的指针） 动作操作（在运行计算">
+<meta name="keywords" content="pyspark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="弹性式分布数据集RDD——Pyspark基础 （二）">
+<meta property="og:url" content="http://www.ihoge.cn/2018/pyspark.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="RDD的内部运行方式RDD不仅是一组不可变的JVM（Java虚拟机）对象的分布集，而且是Spark的核心，可以让任务执行高速运算。 RDD将跟踪（计入日记）应用于每个快的所有转换，以加速计算速度，并在发生错误和部分数据丢失时提供回退（容错机制）。 RDD采用并行的运行方式，也就是每个转换操作并行执行，从而提高速度。RDD有两种并行操作：  转换操作（返回指向新的RDD的指针） 动作操作（在运行计算">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fqdbpax6jbj31kw0hntga.jpg">
+<meta property="og:updated_time" content="2018-04-15T10:15:07.833Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="弹性式分布数据集RDD——Pyspark基础 （二）">
+<meta name="twitter:description" content="RDD的内部运行方式RDD不仅是一组不可变的JVM（Java虚拟机）对象的分布集，而且是Spark的核心，可以让任务执行高速运算。 RDD将跟踪（计入日记）应用于每个快的所有转换，以加速计算速度，并在发生错误和部分数据丢失时提供回退（容错机制）。 RDD采用并行的运行方式，也就是每个转换操作并行执行，从而提高速度。RDD有两种并行操作：  转换操作（返回指向新的RDD的指针） 动作操作（在运行计算">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fqdbpax6jbj31kw0hntga.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/pyspark.html"/>
+
+
+
+
+
+  <title>弹性式分布数据集RDD——Pyspark基础 （二） | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/pyspark.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">弹性式分布数据集RDD——Pyspark基础 （二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-15T17:59:21+08:00">
+                2018-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="RDD的内部运行方式"><a href="#RDD的内部运行方式" class="headerlink" title="RDD的内部运行方式"></a>RDD的内部运行方式</h2><p>RDD不仅是一组不可变的JVM（Java虚拟机）对象的分布集，而且是Spark的核心，可以让任务执行高速运算。</p>
+<p>RDD将<code>跟踪（计入日记）应用于每个快的所有转换</code>，以加速计算速度，并在发生错误和部分数据丢失时提供回退（容错机制）。</p>
+<p>RDD采用并行的运行方式，也就是每个转换操作并行执行，从而提高速度。<br>RDD有两种并行操作：</p>
+<ul>
+<li>转换操作（返回指向新的RDD的指针）</li>
+<li>动作操作（在运行计算后向驱动程序返回值）</li>
+</ul>
+<p>数据集的转换通常是<code>惰性</code>的，这也意味着任何转换操作仅在调用数据集上的操作时才执行。该延迟执行会产生风多的精细查询：针对性能进行优化查询。这种优化始于Spark的DAGScheduler——面向阶段的调度器。DAGScheduler负责Stage级的调度详见:<a href="http://ihoge.cn/2018/Spark%20Scheduler.html" target="_blank" rel="noopener">Spark运行原理剖析</a></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fqdbpax6jbj31kw0hntga.jpg" alt=""></p>
+<p><strong>由于具有单独的RDD转换和动作，DAGScheduler可以在查询中执行优化。包括但不限于避免shuffle数据（最耗费资源的任务）</strong></p>
+<h2 id="创建RDD"><a href="#创建RDD" class="headerlink" title="创建RDD"></a>创建RDD</h2><p>方式一： 用<code>.parallelize(...)</code>集合（元素list或array）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = sc.parallelize([(<span class="string">'a'</span>,<span class="number">1</span>),(<span class="string">'b'</span>,<span class="number">2</span>),(<span class="string">'c'</span>,<span class="number">3</span>),(<span class="string">'d'</span>,<span class="number">5</span>),(<span class="string">'e'</span>,<span class="number">5</span>)])</span><br></pre></td></tr></table></figure></p>
+<p>方式二： 读入外部文件</p>
+<ul>
+<li>支持多文件系统中读取：如NTFS、FAT、HFS+（Mac OS Extended），或者如HDFS、S3、Cassandra这类的分布式文件系统，还有其他类文件系统。</li>
+<li>指出多种数据格式：如文本、parquet、JSON、Hive tables（Hive表）以及使用JDBC驱动程序可读取的关系数据库中的数据。（注意：Spark可以自动处理压缩数据集）</li>
+</ul>
+<p>💡<strong>Tip1：</strong>读取的方式不同，持有对象表达方式也不同。从文件中读取的数据表示为<code>MapPartitionsRDD</code>；使用集合方法的数据表示为<code>ParallelCollectionRDD</code></p>
+<p>💡<strong>Tip2：</strong>RDD是无schema的数据结构（和DataFrame不同），所以我们几乎可以混用任何数据结构：tuple、dict、list和spark等都能支持。如果对数据集使用<code>.collect()</code>方法，将把RDD对所有元素返回给驱动程序，驱动程序将其序列化成了一个列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_from_file = sc.textFile(<span class="string">"hdfs://master:9000/pydata/VS14MORT.txt.gz"</span>,<span class="number">4</span>) <span class="comment"># 这里表示4个分区</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extractInformation</span><span class="params">(row)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> re</span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">    selected_indices = [</span><br><span class="line">         <span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">16</span>,<span class="number">17</span>,<span class="number">18</span>,</span><br><span class="line">         <span class="number">19</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">24</span>,<span class="number">25</span>,<span class="number">27</span>,<span class="number">28</span>,<span class="number">29</span>,<span class="number">30</span>,<span class="number">32</span>,<span class="number">33</span>,<span class="number">34</span>,</span><br><span class="line">         <span class="number">36</span>,<span class="number">37</span>,<span class="number">38</span>,<span class="number">39</span>,<span class="number">40</span>,<span class="number">41</span>,<span class="number">42</span>,<span class="number">43</span>,<span class="number">44</span>,<span class="number">45</span>,<span class="number">46</span>,<span class="number">47</span>,<span class="number">48</span>,</span><br><span class="line">         <span class="number">49</span>,<span class="number">50</span>,<span class="number">51</span>,<span class="number">52</span>,<span class="number">53</span>,<span class="number">54</span>,<span class="number">55</span>,<span class="number">56</span>,<span class="number">58</span>,<span class="number">60</span>,<span class="number">61</span>,<span class="number">62</span>,<span class="number">63</span>,</span><br><span class="line">         <span class="number">64</span>,<span class="number">65</span>,<span class="number">66</span>,<span class="number">67</span>,<span class="number">68</span>,<span class="number">69</span>,<span class="number">70</span>,<span class="number">71</span>,<span class="number">72</span>,<span class="number">73</span>,<span class="number">74</span>,<span class="number">75</span>,<span class="number">76</span>,</span><br><span class="line">         <span class="number">77</span>,<span class="number">78</span>,<span class="number">79</span>,<span class="number">81</span>,<span class="number">82</span>,<span class="number">83</span>,<span class="number">84</span>,<span class="number">85</span>,<span class="number">87</span>,<span class="number">89</span></span><br><span class="line">    ]</span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        Input record schema</span></span><br><span class="line"><span class="string">        schema: n-m (o) -- xxx</span></span><br><span class="line"><span class="string">            n - position from</span></span><br><span class="line"><span class="string">            m - position to</span></span><br><span class="line"><span class="string">            o - number of characters</span></span><br><span class="line"><span class="string">            xxx - description</span></span><br><span class="line"><span class="string">        1. 1-19 (19) -- reserved positions</span></span><br><span class="line"><span class="string">        2. 20 (1) -- resident status</span></span><br><span class="line"><span class="string">        3. 21-60 (40) -- reserved positions</span></span><br><span class="line"><span class="string">        4. 61-62 (2) -- education code (1989 revision)</span></span><br><span class="line"><span class="string">        5. 63 (1) -- education code (2003 revision)</span></span><br><span class="line"><span class="string">        6. 64 (1) -- education reporting flag</span></span><br><span class="line"><span class="string">        7. 65-66 (2) -- month of death</span></span><br><span class="line"><span class="string">        8. 67-68 (2) -- reserved positions</span></span><br><span class="line"><span class="string">        9. 69 (1) -- sex</span></span><br><span class="line"><span class="string">        10. 70 (1) -- age: 1-years, 2-months, 4-days, 5-hours, 6-minutes, 9-not stated</span></span><br><span class="line"><span class="string">        11. 71-73 (3) -- number of units (years, months etc)</span></span><br><span class="line"><span class="string">        12. 74 (1) -- age substitution flag (if the age reported in positions 70-74 is calculated using dates of birth and death)</span></span><br><span class="line"><span class="string">        13. 75-76 (2) -- age recoded into 52 categories</span></span><br><span class="line"><span class="string">        14. 77-78 (2) -- age recoded into 27 categories</span></span><br><span class="line"><span class="string">        15. 79-80 (2) -- age recoded into 12 categories</span></span><br><span class="line"><span class="string">        16. 81-82 (2) -- infant age recoded into 22 categories</span></span><br><span class="line"><span class="string">        17. 83 (1) -- place of death</span></span><br><span class="line"><span class="string">        18. 84 (1) -- marital status</span></span><br><span class="line"><span class="string">        19. 85 (1) -- day of the week of death</span></span><br><span class="line"><span class="string">        20. 86-101 (16) -- reserved positions</span></span><br><span class="line"><span class="string">        21. 102-105 (4) -- current year</span></span><br><span class="line"><span class="string">        22. 106 (1) -- injury at work</span></span><br><span class="line"><span class="string">        23. 107 (1) -- manner of death</span></span><br><span class="line"><span class="string">        24. 108 (1) -- manner of disposition</span></span><br><span class="line"><span class="string">        25. 109 (1) -- autopsy</span></span><br><span class="line"><span class="string">        26. 110-143 (34) -- reserved positions</span></span><br><span class="line"><span class="string">        27. 144 (1) -- activity code</span></span><br><span class="line"><span class="string">        28. 145 (1) -- place of injury</span></span><br><span class="line"><span class="string">        29. 146-149 (4) -- ICD code</span></span><br><span class="line"><span class="string">        30. 150-152 (3) -- 358 cause recode</span></span><br><span class="line"><span class="string">        31. 153 (1) -- reserved position</span></span><br><span class="line"><span class="string">        32. 154-156 (3) -- 113 cause recode</span></span><br><span class="line"><span class="string">        33. 157-159 (3) -- 130 infant cause recode</span></span><br><span class="line"><span class="string">        34. 160-161 (2) -- 39 cause recode</span></span><br><span class="line"><span class="string">        35. 162 (1) -- reserved position</span></span><br><span class="line"><span class="string">        36. 163-164 (2) -- number of entity-axis conditions</span></span><br><span class="line"><span class="string">        37-56. 165-304 (140) -- list of up to 20 conditions</span></span><br><span class="line"><span class="string">        57. 305-340 (36) -- reserved positions</span></span><br><span class="line"><span class="string">        58. 341-342 (2) -- number of record axis conditions</span></span><br><span class="line"><span class="string">        59. 343 (1) -- reserved position</span></span><br><span class="line"><span class="string">        60-79. 344-443 (100) -- record axis conditions</span></span><br><span class="line"><span class="string">        80. 444 (1) -- reserve position</span></span><br><span class="line"><span class="string">        81. 445-446 (2) -- race</span></span><br><span class="line"><span class="string">        82. 447 (1) -- bridged race flag</span></span><br><span class="line"><span class="string">        83. 448 (1) -- race imputation flag</span></span><br><span class="line"><span class="string">        84. 449 (1) -- race recode (3 categories)</span></span><br><span class="line"><span class="string">        85. 450 (1) -- race recode (5 categories)</span></span><br><span class="line"><span class="string">        86. 461-483 (33) -- reserved positions</span></span><br><span class="line"><span class="string">        87. 484-486 (3) -- Hispanic origin</span></span><br><span class="line"><span class="string">        88. 487 (1) -- reserved</span></span><br><span class="line"><span class="string">        89. 488 (1) -- Hispanic origin/race recode</span></span><br><span class="line"><span class="string">     '''</span></span><br><span class="line">    record_split = re\</span><br><span class="line">        .compile(</span><br><span class="line">            <span class="string">r'([\s]&#123;19&#125;)([0-9]&#123;1&#125;)([\s]&#123;40&#125;)([0-9\s]&#123;2&#125;)([0-9\s]&#123;1&#125;)([0-9]&#123;1&#125;)([0-9]&#123;2&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([\s]&#123;2&#125;)([FM]&#123;1&#125;)([0-9]&#123;1&#125;)([0-9]&#123;3&#125;)([0-9\s]&#123;1&#125;)([0-9]&#123;2&#125;)([0-9]&#123;2&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([0-9]&#123;2&#125;)([0-9\s]&#123;2&#125;)([0-9]&#123;1&#125;)([SMWDU]&#123;1&#125;)([0-9]&#123;1&#125;)([\s]&#123;16&#125;)([0-9]&#123;4&#125;)'</span> +</span><br><span class="line">            <span class="string">r'([YNU]&#123;1&#125;)([0-9\s]&#123;1&#125;)([BCOU]&#123;1&#125;)([YNU]&#123;1&#125;)([\s]&#123;34&#125;)([0-9\s]&#123;1&#125;)([0-9\s]&#123;1&#125;)'</span> +</span><br><span class="line">            <span class="string">r'([A-Z0-9\s]&#123;4&#125;)([0-9]&#123;3&#125;)([\s]&#123;1&#125;)([0-9\s]&#123;3&#125;)([0-9\s]&#123;3&#125;)([0-9\s]&#123;2&#125;)([\s]&#123;1&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([0-9\s]&#123;2&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)([A-Z0-9\s]&#123;7&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([A-Z0-9\s]&#123;7&#125;)([\s]&#123;36&#125;)([A-Z0-9\s]&#123;2&#125;)([\s]&#123;1&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([A-Z0-9\s]&#123;5&#125;)([\s]&#123;1&#125;)([0-9\s]&#123;2&#125;)([0-9\s]&#123;1&#125;)'</span> + </span><br><span class="line">            <span class="string">r'([0-9\s]&#123;1&#125;)([0-9\s]&#123;1&#125;)([0-9\s]&#123;1&#125;)([\s]&#123;33&#125;)([0-9\s]&#123;3&#125;)([0-9\s]&#123;1&#125;)([0-9\s]&#123;1&#125;)'</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        rs = np.array(record_split.split(row))[selected_indices]</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        rs = np.array([<span class="string">'-99'</span>] * len(selected_indices))</span><br><span class="line">    <span class="keyword">return</span> rs</span><br><span class="line"></span><br><span class="line">data_file = data_from_file.map(extractInformation)</span><br><span class="line">data_file.map(<span class="keyword">lambda</span> row: row).take(<span class="number">1</span>)</span><br><span class="line">data_file.cache()</span><br><span class="line">data_file.is_cached</span><br></pre></td></tr></table></figure>
+<pre><code>True
+</code></pre><h2 id="全局作用域和局部作用域"><a href="#全局作用域和局部作用域" class="headerlink" title="全局作用域和局部作用域"></a>全局作用域和局部作用域</h2><p>Spark可以在两种模式下运行：本地和集群。本地运行Spark代码时和目前使用的python没有说明不同。然而他如果将相同的代码部署到集群，便可能会导致大量的困扰，这就需要了解Spark是怎么在集群上执行工作的。这里有一篇文章介绍的很详细。<a href="http://ihoge.cn/2018/Spark%20Scheduler.html" target="_blank" rel="noopener">参考：Spark运行原理详解</a></p>
+<p>在集群模式下，提交任务时任务发送给了Master节点。该驱动程序节点为任务创建DAG，并且决定哪一个执行者（Worker）节点运行特定的任务。然后该驱动程序知识工作者执行它们的任务，并且在结束时将结果返回给驱动程序。然而在这之前，驱动程序为每一个任务的终止做准备：驱动程序中有一组变量和方法，以变工作者在RDD上执行任务。</p>
+<p>这组变量和方法在执行者的上下问本质上是静态的，每个执行器从驱动程序中获取的一份变量和方法的<strong>副本</strong>。这意味着运行任务时，如果执行者改变这些变量或覆盖这些方法，它不影响任何其他执行者的副本或者驱动程序的变量和方法。这可能会导致一些意想不到的行为和运行错误，这些行为和错误通常都很难被追踪到。</p>
+<h2 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h2><p>转换操作可以调整数据集。包括映射、筛选、链接、转换数据集中的值。</p>
+<h3 id="map-转换"><a href="#map-转换" class="headerlink" title=".map()转换"></a>.map()转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data_2014 = data_file.map(<span class="keyword">lambda</span> x: x[<span class="number">16</span>])</span><br><span class="line">data_2014.take(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>[&apos;2014&apos;, &apos;2014&apos;, &apos;2014&apos;, &apos;2014&apos;, &apos;2014&apos;, &apos;2014&apos;, &apos;2014&apos;, &apos;2014&apos;, &apos;2014&apos;, &apos;-99&apos;]
+</code></pre><h3 id="filter-转换"><a href="#filter-转换" class="headerlink" title=".filter()转换"></a>.filter()转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data_filter = data_file.filter(<span class="keyword">lambda</span> x: x[<span class="number">16</span>] == <span class="string">'2014'</span> <span class="keyword">and</span> x[<span class="number">21</span>] == <span class="string">'0'</span>)</span><br><span class="line">print(data_filter.count())</span><br><span class="line">data_file.take(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>22
+
+
+
+
+
+[array([&apos;1&apos;, &apos;  &apos;, &apos;2&apos;, &apos;1&apos;, &apos;01&apos;, &apos;M&apos;, &apos;1&apos;, &apos;087&apos;, &apos; &apos;, &apos;43&apos;, &apos;23&apos;, &apos;11&apos;,
+        &apos;  &apos;, &apos;4&apos;, &apos;M&apos;, &apos;4&apos;, &apos;2014&apos;, &apos;U&apos;, &apos;7&apos;, &apos;C&apos;, &apos;N&apos;, &apos; &apos;, &apos; &apos;, &apos;I64 &apos;,
+        &apos;238&apos;, &apos;070&apos;, &apos;   &apos;, &apos;24&apos;, &apos;01&apos;, &apos;11I64  &apos;, &apos;       &apos;, &apos;       &apos;,
+        &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;,
+        &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;,
+        &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;01&apos;,
+        &apos;I64  &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;,
+        &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;,
+        &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;01&apos;, &apos; &apos;,
+        &apos; &apos;, &apos;1&apos;, &apos;1&apos;, &apos;100&apos;, &apos;6&apos;], dtype=&apos;&lt;U40&apos;),
+ array([&apos;1&apos;, &apos;  &apos;, &apos;2&apos;, &apos;1&apos;, &apos;01&apos;, &apos;M&apos;, &apos;1&apos;, &apos;058&apos;, &apos; &apos;, &apos;37&apos;, &apos;17&apos;, &apos;08&apos;,
+        &apos;  &apos;, &apos;4&apos;, &apos;D&apos;, &apos;3&apos;, &apos;2014&apos;, &apos;U&apos;, &apos;7&apos;, &apos;C&apos;, &apos;N&apos;, &apos; &apos;, &apos; &apos;, &apos;I250&apos;,
+        &apos;214&apos;, &apos;062&apos;, &apos;   &apos;, &apos;21&apos;, &apos;03&apos;, &apos;11I250 &apos;, &apos;61I272 &apos;, &apos;62E669 &apos;,
+        &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;,
+        &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;,
+        &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;       &apos;, &apos;03&apos;,
+        &apos;I250 &apos;, &apos;E669 &apos;, &apos;I272 &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;,
+        &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;,
+        &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;     &apos;, &apos;01&apos;, &apos; &apos;,
+        &apos; &apos;, &apos;1&apos;, &apos;1&apos;, &apos;100&apos;, &apos;6&apos;], dtype=&apos;&lt;U40&apos;)]
+</code></pre><h3 id="flatMap-转换"><a href="#flatMap-转换" class="headerlink" title=".flatMap()转换"></a>.flatMap()转换</h3><p><code>.flatMap()</code>方法和.map()工作类似，不同的是flatMap()返回一个扁平的结果而不是一个列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data_flat = data_file.flatMap(<span class="keyword">lambda</span> x: (x[<span class="number">16</span>], int(x[<span class="number">16</span>])+<span class="number">1</span>))</span><br><span class="line">data_flat.take(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>[&apos;2014&apos;, 2015, &apos;2014&apos;, 2015, &apos;2014&apos;, 2015, &apos;2014&apos;, 2015, &apos;2014&apos;, 2015]
+</code></pre><p>.flatMap()可以用于过滤一些格式不正确的记录。在这个机制下，.flatMap()方法吧每一行看作一个列表对待，然后将所有记录简单的加入到一起，通过传递一个空列表可以丢弃格式不正确的记录。</p>
+<h3 id="distinct-转换"><a href="#distinct-转换" class="headerlink" title=".distinct()转换"></a>.distinct()转换</h3><p>这里用该方法检查性别列表是否只包含了男性和女性验证我们是否准确解释了数据集。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">distinct_gender = data_file.map(<span class="keyword">lambda</span> x: x[<span class="number">5</span>]).distinct()</span><br><span class="line">distinct_gender.collect()</span><br></pre></td></tr></table></figure>
+<pre><code>[&apos;M&apos;, &apos;F&apos;, &apos;-99&apos;]
+</code></pre><h3 id="sample-转换"><a href="#sample-转换" class="headerlink" title=".sample() 转换"></a>.sample() 转换</h3><p>该方法返回数据集的随机样本。第一个参数<code>withReplacement</code>指定采样是否应该替换，第二个参数<code>fraction</code>定义返回数据量的百分比，第三个参数是伪随机数产生器的种子<code>seed</code>。</p>
+<p>为了节省运算时间，这里选取愿数据千分之一的随机数据作为下面的练习数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data_sample = data_file.sample(<span class="keyword">False</span>, <span class="number">0.001</span>, <span class="number">666</span>)</span><br><span class="line">data_sample.cache()</span><br></pre></td></tr></table></figure>
+<pre><code>PythonRDD[25] at RDD at PythonRDD.scala:48
+</code></pre><h3 id="leftOuterJoin-转换"><a href="#leftOuterJoin-转换" class="headerlink" title=".leftOuterJoin()转换"></a>.leftOuterJoin()转换</h3><ul>
+<li>.leftOuterJoin()： 根据两个数据集中都有得值来连接两个RDD，并返回<code>左侧</code>的RDD记录，而右边的记录副加载两个RDD匹配的地方。</li>
+<li>.join() ：只返回两个RDD之间的关联数值</li>
+<li>.intersection()：返回两个RDD中相等的记录</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rdd1 = sc.parallelize([(<span class="string">'a'</span>,<span class="number">1</span>), (<span class="string">'b'</span>,<span class="number">4</span>), (<span class="string">'c'</span>,<span class="number">10</span>)])</span><br><span class="line">rdd2 = sc.parallelize([(<span class="string">'a'</span>,<span class="number">4</span>), (<span class="string">'a'</span>,<span class="number">1</span>), (<span class="string">'b'</span>,<span class="number">6</span>), (<span class="string">'d'</span>,<span class="number">15</span>)])</span><br><span class="line">print(<span class="string">"leftOuterJoin: "</span>,rdd1.leftOuterJoin(rdd2).collect())</span><br><span class="line">print(<span class="string">"Join: "</span>,rdd1.join(rdd2).collect())</span><br><span class="line">print(<span class="string">"intersection: "</span>, rdd1.intersection(rdd2).collect())</span><br></pre></td></tr></table></figure>
+<pre><code>leftOuterJoin:  [(&apos;c&apos;, (10, None)), (&apos;b&apos;, (4, 6)), (&apos;a&apos;, (1, 1)), (&apos;a&apos;, (1, 4))]
+Join:  [(&apos;b&apos;, (4, 6)), (&apos;a&apos;, (1, 1)), (&apos;a&apos;, (1, 4))]
+intersection:  [(&apos;a&apos;, 1)]
+</code></pre><h3 id="repartition-转换"><a href="#repartition-转换" class="headerlink" title=".repartition()转换"></a>.repartition()转换</h3><p>重新对数据集进行分区，改变数据集分赛区的数量。此功能应该谨慎并且仅当真正需要的时候使用，因为它会充足数据，导致性能产生巨大的影响。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(len(rdd2.glom().collect()))</span><br><span class="line">rdd2 = rdd2.repartition(<span class="number">4</span>)</span><br><span class="line">print(len(rdd2.glom().collect()))</span><br></pre></td></tr></table></figure>
+<pre><code>3
+4
+</code></pre><h2 id="动作"><a href="#动作" class="headerlink" title="动作"></a>动作</h2><h3 id="collect-动作"><a href="#collect-动作" class="headerlink" title=".collect() 动作"></a>.collect() 动作</h3><p>返回所有RDD的元素给驱动程序</p>
+<p>💡同时常用的还有: <code>.collectAsMap()</code>方法</p>
+<h3 id="take-动作"><a href="#take-动作" class="headerlink" title=".take() 动作"></a>.take() 动作</h3><p>可以说这事最有用的方法，返回<strong>单个数据分区</strong>的前n行。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rdd.take(<span class="number">1</span>)</span><br><span class="line"><span class="comment">#等同于:</span></span><br><span class="line">rdd.first()</span><br></pre></td></tr></table></figure></p>
+<h3 id="reduce-动作"><a href="#reduce-动作" class="headerlink" title=".reduce() 动作"></a>.reduce() 动作</h3><p>该方法使用指定的方法减少RDD中的元素。可以用该方法计算RDD总的元素之和：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdd1.map(<span class="keyword">lambda</span> x: x[<span class="number">1</span>]).reduce(<span class="keyword">lambda</span> x, y: x + y)</span><br></pre></td></tr></table></figure></p>
+<p>在每一个分区里，reduce()方法运行求和方法，将改总和返回给最终聚合所在的程序节点。</p>
+<p>⚠️<strong>警告：</strong><br>要谨慎注意的是，reduce传递的函数需要时关联的，既满足元素顺序改变结果不变，操作符顺序改变结果不变。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rdd = sc.parallelize([1, 2, 0.5, 0.1],1)</span><br><span class="line">rdd.reduce(lambda x, y: x / y)</span><br><span class="line"></span><br><span class="line">out: 10.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rdd = sc.parallelize([1, 2, 0.5, 0.1],2)</span><br><span class="line">rdd.reduce(lambda x, y: x / y)</span><br><span class="line"></span><br><span class="line">out: 0.1</span><br></pre></td></tr></table></figure>
+<p>这里我们希望输出结果是10.0，第一个只把RDD放在一个分区，输出结果符合预期。但是在第二个例子中，分了2个区，结果就不对了。因为该方法是在每个分区并行计算的。</p>
+<h3 id="reduceByKey-动作"><a href="#reduceByKey-动作" class="headerlink" title=".reduceByKey()  动作"></a>.reduceByKey()  动作</h3><p>该方法和.reduce()方法类似，但是实在key-key基础上运行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data_key = sc.parallelize([(<span class="string">'a'</span>,<span class="number">3</span>), (<span class="string">'a'</span>,<span class="number">1</span>), (<span class="string">'b'</span>,<span class="number">6</span>), (<span class="string">'d'</span>,<span class="number">1</span>), (<span class="string">'b'</span>,<span class="number">6</span>), (<span class="string">'d'</span>,<span class="number">15</span>), (<span class="string">'d'</span>,<span class="number">3</span>), (<span class="string">'a'</span>,<span class="number">7</span>), (<span class="string">'b'</span>, <span class="number">8</span>)],<span class="number">4</span>)</span><br><span class="line">data_key.reduceByKey(<span class="keyword">lambda</span> x, y: x+y).collect()</span><br></pre></td></tr></table></figure>
+<pre><code>[(&apos;b&apos;, 20), (&apos;a&apos;, 11), (&apos;d&apos;, 19)]
+</code></pre><h3 id="count-动作"><a href="#count-动作" class="headerlink" title=".count()  动作"></a>.count()  动作</h3><p>.count() 方法统计出了RDD里所有的元素数量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdd.count()</span><br></pre></td></tr></table></figure></p>
+<p>.count() 方法产生入戏方法同样的结果，但不需要把整个数据集移动到驱动程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">len(rdd.collect()). # ⚠️警告：不要这样做！！</span><br></pre></td></tr></table></figure></p>
+<h3 id="countByKey-动作"><a href="#countByKey-动作" class="headerlink" title=".countByKey() 动作"></a>.countByKey() 动作</h3><p>如果数据集是Ket-Value形式，可以使用.countByKey()方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_key.countByKey().items()</span><br></pre></td></tr></table></figure>
+<pre><code>dict_items([(&apos;a&apos;, 3), (&apos;b&apos;, 3), (&apos;d&apos;, 3)])
+</code></pre><h3 id="saveAsTextFile-动作"><a href="#saveAsTextFile-动作" class="headerlink" title=".saveAsTextFile()  动作"></a>.saveAsTextFile()  动作</h3><p>该方法将RDD保存为文本文件：每个文件一个分区</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_key.saveAsTextFile(<span class="string">'hdfs://master:9000/out/data_key.txt'</span>)</span><br></pre></td></tr></table></figure>
+<p>要读取它的时候需要解析，因为所有行都被视为字符串：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parseInput</span><span class="params">(row)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> re</span><br><span class="line">    pattern = re.compile(<span class="string">r"\(\'([a-z]+)\',.([0-9]+)\)"</span>) <span class="comment"># 这里“+”号代表匹配一个或多个匹配字符，否则针对双位数动作操作会报错</span></span><br><span class="line">    row_split = pattern.split(row)</span><br><span class="line">    <span class="keyword">return</span> (row_split[<span class="number">1</span>], row_split[<span class="number">2</span>])</span><br><span class="line">data_key_read = sc.textFile(<span class="string">'hdfs://master:9000/out/data_key.txt'</span>)</span><br><span class="line">data_key_read.map(parseInput).collect()</span><br></pre></td></tr></table></figure>
+<pre><code>[(&apos;a&apos;, &apos;3&apos;),
+ (&apos;a&apos;, &apos;1&apos;),
+ (&apos;b&apos;, &apos;6&apos;),
+ (&apos;d&apos;, &apos;1&apos;),
+ (&apos;b&apos;, &apos;6&apos;),
+ (&apos;d&apos;, &apos;15&apos;),
+ (&apos;d&apos;, &apos;3&apos;),
+ (&apos;a&apos;, &apos;7&apos;),
+ (&apos;b&apos;, &apos;8&apos;)]
+</code></pre><p>💡同时还有：</p>
+<ul>
+<li>rdd.saveAsHadoopDataset</li>
+<li>rdd.saveAsSequenceFile</li>
+<li>…<br>等方法</li>
+</ul>
+<h3 id="foreach-动作"><a href="#foreach-动作" class="headerlink" title=".foreach()  动作"></a>.foreach()  动作</h3><p>这个方法对RDD里的每个元素，用迭代方法应用相同的函数；和<code>.map()</code>相比，<code>.foreach()</code>方法按照一个接一个的方式，对每一条记录应用一个定义好的函数。当希望将数据曹村道PySpark本身不支持的数据库是，该方法很有用。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    print(x)</span><br><span class="line"></span><br><span class="line">rdd.foreach(f)</span><br></pre></td></tr></table></figure></p>
+<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><ul>
+<li><code>RDD是Spark的核心</code>；这些无<code>schema</code>数据结构早Spark中处理的最基本的数据结构。</li>
+<li>RDD的两种创建方式： parallelize 和 文件读取</li>
+<li>Spark中的转化是惰性的，只在操作被调用时应用。</li>
+<li>Scala 和 Python RDD之间一个主要的区别是速度： Python RDD 比 Scala 慢很多！</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pyspark/" rel="tag"><i class="fa fa-tag"></i> pyspark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/Spark Scheduler.html" rel="next" title="Spark运行原理剖析">
+                <i class="fa fa-chevron-left"></i> Spark运行原理剖析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RDD的内部运行方式"><span class="nav-number">1.</span> <span class="nav-text">RDD的内部运行方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建RDD"><span class="nav-number">2.</span> <span class="nav-text">创建RDD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局作用域和局部作用域"><span class="nav-number">3.</span> <span class="nav-text">全局作用域和局部作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换"><span class="nav-number">4.</span> <span class="nav-text">转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#map-转换"><span class="nav-number">4.1.</span> <span class="nav-text">.map()转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter-转换"><span class="nav-number">4.2.</span> <span class="nav-text">.filter()转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flatMap-转换"><span class="nav-number">4.3.</span> <span class="nav-text">.flatMap()转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distinct-转换"><span class="nav-number">4.4.</span> <span class="nav-text">.distinct()转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-转换"><span class="nav-number">4.5.</span> <span class="nav-text">.sample() 转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#leftOuterJoin-转换"><span class="nav-number">4.6.</span> <span class="nav-text">.leftOuterJoin()转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#repartition-转换"><span class="nav-number">4.7.</span> <span class="nav-text">.repartition()转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动作"><span class="nav-number">5.</span> <span class="nav-text">动作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#collect-动作"><span class="nav-number">5.1.</span> <span class="nav-text">.collect() 动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#take-动作"><span class="nav-number">5.2.</span> <span class="nav-text">.take() 动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce-动作"><span class="nav-number">5.3.</span> <span class="nav-text">.reduce() 动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduceByKey-动作"><span class="nav-number">5.4.</span> <span class="nav-text">.reduceByKey()  动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count-动作"><span class="nav-number">5.5.</span> <span class="nav-text">.count()  动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#countByKey-动作"><span class="nav-number">5.6.</span> <span class="nav-text">.countByKey() 动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#saveAsTextFile-动作"><span class="nav-number">5.7.</span> <span class="nav-text">.saveAsTextFile()  动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#foreach-动作"><span class="nav-number">5.8.</span> <span class="nav-text">.foreach()  动作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结："><span class="nav-number">6.</span> <span class="nav-text">小结：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
