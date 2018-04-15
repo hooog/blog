@@ -1,3 +1,4 @@
+http://www.ihoge.cn/2018/Spark Scheduler.html
 http://www.ihoge.cn/2018/Sparksql2.html
 http://www.ihoge.cn/2018/SparkSQl.html
 http://www.ihoge.cn/2018/anacondaPyspark.html
@@ -34,12 +35,12 @@ http://www.ihoge.cn/2018/JavaExtends.html
 http://www.ihoge.cn/2018/JavaMysql.html
 http://www.ihoge.cn/2018/分布式集群架构实验手册.html
 http://www.ihoge.cn/2018/hexo-github.html
-http://www.ihoge.cn/2018/MLlib基本数据类型.html
-http://www.ihoge.cn/2018/利用逻辑回归创建工作流.html
-http://www.ihoge.cn/2018/基本统计工具.html
-http://www.ihoge.cn/2018/推荐算法.html
-http://www.ihoge.cn/2018/mllib分类与回归.html
 http://www.ihoge.cn/2018/朴素贝叶斯.html
+http://www.ihoge.cn/2018/mllib分类与回归.html
+http://www.ihoge.cn/2018/推荐算法.html
+http://www.ihoge.cn/2018/基本统计工具.html
+http://www.ihoge.cn/2018/利用逻辑回归创建工作流.html
+http://www.ihoge.cn/2018/MLlib基本数据类型.html
 http://www.ihoge.cn/2018/Java面向对象+内存原理+内存优化1.html
 http://www.ihoge.cn/2018/聚类分析.html
 http://www.ihoge.cn/2018/降维操作.html
