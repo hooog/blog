@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hbase," />
+  <meta name="keywords" content="Databrickes," />
 
 
 
@@ -83,20 +83,29 @@
 
 
 
-<meta name="description" content="Hbase启动后进程丢失的原因分析原理：  分布式Apache HBase安装依赖于正在运行的ZooKeeper集群。Apache HBase默认情况下为您管理ZooKeeper“集群”。它将启动和停止ZooKeeper集合作为HBase启动/停止过程的一部分。 当然也可以独立于HBase管理ZooKeeper集群，只需要在Hbase的配置文件hbase-env.sh中做一些设置即可。要切换Zo">
-<meta name="keywords" content="Hbase">
+<meta name="description" content="摘要：本文带你畅游Databrickes Spark Clould云服务。小白迅速上手大数据Spark开发环境，从此告别集群Bug的烦恼，彻底解放物理机负担让你随时随地想Run就Run😎。 目录： Databrickes是个啥？ Databrickes注册 Databrickes快速入门 其他进阶神操作   Databrickes是个啥？YouTube简介，自备云梯Databricks 属于">
+<meta name="keywords" content="Databrickes">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hbase启动后进程丢失的原因分析">
-<meta property="og:url" content="http://www.ihoge.cn/2018/Hbaseproblom.html">
+<meta property="og:title" content="免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould">
+<meta property="og:url" content="http://www.ihoge.cn/2018/Databrickes.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
-<meta property="og:description" content="Hbase启动后进程丢失的原因分析原理：  分布式Apache HBase安装依赖于正在运行的ZooKeeper集群。Apache HBase默认情况下为您管理ZooKeeper“集群”。它将启动和停止ZooKeeper集合作为HBase启动/停止过程的一部分。 当然也可以独立于HBase管理ZooKeeper集群，只需要在Hbase的配置文件hbase-env.sh中做一些设置即可。要切换Zo">
-<meta property="og:image" content="http://www.ihoge.cn/images/1.png">
-<meta property="og:image" content="http://www.ihoge.cn/images/2.png">
-<meta property="og:updated_time" content="2018-04-06T17:31:08.000Z">
+<meta property="og:description" content="摘要：本文带你畅游Databrickes Spark Clould云服务。小白迅速上手大数据Spark开发环境，从此告别集群Bug的烦恼，彻底解放物理机负担让你随时随地想Run就Run😎。 目录： Databrickes是个啥？ Databrickes注册 Databrickes快速入门 其他进阶神操作   Databrickes是个啥？YouTube简介，自备云梯Databricks 属于">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238167919311.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238177684915.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238199155320.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238206713516.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238208963616.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238209363742.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238214224410.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238214940209.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238216319562.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238217238654.jpg">
+<meta property="og:updated_time" content="2018-04-15T20:02:51.718Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hbase启动后进程丢失的原因分析">
-<meta name="twitter:description" content="Hbase启动后进程丢失的原因分析原理：  分布式Apache HBase安装依赖于正在运行的ZooKeeper集群。Apache HBase默认情况下为您管理ZooKeeper“集群”。它将启动和停止ZooKeeper集合作为HBase启动/停止过程的一部分。 当然也可以独立于HBase管理ZooKeeper集群，只需要在Hbase的配置文件hbase-env.sh中做一些设置即可。要切换Zo">
-<meta name="twitter:image" content="http://www.ihoge.cn/images/1.png">
+<meta name="twitter:title" content="免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould">
+<meta name="twitter:description" content="摘要：本文带你畅游Databrickes Spark Clould云服务。小白迅速上手大数据Spark开发环境，从此告别集群Bug的烦恼，彻底解放物理机负担让你随时随地想Run就Run😎。 目录： Databrickes是个啥？ Databrickes注册 Databrickes快速入门 其他进阶神操作   Databrickes是个啥？YouTube简介，自备云梯Databricks 属于">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg">
 
 
 
@@ -126,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/Hbaseproblom.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/Databrickes.html"/>
 
 
 
 
 
-  <title>Hbase启动后进程丢失的原因分析 | Hoooge's Blog</title>
+  <title>免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould | Hoooge's Blog</title>
   
 
 
@@ -269,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/Hbaseproblom.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/Databrickes.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -286,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hbase启动后进程丢失的原因分析</h1>
+          <h1 class="post-title" itemprop="name headline">免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould</h1>
         
 
         <div class="post-meta">
@@ -298,8 +307,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-21T11:59:21+08:00">
-                2018-03-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-14T13:59:21+08:00">
+                2018-04-14
               </time>
             
 
@@ -321,8 +330,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
                   </a>
                 </span>
 
@@ -364,21 +373,36 @@
 
       
         <a id="more"></a>
-<h3 id="Hbase启动后进程丢失的原因分析"><a href="#Hbase启动后进程丢失的原因分析" class="headerlink" title="Hbase启动后进程丢失的原因分析"></a>Hbase启动后进程丢失的原因分析</h3><p><strong>原理：</strong></p>
-<ul>
-<li>分布式Apache HBase安装依赖于正在运行的ZooKeeper集群。<strong>Apache HBase默认情况下为您管理ZooKeeper“集群”。</strong>它将启动和停止ZooKeeper集合作为HBase启动/停止过程的一部分。</li>
-<li><p>当然也可以独立于HBase管理ZooKeeper集群，只需要在Hbase的配置文件hbase-env.sh中做一些设置即可。要切换ZooKeeper的HBase管理，请使用conf/hbase-env.sh中的HBASE_MANAGES_ZK变量。 此变量默认为true，告诉HBase是否启动/停止ZooKeeper集合服务器作为HBase启动/停止的一部分。如果为true，这Hbase把zookeeper启动，停止作为自身启动和停止的一部分。如果设置为false，则表示独立的Zookeeper管理。</p>
-</li>
-<li><p>既然我们配置的是HBase管理zookeeper，那么zookeeper在给Hbase提供底层支撑的时候需要与Hbase建立通信，这里最直接高效的通信方式就是建立在本地回环上。</p>
-</li>
-<li>由于最初虚拟机安装Hbase和zookeeper后启动服务的时候Hbase默认是按照 hosts文件的第二行127.0.1.1的本地回环地址和匹配的主机名建立通信（这里我们默认安装的是hduser）。这时zookeeper会生成一个记录文件把127.0.1.1和主机名保存下来。</li>
-<li>后来改成集群模式的时候，把hosts文件第二行的127.0.1.1以及对应的主机名屏蔽掉了。但是Hbase还是按照之前的本地回环地址和主机名尝试取联系对应的zookeeper，但是“身份“信息已经在hosts中被我们屏蔽掉了，所以造成最直接的影响就是主节点的HMaster进程启动后很快丢失，并且可能会造成master节点多了个HRegionServer进程以及从节点的进程紊乱。</li>
-<li>为什么会这样呢？ 启动HBase后我们jps看一下主节点的进程有个HMaster和一个HQ<em>的进程。 HQ</em>这个进程是用来寻找zookeeper的，但是它这时找不到zookeeper，所以就和HMaster一起“死掉了”。</li>
-<li>同理这也是为什么为分布式集群改为分布式集群启动之前需要删除tmp并格式化的原因。否则Apache-hadoop会默认按照之前记录的本地回环地址进行寻址。</li>
-</ul>
-<p>这里的解决方案是彻底删除hbase和zookeeper组件重新安装配置后即可正常启动，且进程将不会再莫名丢失。</p>
-<p><strong>主节点进程：</strong><br><img src="/images/1.png" alt="Alt text"></p>
-<p><strong>从节点进程：</strong><br><img src="/images/2.png" alt="Alt text"></p>
+<p>摘要：本文带你畅游<code>Databrickes Spark Clould</code>云服务。小白迅速上手大数据Spark开发环境，从此告别集群<code>Bug</code>的烦恼，彻底解放物理机负担让你随时随地想<code>Run</code>就<code>Run</code>😎。</p>
+<h2 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h2><ol>
+<li>Databrickes是个啥？</li>
+<li>Databrickes注册</li>
+<li>Databrickes快速入门</li>
+<li>其他进阶神操作</li>
+</ol>
+<hr>
+<h2 id="Databrickes是个啥？"><a href="#Databrickes是个啥？" class="headerlink" title="Databrickes是个啥？"></a>Databrickes是个啥？</h2><p><a href="https://databricks.com" target="_blank" rel="noopener">YouTube简介，自备云梯</a><br>Databricks 属于 Spark 的商业化公司，由美国伯克利大学 AMP 实验室著名的 Spark 大数据处理系统多位创始人联合创立。Databricks 致力于提供基于 Spark 的云服务，可用于数据集成，数据管道等任务。<br>Databricks 公司的云解决方案由三部分组成：Databricks 平台、Spark 和 Databricks 工作区。该产品背后的理念是提供处理数据的单独空间，不受托管环境和 Hadoop 集群管理的影响，整个过程在云中完成。该产品有几个核心概念：由 Notebooks 提供一种与数据交互并构建图形的方法，当用户了解了显示数据的方式时，就可以开始构建主控面板以监视某些类型的数据。最后，用户可以通过该平台的任务启动器来规划 Apache Spark 的运行时间。</p>
+<p>说白了就是<code>Databricks</code>捞钱的，老是开源spark 也不收你钱，大家也要吃饭不是，干脆搞个 spark on cloud，服务懒人或小公司，你既不用搭建集群也不用维护，交点儿钱直接用他们提供的在线集群。当然还有一个作用，推广普及spark ，所以也就有了<code>Community</code>版，即免费版</p>
+<p><code>Databricks</code>相当于给你了一个在线spark 集群，即：<code>Spark online</code>（听着怎么这么像网游 (⊙﹏⊙)b），我等尚处spark初级阶段的小白们刚好可以用他们提供的免费版来学习，省去了搭建和维护配置的过程，用来学习或温习Spark API真是完美！<br>（笔者比较懒，下面<code>Databricks Spark Cloud</code>都用<code>DSC</code>代替😂）<br>话不多说，开搞！！！</p>
+<h2 id="注册Databricks"><a href="#注册Databricks" class="headerlink" title="注册Databricks"></a>注册Databricks</h2><p><a href="https://databricks.com" target="_blank" rel="noopener">官网直达</a></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg" alt=""><br><code>Do you want to TRY DATACRICKS FREE?</code><br><code>Yeah, click here!</code></p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238167919311.jpg" alt=""></p>
+<p>下面就是注册页面，不再啰嗦。注意的是左下角要进行人际身份验证，网络不好的童鞋请自备云梯😎。然后验证邮箱，点击链接到登录界面：</p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238177684915.jpg" alt=""></p>
+<p>💡<code>If you don&#39;t want to pay for money, pelese click here!</code></p>
+<h2 id="搭建云上Spark集群环境"><a href="#搭建云上Spark集群环境" class="headerlink" title="搭建云上Spark集群环境"></a>搭建云上Spark集群环境</h2><p><a href="https://docs.databricks.com/getting-started/index.html" target="_blank" rel="noopener">入门指南</a><br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238199155320.jpg" alt=""></p>
+<p>这货长这样～界面清爽颜值高，功能齐全效率高。</p>
+<h2 id="基本使用流程："><a href="#基本使用流程：" class="headerlink" title="基本使用流程："></a>基本使用流程：</h2><ol>
+<li>创建集群<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238206713516.jpg" alt=""></li>
+</ol>
+<p>没办法，笔者已经有一个集群在运行了，作为免费用户只能拥有一个活动集群，或者升级<code>高级用户</code>😎</p>
+<p>2.创建nootebook<br>选择集群，选择语言，新建项目，凯撸～<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238208963616.jpg" alt=""><br>创建笔记、加载依赖资源、创建文件夹</p>
+<p>3.创建Table<br>上传本地数据，速度有点慢，耐心等待一会～😅<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238209363742.jpg" alt=""></p>
+<h2 id="任务流程可视化、数据可视化"><a href="#任务流程可视化、数据可视化" class="headerlink" title="任务流程可视化、数据可视化"></a>任务流程可视化、数据可视化</h2><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238214224410.jpg" alt=""><br>自动生成任务阶段流程，生成DAG。</p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238214940209.jpg" alt=""><br>丰富的画图工具，只需点点点即可完成高颜值图表。</p>
+<h2 id="其他操作："><a href="#其他操作：" class="headerlink" title="其他操作："></a>其他操作：</h2><p>下面是重点！！<br>下面是重点！！<br>下面是重点！！</p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238216319562.jpg" alt=""><br>这里提供了丰富的适合不同场景的训练数据、源代码及简介。<br>只需找到<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238217238654.jpg" alt=""><br>即可快速导入到工作台。只可惜自己英文太烂，啃的很慢😂😂😂</p>
+<p><code>DSC</code>不仅提供了方便高可用的云集群服务，而且提供了丰富的学习资料，对像我等来说简直是完美的产品。感谢各位大佬给我们提供了如此便捷的学习环境和资源，<code>Life is short</code>，只争朝夕！<br><a href="https://youtu.be/fn3WeMZZcCk?t=17m19s" target="_blank" rel="noopener">油管视频自备云梯</a></p>
 
       
     </div>
@@ -396,7 +420,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hbase/" rel="tag"><i class="fa fa-tag"></i> Hbase</a>
+            <a href="/tags/Databrickes/" rel="tag"><i class="fa fa-tag"></i> Databrickes</a>
           
         </div>
       
@@ -409,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/Pyhive.html" rel="next" title="利用Pyhive实现Python连接Hive数据仓库">
-                <i class="fa fa-chevron-left"></i> 利用Pyhive实现Python连接Hive数据仓库
+              <a href="/2018/anacondaPyspark.html" rel="next" title="使用aconda3-5.1.0（Python3.6.4） 搭建pyspark远程部署">
+                <i class="fa fa-chevron-left"></i> 使用aconda3-5.1.0（Python3.6.4） 搭建pyspark远程部署
               </a>
             
           </div>
@@ -419,8 +443,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/监督学习.html" rel="prev" title="监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）">
-                监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/SparkSQl.html" rel="prev" title="SparkSQL DataFrame基础篇">
+                SparkSQL DataFrame基础篇 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -593,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hbase启动后进程丢失的原因分析"><span class="nav-number">1.</span> <span class="nav-text">Hbase启动后进程丢失的原因分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录："><span class="nav-number">1.</span> <span class="nav-text">目录：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Databrickes是个啥？"><span class="nav-number">2.</span> <span class="nav-text">Databrickes是个啥？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册Databricks"><span class="nav-number">3.</span> <span class="nav-text">注册Databricks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建云上Spark集群环境"><span class="nav-number">4.</span> <span class="nav-text">搭建云上Spark集群环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用流程："><span class="nav-number">5.</span> <span class="nav-text">基本使用流程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务流程可视化、数据可视化"><span class="nav-number">6.</span> <span class="nav-text">任务流程可视化、数据可视化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他操作："><span class="nav-number">7.</span> <span class="nav-text">其他操作：</span></a></li></ol></div>
             
 
           </div>
