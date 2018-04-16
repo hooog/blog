@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.ihoge.cn/"/>
-  <updated>2018-04-15T10:15:35.501Z</updated>
+  <updated>2018-04-15T20:06:17.245Z</updated>
   <id>http://www.ihoge.cn/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould</title>
+    <link href="http://www.ihoge.cn/2018/Databrickes.html"/>
+    <id>http://www.ihoge.cn/2018/Databrickes.html</id>
+    <published>2018-04-15T19:59:21.000Z</published>
+    <updated>2018-04-15T20:06:17.245Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><p>摘要：本文带你畅游<code>Databrickes Spark Clould</code>云服务。小白迅速上手大数据Spark开发环境，从此告别集群<code>Bug</code>的烦恼，彻底解放物理机负担让你随时随地想<code>Run</code>就<code>Run</code>😎。</p><h2 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h2><ol><li>Databrickes是个啥？</li><li>Databrickes注册</li><li>Databrickes快速入门</li><li>其他进阶神操作</li></ol><hr><h2 id="Databrickes是个啥？"><a href="#Databrickes是个啥？" class="headerlink" title="Databrickes是个啥？"></a>Databrickes是个啥？</h2><p><a href="https://databricks.com" target="_blank" rel="noopener">YouTube简介，自备云梯</a><br>Databricks 属于 Spark 的商业化公司，由美国伯克利大学 AMP 实验室著名的 Spark 大数据处理系统多位创始人联合创立。Databricks 致力于提供基于 Spark 的云服务，可用于数据集成，数据管道等任务。<br>Databricks 公司的云解决方案由三部分组成：Databricks 平台、Spark 和 Databricks 工作区。该产品背后的理念是提供处理数据的单独空间，不受托管环境和 Hadoop 集群管理的影响，整个过程在云中完成。该产品有几个核心概念：由 Notebooks 提供一种与数据交互并构建图形的方法，当用户了解了显示数据的方式时，就可以开始构建主控面板以监视某些类型的数据。最后，用户可以通过该平台的任务启动器来规划 Apache Spark 的运行时间。</p><p>说白了就是<code>Databricks</code>捞钱的，老是开源spark 也不收你钱，大家也要吃饭不是，干脆搞个 spark on cloud，服务懒人或小公司，你既不用搭建集群也不用维护，交点儿钱直接用他们提供的在线集群。当然还有一个作用，推广普及spark ，所以也就有了<code>Community</code>版，即免费版</p><p><code>Databricks</code>相当于给你了一个在线spark 集群，即：<code>Spark online</code>（听着怎么这么像网游 (⊙﹏⊙)b），我等尚处spark初级阶段的小白们刚好可以用他们提供的免费版来学习，省去了搭建和维护配置的过程，用来学习或温习Spark API真是完美！<br>（笔者比较懒，下面<code>Databricks Spark Cloud</code>都用<code>DSC</code>代替😂）<br>话不多说，开搞！！！</p><h2 id="注册Databricks"><a href="#注册Databricks" class="headerlink" title="注册Databricks"></a>注册Databricks</h2><p><a href="https://databricks.com" target="_blank" rel="noopener">官网直达</a></p><p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg" alt=""><br><code>Do you want to TRY DATACRICKS FREE?</code><br><code>Yeah, click here!</code></p><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238167919311.jpg" alt=""></p><p>下面就是注册页面，不再啰嗦。注意的是左下角要进行人际身份验证，网络不好的童鞋请自备云梯😎。然后验证邮箱，点击链接到登录界面：</p><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238177684915.jpg" alt=""></p><p>💡<code>If you don&#39;t want to pay for money, pelese click here!</code></p><h2 id="搭建云上Spark集群环境"><a href="#搭建云上Spark集群环境" class="headerlink" title="搭建云上Spark集群环境"></a>搭建云上Spark集群环境</h2><p><a href="https://docs.databricks.com/getting-started/index.html" target="_blank" rel="noopener">入门指南</a><br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238199155320.jpg" alt=""></p><p>这货长这样～界面清爽颜值高，功能齐全效率高。</p><h2 id="基本使用流程："><a href="#基本使用流程：" class="headerlink" title="基本使用流程："></a>基本使用流程：</h2><ol><li>创建集群<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238206713516.jpg" alt=""></li></ol><p>没办法，笔者已经有一个集群在运行了，作为免费用户只能拥有一个活动集群，或者升级<code>高级用户</code>😎</p><p>2.创建nootebook<br>选择集群，选择语言，新建项目，凯撸～<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238208963616.jpg" alt=""><br>创建笔记、加载依赖资源、创建文件夹</p><p>3.创建Table<br>上传本地数据，速度有点慢，耐心等待一会～😅<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238209363742.jpg" alt=""></p><h2 id="任务流程可视化、数据可视化"><a href="#任务流程可视化、数据可视化" class="headerlink" title="任务流程可视化、数据可视化"></a>任务流程可视化、数据可视化</h2><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238214224410.jpg" alt=""><br>自动生成任务阶段流程，生成DAG。</p><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238214940209.jpg" alt=""><br>丰富的画图工具，只需点点点即可完成高颜值图表。</p><h2 id="其他操作："><a href="#其他操作：" class="headerlink" title="其他操作："></a>其他操作：</h2><p>下面是重点！！<br>下面是重点！！<br>下面是重点！！</p><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238216319562.jpg" alt=""><br>这里提供了丰富的适合不同场景的训练数据、源代码及简介。<br>只需找到<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238217238654.jpg" alt=""><br>即可快速导入到工作台。只可惜自己英文太烂，啃的很慢😂😂😂</p><p><code>DSC</code>不仅提供了方便高可用的云集群服务，而且提供了丰富的学习资料，对像我等来说简直是完美的产品。感谢各位大佬给我们提供了如此便捷的学习环境和资源，<code>Life is short</code>，只争朝夕！<br><a href="https://youtu.be/fn3WeMZZcCk?t=17m19s" target="_blank" rel="noopener">油管视频自备云梯</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;摘要：本文带你畅游&lt;code&gt;Databrickes Spark Clould&lt;/code&gt;云服务。小白迅速上手大数据Spark开发环境，从此告别集群&lt;code&gt;Bug&lt;/code&gt;的烦恼，彻底解放物理机负担让你随时随地想&lt;code&gt;Ru
+      
+    
+    </summary>
+    
+      <category term="Spark" scheme="http://www.ihoge.cn/categories/Spark/"/>
+    
+    
+      <category term="Databrickes" scheme="http://www.ihoge.cn/tags/Databrickes/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark运行原理剖析</title>
@@ -115,32 +141,6 @@
     
     
       <category term="Sparksql" scheme="http://www.ihoge.cn/tags/Sparksql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould</title>
-    <link href="http://www.ihoge.cn/2018/Databrickes.html"/>
-    <id>http://www.ihoge.cn/2018/Databrickes.html</id>
-    <published>2018-04-14T05:59:21.000Z</published>
-    <updated>2018-04-15T20:02:51.718Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a><p>摘要：本文带你畅游<code>Databrickes Spark Clould</code>云服务。小白迅速上手大数据Spark开发环境，从此告别集群<code>Bug</code>的烦恼，彻底解放物理机负担让你随时随地想<code>Run</code>就<code>Run</code>😎。</p><h2 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h2><ol><li>Databrickes是个啥？</li><li>Databrickes注册</li><li>Databrickes快速入门</li><li>其他进阶神操作</li></ol><hr><h2 id="Databrickes是个啥？"><a href="#Databrickes是个啥？" class="headerlink" title="Databrickes是个啥？"></a>Databrickes是个啥？</h2><p><a href="https://databricks.com" target="_blank" rel="noopener">YouTube简介，自备云梯</a><br>Databricks 属于 Spark 的商业化公司，由美国伯克利大学 AMP 实验室著名的 Spark 大数据处理系统多位创始人联合创立。Databricks 致力于提供基于 Spark 的云服务，可用于数据集成，数据管道等任务。<br>Databricks 公司的云解决方案由三部分组成：Databricks 平台、Spark 和 Databricks 工作区。该产品背后的理念是提供处理数据的单独空间，不受托管环境和 Hadoop 集群管理的影响，整个过程在云中完成。该产品有几个核心概念：由 Notebooks 提供一种与数据交互并构建图形的方法，当用户了解了显示数据的方式时，就可以开始构建主控面板以监视某些类型的数据。最后，用户可以通过该平台的任务启动器来规划 Apache Spark 的运行时间。</p><p>说白了就是<code>Databricks</code>捞钱的，老是开源spark 也不收你钱，大家也要吃饭不是，干脆搞个 spark on cloud，服务懒人或小公司，你既不用搭建集群也不用维护，交点儿钱直接用他们提供的在线集群。当然还有一个作用，推广普及spark ，所以也就有了<code>Community</code>版，即免费版</p><p><code>Databricks</code>相当于给你了一个在线spark 集群，即：<code>Spark online</code>（听着怎么这么像网游 (⊙﹏⊙)b），我等尚处spark初级阶段的小白们刚好可以用他们提供的免费版来学习，省去了搭建和维护配置的过程，用来学习或温习Spark API真是完美！<br>（笔者比较懒，下面<code>Databricks Spark Cloud</code>都用<code>DSC</code>代替😂）<br>话不多说，开搞！！！</p><h2 id="注册Databricks"><a href="#注册Databricks" class="headerlink" title="注册Databricks"></a>注册Databricks</h2><p><a href="https://databricks.com" target="_blank" rel="noopener">官网直达</a></p><p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg" alt=""><br><code>Do you want to TRY DATACRICKS FREE?</code><br><code>Yeah, click here!</code></p><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238167919311.jpg" alt=""></p><p>下面就是注册页面，不再啰嗦。注意的是左下角要进行人际身份验证，网络不好的童鞋请自备云梯😎。然后验证邮箱，点击链接到登录界面：</p><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238177684915.jpg" alt=""></p><p>💡<code>If you don&#39;t want to pay for money, pelese click here!</code></p><h2 id="搭建云上Spark集群环境"><a href="#搭建云上Spark集群环境" class="headerlink" title="搭建云上Spark集群环境"></a>搭建云上Spark集群环境</h2><p><a href="https://docs.databricks.com/getting-started/index.html" target="_blank" rel="noopener">入门指南</a><br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238199155320.jpg" alt=""></p><p>这货长这样～界面清爽颜值高，功能齐全效率高。</p><h2 id="基本使用流程："><a href="#基本使用流程：" class="headerlink" title="基本使用流程："></a>基本使用流程：</h2><ol><li>创建集群<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238206713516.jpg" alt=""></li></ol><p>没办法，笔者已经有一个集群在运行了，作为免费用户只能拥有一个活动集群，或者升级<code>高级用户</code>😎</p><p>2.创建nootebook<br>选择集群，选择语言，新建项目，凯撸～<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238208963616.jpg" alt=""><br>创建笔记、加载依赖资源、创建文件夹</p><p>3.创建Table<br>上传本地数据，速度有点慢，耐心等待一会～😅<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238209363742.jpg" alt=""></p><h2 id="任务流程可视化、数据可视化"><a href="#任务流程可视化、数据可视化" class="headerlink" title="任务流程可视化、数据可视化"></a>任务流程可视化、数据可视化</h2><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238214224410.jpg" alt=""><br>自动生成任务阶段流程，生成DAG。</p><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238214940209.jpg" alt=""><br>丰富的画图工具，只需点点点即可完成高颜值图表。</p><h2 id="其他操作："><a href="#其他操作：" class="headerlink" title="其他操作："></a>其他操作：</h2><p>下面是重点！！<br>下面是重点！！<br>下面是重点！！</p><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238216319562.jpg" alt=""><br>这里提供了丰富的适合不同场景的训练数据、源代码及简介。<br>只需找到<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238217238654.jpg" alt=""><br>即可快速导入到工作台。只可惜自己英文太烂，啃的很慢😂😂😂</p><p><code>DSC</code>不仅提供了方便高可用的云集群服务，而且提供了丰富的学习资料，对像我等来说简直是完美的产品。感谢各位大佬给我们提供了如此便捷的学习环境和资源，<code>Life is short</code>，只争朝夕！<br><a href="https://youtu.be/fn3WeMZZcCk?t=17m19s" target="_blank" rel="noopener">油管视频自备云梯</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;摘要：本文带你畅游&lt;code&gt;Databrickes Spark Clould&lt;/code&gt;云服务。小白迅速上手大数据Spark开发环境，从此告别集群&lt;code&gt;Bug&lt;/code&gt;的烦恼，彻底解放物理机负担让你随时随地想&lt;code&gt;Ru
-      
-    
-    </summary>
-    
-      <category term="Spark" scheme="http://www.ihoge.cn/categories/Spark/"/>
-    
-    
-      <category term="Databrickes" scheme="http://www.ihoge.cn/tags/Databrickes/"/>
     
   </entry>
   
