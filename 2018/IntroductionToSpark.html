@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15240162492089.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15240162738329.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15240170262028.jpg">
-<meta property="og:updated_time" content="2018-04-18T02:59:29.148Z">
+<meta property="og:updated_time" content="2018-04-18T05:30:40.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark的基本架构">
 <meta name="twitter:description" content="Spark的基本架构当单机没有足够的能力和资源来执行大量信息的计算（或者低延迟计算），这时就需要一个集群或一组机器将许多机器的资源集中在一起，使我们可以使用全部累积的在一起的计算和存储资源。现在只有一组机器不够强大，你需要一个框架来协调他们之间的工作。 Spark是一种工具，可以管理和协调跨计算机集群执行数据任务。Spark用于执行任务的机器集群可以由Spark的Standalone，YARN或">
@@ -381,14 +381,14 @@
 <li>Spark有一些集群管理器，负责调度可用资源。</li>
 <li>驱动程序进程负责执行执行程序中的驱动程序命令，以完成我们的任务。</li>
 </ul>
-<h3 id="2-Spark’s-APIs"><a href="#2-Spark’s-APIs" class="headerlink" title="2. Spark’s APIs"></a>2. Spark’s APIs</h3><p>尽管我们的executor大多会一直运行Spark代码。但我们仍然可以通过Spark的语言API用多种不同语言运行Spark代码。大多数情况下，Spark会在每种语言中提供一些核心“concepts”，并将不同语言的代码译成运行在机器集群上的Spark代码。</p>
+<h3 id="2-Spark’s-Languge-APIs"><a href="#2-Spark’s-Languge-APIs" class="headerlink" title="2. Spark’s Languge APIs"></a>2. Spark’s Languge APIs</h3><p>尽管我们的executor大多会一直运行Spark代码。但我们仍然可以通过Spark的语言API用多种不同语言运行Spark代码。大多数情况下，Spark会在每种语言中提供一些核心“concepts”，并将不同语言的代码译成运行在机器集群上的Spark代码。</p>
 <p><img src="http://p6rvh6ej2.bkt.clouddn.com/15239873536392.jpg" alt=""></p>
 <p> <code>Spark有两套基本的API：低级非结构化(Unstructured)API和更高级别的结构化(Structured)API。</code></p>
 <h3 id="3-SparkSession"><a href="#3-SparkSession" class="headerlink" title="3. SparkSession"></a>3. SparkSession</h3><p>我们通过驱动程序来控制Spark应用程序。该驱动程序进程将自身作为名为SparkSession并作为唯一的接口API对象向用户开放。 SparkSession实例是Spark在群集中执行用户定义操作的方式。 SparkSession和Spark应用程序之间有一对一的对应关系。在Scala和Python中，变量在启动控制台时可用作spark。让我们看下简单的Scala和/或Python中的SparkSession。</p>
 <p><img src="http://p6rvh6ej2.bkt.clouddn.com/15239862105558.jpg" alt=""></p>
 <h3 id="4-Dataframe"><a href="#4-Dataframe" class="headerlink" title="4. Dataframe"></a>4. Dataframe</h3><p>DataFrame是最常见的<code>Structured API</code>（结构化API），只是表示有类型的<code>包含行和列的数据表</code>。一个简单的比喻就是一个带有命名列的电子表格。其根本区别在于，当电子表格位于一台计算机上某个特定位置时，Spark DataFrame可以跨越数千台计算机。将数据放在多台计算机上的原因无非有两种：数据太大而无法放在一台计算机上，或者在一台计算机上执行计算所需的时间太长。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15239862709297.jpg" alt=""></p>
 <p>DataFrame概念并不是Spark独有的。 R和Python都有相似的概念。但是，Python / R DataFrame（有一些例外）存在于一台机器上，而不是多台机器上。这限制了您可以对python和R中给定的DataFrame执行的操作与该特定机器上存在的资源进行对比。但是，由于Spark具有适用于Python和R的<code>Spark’s Language APIs</code>，因此将Pandas（Python）DataFrame转换为Spark DataFrame和R DataFrame转换为Spark DataFrame（R）非常容易。</p>
-<p><strong>注意</strong><br>Spark有几个核心抽象：Datasets, DataFrames, SQL Tables,和弹性分布式数据集（RDD）。这些抽象都表示分布式数据集合，但它们有不同的接口来处理这些数据。最简单和最有效的是DataFrames，它可以用于所有语言。</p>
+<p><strong>注意</strong><br>Spark有几个核心抽象：Datasets，Dadaframes，SQL Table和弹性分布式数据集（RDD）。这些抽象都表示分布式数据集合，但它们有不同的接口来处理这些数据。最简单和最有效的是DataFrames，它可以用于所有语言。<strong>以下概念适用于所有的核心抽象。</strong></p>
 <h3 id="5-Partitions"><a href="#5-Partitions" class="headerlink" title="5. Partitions"></a>5. Partitions</h3><p>为了允许每个执行者并行执行工作，Spark将数据分解成称为分区的块。分区是位于集群中的一台物理机上的一组行。 DataFrame的分区表示数据在执行过程中如何在整个机器群中物理分布。如果你有一个分区，即使你有数千个执行者，Spark也只会有一个分区。如果有多个分区，但只有一个执行程序Spark仍然只有一个并行性，因为只有一个计算资源。<br>值得注意的是，使用DataFrames，我们不会（大部分）操作 手动分区（基于个人）。我们只需指定物理分区中数据的高级转换，并且Spark确定此工作将如何在集群上实际执行。较低级别的API确实存在（通过弹性分布式数据集接口）。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15240195737335.jpg" alt=""></p>
 <h3 id="6-Transformations"><a href="#6-Transformations" class="headerlink" title="6. Transformations"></a>6. Transformations</h3><p>在Spark中，核心数据结构是不可改变的，这意味着一旦创建它们就不能更改。起初，这可能看起来像一个奇怪的概念，如果你不能改变它，你应该如何使用它？为了“更改”DataFrame，您必须指示Spark如何修改您所需的DataFrame。这些说明被称为<code>转换</code>。<br>转换操作没有返回输出，这是因为我们只指定了一个抽象转换，并且Spark不会在转换之前采取行动，直到我们执行一个动作。Transformations是如何使用Spark来表达业务逻辑的核心。Spark有两种类型的Transformations，一种是窄依赖转换关系，一种是宽依赖转换关系。</p>
 <p><img src="http://p6rvh6ej2.bkt.clouddn.com/15239881561168.jpg" alt=""><br>宽依赖指输入分区对多输出分区起作用（多个孩子）。这被称为shuffle，Spark将在群集之间交换分区。对于窄依赖转换，Spark将自动执行称为流水线的操作，这意味着如果我们在DataFrame上指定了多个过滤器，它们将全部在内存中执行。当我们执行shuffle时，Spark会将结果写入磁盘。</p>
@@ -447,6 +447,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/strame.html" rel="prev" title="流式处理框架 & Spark Streaming">
+                流式处理框架 & Spark Streaming <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -534,7 +538,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
@@ -556,7 +560,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">Tags</span>
                 </a>
               </div>
@@ -618,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark的基本架构"><span class="nav-number">1.</span> <span class="nav-text">Spark的基本架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Spark-Application"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. Spark Application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Spark’s-APIs"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. Spark’s APIs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SparkSession"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. SparkSession</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Dataframe"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. Dataframe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Partitions"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. Partitions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Transformations"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. Transformations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Lazy-Evaluation"><span class="nav-number">1.0.7.</span> <span class="nav-text">7. Lazy Evaluation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Actions"><span class="nav-number">1.0.8.</span> <span class="nav-text">8. Actions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Dataframe-amp-SQL"><span class="nav-number">1.0.9.</span> <span class="nav-text">9. Dataframe &amp; SQL</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark的基本架构"><span class="nav-number">1.</span> <span class="nav-text">Spark的基本架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Spark-Application"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. Spark Application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Spark’s-Languge-APIs"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. Spark’s Languge APIs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SparkSession"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. SparkSession</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Dataframe"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. Dataframe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Partitions"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. Partitions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Transformations"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. Transformations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Lazy-Evaluation"><span class="nav-number">1.0.7.</span> <span class="nav-text">7. Lazy Evaluation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Actions"><span class="nav-number">1.0.8.</span> <span class="nav-text">8. Actions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Dataframe-amp-SQL"><span class="nav-number">1.0.9.</span> <span class="nav-text">9. Dataframe &amp; SQL</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

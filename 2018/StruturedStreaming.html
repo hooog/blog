@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hive," />
+  <meta name="keywords" content="Strutured Streaming," />
 
 
 
@@ -83,17 +83,26 @@
 
 
 
-<meta name="description" content="配置好hive-site.xml用mysql作为hive的元数据库之后，使用命令进行格式化：schematool -dbType mysql -initSchema 失败报错：12345678910111213141516171819202122Logging initialized using configuration in jar:file:/hive/apache-hive-1.1.0-">
-<meta name="keywords" content="Hive">
+<meta name="description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
+<meta name="keywords" content="Strutured Streaming">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hive使用Mysql作为元数据库报错的bug解决办法">
-<meta property="og:url" content="http://www.ihoge.cn/2018/hive.html">
+<meta property="og:title" content="Strutured Streaming(Spark 2.3)">
+<meta property="og:url" content="http://www.ihoge.cn/2018/StruturedStreaming.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
-<meta property="og:description" content="配置好hive-site.xml用mysql作为hive的元数据库之后，使用命令进行格式化：schematool -dbType mysql -initSchema 失败报错：12345678910111213141516171819202122Logging initialized using configuration in jar:file:/hive/apache-hive-1.1.0-">
-<meta property="og:updated_time" content="2018-04-06T17:31:08.000Z">
+<meta property="og:description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241491220257.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241495217055.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241175216530.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241175635666.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241453518177.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241453673148.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241457085725.jpg">
+<meta property="og:updated_time" content="2018-04-19T16:02:26.827Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hive使用Mysql作为元数据库报错的bug解决办法">
-<meta name="twitter:description" content="配置好hive-site.xml用mysql作为hive的元数据库之后，使用命令进行格式化：schematool -dbType mysql -initSchema 失败报错：12345678910111213141516171819202122Logging initialized using configuration in jar:file:/hive/apache-hive-1.1.0-">
+<meta name="twitter:title" content="Strutured Streaming(Spark 2.3)">
+<meta name="twitter:description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
+<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg">
 
 
 
@@ -123,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/hive.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/StruturedStreaming.html"/>
 
 
 
 
 
-  <title>Hive使用Mysql作为元数据库报错的bug解决办法 | Hoooge's Blog</title>
+  <title>Strutured Streaming(Spark 2.3) | Hoooge's Blog</title>
   
 
 
@@ -266,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/hive.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/StruturedStreaming.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -283,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hive使用Mysql作为元数据库报错的bug解决办法</h1>
+          <h1 class="post-title" itemprop="name headline">Strutured Streaming(Spark 2.3)</h1>
         
 
         <div class="post-meta">
@@ -295,8 +304,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-25T17:05:59+08:00">
-                2018-03-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T10:59:21+08:00">
+                2018-04-19
               </time>
             
 
@@ -318,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
                   </a>
                 </span>
 
@@ -361,14 +370,27 @@
 
       
         <a id="more"></a>
-<p>配置好hive-site.xml用mysql作为hive的元数据库之后，使用命令进行格式化：schematool -dbType mysql -initSchema 失败报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Logging initialized using configuration in jar:file:/hive/apache-hive-1.1.0-bin/lib/hive-common-1.1.0.jar!/hive-log4j.properties</span><br><span class="line">SLF4J: Class path contains multiple SLF4J bindings.</span><br><span class="line">SLF4J: Found binding in [jar:file:/hadoop-2.5.2/share/hadoop/common/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]</span><br><span class="line">SLF4J: Found binding in [jar:file:/hive/apache-hive-1.1.0-bin/lib/hive-jdbc-1.1.0-standalone.jar!/org/slf4j/impl/StaticLoggerBinder.class]</span><br><span class="line">SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.</span><br><span class="line">SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]</span><br><span class="line">[ERROR] Terminal initialization failed; falling back to unsupported</span><br><span class="line">java.lang.IncompatibleClassChangeError: Found class jline.Terminal, but interface was expected</span><br><span class="line">        at jline.TerminalFactory.create(TerminalFactory.java:101)</span><br><span class="line">        at jline.TerminalFactory.get(TerminalFactory.java:158)</span><br><span class="line">        at jline.console.ConsoleReader.&lt;init&gt;(ConsoleReader.java:229)</span><br><span class="line">        at jline.console.ConsoleReader.&lt;init&gt;(ConsoleReader.java:221)</span><br><span class="line">        at jline.console.ConsoleReader.&lt;init&gt;(ConsoleReader.java:209)</span><br><span class="line">        at org.apache.hadoop.hive.cli.CliDriver.getConsoleReader(CliDriver.java:773)</span><br><span class="line">        at org.apache.hadoop.hive.cli.CliDriver.executeDriver(CliDriver.java:715)</span><br><span class="line">        at org.apache.hadoop.hive.cli.CliDriver.run(CliDriver.java:675)</span><br><span class="line">        at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:615)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)</span><br><span class="line">        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Method.java:606)</span><br><span class="line">        at org.apache.hadoop.util.RunJar.main(RunJar.java:212)</span><br></pre></td></tr></table></figure></p>
-<p>原因是hadoop目录下存在老版本jline</p>
-<p>解决办法：</p>
+<h1 id="Spark-2-3-Strutured-Streaming"><a href="#Spark-2-3-Strutured-Streaming" class="headerlink" title="Spark 2.3 Strutured Streaming"></a>Spark 2.3 Strutured Streaming</h1><p>为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持第四种调度引擎 Kubernetes clusters（其他三种分别是自带的独立模式Standalone，YARN、Mesos）。除了这些比较具有里程碑的重要功能外，Spark  2.3 还有以下几个重要的更新：<br>引入 DataSource v2 APIs<br>矢量化(Vectorized)的 ORC reader<br>Spark History Server v2 with K-V store<br>基于 Structured Streaming 的机器学习管道API模型<br>MLlib 增强<br>Spark SQL 增强<br>这篇文章将简单地介绍上面一些高级功能和改进，更多的特性请参见 <a href="https://spark.apache.org/releases/spark-release-2-3-0.html" target="_blank" rel="noopener">Spark 2.3 release notes</a></p>
+<p>这里主要针对Spark2.3 对Structured Streaming的新特性进行描述。</p>
+<p>The simplest way to perform streaming analytics is not having to reason about streaming.</p>
+<h2 id="毫秒延迟的连续流处理"><a href="#毫秒延迟的连续流处理" class="headerlink" title="毫秒延迟的连续流处理"></a>毫秒延迟的连续流处理</h2><p>Apache Spark 2.0 的 Structured Streaming 将微批次处理(micro-batch processing)从它的高级 APIs 中解耦出去，原因有两个：首先，开发人员更容易学习这些 API，不需要考虑这些 APIs 的微批次处理情况;其次，它允许开发人员将一个流视为一个无限表，他们查询流的数据，就像他们查询静态表一样简便。<br>但是，为了给开发人员提供不同的流处理模式，社区引入了一种新的毫秒级低延迟(millisecond low-latency连续模式(continuous mode)。<br>在内部，结构化的流引擎逐步执行微批中的查询计算，执行周期由触发器间隔决定，这个延迟对大多数真实世界的流应用程序来说是可以容忍的。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg" alt=""></p>
+<h3 id="微批处理（micro-batch）"><a href="#微批处理（micro-batch）" class="headerlink" title="微批处理（micro-batch）"></a>微批处理（micro-batch）</h3><p>Structured Streaming默认使用微量批处理执行模型。这意味着Spark流引擎会定期检查流源，并对自上次批量结束后到达的新数据运行批量查询。At a high-level, it looks like this:<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241491220257.jpg" alt=""></p>
+<p>在微批处理体系结构中，驱动程序通过将记录偏移量保存到<strong>预写的日志中（write-ahead-log）</strong>来检查进度，然后用它来重新启动查询。请注意，为了获得确定性的重新执行和端对端语义，在微批处理启动之前，要在下一个微批处理中处理的范围偏移保存到日志中。因此，数据源中可用的记录可能<strong>不得不等待当前的微批次在其偏移记录之前</strong>完成，并且在下一个微批中处理它。过程看起来像这样。</p>
+<p>In this architecture, the driver checkpoints the progress by saving the records offsets to a write-ahead-log, which may be then used to restart the query. Note that the range offsets to be processed in the next micro-batch is saved to the log before the micro-batch has started in order to get deterministic re-executions and end-to-end semantics. As a result, a record that is available at the source may have to wait for the current micro-batch to be completed before its offset is logged and the next micro-batch processes it. At the record level, the timeline looks like this.<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241495217055.jpg" alt=""><br>这会导致更多的延迟时间。</p>
+<h3 id="连续处理（Continuous-Processing）"><a href="#连续处理（Continuous-Processing）" class="headerlink" title="连续处理（Continuous Processing）"></a>连续处理（Continuous Processing）</h3><p>而对于连续模式，流读取器连续拉取源数据并处理数据，而不是按指定的触发时间间隔读取一批数据。通过不断地查询源数据和处理数据，新的记录在到达时立即被处理，将等待时间缩短到毫秒，满足低延迟的应用程序的需求，具体如下面图所示：</p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241175216530.jpg" alt=""></p>
+<p>目前连续模式支持 map-like Dataset 操作，包括投影(projections)、selections以及其他 SQL 函数，但是不支持 current_timestamp(), current_date() 以及聚合函数。它还支持将 Kafka 作为数据源和数据存储目的地(sink)，也支持 console 和 memory sink。<br>现在，开发人员可以根据延迟要求选择模式连续或微量批处理，来构建大规模实时流式传输应用程序，同时这些系统还能够享受到 Structured Streaming 提供的 fault-tolerance 和 reliability guarantees 特性。<br>简单来说，Spark 2.3 中的连续模式是实验性的，它提供了以下特性：<br>端到端的毫秒级延迟<br>至少一次语义保证<br>支持 map-like 的 Dataset 操作</p>
+<h2 id="流与流进行Join"><a href="#流与流进行Join" class="headerlink" title="流与流进行Join"></a>流与流进行Join</h2><p>Spark 2.0 版本的 Structured Streaming 支持流 DataFrame/Dataset 和静态数据集之间的 join，但是 Spark 2.3 带来了期待已久的流和流的 Join 操作。支持内连接和外连接，可用在大量的实时场景中。<br>广告收益是流与流进行Join的典型用例。例如，展示广告流和广告点击流共享您希望进行流式分析的公共关键字(如adId)和相关数据，根据这些数据你可以分析出哪些广告更容易被点击。</p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241175635666.jpg" alt=""></p>
+<p>这个例子看起来很简单，但是实现流和流的Join需要解决很多技术难题，如下：</p>
 <ul>
-<li>将hive下的新版本jline的JAR包拷贝到hadoop下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /hive/lib/jline-2.12.jar ./hadoop/share/hadoop/yarn/lib：</span><br></pre></td></tr></table></figure>
-</li>
+<li><strong>缓存处理延迟数据：</strong>需要缓存延迟的数据，直到从其他流中找到匹配的事件;</li>
+<li><strong>先置缓冲区大小：</strong>限制流式连接缓冲区大小的唯一方法是将延迟超过某个阈值的数据丢弃。此最大延迟阈值应由用户根据业务需求和系统资源限制之间的平衡进行配置。</li>
+<li><strong>明确定义的语义</strong>：在静态连接和流式连接之间保持一致的SQL连接语义，具有或不具有上述阈值。</li>
 </ul>
-<p>重新输入schematool -dbType mysql -initSchema ，格式化成功。<br>这是进入mysql的hive数据库中即可看到hive的元数据结构信息</p>
+<p>幸运的事Spark2.3解决了所有这些问题，因此我们使用SQL连接的清晰语义来表达计算，并控制相关事件之间的延迟容忍。<br>假设有两个不同的kafka流，我们要通过两个流中的共有的<code>adID</code>属性进行连接。让我们来看看代码是怎么实现的：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241453518177.jpg" alt=""></p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241453673148.jpg" alt=""></p>
+<p>与所有的结构化数据流的查询相同，代码是完全一样的。将kafka流数据当作静态的Dataframe一样去定义。当执行此查询时，结构化流式处理引擎会根据需要将点击和展示作为流状态进行缓冲。对于特定广告，只要接收到两个相关事件（即收到第二个事件后），即会生成联合输出。随着数据到达，连接的输出将逐步生成并写入查询接收器（例如，另一个Kafka）。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241457085725.jpg" alt=""></p>
 
       
     </div>
@@ -386,7 +408,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hive/" rel="tag"><i class="fa fa-tag"></i> Hive</a>
+            <a href="/tags/Strutured-Streaming/" rel="tag"><i class="fa fa-tag"></i> Strutured Streaming</a>
           
         </div>
       
@@ -399,8 +421,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/监督学习.html" rel="next" title="监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）">
-                <i class="fa fa-chevron-left"></i> 监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）
+              <a href="/2018/strame.html" rel="next" title="流式处理框架 & Spark Streaming">
+                <i class="fa fa-chevron-left"></i> 流式处理框架 & Spark Streaming
               </a>
             
           </div>
@@ -408,10 +430,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/hivebug1.html" rel="prev" title="Hive提交MapReduce任务失败The auxService:mapreduce_shuffle does not exist">
-                Hive提交MapReduce任务失败The auxService:mapreduce_shuffle does not exist <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -474,8 +492,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -564,6 +591,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-2-3-Strutured-Streaming"><span class="nav-number">1.</span> <span class="nav-text">Spark 2.3 Strutured Streaming</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#毫秒延迟的连续流处理"><span class="nav-number">1.1.</span> <span class="nav-text">毫秒延迟的连续流处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微批处理（micro-batch）"><span class="nav-number">1.1.1.</span> <span class="nav-text">微批处理（micro-batch）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续处理（Continuous-Processing）"><span class="nav-number">1.1.2.</span> <span class="nav-text">连续处理（Continuous Processing）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流与流进行Join"><span class="nav-number">1.2.</span> <span class="nav-text">流与流进行Join</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
