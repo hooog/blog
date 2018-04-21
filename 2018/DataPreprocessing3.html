@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="pyspark," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="数据预处理33.1 描述性统计12345678910111213141516171819import pyspark.sql.types as typfields = [    (&apos;custID&apos;, typ.IntegerType()),    (&apos;gender&apos;, typ.IntegerType()),    (&apos;state&apos;, typ.IntegerType()),    (&apos;cardhol">
+<meta name="keywords" content="pyspark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark数据预处理3">
+<meta property="og:url" content="http://www.ihoge.cn/2018/DataPreprocessing3.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="数据预处理33.1 描述性统计12345678910111213141516171819import pyspark.sql.types as typfields = [    (&apos;custID&apos;, typ.IntegerType()),    (&apos;gender&apos;, typ.IntegerType()),    (&apos;state&apos;, typ.IntegerType()),    (&apos;cardhol">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fqkvrtx0f5j31000g2q41.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fqkvm4tn42j31kw0szk4z.jpg">
+<meta property="og:updated_time" content="2018-04-21T19:35:33.491Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spark数据预处理3">
+<meta name="twitter:description" content="数据预处理33.1 描述性统计12345678910111213141516171819import pyspark.sql.types as typfields = [    (&apos;custID&apos;, typ.IntegerType()),    (&apos;gender&apos;, typ.IntegerType()),    (&apos;state&apos;, typ.IntegerType()),    (&apos;cardhol">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fqkvrtx0f5j31000g2q41.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/DataPreprocessing3.html"/>
+
+
+
+
+
+  <title>spark数据预处理3 | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/DataPreprocessing3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spark数据预处理3</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-22T03:59:31+08:00">
+                2018-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h1 id="数据预处理3"><a href="#数据预处理3" class="headerlink" title="数据预处理3"></a>数据预处理3</h1><h2 id="3-1-描述性统计"><a href="#3-1-描述性统计" class="headerlink" title="3.1 描述性统计"></a>3.1 描述性统计</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyspark.sql.types <span class="keyword">as</span> typ</span><br><span class="line"></span><br><span class="line">fields = [</span><br><span class="line">    (<span class="string">'custID'</span>, typ.IntegerType()),</span><br><span class="line">    (<span class="string">'gender'</span>, typ.IntegerType()),</span><br><span class="line">    (<span class="string">'state'</span>, typ.IntegerType()),</span><br><span class="line">    (<span class="string">'cardholder'</span>, typ.IntegerType()),</span><br><span class="line">    (<span class="string">'balance'</span>, typ.IntegerType()),</span><br><span class="line">    (<span class="string">'numTrans'</span>, typ.IntegerType()),</span><br><span class="line">    (<span class="string">'numIntTrans'</span>, typ.IntegerType()),</span><br><span class="line">    (<span class="string">'creditLine'</span>, typ.IntegerType()),</span><br><span class="line">    (<span class="string">'fraudRisk'</span>, typ.IntegerType()),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">schema = typ.StructType([</span><br><span class="line">    typ.StructField(e[<span class="number">0</span>], e[<span class="number">1</span>], <span class="keyword">True</span>) <span class="keyword">for</span> e <span class="keyword">in</span> fields</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">fraud_df = spark.read.csv(<span class="string">"/pydata/ccFraud.gz"</span>, header=<span class="string">'true'</span>, schema = schema, sep=<span class="string">','</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fraud_df.printSchema()</span><br></pre></td></tr></table></figure>
+<pre><code>root
+ |-- custID: integer (nullable = true)
+ |-- gender: integer (nullable = true)
+ |-- state: integer (nullable = true)
+ |-- cardholder: integer (nullable = true)
+ |-- balance: integer (nullable = true)
+ |-- numTrans: integer (nullable = true)
+ |-- numIntTrans: integer (nullable = true)
+ |-- creditLine: integer (nullable = true)
+ |-- fraudRisk: integer (nullable = true)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fraud_df.groupBy(<span class="string">'gender'</span>).count().show()</span><br></pre></td></tr></table></figure>
+<pre><code>+------+-------+
+|gender|  count|
++------+-------+
+|     1|6178231|
+|     2|3821769|
++------+-------+
+</code></pre><p>⚠️ 这里男女比例失衡，在实际生产场景中应该重视这个问题</p>
+<h3 id="descrive"><a href="#descrive" class="headerlink" title=".descrive()"></a>.descrive()</h3><p>这里可以选定某些列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">numerical = [<span class="string">'balance'</span>, <span class="string">'numTrans'</span>, <span class="string">'numIntTrans'</span>]</span><br><span class="line">desc = fraud_df.describe(numerical)</span><br><span class="line">desc.show()</span><br></pre></td></tr></table></figure>
+<pre><code>+-------+-----------------+------------------+-----------------+
+|summary|          balance|          numTrans|      numIntTrans|
++-------+-----------------+------------------+-----------------+
+|  count|         10000000|          10000000|         10000000|
+|   mean|     4109.9199193|        28.9351871|        4.0471899|
+| stddev|3996.847309737077|26.553781024522852|8.602970115863767|
+|    min|                0|                 0|                0|
+|    max|            41485|               100|               60|
++-------+-----------------+------------------+-----------------+
+</code></pre><ul>
+<li>所有特征成正态分布；最大值是最小值的多倍</li>
+<li>变异系数（均值与标准差之比）非常高（接近或大于1），意味着这是一个广泛的观测数据。</li>
+</ul>
+<p>如何检查偏度？（这里对“平衡”特征进行检查）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fraud_df.agg(&#123;<span class="string">'balance'</span>:<span class="string">'skewness'</span>&#125;).show()</span><br></pre></td></tr></table></figure>
+<pre><code>+------------------+
+| skewness(balance)|
++------------------+
+|1.1818315552995033|
++------------------+
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fraud_df.agg(&#123;<span class="string">'balance'</span>:<span class="string">'stddev'</span>&#125;).show()</span><br></pre></td></tr></table></figure>
+<pre><code>+-----------------+
+|  stddev(balance)|
++-----------------+
+|3996.847309737077|
++-----------------+
+</code></pre><p>列表中的聚合函数包括：</p>
+<ul>
+<li>avg()</li>
+<li>count()</li>
+<li>countDistinct()</li>
+<li>first()</li>
+<li>kurtosis()</li>
+<li>max()</li>
+<li>mean()</li>
+<li>skewness()</li>
+<li>stddev()</li>
+<li>stddev_pop()</li>
+<li>stddev_samp()</li>
+<li>sum()</li>
+<li>sunDistinct()</li>
+<li>var_pop()</li>
+<li>var_samp()</li>
+<li>variance()</li>
+</ul>
+<h2 id="3-2-相关性"><a href="#3-2-相关性" class="headerlink" title="3.2 相关性"></a>3.2 相关性</h2><p>模型应该只包括哪些与目标高度相关的特征，因此检查特征的相关性是非常重要的。其次之间的高度相关特征（即<strong>共线（collinear）性</strong>），可能会导致模型的不可预知性为或者可能进行不必要的复杂化。</p>
+<p>这里的<strong>.corr(…)</strong>方法支持Pearson（皮尔森）相关系数，并且只能计算两两相关性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fraud_df.corr(<span class="string">'balance'</span>, <span class="string">'numTrans'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>0.00044523140172659576
+</code></pre><p>为了创建相关矩阵，可以使用以下脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">numerical = [<span class="string">'balance'</span>, <span class="string">'numTrans'</span>, <span class="string">'numIntTrans'</span>]</span><br><span class="line"></span><br><span class="line">corr=[]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(numerical)):</span><br><span class="line">    temp = [<span class="keyword">None</span>] * i</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i, len(numerical)):</span><br><span class="line">        temp.append(fraud_df.corr(numerical[i], numerical[j]))</span><br><span class="line">    corr.append(temp)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 这里令temp = [None] * i是为了填充左下角矩阵</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">corrpd = pd.DataFrame(corr)</span><br><span class="line">corrpd.columns = corrpd.index = numerical</span><br><span class="line">corrpd</span><br></pre></td></tr></table></figure>
+<div><br><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }<br><br>    .dataframe tbody tr th {<br>        vertical-align: top;<br>    }<br><br>    .dataframe thead th {<br>        text-align: right;<br>    }<br></style><br><table border="1" class="dataframe"><br>  <thead><br>    <tr style="text-align: right;"><br>      <th></th><br>      <th>balance</th><br>      <th>numTrans</th><br>      <th>numIntTrans</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <th>balance</th><br>      <td>1.0</td><br>      <td>0.000445</td><br>      <td>0.000271</td><br>    </tr><br>    <tr><br>      <th>numTrans</th><br>      <td>NaN</td><br>      <td>1.000000</td><br>      <td>-0.000281</td><br>    </tr><br>    <tr><br>      <th>numIntTrans</th><br>      <td>NaN</td><br>      <td>NaN</td><br>      <td>1.000000</td><br>    </tr><br>  </tbody><br></table><br></div>
+
+
+
+<h2 id="3-3-可视化"><a href="#3-3-可视化" class="headerlink" title="3.3 可视化"></a>3.3 可视化</h2><h3 id="3-3-1-直方图"><a href="#3-3-1-直方图" class="headerlink" title="3.3.1 直方图"></a>3.3.1 直方图</h3><p>当数据量非常大时，需要先对数据进行聚合:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hists = fraud_df.select(<span class="string">'balance'</span>).rdd.flatMap(<span class="keyword">lambda</span> x: x).histogram(<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">'bins'</span>:hists[<span class="number">0</span>][:<span class="number">-1</span>],</span><br><span class="line">    <span class="string">'freq'</span>:hists[<span class="number">1</span>]</span><br><span class="line">&#125;</span><br><span class="line">plt.bar(data[<span class="string">'bins'</span>], data[<span class="string">'freq'</span>], width=<span class="number">2000</span>)</span><br><span class="line">plt.title(<span class="string">'Histogram of \'balance\''</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fqkvrtx0f5j31000g2q41.jpg" alt=""></p>
+<h3 id="3-3-2-散点图"><a href="#3-3-2-散点图" class="headerlink" title="3.3.2 散点图"></a>3.3.2 散点图</h3><p>因为Pyspark不支持在服务器端的任何可视化模块，并且视图同时绘制数十亿的观测数据是非常不切实际的。在这个例子中，把欺诈数据集作为一个阶层抽取0.02%大约2000个观测数据。</p>
+<p>使用<strong>df.sampleBy(…)</strong>方法随机抽取样本集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">numerical = [<span class="string">'balance'</span>, <span class="string">'numTrans'</span>, <span class="string">'numIntTrans'</span>]</span><br><span class="line"></span><br><span class="line">data_sample = fraud_df.sampleBy(<span class="string">'gender'</span>, &#123;<span class="number">1</span>: <span class="number">0.001</span>, <span class="number">2</span>: <span class="number">0.001</span>&#125;).select(numerical)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_sample.describe().show()</span><br></pre></td></tr></table></figure>
+<pre><code>+-------+------------------+------------------+-----------------+
+|summary|           balance|          numTrans|      numIntTrans|
++-------+------------------+------------------+-----------------+
+|  count|              2032|              2032|             2032|
+|   mean| 3962.410433070866|28.546751968503937|3.989665354330709|
+| stddev|3876.8504670568145|25.611704520599815|8.235480127222067|
+|    min|                 0|                 0|                0|
+|    max|             28000|               100|               60|
++-------+------------------+------------------+-----------------+
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = data_sample.rdd.map(<span class="keyword">lambda</span> x: [x[<span class="number">0</span>],x[<span class="number">1</span>],x[<span class="number">2</span>]]).collect()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> Scatter3D</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="comment"># data = [d1,d3,d2]</span></span><br><span class="line">range_color = [</span><br><span class="line">    <span class="string">'#313695'</span>, <span class="string">'#4575b4'</span>, <span class="string">'#74add1'</span>, <span class="string">'#abd9e9'</span>, <span class="string">'#e0f3f8'</span>, <span class="string">'#ffffbf'</span>,</span><br><span class="line">    <span class="string">'#fee090'</span>, <span class="string">'#fdae61'</span>, <span class="string">'#f46d43'</span>, <span class="string">'#d73027'</span>, <span class="string">'#a50026'</span>]</span><br><span class="line">scatter3D = Scatter3D(<span class="string">"3D 散点图示例"</span>, width=<span class="number">1200</span>, height=<span class="number">800</span>)</span><br><span class="line">scatter3D.add(<span class="string">"3D"</span>, </span><br><span class="line">              data, is_visualmap=<span class="keyword">True</span>, </span><br><span class="line">              visual_range_color=range_color, </span><br><span class="line">              grid3d_opacity=<span class="number">0.5</span>,</span><br><span class="line">              is_grid3d_rotate = <span class="keyword">True</span>,</span><br><span class="line">              xaxis3d_name=<span class="string">'balance'</span>,</span><br><span class="line">              yaxis3d_name=<span class="string">'numTrans'</span>,</span><br><span class="line">              zaxis3d_name=<span class="string">'numIntTrans'</span></span><br><span class="line">             )</span><br><span class="line">scatter3D.render()</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fqkvm4tn42j31kw0szk4z.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pyspark/" rel="tag"><i class="fa fa-tag"></i> pyspark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/DataPreprocessing2.html" rel="next" title="spark数据预处理2">
+                <i class="fa fa-chevron-left"></i> spark数据预处理2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据预处理3"><span class="nav-number">1.</span> <span class="nav-text">数据预处理3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-描述性统计"><span class="nav-number">1.1.</span> <span class="nav-text">3.1 描述性统计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#descrive"><span class="nav-number">1.1.1.</span> <span class="nav-text">.descrive()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-相关性"><span class="nav-number">1.2.</span> <span class="nav-text">3.2 相关性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-可视化"><span class="nav-number">1.3.</span> <span class="nav-text">3.3 可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-直方图"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.3.1 直方图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-散点图"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.3.2 散点图</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
