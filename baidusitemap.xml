@@ -4,19 +4,17 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/DataPreprocessing3.html</loc>
-    <lastmod>2018-04-21T19:35:33.491Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/JavaMysql.html</loc>
+    <lastmod>2018-04-22T14:59:07.261Z</lastmod>
     <data>
         <display>
-        <title>spark数据预处理3</title>
-        <pubTime>2018-04-21T19:59:31.000Z</pubTime>
+        <title>JavaMysql</title>
+        <pubTime>2018-03-15T17:05:59.000Z</pubTime>
         
-        <tag>pyspark</tag>
-         
          
            
              
-              <breadCrumb title="spark" url="http://www.ihoge.cn/categories/spark/"/>
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
           
         </display>
     </data>
@@ -24,19 +22,17 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/DataPreprocessing1.html</loc>
-    <lastmod>2018-04-21T19:35:25.770Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1+%E5%86%85%E5%AD%98%E5%8E%9F%E7%90%86+%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%961.html</loc>
+    <lastmod>2018-04-22T14:58:55.758Z</lastmod>
     <data>
         <display>
-        <title>spark数据预处理1</title>
-        <pubTime>2018-04-21T19:59:00.000Z</pubTime>
+        <title>Java面向对象编程思想+Java内存原理+Java读写优化</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
-        <tag>pyspark</tag>
-         
          
            
              
-              <breadCrumb title="spark" url="http://www.ihoge.cn/categories/spark/"/>
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
           
         </display>
     </data>
@@ -44,19 +40,17 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/DataPreprocessing2.html</loc>
-    <lastmod>2018-04-21T19:34:38.318Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/Recursive.html</loc>
+    <lastmod>2018-04-22T14:58:45.717Z</lastmod>
     <data>
         <display>
-        <title>spark数据预处理2</title>
-        <pubTime>2018-04-21T19:59:21.000Z</pubTime>
+        <title>递归、尾递归、循环的比较及Python尾递归的优化</title>
+        <pubTime>2018-04-02T19:05:59.000Z</pubTime>
         
-        <tag>pyspark</tag>
-         
          
            
              
-              <breadCrumb title="spark" url="http://www.ihoge.cn/categories/spark/"/>
+              <breadCrumb title="Python" url="http://www.ihoge.cn/categories/Python/"/>
           
         </display>
     </data>
@@ -64,19 +58,17 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/strame.html</loc>
-    <lastmod>2018-04-19T16:17:01.115Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/Pyhive.html</loc>
+    <lastmod>2018-04-22T14:58:33.772Z</lastmod>
     <data>
         <display>
-        <title>流式处理框架 & Spark Streaming & Flume & Kafka</title>
-        <pubTime>2018-04-19T02:59:21.000Z</pubTime>
+        <title>利用Pyhive实现Python连接Hive数据仓库</title>
+        <pubTime>2018-03-21T02:05:59.000Z</pubTime>
         
-        <tag>spark</tag>
-         
          
            
              
-              <breadCrumb title="spark" url="http://www.ihoge.cn/categories/spark/"/>
+              <breadCrumb title="Python" url="http://www.ihoge.cn/categories/Python/"/>
           
         </display>
     </data>
@@ -84,19 +76,17 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/StruturedStreaming.html</loc>
-    <lastmod>2018-04-19T16:02:26.827Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/githubhexocodingbaidu.html</loc>
+    <lastmod>2018-04-22T14:58:20.557Z</lastmod>
     <data>
         <display>
-        <title>Strutured Streaming(Spark 2.3)</title>
-        <pubTime>2018-04-19T02:59:21.000Z</pubTime>
+        <title>使用Github和Coding共同托管hexo博客解决无法被百度收录的问题</title>
+        <pubTime>2018-04-05T05:05:59.000Z</pubTime>
         
-        <tag>Strutured Streaming</tag>
-         
          
            
              
-              <breadCrumb title="spark" url="http://www.ihoge.cn/categories/spark/"/>
+              <breadCrumb title="Hexo" url="http://www.ihoge.cn/categories/Hexo/"/>
           
         </display>
     </data>
@@ -104,40 +94,131 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/IntroductionToSpark.html</loc>
-    <lastmod>2018-04-18T05:30:40.100Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/scala1.html</loc>
+    <lastmod>2018-04-22T14:58:09.541Z</lastmod>
     <data>
         <display>
-        <title>Spark的基本架构</title>
-        <pubTime>2018-04-18T02:59:21.000Z</pubTime>
+        <title>Scala数据类型及基础语法</title>
+        <pubTime>2018-03-31T16:28:59.000Z</pubTime>
         
-        <tag>spark</tag>
+        <tag>scala</tag>
          
          
            
              
-              <breadCrumb title="spark" url="http://www.ihoge.cn/categories/spark/"/>
+              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
           
         </display>
     </data>
     </url>
 
     
-    
   <url>
-    <loc>http://www.ihoge.cn/2018/hbase.html</loc>
-    <lastmod>2018-04-16T14:16:38.799Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/hivewebhui.html</loc>
+    <lastmod>2018-04-22T14:57:54.540Z</lastmod>
     <data>
         <display>
-        <title>分布式数据库HBase原理</title>
-        <pubTime>2018-04-16T05:59:21.000Z</pubTime>
+        <title>Hive-2.2.0启动webui端口</title>
+        <pubTime>2018-03-25T16:28:59.000Z</pubTime>
+        
+        <tag>hive</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/JavaExtends.html</loc>
+    <lastmod>2018-04-22T14:57:48.644Z</lastmod>
+    <data>
+        <display>
+        <title>Java的继承、多态、抽象</title>
+        <pubTime>2018-03-16T02:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%9F%BA%E4%BA%8E%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6%E7%A0%94%E7%A9%B6%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%BB%BA%E6%A8%A1%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%E5%8F%8A%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96.html</loc>
+    <lastmod>2018-04-22T14:57:43.172Z</lastmod>
+    <data>
+        <display>
+        <title>基于计量经济学研究线性回归建模的一般步骤及模型优化</title>
+        <pubTime>2018-03-31T09:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/githubhexos.html</loc>
+    <lastmod>2018-04-22T14:57:33.172Z</lastmod>
+    <data>
+        <display>
+        <title>github 创建分支位作为云端备份解决hexo博客多PC间同步的问题</title>
+        <pubTime>2018-04-05T09:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://www.ihoge.cn/categories/Hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.html</loc>
+    <lastmod>2018-04-22T14:57:19.281Z</lastmod>
+    <data>
+        <display>
+        <title>Hadoop分布式集群架构实验手册</title>
+        <pubTime>2018-03-15T03:59:21.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/Hbaseproblom.html</loc>
+    <lastmod>2018-04-22T14:57:07.116Z</lastmod>
+    <data>
+        <display>
+        <title>Hbase启动后进程丢失的原因分析</title>
+        <pubTime>2018-03-21T03:59:21.000Z</pubTime>
         
         <tag>hbase</tag>
          
          
            
              
-              <breadCrumb title="hadoop" url="http://www.ihoge.cn/categories/hadoop/"/>
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
           
         </display>
     </data>
@@ -145,14 +226,130 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/Databrickes.html</loc>
-    <lastmod>2018-04-15T20:06:17.245Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/hive.html</loc>
+    <lastmod>2018-04-22T14:56:49.362Z</lastmod>
     <data>
         <display>
-        <title>免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould</title>
-        <pubTime>2018-04-15T19:59:21.000Z</pubTime>
+        <title>Hive使用Mysql作为元数据库报错的bug解决办法</title>
+        <pubTime>2018-03-25T09:05:59.000Z</pubTime>
         
-        <tag>Databrickes</tag>
+        <tag>hive</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/pymysql.html</loc>
+    <lastmod>2018-04-22T14:56:26.612Z</lastmod>
+    <data>
+        <display>
+        <title>利用Pyecharts连接Mysql并对数据进行可视化</title>
+        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
+        
+        <tag>pyecharts</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://www.ihoge.cn/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/hexo-github.html</loc>
+    <lastmod>2018-04-22T14:56:20.212Z</lastmod>
+    <data>
+        <display>
+        <title>hexo+github+mac+coding搭建hexo-next主题个人博客详解</title>
+        <pubTime>2018-03-13T05:43:53.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://www.ihoge.cn/categories/Hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/DataMining.html</loc>
+    <lastmod>2018-04-22T14:55:57.331Z</lastmod>
+    <data>
+        <display>
+        <title>数据挖掘的9大成熟技术和商业应用</title>
+        <pubTime>2018-04-10T17:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/HiveSpark.html</loc>
+    <lastmod>2018-04-22T14:55:36.971Z</lastmod>
+    <data>
+        <display>
+        <title>Hive集成Spark+Sql</title>
+        <pubTime>2018-04-13T03:59:21.000Z</pubTime>
+        
+        <tag>environment</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/anacondaPyspark.html</loc>
+    <lastmod>2018-04-22T14:55:33.612Z</lastmod>
+    <data>
+        <display>
+        <title>使用aconda3-5.1.0（Python3.6.4） 搭建pyspark远程部署</title>
+        <pubTime>2018-04-13T17:59:21.000Z</pubTime>
+        
+        <tag>environment</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/SparkSQl.html</loc>
+    <lastmod>2018-04-22T14:55:25.956Z</lastmod>
+    <data>
+        <display>
+        <title>SparkSQL DataFrame基础篇</title>
+        <pubTime>2018-04-14T05:59:21.000Z</pubTime>
+        
+        <tag>sparksql</tag>
          
          
            
@@ -166,12 +363,14 @@
     
   <url>
     <loc>http://www.ihoge.cn/2018/Spark%20Scheduler.html</loc>
-    <lastmod>2018-04-15T10:15:35.501Z</lastmod>
+    <lastmod>2018-04-22T14:55:22.036Z</lastmod>
     <data>
         <display>
         <title>Spark运行原理剖析</title>
         <pubTime>2018-04-15T09:59:21.000Z</pubTime>
         
+        <tag>spark</tag>
+         
          
            
              
@@ -184,7 +383,7 @@
     
   <url>
     <loc>http://www.ihoge.cn/2018/pyspark.html</loc>
-    <lastmod>2018-04-15T10:15:07.833Z</lastmod>
+    <lastmod>2018-04-22T14:55:20.485Z</lastmod>
     <data>
         <display>
         <title>弹性式分布数据集RDD——Pyspark基础 （二）</title>
@@ -203,19 +402,159 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/anacondaPyspark.html</loc>
-    <lastmod>2018-04-14T10:47:55.079Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/Databrickes.html</loc>
+    <lastmod>2018-04-22T14:55:19.382Z</lastmod>
     <data>
         <display>
-        <title>使用aconda3-5.1.0（Python3.6.4） 搭建pyspark远程部署</title>
-        <pubTime>2018-04-13T17:59:21.000Z</pubTime>
+        <title>免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould</title>
+        <pubTime>2018-04-15T19:59:21.000Z</pubTime>
         
-        <tag>Environment</tag>
+        <tag>databrickes</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/hbase.html</loc>
+    <lastmod>2018-04-22T14:55:17.503Z</lastmod>
+    <data>
+        <display>
+        <title>分布式数据库HBase原理</title>
+        <pubTime>2018-04-16T05:59:21.000Z</pubTime>
+        
+        <tag>hbase</tag>
          
          
            
              
               <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/IntroductionToSpark.html</loc>
+    <lastmod>2018-04-22T14:55:15.713Z</lastmod>
+    <data>
+        <display>
+        <title>Spark的基本架构</title>
+        <pubTime>2018-04-18T02:59:21.000Z</pubTime>
+        
+        <tag>spark</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/strame.html</loc>
+    <lastmod>2018-04-22T14:55:14.911Z</lastmod>
+    <data>
+        <display>
+        <title>流式处理框架 & Spark Streaming & Flume & Kafka</title>
+        <pubTime>2018-04-19T02:59:21.000Z</pubTime>
+        
+        <tag>spark</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/StruturedStreaming.html</loc>
+    <lastmod>2018-04-22T14:55:14.155Z</lastmod>
+    <data>
+        <display>
+        <title>Strutured Streaming(Spark 2.3)</title>
+        <pubTime>2018-04-19T02:59:21.000Z</pubTime>
+        
+        <tag>strutured Streaming</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/DataPreprocessing1.html</loc>
+    <lastmod>2018-04-22T14:55:13.475Z</lastmod>
+    <data>
+        <display>
+        <title>spark数据预处理1</title>
+        <pubTime>2018-04-21T19:59:00.000Z</pubTime>
+        
+        <tag>pyspark</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/DataPreprocessing3.html</loc>
+    <lastmod>2018-04-22T14:55:12.786Z</lastmod>
+    <data>
+        <display>
+        <title>spark数据预处理3</title>
+        <pubTime>2018-04-21T19:59:31.000Z</pubTime>
+        
+        <tag>pyspark</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/DataPreprocessing2.html</loc>
+    <lastmod>2018-04-22T14:55:12.053Z</lastmod>
+    <data>
+        <display>
+        <title>spark数据预处理2</title>
+        <pubTime>2018-04-21T19:59:21.000Z</pubTime>
+        
+        <tag>pyspark</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
           
         </display>
     </data>
@@ -224,13 +563,13 @@
     
   <url>
     <loc>http://www.ihoge.cn/2018/Sparksql2.html</loc>
-    <lastmod>2018-04-14T10:38:20.169Z</lastmod>
+    <lastmod>2018-04-22T14:54:42.223Z</lastmod>
     <data>
         <display>
         <title>SparkSQL DataFrame进阶篇</title>
         <pubTime>2018-04-14T09:59:21.000Z</pubTime>
         
-        <tag>Sparksql</tag>
+        <tag>sparksql</tag>
          
          
            
@@ -242,65 +581,6 @@
     </url>
 
     
-  <url>
-    <loc>http://www.ihoge.cn/2018/SparkSQl.html</loc>
-    <lastmod>2018-04-14T10:31:23.224Z</lastmod>
-    <data>
-        <display>
-        <title>SparkSQL DataFrame基础篇</title>
-        <pubTime>2018-04-14T05:59:21.000Z</pubTime>
-        
-        <tag>Sparksql</tag>
-         
-         
-           
-             
-              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/HiveSpark.html</loc>
-    <lastmod>2018-04-13T08:18:16.776Z</lastmod>
-    <data>
-        <display>
-        <title>Hive集成Spark+Sql</title>
-        <pubTime>2018-04-13T03:59:21.000Z</pubTime>
-        
-        <tag>Environment</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/DataMining.html</loc>
-    <lastmod>2018-04-10T17:39:15.681Z</lastmod>
-    <data>
-        <display>
-        <title>数据挖掘的9大成熟技术和商业应用</title>
-        <pubTime>2018-04-10T17:05:59.000Z</pubTime>
-        
-        <tag>数据挖掘</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://www.ihoge.cn/2018/sklearn-ensemble.html</loc>
@@ -464,186 +744,6 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/hadoop.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？</title>
-        <pubTime>2018-03-26T16:28:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>scikit-learn逻辑回归</title>
-        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/githubhexocodingbaidu.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>使用Github和Coding共同托管hexo博客解决无法被百度收录的问题</title>
-        <pubTime>2018-04-05T05:05:59.000Z</pubTime>
-        
-        <tag>Coding</tag>
-         
-        <tag>Github</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hexo" url="http://www.ihoge.cn/categories/Hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/MLlib%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>MLlib基本数据类型</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/githubhexos.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>github 创建分支位作为云端备份解决hexo博客多PC间同步的问题</title>
-        <pubTime>2018-04-05T09:05:59.000Z</pubTime>
-        
-        <tag>Github</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hexo" url="http://www.ihoge.cn/categories/Hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/Hbaseproblom.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hbase启动后进程丢失的原因分析</title>
-        <pubTime>2018-03-21T03:59:21.000Z</pubTime>
-        
-        <tag>Hbase</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/hive.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hive使用Mysql作为元数据库报错的bug解决办法</title>
-        <pubTime>2018-03-25T09:05:59.000Z</pubTime>
-        
-        <tag>Hive</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/hivebug1.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hive提交MapReduce任务失败The auxService:mapreduce_shuffle does not exist</title>
-        <pubTime>2018-03-25T09:05:59.000Z</pubTime>
-        
-        <tag>Hive</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/hivewebhui.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hive-2.2.0启动webui端口</title>
-        <pubTime>2018-03-25T16:28:59.000Z</pubTime>
-        
-        <tag>Hive</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
@@ -664,181 +764,17 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/hexo-github.html</loc>
+    <loc>http://www.ihoge.cn/2018/hadoop.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>hexo+github+mac+coding搭建hexo-next主题个人博客详解</title>
-        <pubTime>2018-03-13T05:43:53.000Z</pubTime>
+        <title>如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？</title>
+        <pubTime>2018-03-26T16:28:59.000Z</pubTime>
         
-        <tag>Coding</tag>
-         
-        <tag>Github</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hexo" url="http://www.ihoge.cn/categories/Hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/pymysql.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>利用Pyecharts连接Mysql并对数据进行可视化</title>
-        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
-        
-        <tag>Pyecharts</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="http://www.ihoge.cn/categories/Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/mllib%E5%88%86%E7%B1%BB%E4%B8%8E%E5%9B%9E%E5%BD%92.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>MLlib分类与回归</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/Pyhive.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>利用Pyhive实现Python连接Hive数据仓库</title>
-        <pubTime>2018-03-21T02:05:59.000Z</pubTime>
-        
-        <tag>Hive</tag>
-         
-        <tag>Pyhive</tag>
-         
          
            
              
               <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
-        <pubTime>2018-03-17T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/scala1.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Scala数据类型及基础语法</title>
-        <pubTime>2018-03-31T16:28:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Scala" url="http://www.ihoge.cn/categories/Scala/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/Recursive.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>递归、尾递归、循环的比较及Python尾递归的优化</title>
-        <pubTime>2018-04-02T19:05:59.000Z</pubTime>
-        
-        <tag>递归</tag>
-         
-         
-           
-             
-              <breadCrumb title="Python" url="http://www.ihoge.cn/categories/Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/JavaExtends.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Java的继承、多态、抽象</title>
-        <pubTime>2018-03-16T02:05:59.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/sklearn1.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>支持向量机、学习曲线、查准率和召回率</title>
-        <pubTime>2018-03-28T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
           
         </display>
     </data>
@@ -857,88 +793,6 @@
            
              
               <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%88%A9%E7%94%A8%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E6%B5%81.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>MLlib利用逻辑回归构建机器学习工作流</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%9F%BA%E6%9C%AC%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>MLlib基本统计工具</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%9F%BA%E4%BA%8E%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6%E7%A0%94%E7%A9%B6%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%BB%BA%E6%A8%A1%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%E5%8F%8A%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>基于计量经济学研究线性回归建模的一般步骤及模型优化</title>
-        <pubTime>2018-03-31T09:05:59.000Z</pubTime>
-        
-        <tag>Econometrics</tag>
-         
-        <tag>计量经济</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>MLlib朴素叶贝斯</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
           
         </display>
     </data>
@@ -966,44 +820,6 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>MLlib推荐算法</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/JavaMysql.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>JavaMysql</title>
-        <pubTime>2018-03-15T17:05:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
@@ -1024,59 +840,19 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/%E9%99%8D%E7%BB%B4%E6%93%8D%E4%BD%9C.html</loc>
+    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>MLlib降维操作</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
+        <pubTime>2018-03-17T09:05:59.000Z</pubTime>
         
-        <tag>MLlib</tag>
+        <tag>scikit-learn</tag>
          
          
            
              
               <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>MLlib聚类算法</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hadoop分布式集群架构实验手册</title>
-        <pubTime>2018-03-15T03:59:21.000Z</pubTime>
-        
-        <tag>Environment</tag>
-         
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
           
         </display>
     </data>
@@ -1104,19 +880,39 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1+%E5%86%85%E5%AD%98%E5%8E%9F%E7%90%86+%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%961.html</loc>
+    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>Java面向对象编程思想+Java内存原理+Java读写优化</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        <title>scikit-learn逻辑回归</title>
+        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
         
-        <tag>Java</tag>
+        <tag>scikit-learn</tag>
          
          
            
              
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/sklearn1.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>支持向量机、学习曲线、查准率和召回率</title>
+        <pubTime>2018-03-28T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
           
         </display>
     </data>

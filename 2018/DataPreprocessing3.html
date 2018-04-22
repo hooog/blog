@@ -92,7 +92,7 @@
 <meta property="og:description" content="数据预处理33.1 描述性统计12345678910111213141516171819import pyspark.sql.types as typfields = [    (&apos;custID&apos;, typ.IntegerType()),    (&apos;gender&apos;, typ.IntegerType()),    (&apos;state&apos;, typ.IntegerType()),    (&apos;cardhol">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fqkvrtx0f5j31000g2q41.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fqkvm4tn42j31kw0szk4z.jpg">
-<meta property="og:updated_time" content="2018-04-21T19:35:33.491Z">
+<meta property="og:updated_time" content="2018-04-22T14:55:12.786Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark数据预处理3">
 <meta name="twitter:description" content="数据预处理33.1 描述性统计12345678910111213141516171819import pyspark.sql.types as typfields = [    (&apos;custID&apos;, typ.IntegerType()),    (&apos;gender&apos;, typ.IntegerType()),    (&apos;state&apos;, typ.IntegerType()),    (&apos;cardhol">
@@ -321,8 +321,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
                   </a>
                 </span>
 
@@ -384,7 +384,7 @@
 |     2|3821769|
 +------+-------+
 </code></pre><p>⚠️ 这里男女比例失衡，在实际生产场景中应该重视这个问题</p>
-<h3 id="descrive"><a href="#descrive" class="headerlink" title=".descrive()"></a>.descrive()</h3><p>这里可以选定某些列</p>
+<h3 id="descrive"><a href="#descrive" class="headerlink" title=".descrive()"></a>.descrive()</h3><p>这里可以选定某些列   <code>Dataframe的.describe()方法属于，RDD不可用</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">numerical = [<span class="string">'balance'</span>, <span class="string">'numTrans'</span>, <span class="string">'numIntTrans'</span>]</span><br><span class="line">desc = fraud_df.describe(numerical)</span><br><span class="line">desc.show()</span><br></pre></td></tr></table></figure>
 <pre><code>+-------+-----------------+------------------+-----------------+
 |summary|          balance|          numTrans|      numIntTrans|
@@ -588,7 +588,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
@@ -599,7 +599,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">Kategorien</span>
                 </a>
               </div>
@@ -610,7 +610,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">Tags</span>
                 </a>
               </div>
