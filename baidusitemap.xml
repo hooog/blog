@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>http://www.ihoge.cn/2018/ML2.html</loc>
     <lastmod>2018-05-05T17:23:04.407Z</lastmod>
@@ -641,7 +642,6 @@
     </url>
 
     
-    
   <url>
     <loc>http://www.ihoge.cn/2018/sklearn-ensemble.html</loc>
     <lastmod>2018-04-10T10:01:44.986Z</lastmod>
@@ -804,24 +804,6 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
-        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
@@ -842,12 +824,32 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>机器学习scikit-learn 中的设置以及预估对象</title>
-        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
+        <title>DStream的基本操作</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        
+        <tag>MLlib</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
+        <pubTime>2018-03-17T09:05:59.000Z</pubTime>
         
         <tag>scikit-learn</tag>
          
@@ -882,6 +884,44 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习scikit-learn 中的设置以及预估对象</title>
+        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
+        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/KNN.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
@@ -890,46 +930,6 @@
         <pubTime>2018-03-29T09:05:59.000Z</pubTime>
         
         <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
-        <pubTime>2018-03-17T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>DStream的基本操作</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
          
          
            

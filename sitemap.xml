@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/about/index.html</loc>
+    
+    <lastmod>2018-05-05T17:46:45.596Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/2018/ML2.html</loc>
     
     <lastmod>2018-05-05T17:23:04.407Z</lastmod>
@@ -233,13 +240,6 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/about/index.html</loc>
-    
-    <lastmod>2018-04-18T03:10:23.557Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/sklearn-ensemble.html</loc>
     
     <lastmod>2018-04-10T10:01:44.986Z</lastmod>
@@ -303,13 +303,6 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
@@ -317,21 +310,7 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     
@@ -345,7 +324,28 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
+    <loc>http://www.ihoge.cn/2018/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     
