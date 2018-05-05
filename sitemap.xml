@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2018/ML2.html</loc>
+    
+    <lastmod>2018-05-05T17:23:04.407Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/ML1.html</loc>
+    
+    <lastmod>2018-05-05T17:22:29.171Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/sklearn1.html</loc>
+    
+    <lastmod>2018-04-25T02:32:36.914Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/2018/JavaMysql.html</loc>
     
     <lastmod>2018-04-22T14:59:07.261Z</lastmod>
@@ -282,21 +303,14 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/hadoop.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     
@@ -317,13 +331,6 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/KNN.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
@@ -331,14 +338,21 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
+    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/sklearn1.html</loc>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/hadoop.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     

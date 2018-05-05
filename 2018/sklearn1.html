@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
 <meta property="og:description" content="手写字体识别–支持向量机12from sklearn import datasetsdigits = datasets.load_digits() 12from sklearn.cross_validation import train_test_splitX_train, X_test, y_train, y_test = train_test_split(digits.data, digit">
 <meta property="og:image" content="http://www.ihoge.cn/images/sklearn/1.png">
-<meta property="og:updated_time" content="2018-04-06T17:31:08.000Z">
+<meta property="og:updated_time" content="2018-04-25T02:32:36.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="支持向量机、学习曲线、查准率和召回率">
 <meta name="twitter:description" content="手写字体识别–支持向量机12from sklearn import datasetsdigits = datasets.load_digits() 12from sklearn.cross_validation import train_test_splitX_train, X_test, y_train, y_test = train_test_split(digits.data, digit">
@@ -191,7 +191,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Accueil
           </a>
         </li>
       
@@ -201,7 +201,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            A propos
           </a>
         </li>
       
@@ -221,7 +221,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -231,7 +231,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -295,7 +295,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-28T17:05:59+08:00">
                 2018-03-28
@@ -316,7 +316,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -393,8 +393,9 @@ R方得分（R2 score） ： 1.0
 <li>增加多项式特征<br>  -如原数据只有$x_1, x_2$，优化后可以增加特征变成，$x_1,x_2,x_1x_2,x_1^2,x_2^2$。这样即可增加模型复杂度</li>
 </ul>
 <h2 id="查准率和召回率"><a href="#查准率和召回率" class="headerlink" title="查准率和召回率"></a>查准率和召回率</h2><ul>
-<li>准确率(Precision) =  预测到的相关的 / 预测到的相关的+预测到的不相关的</li>
-<li>召回率(Recall)      =  预测到的相关的 / 预测到的相关的+没有被预测到的相关的</li>
+<li>准确率            =  预测准确的 / 所有的 </li>
+<li>查准率(Precision) =  预测到的相关的 / 预测到的相关的+预测到的不相关的</li>
+<li>召回率(Recall)    =  预测到的相关的 / 预测到的相关的+没有被预测到的相关的</li>
 </ul>
 <p>在<code>scikit-learn</code>中，评估模型性能的算法都在<code>sklearn.metrics</code>包里。</p>
 <p>其中计算查准率和召回率的<code>API</code>分别为<code>sklearn.metrics.precision_score()</code>和<code>sklearn.metrics.recall_score()</code></p>
@@ -512,10 +513,10 @@ R方得分（R2 score） ： 1.0
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table Des Matières
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Ensemble
           </li>
         </ul>
       
@@ -535,8 +536,8 @@ R方得分（R2 score） ： 1.0
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">articles</span>
                 </a>
               </div>
             
@@ -547,7 +548,7 @@ R方得分（R2 score） ： 1.0
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">Kategorien</span>
+                  <span class="site-state-item-name">categories</span>
                 </a>
               </div>
             
@@ -557,8 +558,8 @@ R方得分（R2 score） ： 1.0
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -659,7 +660,7 @@ R方得分（R2 score） ： 1.0
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Thème &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 

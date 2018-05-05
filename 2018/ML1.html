@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="databrickes," />
+  <meta name="keywords" content="ML," />
 
 
 
@@ -83,29 +83,17 @@
 
 
 
-<meta name="description" content="摘要：本文带你畅游Databrickes Spark Clould云服务。小白迅速上手大数据Spark开发环境，从此告别集群Bug的烦恼，彻底解放物理机负担让你随时随地想Run就Run😎。 目录： Databrickes是个啥？ Databrickes注册 Databrickes快速入门 其他进阶神操作   Databrickes是个啥？YouTube简介，自备云梯Databricks 属于">
-<meta name="keywords" content="databrickes">
+<meta name="description" content="协同过滤算法​    获取spark自带的MovieLens数据集，其中每行包含一个用户、一个电影、一个该用户对该电影的评分以及时间戳。我们使用默认的ALS.train() 方法，即显性反馈（默认implicitPrefs 为false）来构建推荐模型并根据模型对评分预测的均方根误差来对模型进行评估。 导入需要的包：12import org.apache.spark.ml.evaluation.">
+<meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould">
-<meta property="og:url" content="http://www.ihoge.cn/2018/Databrickes.html">
+<meta property="og:title" content="Spark ML - 协同过滤">
+<meta property="og:url" content="http://www.ihoge.cn/2018/ML1.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
-<meta property="og:description" content="摘要：本文带你畅游Databrickes Spark Clould云服务。小白迅速上手大数据Spark开发环境，从此告别集群Bug的烦恼，彻底解放物理机负担让你随时随地想Run就Run😎。 目录： Databrickes是个啥？ Databrickes注册 Databrickes快速入门 其他进阶神操作   Databrickes是个啥？YouTube简介，自备云梯Databricks 属于">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238167919311.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238177684915.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238199155320.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238206713516.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238208963616.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238209363742.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238214224410.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238214940209.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238216319562.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238217238654.jpg">
-<meta property="og:updated_time" content="2018-04-22T14:55:19.382Z">
+<meta property="og:description" content="协同过滤算法​    获取spark自带的MovieLens数据集，其中每行包含一个用户、一个电影、一个该用户对该电影的评分以及时间戳。我们使用默认的ALS.train() 方法，即显性反馈（默认implicitPrefs 为false）来构建推荐模型并根据模型对评分预测的均方根误差来对模型进行评估。 导入需要的包：12import org.apache.spark.ml.evaluation.">
+<meta property="og:updated_time" content="2018-05-05T17:22:29.171Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould">
-<meta name="twitter:description" content="摘要：本文带你畅游Databrickes Spark Clould云服务。小白迅速上手大数据Spark开发环境，从此告别集群Bug的烦恼，彻底解放物理机负担让你随时随地想Run就Run😎。 目录： Databrickes是个啥？ Databrickes注册 Databrickes快速入门 其他进阶神操作   Databrickes是个啥？YouTube简介，自备云梯Databricks 属于">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg">
+<meta name="twitter:title" content="Spark ML - 协同过滤">
+<meta name="twitter:description" content="协同过滤算法​    获取spark自带的MovieLens数据集，其中每行包含一个用户、一个电影、一个该用户对该电影的评分以及时间戳。我们使用默认的ALS.train() 方法，即显性反馈（默认implicitPrefs 为false）来构建推荐模型并根据模型对评分预测的均方根误差来对模型进行评估。 导入需要的包：12import org.apache.spark.ml.evaluation.">
 
 
 
@@ -135,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/Databrickes.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/ML1.html"/>
 
 
 
 
 
-  <title>免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould | Hoooge's Blog</title>
+  <title>Spark ML - 协同过滤 | Hoooge's Blog</title>
   
 
 
@@ -278,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/Databrickes.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/ML1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -295,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould</h1>
+          <h1 class="post-title" itemprop="name headline">Spark ML - 协同过滤</h1>
         
 
         <div class="post-meta">
@@ -307,8 +295,8 @@
               
                 <span class="post-meta-item-text">Posté le</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-16T03:59:21+08:00">
-                2018-04-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-06T01:59:21+08:00">
+                2018-05-06
               </time>
             
 
@@ -330,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
+                  <a href="/categories/Machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine learning</span>
                   </a>
                 </span>
 
@@ -373,36 +361,41 @@
 
       
         <a id="more"></a>
-<p>摘要：本文带你畅游<code>Databrickes Spark Clould</code>云服务。小白迅速上手大数据Spark开发环境，从此告别集群<code>Bug</code>的烦恼，彻底解放物理机负担让你随时随地想<code>Run</code>就<code>Run</code>😎。</p>
-<h2 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h2><ol>
-<li>Databrickes是个啥？</li>
-<li>Databrickes注册</li>
-<li>Databrickes快速入门</li>
-<li>其他进阶神操作</li>
-</ol>
-<hr>
-<h2 id="Databrickes是个啥？"><a href="#Databrickes是个啥？" class="headerlink" title="Databrickes是个啥？"></a>Databrickes是个啥？</h2><p><a href="https://databricks.com" target="_blank" rel="noopener">YouTube简介，自备云梯</a><br>Databricks 属于 Spark 的商业化公司，由美国伯克利大学 AMP 实验室著名的 Spark 大数据处理系统多位创始人联合创立。Databricks 致力于提供基于 Spark 的云服务，可用于数据集成，数据管道等任务。<br>Databricks 公司的云解决方案由三部分组成：Databricks 平台、Spark 和 Databricks 工作区。该产品背后的理念是提供处理数据的单独空间，不受托管环境和 Hadoop 集群管理的影响，整个过程在云中完成。该产品有几个核心概念：由 Notebooks 提供一种与数据交互并构建图形的方法，当用户了解了显示数据的方式时，就可以开始构建主控面板以监视某些类型的数据。最后，用户可以通过该平台的任务启动器来规划 Apache Spark 的运行时间。</p>
-<p>说白了就是<code>Databricks</code>捞钱的，老是开源spark 也不收你钱，大家也要吃饭不是，干脆搞个 spark on cloud，服务懒人或小公司，你既不用搭建集群也不用维护，交点儿钱直接用他们提供的在线集群。当然还有一个作用，推广普及spark ，所以也就有了<code>Community</code>版，即免费版</p>
-<p><code>Databricks</code>相当于给你了一个在线spark 集群，即：<code>Spark online</code>（听着怎么这么像网游 (⊙﹏⊙)b），我等尚处spark初级阶段的小白们刚好可以用他们提供的免费版来学习，省去了搭建和维护配置的过程，用来学习或温习Spark API真是完美！<br>（笔者比较懒，下面<code>Databricks Spark Cloud</code>都用<code>DSC</code>代替😂）<br>话不多说，开搞！！！</p>
-<h2 id="注册Databricks"><a href="#注册Databricks" class="headerlink" title="注册Databricks"></a>注册Databricks</h2><p><a href="https://databricks.com" target="_blank" rel="noopener">官网直达</a></p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg" alt=""><br><code>Do you want to TRY DATACRICKS FREE?</code><br><code>Yeah, click here!</code></p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238167919311.jpg" alt=""></p>
-<p>下面就是注册页面，不再啰嗦。注意的是左下角要进行人际身份验证，网络不好的童鞋请自备云梯😎。然后验证邮箱，点击链接到登录界面：</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238177684915.jpg" alt=""></p>
-<p>💡<code>If you don&#39;t want to pay for money, pelese click here!</code></p>
-<h2 id="搭建云上Spark集群环境"><a href="#搭建云上Spark集群环境" class="headerlink" title="搭建云上Spark集群环境"></a>搭建云上Spark集群环境</h2><p><a href="https://docs.databricks.com/getting-started/index.html" target="_blank" rel="noopener">入门指南</a><br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238199155320.jpg" alt=""></p>
-<p>这货长这样～界面清爽颜值高，功能齐全效率高。</p>
-<h2 id="基本使用流程："><a href="#基本使用流程：" class="headerlink" title="基本使用流程："></a>基本使用流程：</h2><ol>
-<li>创建集群<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238206713516.jpg" alt=""></li>
-</ol>
-<p>没办法，笔者已经有一个集群在运行了，作为免费用户只能拥有一个活动集群，或者升级<code>高级用户</code>😎</p>
-<p>2.创建nootebook<br>选择集群，选择语言，新建项目，凯撸～<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238208963616.jpg" alt=""><br>创建笔记、加载依赖资源、创建文件夹</p>
-<p>3.创建Table<br>上传本地数据，速度有点慢，耐心等待一会～😅<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238209363742.jpg" alt=""></p>
-<h2 id="任务流程可视化、数据可视化"><a href="#任务流程可视化、数据可视化" class="headerlink" title="任务流程可视化、数据可视化"></a>任务流程可视化、数据可视化</h2><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238214224410.jpg" alt=""><br>自动生成任务阶段流程，生成DAG。</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238214940209.jpg" alt=""><br>丰富的画图工具，只需点点点即可完成高颜值图表。</p>
-<h2 id="其他操作："><a href="#其他操作：" class="headerlink" title="其他操作："></a>其他操作：</h2><p>下面是重点！！<br>下面是重点！！<br>下面是重点！！</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238216319562.jpg" alt=""><br>这里提供了丰富的适合不同场景的训练数据、源代码及简介。<br>只需找到<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238217238654.jpg" alt=""><br>即可快速导入到工作台。只可惜自己英文太烂，啃的很慢😂😂😂</p>
-<p><code>DSC</code>不仅提供了方便高可用的云集群服务，而且提供了丰富的学习资料，对像我等来说简直是完美的产品。感谢各位大佬给我们提供了如此便捷的学习环境和资源，<code>Life is short</code>，只争朝夕！<br><a href="https://youtu.be/fn3WeMZZcCk?t=17m19s" target="_blank" rel="noopener">油管视频自备云梯</a></p>
+<h2 id="协同过滤算法"><a href="#协同过滤算法" class="headerlink" title="协同过滤算法"></a>协同过滤算法</h2><p>​    获取spark自带的MovieLens数据集，其中每行包含一个用户、一个电影、一个该用户对该电影的评分以及时间戳。我们使用默认的<code>ALS.train()</code> 方法，即显性反馈（默认<code>implicitPrefs</code> 为false）来构建推荐模型并根据模型对评分预测的均方根误差来对模型进行评估。</p>
+<h3 id="导入需要的包："><a href="#导入需要的包：" class="headerlink" title="导入需要的包："></a>导入需要的包：</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.ml.evaluation.<span class="type">RegressionEvaluator</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.ml.recommendation.<span class="type">ALS</span></span><br></pre></td></tr></table></figure>
+<h3 id="根据数据结构创建读取规范"><a href="#根据数据结构创建读取规范" class="headerlink" title="根据数据结构创建读取规范"></a>根据数据结构创建读取规范</h3><p> 创建一个Rating类型，即[Int, Int, Float, Long];然后建造一个把数据中每一行转化成Rating类的函数。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Rating</span>(<span class="params">userId: <span class="type">Int</span>, movieId: <span class="type">Int</span>, rating: <span class="type">Float</span>, timestamp: <span class="type">Long</span></span>)</span></span><br><span class="line"><span class="class"><span class="title">def</span> <span class="title">parseRating</span>(<span class="params">str: <span class="type">String</span></span>)</span>: <span class="type">Rating</span> = &#123;</span><br><span class="line">            <span class="keyword">val</span> fields = str.split(<span class="string">"::"</span>)</span><br><span class="line">            assert(fields.size == <span class="number">4</span>)</span><br><span class="line">            <span class="type">Rating</span>(fields(<span class="number">0</span>).toInt, fields(<span class="number">1</span>).toInt, fields(<span class="number">2</span>).toFloat, fields(<span class="number">3</span>).toLong)</span><br><span class="line">         &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="读取数据："><a href="#读取数据：" class="headerlink" title="读取数据："></a>读取数据：</h3><p> 导入implicits，读取MovieLens数据集，把数据转化成Rating类型；</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> spark.implicits._</span><br><span class="line"><span class="keyword">val</span> ratings = spark.sparkContext.textFile(<span class="string">"file:///home/hduser/spark/data/mllib/als/sample_movielens_ratings.txt"</span>).map(parseRating).toDF()</span><br></pre></td></tr></table></figure>
+<p>然后打印数据</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ratings.show()</span><br></pre></td></tr></table></figure>
+<h3 id="构建模型"><a href="#构建模型" class="headerlink" title="构建模型"></a>构建模型</h3><p> 把MovieLens数据集划分训练集和测试集</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> <span class="type">Array</span>(training, test) = ratings.randomSplit(<span class="type">Array</span>(<span class="number">0.8</span>, <span class="number">0.2</span>))</span><br></pre></td></tr></table></figure>
+<p> 使用ALS来建立推荐模型，这里我们构建了两个模型，一个是显性反馈，一个是隐性反馈</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> alsExplicit = <span class="keyword">new</span> <span class="type">ALS</span>().setMaxIter(<span class="number">5</span>).setRegParam(<span class="number">0.01</span>).setUserCol(<span class="string">"userId"</span>). setItemCol(<span class="string">"movieId"</span>).setRatingCol(<span class="string">"rating"</span>)</span><br><span class="line"><span class="keyword">val</span> alsImplicit = <span class="keyword">new</span> <span class="type">ALS</span>().setMaxIter(<span class="number">5</span>).setRegParam(<span class="number">0.01</span>).setImplicitPrefs(<span class="literal">true</span>). setUserCol(<span class="string">"userId"</span>).setItemCol(<span class="string">"movieId"</span>).setRatingCol(<span class="string">"rating"</span>)</span><br></pre></td></tr></table></figure>
+<p> 在 ML 中的实现有如下的参数:</p>
+<ul>
+<li><code>numBlocks</code> 是用于并行化计算的用户和商品的分块个数 (默认为10)。</li>
+<li><code>rank</code> 是模型中隐语义因子的个数（默认为10）。</li>
+<li><code>maxIter</code> 是迭代的次数（默认为10）。</li>
+<li><code>regParam</code> 是ALS的正则化参数（默认为1.0）。</li>
+<li><code>implicitPrefs</code> 决定了是用显性反馈ALS的版本还是用适用隐性反馈数据集的版本（默认是false，即用显性反馈）。</li>
+<li><code>alpha</code> 是一个针对于隐性反馈 ALS 版本的参数，这个参数决定了偏好行为强度的基准（默认为1.0）。</li>
+<li><p><code>nonnegative</code> 决定是否对最小二乘法使用非负的限制（默认为false）。</p>
+<p>可以调整这些参数，不断优化结果，使均方差变小。比如：imaxIter越大，regParam越 小，均方差会越小，推荐结果较优。</p>
+</li>
+</ul>
+<p>接下来，把推荐模型放在训练数据上训练：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> modelExplicit = alsExplicit.fit(training)</span><br><span class="line"><span class="keyword">val</span> modelImplicit = alsImplicit.fit(training)</span><br></pre></td></tr></table></figure>
+<h3 id="模型预测"><a href="#模型预测" class="headerlink" title="模型预测"></a>模型预测</h3><p> 使用训练好的推荐模型对测试集中的用户商品进行预测评分，得到预测评分的数据集</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> predictionsExplicit = modelExplicit.transform(test)</span><br><span class="line"><span class="keyword">val</span> predictionsImplicit = modelImplicit.transform(test)</span><br></pre></td></tr></table></figure>
+<p> 我们把结果输出，对比一下真实结果与预测结果：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">predictionsExplicit.show()</span><br><span class="line">predictionsImplicit.show()</span><br></pre></td></tr></table></figure>
+<h3 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h3><p> 通过计算模型的均方根误差来对模型进行评估，均方根误差越小，模型越准确：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> evaluator = <span class="keyword">new</span> <span class="type">RegressionEvaluator</span>().setMetricName(<span class="string">"rmse"</span>).setLabelCol(<span class="string">"rating"</span>). setPredictionCol(<span class="string">"prediction"</span>)</span><br><span class="line"><span class="keyword">val</span> rmseExplicit = evaluator.evaluate(predictionsExplicit)</span><br><span class="line"><span class="keyword">val</span> rmseImplicit = evaluator.evaluate(predictionsImplicit)</span><br></pre></td></tr></table></figure>
+<p> 打印出两个模型的均方根误差 ：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">println(<span class="string">s"Explicit:Root-mean-square error = <span class="subst">$rmseExplicit</span>"</span>)</span><br><span class="line">println(<span class="string">s"Implicit:Root-mean-square error = <span class="subst">$rmseImplicit</span>"</span>)</span><br></pre></td></tr></table></figure>
+<p> 可以看到打分的均方差值为1.69和1.80左右。由于本例的数据量很少，预测的结果和实际相比有一定的差距。</p>
 
       
     </div>
@@ -420,7 +413,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/databrickes/" rel="tag"><i class="fa fa-tag"></i> databrickes</a>
+            <a href="/tags/ML/" rel="tag"><i class="fa fa-tag"></i> ML</a>
           
         </div>
       
@@ -433,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/Spark Scheduler.html" rel="next" title="Spark运行原理剖析">
-                <i class="fa fa-chevron-left"></i> Spark运行原理剖析
+              <a href="/2018/DataPreprocessing3.html" rel="next" title="spark数据预处理3">
+                <i class="fa fa-chevron-left"></i> spark数据预处理3
               </a>
             
           </div>
@@ -443,8 +436,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/hbase.html" rel="prev" title="分布式数据库HBase原理">
-                分布式数据库HBase原理 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/ML2.html" rel="prev" title="Spark ML - 聚类算法">
+                Spark ML - 聚类算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -617,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录："><span class="nav-number">1.</span> <span class="nav-text">目录：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Databrickes是个啥？"><span class="nav-number">2.</span> <span class="nav-text">Databrickes是个啥？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册Databricks"><span class="nav-number">3.</span> <span class="nav-text">注册Databricks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建云上Spark集群环境"><span class="nav-number">4.</span> <span class="nav-text">搭建云上Spark集群环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用流程："><span class="nav-number">5.</span> <span class="nav-text">基本使用流程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务流程可视化、数据可视化"><span class="nav-number">6.</span> <span class="nav-text">任务流程可视化、数据可视化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他操作："><span class="nav-number">7.</span> <span class="nav-text">其他操作：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#协同过滤算法"><span class="nav-number">1.</span> <span class="nav-text">协同过滤算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入需要的包："><span class="nav-number">1.1.</span> <span class="nav-text">导入需要的包：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据数据结构创建读取规范"><span class="nav-number">1.2.</span> <span class="nav-text">根据数据结构创建读取规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取数据："><span class="nav-number">1.3.</span> <span class="nav-text">读取数据：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建模型"><span class="nav-number">1.4.</span> <span class="nav-text">构建模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型预测"><span class="nav-number">1.5.</span> <span class="nav-text">模型预测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型评估"><span class="nav-number">1.6.</span> <span class="nav-text">模型评估</span></a></li></ol></li></ol></div>
             
 
           </div>
