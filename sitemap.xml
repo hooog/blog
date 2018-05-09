@@ -2,9 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2018/Pyhive.html</loc>
+    
+    <lastmod>2018-05-09T12:41:11.747Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
+    
+    <lastmod>2018-05-09T12:39:55.334Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.html</loc>
+    
+    <lastmod>2018-05-09T12:39:31.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/SVMPLOT.html</loc>
+    
+    <lastmod>2018-05-09T12:38:35.340Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/Spark%20Scheduler.html</loc>
+    
+    <lastmod>2018-05-09T12:38:03.223Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/about/index.html</loc>
     
-    <lastmod>2018-05-05T17:46:45.596Z</lastmod>
+    <lastmod>2018-05-05T17:47:54.999Z</lastmod>
     
   </url>
   
@@ -51,13 +86,6 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/Pyhive.html</loc>
-    
-    <lastmod>2018-04-22T14:58:33.772Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/githubhexocodingbaidu.html</loc>
     
     <lastmod>2018-04-22T14:58:20.557Z</lastmod>
@@ -96,13 +124,6 @@
     <loc>http://www.ihoge.cn/2018/githubhexos.html</loc>
     
     <lastmod>2018-04-22T14:57:33.172Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.html</loc>
-    
-    <lastmod>2018-04-22T14:57:19.281Z</lastmod>
     
   </url>
   
@@ -163,13 +184,6 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/Spark%20Scheduler.html</loc>
-    
-    <lastmod>2018-04-22T14:55:22.036Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/pyspark.html</loc>
     
     <lastmod>2018-04-22T14:55:20.485Z</lastmod>
@@ -205,7 +219,7 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/StruturedStreaming.html</loc>
+    <loc>http://www.ihoge.cn/2018/StructuredStreaming.html</loc>
     
     <lastmod>2018-04-22T14:55:14.155Z</lastmod>
     
@@ -247,13 +261,6 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/SVM%E7%BB%98%E5%9B%BE.html</loc>
-    
-    <lastmod>2018-04-10T10:01:40.957Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/MultinomialNB.html</loc>
     
     <lastmod>2018-04-10T10:01:37.805Z</lastmod>
@@ -268,7 +275,7 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BASVC.html</loc>
+    <loc>http://www.ihoge.cn/2018/SVWSVC.html</loc>
     
     <lastmod>2018-04-10T10:01:23.892Z</lastmod>
     
@@ -303,42 +310,14 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     
@@ -352,7 +331,28 @@
   </url>
   
   <url>
+    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/2018/hadoop.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     

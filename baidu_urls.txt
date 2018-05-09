@@ -3,13 +3,13 @@ http://www.ihoge.cn/2018/ML1.html
 http://www.ihoge.cn/2018/DataPreprocessing3.html
 http://www.ihoge.cn/2018/DataPreprocessing2.html
 http://www.ihoge.cn/2018/DataPreprocessing1.html
+http://www.ihoge.cn/2018/StructuredStreaming.html
 http://www.ihoge.cn/2018/strame.html
-http://www.ihoge.cn/2018/StruturedStreaming.html
 http://www.ihoge.cn/2018/IntroductionToSpark.html
 http://www.ihoge.cn/2018/hbase.html
 http://www.ihoge.cn/2018/Databrickes.html
-http://www.ihoge.cn/2018/Spark Scheduler.html
 http://www.ihoge.cn/2018/pyspark.html
+http://www.ihoge.cn/2018/Spark Scheduler.html
 http://www.ihoge.cn/2018/Sparksql2.html
 http://www.ihoge.cn/2018/SparkSQl.html
 http://www.ihoge.cn/2018/anacondaPyspark.html
@@ -17,8 +17,8 @@ http://www.ihoge.cn/2018/HiveSpark.html
 http://www.ihoge.cn/2018/DataMining.html
 http://www.ihoge.cn/2018/PCA+SVM人脸识别.html
 http://www.ihoge.cn/2018/MultinomialNB.html
-http://www.ihoge.cn/2018/SVM绘图.html
-http://www.ihoge.cn/2018/支持向量机SVC.html
+http://www.ihoge.cn/2018/SVMPLOT.html
+http://www.ihoge.cn/2018/SVWSVC.html
 http://www.ihoge.cn/2018/sklearn-ensemble.html
 http://www.ihoge.cn/2018/SVM.html
 http://www.ihoge.cn/2018/DecisionTree.html
@@ -34,16 +34,16 @@ http://www.ihoge.cn/2018/sklearn1.html
 http://www.ihoge.cn/2018/hadoop.html
 http://www.ihoge.cn/2018/hivewebhui.html
 http://www.ihoge.cn/2018/hive.html
-http://www.ihoge.cn/2018/监督学习.html
+http://www.ihoge.cn/2018/MLLearning.html
 http://www.ihoge.cn/2018/Hbaseproblom.html
 http://www.ihoge.cn/2018/Pyhive.html
-http://www.ihoge.cn/2018/pymysql.html
 http://www.ihoge.cn/2018/关于科学数据处理的统计学习教程.html
+http://www.ihoge.cn/2018/pymysql.html
 http://www.ihoge.cn/2018/s-klearn.html
 http://www.ihoge.cn/2018/JavaMap.html
 http://www.ihoge.cn/2018/JavaExtends.html
 http://www.ihoge.cn/2018/JavaMysql.html
 http://www.ihoge.cn/2018/分布式集群架构实验手册.html
 http://www.ihoge.cn/2018/hexo-github.html
-http://www.ihoge.cn/2018/Java面向对象+内存原理+内存优化1.html
 http://www.ihoge.cn/2018/DStream的基本操作.html
+http://www.ihoge.cn/2018/Java面向对象+内存原理+内存优化1.html

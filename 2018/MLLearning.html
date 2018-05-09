@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="scikit-learn," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="监督学习简介如果你熟悉机器学习的基础知识，那么肯定知道什么是监督学习。监督学习是指在有标记的样本（labeled samples）上建立机器学习的模型。例如，如果用尺寸、位置等不同参数建立一套模型来评估一栋房子的价格，那么首先需要创建一个数据库，然后为参数打上标记。我们需要告诉算法，什么样的参数（尺寸、位置）对应什么样的价格。有了这些带标记的数据，算法就可以学会如何根据输入的参数计算房价了。 无">
+<meta name="keywords" content="scikit-learn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）">
+<meta property="og:url" content="http://www.ihoge.cn/2018/MLLearning.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="监督学习简介如果你熟悉机器学习的基础知识，那么肯定知道什么是监督学习。监督学习是指在有标记的样本（labeled samples）上建立机器学习的模型。例如，如果用尺寸、位置等不同参数建立一套模型来评估一栋房子的价格，那么首先需要创建一个数据库，然后为参数打上标记。我们需要告诉算法，什么样的参数（尺寸、位置）对应什么样的价格。有了这些带标记的数据，算法就可以学会如何根据输入的参数计算房价了。 无">
+<meta property="og:image" content="http://www.ihoge.cn/images/01/output_23_1.png">
+<meta property="og:image" content="http://www.ihoge.cn/images/01/output_24_1.png">
+<meta property="og:image" content="http://www.ihoge.cn/images/01/test1.png">
+<meta property="og:image" content="http://www.ihoge.cn/images/01/test2.png">
+<meta property="og:image" content="http://www.ihoge.cn/images/01/test3.png">
+<meta property="og:image" content="http://www.ihoge.cn/images/01/test4.png">
+<meta property="og:image" content="http://www.ihoge.cn/images/01/test5.png">
+<meta property="og:image" content="http://www.ihoge.cn/images/01/test6.png">
+<meta property="og:updated_time" content="2018-04-06T17:31:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）">
+<meta name="twitter:description" content="监督学习简介如果你熟悉机器学习的基础知识，那么肯定知道什么是监督学习。监督学习是指在有标记的样本（labeled samples）上建立机器学习的模型。例如，如果用尺寸、位置等不同参数建立一套模型来评估一栋房子的价格，那么首先需要创建一个数据库，然后为参数打上标记。我们需要告诉算法，什么样的参数（尺寸、位置）对应什么样的价格。有了这些带标记的数据，算法就可以学会如何根据输入的参数计算房价了。 无">
+<meta name="twitter:image" content="http://www.ihoge.cn/images/01/output_23_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/MLLearning.html"/>
+
+
+
+
+
+  <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性） | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/MLLearning.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-24T17:05:59+08:00">
+                2018-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="监督学习简介"><a href="#监督学习简介" class="headerlink" title="监督学习简介"></a>监督学习简介</h2><p>如果你熟悉机器学习的基础知识，那么肯定知道什么是监督学习。监督学习是指在有标记的样本（labeled samples）上建立机器学习的模型。例如，如果用尺寸、位置等不同参数建立一套模型来评估一栋房子的价格，那么首先需要创建一个数据库，然后为参数打上标记。我们需要告诉算法，什么样的参数（尺寸、位置）对应什么样的价格。有了这些带标记的数据，算法就可以学会如何根据输入的参数计算房价了。</p>
+<p>无监督学习与刚才说的恰好相反，它面对的是没有标记的数据。假设需要把一些数据分成不同的组别，但是对分组的条件毫不知情，于是，无监督学习算法就会以最合理的方式将数据集分成确定数量的组别。我们将在后面章节介绍无监督学习。”</p>
+<h2 id="数据预处理技术"><a href="#数据预处理技术" class="headerlink" title="数据预处理技术"></a>数据预处理技术</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"></span><br><span class="line">data = np.array([[ <span class="number">3</span>, <span class="number">-1.5</span>,  <span class="number">2</span>, <span class="number">-5.4</span>],</span><br><span class="line">                 [ <span class="number">0</span>,  <span class="number">4</span>,  <span class="number">-0.3</span>, <span class="number">2.1</span>],</span><br><span class="line">                 [ <span class="number">1</span>,  <span class="number">3.3</span>, <span class="number">-1.9</span>, <span class="number">-4.3</span>]])</span><br></pre></td></tr></table></figure>
+<h3 id="均值移除-mean-removal"><a href="#均值移除-mean-removal" class="headerlink" title="均值移除 mean removal"></a>均值移除 mean removal</h3><ul>
+<li>“通常我们会把每个特征的平均值移除，以保证特征均值为0（即标准化处理）。这样做可以消除特征彼此间的偏差（bias）”</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data_standardized = preprocessing.scale(data)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"\nMean特征均值 ="</span>, data_standardized.mean(axis=<span class="number">0</span>))</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Std deviation标准偏差 ="</span>, data_standardized.std(axis=<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>Mean特征均值 = [ 5.55111512e-17 -1.11022302e-16 -7.40148683e-17 -7.40148683e-17]
+Std deviation标准偏差 = [1. 1. 1. 1.]
+</code></pre><h3 id="范围缩放-min-max-scaling"><a href="#范围缩放-min-max-scaling" class="headerlink" title="范围缩放 min max scaling"></a>范围缩放 min max scaling</h3><ul>
+<li>“数据点中每个特征的数值范围可能变化很大，因此，有时将特征的数值范围缩放到合理的大小是非常重要的。”</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data_scaler = preprocessing.MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">data_scaled = data_scaler.fit_transform(data)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"\nMin max scaled data范围缩放数据:\n"</span>, data_scaled)</span><br></pre></td></tr></table></figure>
+<pre><code>Min max scaled data范围缩放数据:
+ [[1.         0.         1.         0.        ]
+ [0.         1.         0.41025641 1.        ]
+ [0.33333333 0.87272727 0.         0.14666667]]
+</code></pre><h3 id="归一化-normalization"><a href="#归一化-normalization" class="headerlink" title="归一化 normalization"></a>归一化 normalization</h3><ul>
+<li>“数据归一化用于需要对特征向量的值进行调整时，以保证每个特征向量的值都缩放到相同的数值范围。机器学习中最常用的归一化形式就是将特征向量调整为L1范数，使特征向量的数值之和为1。”</li>
+<li>“这个方法经常用于确保数据点没有因为特征的基本性质而产生较大差异，即确保数据处于同一数量级，提高不同特征数据的可比性。”</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data_normalized = preprocessing.normalize(data, norm=<span class="string">'l1'</span>)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"\nL1 normalized data归一化后数据:\n"</span>, data_normalized)</span><br></pre></td></tr></table></figure>
+<pre><code>L1 normalized data归一化后数据:
+ [[ 0.25210084 -0.12605042  0.16806723 -0.45378151]
+ [ 0.          0.625      -0.046875    0.328125  ]
+ [ 0.0952381   0.31428571 -0.18095238 -0.40952381]]
+</code></pre><h3 id="二值化-binarization"><a href="#二值化-binarization" class="headerlink" title="二值化 binarization"></a>二值化 binarization</h3><ul>
+<li>“二值化用于将数值特征向量转换为布尔类型向量。”</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data_binarized = preprocessing.Binarizer(threshold=<span class="number">1.4</span>).transform(data)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"\n二值化 data:\n"</span>, data_binarized)</span><br></pre></td></tr></table></figure>
+<pre><code>二值化 data:
+ [[1. 0. 1. 0.]
+ [0. 1. 0. 1.]
+ [0. 1. 0. 0.]]
+</code></pre><h3 id="独热编码"><a href="#独热编码" class="headerlink" title="独热编码"></a>独热编码</h3><ul>
+<li>one hot encoding独热编码<br>“通常，需要处理的数值都是稀疏地、散乱地分布在空间中，然而，我们并不需要存储这些大数值，这时就需要使用独热编码（One-Hot Encoding）。可以把独热编码看作是一种收紧 （tighten）特征向量的工具。它把特征向量的每个特征与特征的非重复总数相对应，通过one-of-k 的形式对每个值进行编码。特征向量的每个特征值都按照这种方式编码，这样可以更加有效地表示空间。例如，我们需要处理4维向量空间，当给一个特性向量的第n 个特征进行编码时，编码器会遍历每个特征向量的第n 个特征，然后进行非重复计数。如果非重复计数的值是K ，那么就把这个特征转换为只有一个值是1其他值都是0的K 维向量。”</li>
+<li>“在下面的示例中，观察一下每个特征向量的第三个特征，分别是1 、5 、2 、4 这4个不重复的值，也就是说独热编码向量的长度是4。如果你需要对5 进行编码，那么向量就是[0, 1, 0, 0] 。向量中只有一个值是1。第二个元素是1，对应的值是5 。”</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">encoder = preprocessing.OneHotEncoder()</span><br><span class="line">encoder.fit([[<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">12</span>], [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">3</span>], [<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">12</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">3</span>]])</span><br><span class="line">encoded_vector = encoder.transform([[<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">3</span>]]).toarray()</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"\n编码矢量:\n"</span>, encoded_vector)</span><br></pre></td></tr></table></figure>
+<pre><code>编码矢量:
+ [[0. 0. 1. 0. 1. 0. 0. 0. 1. 1. 0.]]
+</code></pre><h2 id="标记编码方法"><a href="#标记编码方法" class="headerlink" title="标记编码方法"></a>标记编码方法</h2><p>在监督学习中，经常需要处理各种各样的标记。这些标记可能是数字，也可能是单词。如果标记是数字，那么算法可以直接使用它们，但是，许多情况下，标记都需要以人们可理解的形式存在，因此，人们通常会用单词标记训练数据集。标记编码就是要把单词标记转换成数值形式，让算法懂得如何操作标记。接下来看看如何标记编码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="comment"># 定义一个标记编码器</span></span><br><span class="line">label_encoder = preprocessing.LabelEncoder()</span><br><span class="line"></span><br><span class="line"><span class="comment"># label_encoder对象知道如何理解单词标记，接下来创建标记</span></span><br><span class="line">input_classes = [<span class="string">'audi'</span>, <span class="string">'ford'</span>, <span class="string">'audi'</span>, <span class="string">'toyota'</span>, <span class="string">'ford'</span>, <span class="string">'bmw'</span>]</span><br><span class="line"><span class="comment"># 开始标记</span></span><br><span class="line">label_encoder.fit(input_classes)</span><br><span class="line">print(<span class="string">"Classes mapping: 结果显示单词背转换成从0开始的索引值"</span>)</span><br><span class="line"><span class="keyword">for</span> i, item <span class="keyword">in</span> enumerate(lable_encoder.classes_):</span><br><span class="line">    print(item, <span class="string">'--&gt;'</span>, i)</span><br></pre></td></tr></table></figure>
+<pre><code>Classes mapping: 结果显示单词背转换成从0开始的索引值
+audi --&gt; 0
+bmw --&gt; 1
+ford --&gt; 2
+toyota --&gt; 3
+</code></pre><p>这时，如果遇到一组数据就可以轻松的转换它们了。（如药品数据的药品名）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">labels = [<span class="string">'toyota'</span>, <span class="string">'ford'</span>, <span class="string">'audi'</span>]</span><br><span class="line">encoded_labels = label_encoder.transform(labels)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"\nLabels ="</span>, labels)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Encoded labels ="</span>, list(encoded_labels))</span><br></pre></td></tr></table></figure>
+<pre><code>Labels = [&apos;toyota&apos;, &apos;ford&apos;, &apos;audi&apos;]
+Encoded labels = [3, 2, 0]
+</code></pre><p>还可以数字反转回单词（或字符串）:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">encoded_labels = [<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">1</span>]</span><br><span class="line">decoded_labels = label_encoder.inverse_transform(encoded_labels)</span><br><span class="line">print(encoded_labels)</span><br><span class="line">print(list(decoded_labels))</span><br></pre></td></tr></table></figure>
+<pre><code>[2, 1, 0, 3, 1]
+[&apos;ford&apos;, &apos;bmw&apos;, &apos;audi&apos;, &apos;toyota&apos;, &apos;bmw&apos;]
+
+
+/Users/hadoop/anaconda3/lib/python3.6/site-packages/sklearn/preprocessing/label.py:151: DeprecationWarning: The truth value of an empty array is ambiguous. Returning False, but in future this will result in an error. Use `array.size &gt; 0` to check that an array is not empty.
+  if diff:
+</code></pre><h2 id="创建线性回归"><a href="#创建线性回归" class="headerlink" title="创建线性回归"></a>创建线性回归</h2><p>回归是估计输入数据与连续值输出数据之间关系的过程。数据通常是实数形式的，我们的目标是<strong><em>估计满足输入到输出映射关系的基本函数。</em></strong></p>
+<p>线性回归的目标是提取输入变量与输出变量的关联线性模型，这就要求实际输出与线性方程预测的输出的残差平方和（sum of squares of differences）最小化。这种方法被称为普通最小二乘法 （Ordinary Least Squares，OLS）。</p>
+<p>你可能觉得用一条曲线对这些点进行拟合效果会更好，但是线性回归不允许这样做。线性回归的主要优点就是方程简单。如果你想用非线性回归，可能会得到更准确的模型，但是拟合速度会慢很多。线性回归模型就像前面那张图里显示的，<strong>用一条直线近似数据点的趋势</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 加载数据</span></span><br><span class="line">filename = sys.argv[<span class="number">1</span>]</span><br><span class="line">X = []</span><br><span class="line">y = []</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data_singlevar.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        data = [float(i) <span class="keyword">for</span> i <span class="keyword">in</span> line.split(<span class="string">','</span>)]</span><br><span class="line">        xt, yt = data[:<span class="number">-1</span>], data[<span class="number">-1</span>]</span><br><span class="line">        X.append(xt)</span><br><span class="line">        y.append(yt)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 80%训练集和20%测试集</span></span><br><span class="line">num_train = int(<span class="number">0.8</span> * len(X))</span><br><span class="line">num_test = len(X) - num_train</span><br><span class="line">X_train = np.array(X[:num_train]).reshape(num_train,<span class="number">1</span>)</span><br><span class="line">y_train = np.array(y[:num_train])</span><br><span class="line"></span><br><span class="line">X_test = np.array(X[num_train:]).reshape(num_test, <span class="number">1</span>)</span><br><span class="line">y_test = np.array(y[num_train:])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</span><br><span class="line">linear_regr = linear_model.LinearRegression()</span><br><span class="line">linear_regr.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
+<pre><code>/Users/hadoop/anaconda3/lib/python3.6/site-packages/scipy/linalg/basic.py:1226: RuntimeWarning: internal gelsd driver lwork query error, required iwork dimension not returned. This is likely the result of LAPACK bug 0038, fixed in LAPACK 3.2.2 (released July 21, 2010). Falling back to &apos;gelss&apos; driver.
+  warnings.warn(mesg, RuntimeWarning)
+
+
+
+
+
+LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
+</code></pre><p>我们利用训练数据集训练了线性回归器。向fit 方法提供输入数据即可训练模型。用下面的代码看看它如何拟合 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">print(<span class="string">'训练集拟合效果'</span>)</span><br><span class="line">y_train_pred = linear_regr.predict(X_train)</span><br><span class="line">plt.figure()</span><br><span class="line">plt.scatter(X_train, y_train)</span><br><span class="line">plt.plot(X_train, y_train_pred, color=<span class="string">'green'</span>, linewidth=<span class="number">2</span>)</span><br><span class="line">plt.title(<span class="string">'Training Data'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/images/01/output_23_1.png" alt="Alt text"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y_test_pred = linear_regr.predict(X_test)</span><br><span class="line">print(<span class="string">"测试集拟合效果"</span>)</span><br><span class="line">plt.scatter(X_test, y_test)</span><br><span class="line">plt.plot(X_test, y_test_pred, color=<span class="string">'green'</span>)</span><br><span class="line">plt.title(<span class="string">"Test Data"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/images/01/output_24_1.png" alt="Alt text"></p>
+<h2 id="计算回归准确性"><a href="#计算回归准确性" class="headerlink" title="计算回归准确性"></a>计算回归准确性</h2><p>现在已经建立了回归器，接下来最重要的就是如何评价回归器的拟合效果。在模型评价的相关内容中，用误差 （error）表示实际值与模型预测值之间的差值。</p>
+<p>下面快速了解几个衡量回归器拟合效果的重要指标（metric）。回归器可以用许多不同的指标进行衡量，部分指标如下所示。</p>
+<ul>
+<li><p><strong>平均绝对误差（mean absolute error）</strong> ：这是给定数据集的所有数据点的绝对误差平均值。</p>
+</li>
+<li><p><strong>均方误差（mean squared error）</strong> ：这是给定数据集的所有数据点的误差的平方的平均值。这是最流行的指标之一。</p>
+</li>
+<li><p><strong>中位数绝对误差（median absolute error）</strong> ：这是给定数据集的所有数据点的误差的中位数。这个指标的主要优点是可以消除异常值（outlier）的干扰。测试数据集中的单个坏点不会影响整个误差指标，均值误差指标会受到异常点的影响。</p>
+</li>
+<li><p><strong>解释方差分（explained variance score）</strong> ：这个分数用于衡量我们的模型对数据集波动的解释能力。如果得分1.0分，那么表明我们的模型是完美的。</p>
+</li>
+<li><p><strong>R方得分（R2 score）</strong> ：这个指标读作“R方”，是指确定性相关系数，用于衡量模型对未知样本预测的效果。最好的得分是1.0，值也可以是负数。</p>
+</li>
+</ul>
+<p>“每个指标都描述得面面俱到是非常乏味的，因此只选择一两个指标来评估我们的模型。通常的做法是尽量保证均方误差最低，而且解释方差分最高”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sklearn.metrics <span class="keyword">as</span> sm</span><br><span class="line"></span><br><span class="line">print(<span class="string">"平均绝对误差（mean absolute error） ："</span></span><br><span class="line">      , round(sm.mean_absolute_error(y_test, y_test_pred), <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"均方误差（mean squared error） ："</span></span><br><span class="line">     , round(sm.mean_squared_error(y_test, y_test_pred), <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"中位数绝对误差（median absolute error） ："</span></span><br><span class="line">     , round(sm.median_absolute_error(y_test, y_test_pred), <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"解释方差分（explained variance score） ："</span></span><br><span class="line">     , round(sm.explained_variance_score(y_test, y_test_pred), <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"R方得分（R2 score） ："</span></span><br><span class="line">     , round(sm.r2_score(y_test, y_test_pred)))</span><br></pre></td></tr></table></figure>
+<pre><code>平均绝对误差（mean absolute error） ： 0.54
+均方误差（mean squared error） ： 0.38
+中位数绝对误差（median absolute error） ： 0.54
+解释方差分（explained variance score） ： 0.68
+R方得分（R2 score） ： 1.0
+</code></pre><h2 id="保存模型数据"><a href="#保存模型数据" class="headerlink" title="保存模型数据"></a>保存模型数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">regr = pickle.dumps(linear_regr) <span class="comment"># 保存</span></span><br><span class="line">regr1 = pickle.loads(regr) <span class="comment"># 加载</span></span><br><span class="line">regr1.predict(X_test)</span><br></pre></td></tr></table></figure>
+<pre><code>array([2.20369892, 4.45873314, 2.12918475, 3.1253216 , 3.21944477,
+       3.75673118, 3.91360313, 2.66647116, 3.32925513, 2.77235973])
+</code></pre><p>在scikit的具体情况下，使用 joblib 替换 pickle（ joblib.dump &amp; joblib.load ）可能会更有趣，这对大数据更有效，但只能序列化 (pickle) 到磁盘而不是字符串变量:</p>
+<p>之后，您可以加载已保存的模型（可能在另一个 Python 进程中）:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.externals <span class="keyword">import</span> joblib</span><br><span class="line">joblib.dump(linear_regr, <span class="string">'regr.pkl'</span>) </span><br><span class="line">regr2 = joblib.load(<span class="string">'regr.pkl'</span>) </span><br><span class="line">regr2.predict(X_test)</span><br></pre></td></tr></table></figure>
+<pre><code>array([2.20369892, 4.45873314, 2.12918475, 3.1253216 , 3.21944477,
+       3.75673118, 3.91360313, 2.66647116, 3.32925513, 2.77235973])
+</code></pre><h2 id="创建岭回归"><a href="#创建岭回归" class="headerlink" title="创建岭回归"></a>创建岭回归</h2><p>线性回归的主要问题是对异常值敏感。在真实世界的数据收集过程中，经常会遇到错误的度量结果。而线性回归使用的普通最小二乘法，其目标是使平方误差最小化。这时，由于异常值误差的绝对值很大，因此会引起问题，从而破坏整个模型。</p>
+<p>普通最小二乘法在建模时会考虑每个数据点的影响，因此，最终模型就会瘦异常值影响较大。显然，我们发现这个模型不是最优的。为了避免这个问题，我们引入正则化项 的系数作为阈值来消除异常值的影响。这个方法被称为岭回归 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">X = []</span><br><span class="line">y = []</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data_multivar.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        data = [float(i) <span class="keyword">for</span> i <span class="keyword">in</span> line.split(<span class="string">','</span>)]</span><br><span class="line">        xt, yt = data[:<span class="number">-1</span>], data[<span class="number">-1</span>]</span><br><span class="line">        X.append(xt)</span><br><span class="line">        y.append(yt)</span><br><span class="line"><span class="comment"># 80%训练集和20%测试集</span></span><br><span class="line">num_train = int(<span class="number">0.8</span> * len(X))</span><br><span class="line">num_test = len(X) - num_train</span><br><span class="line">X_train = np.array(X[:num_train]).reshape(num_train,<span class="number">3</span>)</span><br><span class="line">y_train = np.array(y[:num_train])</span><br><span class="line"></span><br><span class="line">X_test = np.array(X[num_train:]).reshape(num_test, <span class="number">3</span>)</span><br><span class="line">y_test = np.array(y[num_train:])</span><br></pre></td></tr></table></figure>
+<p>alpha 参数控制回归器的复杂程度。当alpha 趋于0 时，岭回归器就是用普通最小二乘法的线性回归器。因此，如果你希望模型对异常值不那么敏感，就需要设置一个较大的alpha 值。这里把alpha 值设置为0.01 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rid = linear_model.Ridge(alpha=<span class="number">0.01</span>, fit_intercept=<span class="keyword">True</span>, max_iter=<span class="number">10000</span>)</span><br><span class="line"></span><br><span class="line">rid.fit(X_train, y_train)</span><br><span class="line">y_test_pred = rid.predict(X_test)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sklearn.metrics <span class="keyword">as</span> sm</span><br><span class="line"></span><br><span class="line">print(<span class="string">"平均绝对误差（mean absolute error） ："</span></span><br><span class="line">      , round(sm.mean_absolute_error(y_test, y_test_pred), <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"均方误差（mean squared error） ："</span></span><br><span class="line">     , round(sm.mean_squared_error(y_test, y_test_pred), <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"中位数绝对误差（median absolute error） ："</span></span><br><span class="line">     , round(sm.median_absolute_error(y_test, y_test_pred), <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"解释方差分（explained variance score） ："</span></span><br><span class="line">     , round(sm.explained_variance_score(y_test, y_test_pred), <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"R方得分（R2 score） ："</span></span><br><span class="line">     , round(sm.r2_score(y_test, y_test_pred)))</span><br></pre></td></tr></table></figure>
+<pre><code>平均绝对误差（mean absolute error） ： 3.95
+均方误差（mean squared error） ： 23.15
+中位数绝对误差（median absolute error） ： 3.69
+解释方差分（explained variance score） ： 0.84
+R方得分（R2 score） ： 1.0
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> Line</span><br><span class="line">line = Line(<span class="string">"期望值测试对比"</span>)</span><br><span class="line">line.add(<span class="string">'测试目标值'</span>, np.linspace(<span class="number">-20</span>,<span class="number">40</span>,len(y_test)), y_test, mark_line=[<span class="string">"average"</span>], is_datazoom_show=<span class="keyword">True</span>)</span><br><span class="line">line.add(<span class="string">'实际测试值'</span>, np.linspace(<span class="number">-20</span>,<span class="number">40</span>,len(y_test)),  y_test_pred, mark_line=[<span class="string">"average"</span>], is_datazoom_show=<span class="keyword">True</span>)</span><br><span class="line">line</span><br><span class="line"></span><br><span class="line"><span class="comment"># 80%训练集和20%测试集</span></span><br><span class="line">num_train = int(<span class="number">0.8</span> * len(X))</span><br><span class="line">num_test = len(X) - num_train</span><br><span class="line">X_train = np.array(X[:num_train]).reshape(num_train,<span class="number">1</span>)</span><br><span class="line">y_train = np.array(y[:num_train])</span><br><span class="line"></span><br><span class="line">X_test = np.array(X[num_train:]).reshape(num_test, <span class="number">1</span>)</span><br><span class="line">y_test = np.array(y[num_train:])</span><br></pre></td></tr></table></figure>
+<p><img src="/images/01/test1.png" alt="Alt text"></p>
+<h2 id="创建多项式回归器（重点）"><a href="#创建多项式回归器（重点）" class="headerlink" title="创建多项式回归器（重点）"></a>创建多项式回归器（重点）</h2><p>数据点本身的模式中带有自然的曲线，而线性模型是不能捕捉到这一点的。多项式回归模型的曲率是由多项式的次数决定的。随着模型曲率的增加，模型变得更准确。但是，增加曲率的同时也增加了模型的复杂性，因此拟合速度会变慢。当我们对模型的准确性的理想追求与计算能力限制的残酷现实发生冲突时，就需要综合考虑了。</p>
+<p>下面使用岭回归的数据，注意和简单线性回归的区别。 这里使用的观察数据是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X_train[0] : array([0.39, 2.78, 7.11])</span><br><span class="line">y_train[0] : -8.07</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> PolynomialFeatures</span><br><span class="line"></span><br><span class="line"><span class="comment">#将曲线的多项式次数初始值设置为3</span></span><br><span class="line">poly = PolynomialFeatures(degree = <span class="number">20</span>) </span><br><span class="line"><span class="comment"># “其中，X_train_transformed 表示多项式形式的输入，与线性回归模型是一样的。”</span></span><br><span class="line">X_train_transformed = poly.fit_transform(X_train)  </span><br><span class="line"></span><br><span class="line"><span class="comment">#测试一下</span></span><br><span class="line">dp = X_train[<span class="number">0</span>].reshape(<span class="number">1</span>,<span class="number">-1</span>)</span><br><span class="line">poly_dp = poly.fit_transform(dp)</span><br><span class="line"></span><br><span class="line">poly_liner = linear_model.LinearRegression()</span><br><span class="line">poly_liner.fit(X_train_transformed, y_train)        <span class="comment">#这里注意输入转换后的X_train</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"\nLinear regression:"</span>, rid.predict(dp)[<span class="number">0</span>])</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"\nPolynomial regression:"</span>, poly_liner.predict(poly_dp)[<span class="number">0</span>]) <span class="comment">##这输入转换后的X_test</span></span><br></pre></td></tr></table></figure>
+<pre><code>Linear regression: -11.058646635286552
+
+Polynomial regression: -8.070076359128953
+</code></pre><ul>
+<li>多项式次数为1时 返回预测结果为：-11.058729498335897，欠拟合</li>
+<li>多项式次数为10时 返回预测结果为：-8.206005341193759，这里与真实值-8.07已经非常接近了</li>
+<li>多项式次数为20时 返回预测结果为：-8.070076359128953，针对这个值的预测最完美</li>
+<li>多项式次数为100时 返回预测结果为：10.01397529328105，说明出现过拟合</li>
+</ul>
+<h2 id="daBoost算法估算房屋价格"><a href="#daBoost算法估算房屋价格" class="headerlink" title="daBoost算法估算房屋价格"></a>daBoost算法估算房屋价格</h2><p><strong>利用AdaBoost算法的决策树回归器<code>（decision tree regreessor）</code>来估算房屋价格</strong></p>
+<p>决策树是一个树状模型，每个节点都做出一个决策，从而影响最终结果。叶子节点表示输出数值，分支表示根据输入特征做出的中间决策。<code>AdaBoost</code>算法是指自适应增强（<code>adaptive boosting</code>）算法，这是一种利用其他系统增强模型准确性的技术。这种技术是将不同版本的算法结果进行组合，用加权汇总的方式获得最终结果，被称为弱学习器 （<code>weak learners</code>）。<code>AdaBoost</code>算法在每个阶段获取的信息都会反馈到模型中，这样学习器就可以在后一阶段重点训练难以分类的样本。这种学习方式可以增强系统的准确性。</p>
+<p>首先使用<code>AdaBoost</code>算法对数据集进行回归拟合，再计算误差，然后根据误差评估结果，用同样的数据集重新拟合。可以把这些看作是回归器的调优过程，直到达到预期的准确性。假设你拥有一个包含影响房价的各种参数的数据集，我们的目标就是估计这些参数与房价的关系，这样就可以根据未知参数估计房价了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> AdaBoostRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error, explained_variance_score</span><br><span class="line"><span class="keyword">from</span> sklearn.utils <span class="keyword">import</span> shuffle</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">hous_data = datasets.load_boston()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 利用shuffle函数把数据的顺序打乱（参数random_state用来控制如何打乱数据）</span></span><br><span class="line">X, y = shuffle(hous_data.data, hous_data.target, random_state=<span class="number">7</span>)</span><br><span class="line"></span><br><span class="line">num = int(<span class="number">0.8</span> * len(X))</span><br><span class="line">X_train, y_train = X[:num], y[:num]</span><br><span class="line">X_test, y_test = X[num:], y[num:]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择最大深度为5的决策树回归模型</span></span><br><span class="line">dtre = DecisionTreeRegressor(max_depth=<span class="number">5</span>)</span><br><span class="line">dtre.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 再用带AdaBoost算法的决策树回归模型进行拟合与上面进行比较</span></span><br><span class="line">abre = AdaBoostRegressor(DecisionTreeRegressor(max_depth=<span class="number">5</span>), n_estimators=<span class="number">400</span>, random_state=<span class="number">7</span>)</span><br><span class="line">abre.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment">#  看看AdaBoost算法对决策树回归器的训练效果有多大改善</span></span><br><span class="line">y_pred_dt = dtre.predict(X_test)</span><br><span class="line">mse = mean_squared_error(y_test, y_pred_dt)</span><br><span class="line">evs = explained_variance_score(y_test, y_pred_dt)</span><br><span class="line">print(<span class="string">"决策树-均方误差: "</span>, mse)</span><br><span class="line">print(<span class="string">"决策树-解释方差: "</span>, evs)</span><br><span class="line"></span><br><span class="line">y_pred_ab = abre.predict(X_test)</span><br><span class="line">mse = mean_squared_error(y_test, y_pred_ab)</span><br><span class="line">evs = explained_variance_score(y_test, y_pred_ab)</span><br><span class="line">print(<span class="string">"\nAbaBoost决策树-均方误差: "</span>, mse)</span><br><span class="line">print(<span class="string">"AbaBoost决策树-解释方差: "</span>, evs)</span><br></pre></td></tr></table></figure>
+<pre><code>决策树-均方误差:  12.74782456548819
+决策树-解释方差:  0.8454595720920495
+
+AbaBoost决策树-均方误差:  7.015648111222207
+AbaBoost决策树-解释方差:  0.9147414844474588
+</code></pre><h2 id="计算特征的相对重要性-（如交通案例计算各出口贡献率）"><a href="#计算特征的相对重要性-（如交通案例计算各出口贡献率）" class="headerlink" title="计算特征的相对重要性 （如交通案例计算各出口贡献率）"></a>计算特征的相对重要性 （如交通案例计算各出口贡献率）</h2><p><strong>(<em>modle.feature__importances</em>)</strong></p>
+<p>在这个案例中，我们用了13个特征，它们对模型都有贡献。但是，有一个重要的问题出现了：如何判断哪个特征更加重要？显然，所有的特征对结果的贡献是不一样的。如果需要忽略一些特征，就需要知道哪些特征不太重要。scikit-learn里面有这样的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_feature_importances</span><span class="params">(feature_importances, title, feature_names)</span>:</span></span><br><span class="line">    <span class="comment"># 将重要性值标准化</span></span><br><span class="line">    feature_importances = <span class="number">100.0</span> * (feature_importances / max(feature_importances))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将得分从高到低排序</span></span><br><span class="line">    index_sorted = np.flipud(np.argsort(feature_importances))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 让X坐标轴上的标签居中显示</span></span><br><span class="line">    pos = np.arange(index_sorted.shape[<span class="number">0</span>]) + <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 画条形图</span></span><br><span class="line">    plt.figure()</span><br><span class="line">    plt.bar(pos, feature_importances[index_sorted], align=<span class="string">'center'</span>)</span><br><span class="line">    plt.xticks(pos, feature_names[index_sorted])</span><br><span class="line">    plt.ylabel(<span class="string">'Relative Importance'</span>)</span><br><span class="line">    plt.title(title)</span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 画出特征的相对重要性</span></span><br><span class="line">plot_feature_importances(dtre.feature_importances_, </span><br><span class="line">        <span class="string">'Decision Tree regressor'</span>, hous_data.feature_names)</span><br><span class="line">plot_feature_importances(abre.feature_importances_, </span><br><span class="line">        <span class="string">'AdaBoost regressor'</span>, hous_data.feature_names)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/01/test2.png" alt="Alt text"></p>
+<p><img src="/images/01/test3.png" alt="Alt text"></p>
+<p>上图可以看出不带AbaBoost的决策树回归器显示最重要的特征是RM，而带AbaBoost算法的决策回归器现实的最主要特征是LASTAT。现实生活中如果对这个数据集建立不同的回归器会发现最重要的特征就是LSTAT，这足以体现AbaBoost算法对决策树训练效果的改善。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> Pie</span><br><span class="line"></span><br><span class="line">attr = f_name</span><br><span class="line">v1 = rf_regr.feature_importances_</span><br><span class="line">pie = Pie(<span class="string">"影响房价的因素分析"</span>)</span><br><span class="line">pie.add(<span class="string">"决策树回归器"</span>, hous_data.feature_names, dtre.feature_importances_, is_label_show=<span class="keyword">True</span>, label_emphasis_textcolor=<span class="string">'red'</span>,</span><br><span class="line">        label_emphasis_textsize=<span class="number">14</span>, is_random=<span class="keyword">True</span>, </span><br><span class="line">        legend_orient=<span class="string">'vertical'</span>, legend_pos=<span class="string">'1'</span>, legend_top=<span class="string">'40'</span>,</span><br><span class="line">        center=[<span class="number">35</span>, <span class="number">50</span>],radius=[<span class="number">0</span>, <span class="number">50</span>])</span><br><span class="line"></span><br><span class="line">pie.add(<span class="string">"AbaBoost决策树"</span>, hous_data.feature_names, abre.feature_importances_, is_label_show=<span class="keyword">True</span>, label_emphasis_textcolor=<span class="string">'red'</span>,</span><br><span class="line">        label_emphasis_textsize=<span class="number">14</span>, is_random=<span class="keyword">True</span>, </span><br><span class="line">        legend_orient=<span class="string">'vertical'</span>, legend_pos=<span class="string">'1'</span>, legend_top=<span class="string">'40'</span>,</span><br><span class="line">        center=[<span class="number">75</span>, <span class="number">50</span>],radius=[<span class="number">0</span>, <span class="number">50</span>])</span><br><span class="line">pie</span><br></pre></td></tr></table></figure>
+<p><img src="/images/01/test4.png" alt="Alt text"></p>
+<h2 id="随机森林评估共享单车的需求分布"><a href="#随机森林评估共享单车的需求分布" class="headerlink" title="随机森林评估共享单车的需求分布"></a>随机森林评估共享单车的需求分布</h2><p><strong>采用随机森林回归器<code>(random forest regressor)</code>估计输出结果。</strong></p>
+<p>随机森林死一个决策树合集，它基本上就是用一组由数据集的若干子集构建的决策树构成，再用决策树平均值改善整体学习效果</p>
+<p>我们将使用bike_day.csv文件中的数据集，它可以在 <a href="https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset" target="_blank" rel="noopener">https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset</a> 获取。这份数据集一共16列，前两列是序列号与日期，分析的时候可以不用；最后三列数据是不同类型的输出结果；最后一列是第十四列与第十五列的和，因此建立模型时可以不考虑第十四列与第十五列。</p>
+<p>参数<code>n_estimators</code>是指评估器<code>（estimator）</code>的数量，表示随机森林需要使用的决策树数量；<br>参数<code>max_depth</code> 是指每个决策树的最大深度；参数<code>min_samples_split</code>是指决策树分裂一个节点需要用到的最小数据样本量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestRegressor</span><br><span class="line"><span class="keyword">from</span> housing <span class="keyword">import</span> plot_feature_importances   <span class="comment">#这个方法源码参考上例</span></span><br><span class="line"></span><br><span class="line">data = pd.read_csv(<span class="string">'bike_day.csv'</span>,sep=<span class="string">','</span>)</span><br><span class="line"></span><br><span class="line">X = data[data.columns[<span class="number">2</span>:<span class="number">13</span>]]</span><br><span class="line">y = data[data.columns[<span class="number">-1</span>]]</span><br><span class="line">f_name = X.columns</span><br><span class="line"></span><br><span class="line">X, y = shuffle(X, y, random_state=<span class="number">7</span>)</span><br><span class="line"></span><br><span class="line">num = int(<span class="number">0.9</span> * len(X))</span><br><span class="line">X_train, y_train = X[:num], y[:num]</span><br><span class="line">X_test, y_test = X[num:], y[num:]</span><br><span class="line"></span><br><span class="line">rf_regr = RandomForestRegressor(n_estimators=<span class="number">1000</span>, max_depth=<span class="number">15</span>, min_samples_split=<span class="number">12</span>)</span><br><span class="line">rf_regr.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">y_pred = rf_regr.predict(X_test)</span><br><span class="line"></span><br><span class="line">mse = mean_squared_error(y_test, y_pred)</span><br><span class="line">evs = explained_variance_score(y_test, y_pred)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"随机森林回归器效果："</span>)</span><br><span class="line">print(<span class="string">"均方误差："</span>, round(mse, <span class="number">2</span>))</span><br><span class="line">print(<span class="string">"解释方差分："</span>, round(evs, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>随机森林回归器效果：
+均方误差： 368026.24
+解释方差分： 0.89
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> Pie</span><br><span class="line"></span><br><span class="line">attr = f_name</span><br><span class="line">v1 = rf_regr.feature_importances_</span><br><span class="line">pie = Pie(<span class="string">"共享单车因素分析"</span>)</span><br><span class="line">pie.add(<span class="string">"因素"</span>, attr, v1, is_label_show=<span class="keyword">True</span>, label_emphasis_textcolor=<span class="string">'red'</span>,</span><br><span class="line">        label_emphasis_textsize=<span class="number">14</span>, is_random=<span class="keyword">True</span>, </span><br><span class="line">        legend_orient=<span class="string">'vertical'</span>, legend_pos=<span class="string">'1'</span>, legend_top=<span class="string">'40'</span>)</span><br><span class="line">pie</span><br></pre></td></tr></table></figure>
+<p><img src="/images/01/test5.png" alt="Alt text"></p>
+<p><strong>利用按小时的数据计算相关性</strong></p>
+<p>这里要用到3～14列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">len(X_train)</span><br></pre></td></tr></table></figure>
+<pre><code>15641
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">hour_data = pd.read_csv(<span class="string">'bike_hour.csv'</span>, sep=<span class="string">','</span>)</span><br><span class="line">X = hour_data[hour_data.columns[<span class="number">2</span>:<span class="number">14</span>]]</span><br><span class="line">y = hour_data[hour_data.columns[<span class="number">-1</span>]]</span><br><span class="line">X, y = shuffle(X, y, random_state=<span class="number">7</span>)</span><br><span class="line"></span><br><span class="line">num = int(<span class="number">0.9</span>*len(X))</span><br><span class="line">X_train, y_train = X[:num], y[:num]</span><br><span class="line">X_test, y_test = X[num:], y[num:]</span><br><span class="line">f_names = X.columns</span><br><span class="line"></span><br><span class="line">hrf_regr = RandomForestRegressor(n_estimators=<span class="number">1000</span>, max_depth=<span class="number">15</span>, min_samples_split=<span class="number">10</span>)</span><br><span class="line">hrf_regr.fit(X_train, y_train)</span><br><span class="line">y_pred = hrf_regr.predict(X_test)</span><br><span class="line">mse = mean_squared_error(y_test, y_pred)</span><br><span class="line">evs = explained_variance_score(y_test, y_pred)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"均方误差："</span>, mse)</span><br><span class="line">print(<span class="string">"解释方差分："</span>, evs)</span><br></pre></td></tr></table></figure>
+<pre><code>均方误差： 1884.1767363623571
+解释方差分： 0.9414038595964176
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">attr = f_names</span><br><span class="line">v1 = hrf_regr.feature_importances_</span><br><span class="line">pie = Pie(<span class="string">"共享单车因素分析"</span>)</span><br><span class="line">pie.add(<span class="string">"因素"</span>, attr, v1, is_label_show=<span class="keyword">True</span>, label_emphasis_textcolor=<span class="string">'red'</span>,</span><br><span class="line">        label_emphasis_textsize=<span class="number">14</span>, is_random=<span class="keyword">True</span>, </span><br><span class="line">        legend_orient=<span class="string">'vertical'</span>, legend_pos=<span class="string">'1'</span>, legend_top=<span class="string">'40'</span>)</span><br><span class="line">pie</span><br></pre></td></tr></table></figure>
+<p><img src="/images/01/test6.png" alt="Alt text"></p>
+<p>由图可见，其中最重要的特征是一天中的不同时间点（hr），其次重要的是温度，这完全符合人们的直觉。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/scikit-learn/" rel="tag"><i class="fa fa-tag"></i> scikit-learn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/Hbaseproblom.html" rel="next" title="Hbase启动后进程丢失的原因分析">
+                <i class="fa fa-chevron-left"></i> Hbase启动后进程丢失的原因分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/hive.html" rel="prev" title="Hive使用Mysql作为元数据库报错的bug解决办法">
+                Hive使用Mysql作为元数据库报错的bug解决办法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#监督学习简介"><span class="nav-number">1.</span> <span class="nav-text">监督学习简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据预处理技术"><span class="nav-number">2.</span> <span class="nav-text">数据预处理技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#均值移除-mean-removal"><span class="nav-number">2.1.</span> <span class="nav-text">均值移除 mean removal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范围缩放-min-max-scaling"><span class="nav-number">2.2.</span> <span class="nav-text">范围缩放 min max scaling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归一化-normalization"><span class="nav-number">2.3.</span> <span class="nav-text">归一化 normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二值化-binarization"><span class="nav-number">2.4.</span> <span class="nav-text">二值化 binarization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#独热编码"><span class="nav-number">2.5.</span> <span class="nav-text">独热编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标记编码方法"><span class="nav-number">3.</span> <span class="nav-text">标记编码方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建线性回归"><span class="nav-number">4.</span> <span class="nav-text">创建线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算回归准确性"><span class="nav-number">5.</span> <span class="nav-text">计算回归准确性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存模型数据"><span class="nav-number">6.</span> <span class="nav-text">保存模型数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建岭回归"><span class="nav-number">7.</span> <span class="nav-text">创建岭回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建多项式回归器（重点）"><span class="nav-number">8.</span> <span class="nav-text">创建多项式回归器（重点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#daBoost算法估算房屋价格"><span class="nav-number">9.</span> <span class="nav-text">daBoost算法估算房屋价格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算特征的相对重要性-（如交通案例计算各出口贡献率）"><span class="nav-number">10.</span> <span class="nav-text">计算特征的相对重要性 （如交通案例计算各出口贡献率）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机森林评估共享单车的需求分布"><span class="nav-number">11.</span> <span class="nav-text">随机森林评估共享单车的需求分布</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
