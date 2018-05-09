@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="hbase," />
+  <meta name="keywords" content="spark sql," />
 
 
 
@@ -83,20 +83,23 @@
 
 
 
-<meta name="description" content="Hbase启动后进程丢失的原因分析原理：  分布式Apache HBase安装依赖于正在运行的ZooKeeper集群。Apache HBase默认情况下为您管理ZooKeeper“集群”。它将启动和停止ZooKeeper集合作为HBase启动/停止过程的一部分。 当然也可以独立于HBase管理ZooKeeper集群，只需要在Hbase的配置文件hbase-env.sh中做一些设置即可。要切换Zo">
-<meta name="keywords" content="hbase">
+<meta name="description" content="Spark SQL （一）基础框架和核心组件今天被问到Spark Sql和Dataframe的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。 1. Spark SQL发展史在Spark的早期版本，为什么解决Hive查询在性能上的问题，在Spark生态圈引入了一个名为Shark的项目。（使用Spark的计算引">
+<meta name="keywords" content="spark sql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hbase启动后进程丢失的原因分析">
-<meta property="og:url" content="http://www.ihoge.cn/2018/Hbaseproblom.html">
+<meta property="og:title" content="Spark SQL （一）基础框架和核心组件">
+<meta property="og:url" content="http://www.ihoge.cn/2018/SparkSQL1.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
-<meta property="og:description" content="Hbase启动后进程丢失的原因分析原理：  分布式Apache HBase安装依赖于正在运行的ZooKeeper集群。Apache HBase默认情况下为您管理ZooKeeper“集群”。它将启动和停止ZooKeeper集合作为HBase启动/停止过程的一部分。 当然也可以独立于HBase管理ZooKeeper集群，只需要在Hbase的配置文件hbase-env.sh中做一些设置即可。要切换Zo">
-<meta property="og:image" content="http://www.ihoge.cn/images/1.png">
-<meta property="og:image" content="http://www.ihoge.cn/images/2.png">
-<meta property="og:updated_time" content="2018-04-22T14:57:07.116Z">
+<meta property="og:description" content="Spark SQL （一）基础框架和核心组件今天被问到Spark Sql和Dataframe的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。 1. Spark SQL发展史在Spark的早期版本，为什么解决Hive查询在性能上的问题，在Spark生态圈引入了一个名为Shark的项目。（使用Spark的计算引">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258813010356.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258818229539.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258850302556.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258851101623.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258847849628.jpg">
+<meta property="og:updated_time" content="2018-05-09T17:01:16.311Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hbase启动后进程丢失的原因分析">
-<meta name="twitter:description" content="Hbase启动后进程丢失的原因分析原理：  分布式Apache HBase安装依赖于正在运行的ZooKeeper集群。Apache HBase默认情况下为您管理ZooKeeper“集群”。它将启动和停止ZooKeeper集合作为HBase启动/停止过程的一部分。 当然也可以独立于HBase管理ZooKeeper集群，只需要在Hbase的配置文件hbase-env.sh中做一些设置即可。要切换Zo">
-<meta name="twitter:image" content="http://www.ihoge.cn/images/1.png">
+<meta name="twitter:title" content="Spark SQL （一）基础框架和核心组件">
+<meta name="twitter:description" content="Spark SQL （一）基础框架和核心组件今天被问到Spark Sql和Dataframe的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。 1. Spark SQL发展史在Spark的早期版本，为什么解决Hive查询在性能上的问题，在Spark生态圈引入了一个名为Shark的项目。（使用Spark的计算引">
+<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258813010356.jpg">
 
 
 
@@ -126,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/Hbaseproblom.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/SparkSQL1.html"/>
 
 
 
 
 
-  <title>Hbase启动后进程丢失的原因分析 | Hoooge's Blog</title>
+  <title>Spark SQL （一）基础框架和核心组件 | Hoooge's Blog</title>
   
 
 
@@ -269,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/Hbaseproblom.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/SparkSQL1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -286,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hbase启动后进程丢失的原因分析</h1>
+          <h1 class="post-title" itemprop="name headline">Spark SQL （一）基础框架和核心组件</h1>
         
 
         <div class="post-meta">
@@ -298,8 +301,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-21T11:59:21+08:00">
-                2018-03-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-10T01:00:21+08:00">
+                2018-05-10
               </time>
             
 
@@ -321,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
                   </a>
                 </span>
 
@@ -364,21 +367,48 @@
 
       
         <a id="more"></a>
-<h3 id="Hbase启动后进程丢失的原因分析"><a href="#Hbase启动后进程丢失的原因分析" class="headerlink" title="Hbase启动后进程丢失的原因分析"></a>Hbase启动后进程丢失的原因分析</h3><p><strong>原理：</strong></p>
+<h1 id="Spark-SQL-（一）基础框架和核心组件"><a href="#Spark-SQL-（一）基础框架和核心组件" class="headerlink" title="Spark SQL （一）基础框架和核心组件"></a>Spark SQL （一）基础框架和核心组件</h1><p>今天被问到<code>Spark Sql</code>和<code>Dataframe</code>的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。</p>
+<h2 id="1-Spark-SQL发展史"><a href="#1-Spark-SQL发展史" class="headerlink" title="1. Spark SQL发展史"></a>1. Spark SQL发展史</h2><p>在<code>Spark</code>的早期版本，为什么解决<code>Hive</code>查询在性能上的问题，在<code>Spark</code>生态圈引入了一个名为<code>Shark</code>的项目。（使用<code>Spark</code>的计算引擎而不是<code>MapReduce</code>来执行<code>Hive</code>查询）。<code>Shark</code>是在<code>Hive</code>代码库上构建的，使用<code>Hive</code>查询编译器来解析<code>Hive</code>查询并生成一个抽象语法树，它会转化为一个具有某些基本优化的逻辑计划。<code>Shark</code>应用了额外的优化手段并创建了一个<code>RDD</code>操作额度物理计划，然后在<code>Spark</code>上执行。基于这种对<code>Hive</code>的过分依赖，也让<code>Shark</code>本身具有一些问题：</p>
+<ol>
+<li>只适用于查询<code>Hive</code>表。无法在RDD上进行关系查询。</li>
+<li>在<code>Spark</code>程序中将<code>Hive-QL</code>作为字符串运行容易出错。</li>
+<li>它的<code>Hive</code>优化器是为<code>MapReduce</code>附案例创建的，很难讲<code>Spark</code>扩展到新的数据源和新的处理模型。<br>基于以上原因，<code>Spark</code>团队终止了<code>Shark</code>，原班人马合并全力开发<code>Spark SQL</code>。下面是<code>Spark SQL</code>的发展史。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15258813010356.jpg" alt=""><br><img src="http://p6rvh6ej2.bkt.clouddn.com/15258818229539.jpg" alt=""><h2 id="2-Spark-SQL的构架"><a href="#2-Spark-SQL的构架" class="headerlink" title="2. Spark SQL的构架"></a>2. Spark SQL的构架</h2><code>Spark SQL</code>是在<code>Spark</code>核心执行引擎上的一个库，它借助JDBC/ODBC公开了SQL接口，用于数据仓库应用程序，或通过命令行进行交互式查询。因此<strong>任何商务智能（BI）工具都可以连接到Spark SQL以内存速度执行分析</strong>。<br>它还提供了<code>Java、Scala、Python、R</code>支持的<code>Dataset API</code>和<code>Dataframe API</code>。（注意：Python和R不支持Dataset）<br><code>Spark SQL</code>用户可以使用<code>Data Sourse API</code>从各种数据源读取和写入数据，从而创建<code>Dataframe</code> 或者 <code>Dataset</code>。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15258850302556.jpg" alt=""><br><code>Spark SQL</code>还扩展了用于所有其他<code>Spark</code>库（如 <code>SparkR、SparkStreaming、Structred Streaming、ML、MLlib、GraphX）的DataSet API、Dataframe API和Data Sources API</code>。如下图所示：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15258851101623.jpg" alt=""></li>
+</ol>
+<p><code>Spark SQL</code>引入了<code>Catalyst</code>的可扩展优化器，一直吃大多数常见的数据源和算法。<code>Catalyst</code>支持添加新的数据源、优化规则和某些领域（如机器学习）使用的数据类型。</p>
+<h2 id="3-Spark-SQL的四个组件"><a href="#3-Spark-SQL的四个组件" class="headerlink" title="3. Spark SQL的四个组件"></a>3. Spark SQL的四个组件</h2><p>Spark SQL 中的四个组件分别是：<strong>SQL、 Data Sources API、 DataFrame API、 DataSet API</strong><br>下面一一展开：</p>
 <ul>
-<li>分布式Apache HBase安装依赖于正在运行的ZooKeeper集群。<strong>Apache HBase默认情况下为您管理ZooKeeper“集群”。</strong>它将启动和停止ZooKeeper集合作为HBase启动/停止过程的一部分。</li>
-<li><p>当然也可以独立于HBase管理ZooKeeper集群，只需要在Hbase的配置文件hbase-env.sh中做一些设置即可。要切换ZooKeeper的HBase管理，请使用conf/hbase-env.sh中的HBASE_MANAGES_ZK变量。 此变量默认为true，告诉HBase是否启动/停止ZooKeeper集合服务器作为HBase启动/停止的一部分。如果为true，这Hbase把zookeeper启动，停止作为自身启动和停止的一部分。如果设置为false，则表示独立的Zookeeper管理。</p>
+<li><p><strong>Spark SQL</strong>可以使用SQL语言向Hive表写入读取数据。</p>
+<p>  SQL通过ODBC/JDBC或命令行选项在Java、Scala、Python、R语言中使用。在编程语言中使用SQL时，结果会转换成DataFrame。<strong>SQL</strong>的优点是可以轻松的处理Hive表，并且可以利用Thrift服务器将BI工具连接到分布式SQL引擎，并利用JDBC/ODBC接口提交SQL或HQL查询。</p>
 </li>
-<li><p>既然我们配置的是HBase管理zookeeper，那么zookeeper在给Hbase提供底层支撑的时候需要与Hbase建立通信，这里最直接高效的通信方式就是建立在本地回环上。</p>
+<li><p><strong>Data Sources API</strong>为使用Spark SQL 读取和写入数据提供了统一的接口。</p>
+<p>  Data Sources API的优点有：</p>
+<pre><code>1. 容易加载/保存Dataframe
+2. 通过到数据源的*谓词下推*方式进行高效的数据访问，采用这种方式能从数据源读取更少的数据。
+3. 为任何新的数据源构建库
+4. 无需包含在Spark代码中
+5. 很容易与Spark组件包共享新的数据源。
+
+--谓词下推的思路是让筛选数据的条件表达式尽可能靠近数据源执行，从而减少数据额移动和传输。谓词就是筛选数据的条件，下推就是让这些筛选动作尽量在靠近数据源的位置执行。
+</code></pre></li>
+<li><p><strong>DataFrame API</strong>旨在让大数据分析工作更为简单易行。</p>
+<p>  这个API收到了R和Python（Pandas库）中的DataFrame的启发，但他被实际用于大规模数据集的分布式处理一支持大数据分析。<em>DataFrame可以看作是对现有RDD API的扩展，也是RDD纸上的一个抽象</em><br>  DataFrame的优点有：</p>
+<pre><code>1. 易于使用域特定语言开发应用程序
+2. 在传统RDD基础上的高性能，并且在Scala、Java、Python、R中都具备近似性能
+3. 在数据源中自动发现模式类型（Schema）和分区
+4. 支持多种数据源
+5. 通过Catalyst优化器进行优化和代码生成
+6. 可以与RDD、DatSet、Pandas和外部数据源（RDBMS关系型数据库、HBase、Cassandra等）互操作
+</code></pre></li>
+<li><p><strong>DataSet API</strong></p>
+<p>  Spark1.6 版本引入的 DataSet API 结合了 RDD 和 DataFrame的最大优点。 DatSet 会使用编码器将JVM对象转换为用 Spark 的 Tungsten 二进制格式存储的 DatSet 表形式。<br>  它的优点有：</p>
+<pre><code>1. 和 RDD 一样，类型安全性
+2. 和 DataFrame 一样， 比 RDD 更快
+3. 与 DataFrame 和 RDD 之间具有互操性
+4. 缓存的 DatSet 专用的空间比 RDD 更少
+5. 使用编码器进行序列话比 Java 或 Kyro 序列化更快 
+</code></pre><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15258847849628.jpg" alt=""></p>
 </li>
-<li>由于最初虚拟机安装Hbase和zookeeper后启动服务的时候Hbase默认是按照 hosts文件的第二行127.0.1.1的本地回环地址和匹配的主机名建立通信（这里我们默认安装的是hduser）。这时zookeeper会生成一个记录文件把127.0.1.1和主机名保存下来。</li>
-<li>后来改成集群模式的时候，把hosts文件第二行的127.0.1.1以及对应的主机名屏蔽掉了。但是Hbase还是按照之前的本地回环地址和主机名尝试取联系对应的zookeeper，但是“身份“信息已经在hosts中被我们屏蔽掉了，所以造成最直接的影响就是主节点的HMaster进程启动后很快丢失，并且可能会造成master节点多了个HRegionServer进程以及从节点的进程紊乱。</li>
-<li>为什么会这样呢？ 启动HBase后我们jps看一下主节点的进程有个HMaster和一个HQ<em>的进程。 HQ</em>这个进程是用来寻找zookeeper的，但是它这时找不到zookeeper，所以就和HMaster一起“死掉了”。</li>
-<li>同理这也是为什么为分布式集群改为分布式集群启动之前需要删除tmp并格式化的原因。否则Apache-hadoop会默认按照之前记录的本地回环地址进行寻址。</li>
 </ul>
-<p>这里的解决方案是彻底删除hbase和zookeeper组件重新安装配置后即可正常启动，且进程将不会再莫名丢失。</p>
-<p><strong>主节点进程：</strong><br><img src="/images/1.png" alt="Alt text"></p>
-<p><strong>从节点进程：</strong><br><img src="/images/2.png" alt="Alt text"></p>
 
       
     </div>
@@ -396,7 +426,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hbase/" rel="tag"><i class="fa fa-tag"></i> hbase</a>
+            <a href="/tags/spark-sql/" rel="tag"><i class="fa fa-tag"></i> spark sql</a>
           
         </div>
       
@@ -409,8 +439,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/Pyhive.html" rel="next" title="利用Pyhive实现Python连接Hive数据仓库">
-                <i class="fa fa-chevron-left"></i> 利用Pyhive实现Python连接Hive数据仓库
+              <a href="/2018/ML2.html" rel="next" title="Spark ML - 聚类算法">
+                <i class="fa fa-chevron-left"></i> Spark ML - 聚类算法
               </a>
             
           </div>
@@ -418,10 +448,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/MLLearning.html" rel="prev" title="监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）">
-                监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -593,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hbase启动后进程丢失的原因分析"><span class="nav-number">1.</span> <span class="nav-text">Hbase启动后进程丢失的原因分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-SQL-（一）基础框架和核心组件"><span class="nav-number">1.</span> <span class="nav-text">Spark SQL （一）基础框架和核心组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Spark-SQL发展史"><span class="nav-number">1.1.</span> <span class="nav-text">1. Spark SQL发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Spark-SQL的构架"><span class="nav-number">1.2.</span> <span class="nav-text">2. Spark SQL的构架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Spark-SQL的四个组件"><span class="nav-number">1.3.</span> <span class="nav-text">3. Spark SQL的四个组件</span></a></li></ol></li></ol></div>
             
 
           </div>

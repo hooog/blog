@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/SparkSQL1.html</loc>
+    <lastmod>2018-05-09T17:01:16.311Z</lastmod>
+    <data>
+        <display>
+        <title>Spark SQL （一）基础框架和核心组件</title>
+        <pubTime>2018-05-09T17:00:21.000Z</pubTime>
+        
+        <tag>spark sql</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/Pyhive.html</loc>
     <lastmod>2018-05-09T12:41:11.747Z</lastmod>
     <data>
@@ -862,6 +882,44 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/hadoop.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？</title>
+        <pubTime>2018-03-26T16:28:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
+        <pubTime>2018-03-17T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/KNN.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
@@ -895,44 +953,6 @@
            
              
               <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
-        <pubTime>2018-03-17T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/hadoop.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？</title>
-        <pubTime>2018-03-26T16:28:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
           
         </display>
     </data>
