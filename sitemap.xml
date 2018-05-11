@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
+    
+    <lastmod>2018-05-11T15:40:12.207Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/2018-05-11.html</loc>
+    
+    <lastmod>2018-05-11T15:39:41.371Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/2018/pymysql.html</loc>
     
-    <lastmod>2018-05-10T03:05:51.920Z</lastmod>
+    <lastmod>2018-05-10T03:08:28.235Z</lastmod>
     
   </url>
   
@@ -317,21 +331,7 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
+    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     
@@ -345,14 +345,28 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
+    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
+    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     

@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="algorithm," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="KNN——不需要学习的算法概述KNN（K-Nearest Neighbor）算法是机器学习中算法中最基础和简单的算法之一。它既能用于分类，也能用于回归。本文将在不同的小节详细地介绍 KNN 算法在分类和回归两种任务下的运用原理。 KNN 算法的思想非常简单：对于任意的 n 维输入向量，其对应于特征空间一个点，输出为该特征向量所对应的类别标签或者预测值。KNN 算法在机器学习算法中有一个十分特别的">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KNN——不需要学习的算法">
+<meta property="og:url" content="http://www.ihoge.cn/2018/KNN1.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="KNN——不需要学习的算法概述KNN（K-Nearest Neighbor）算法是机器学习中算法中最基础和简单的算法之一。它既能用于分类，也能用于回归。本文将在不同的小节详细地介绍 KNN 算法在分类和回归两种任务下的运用原理。 KNN 算法的思想非常简单：对于任意的 n 维输入向量，其对应于特征空间一个点，输出为该特征向量所对应的类别标签或者预测值。KNN 算法在机器学习算法中有一个十分特别的">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15260483350913.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15260517984690.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15260528682435.jpg">
+<meta property="og:updated_time" content="2018-05-11T15:40:12.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KNN——不需要学习的算法">
+<meta name="twitter:description" content="KNN——不需要学习的算法概述KNN（K-Nearest Neighbor）算法是机器学习中算法中最基础和简单的算法之一。它既能用于分类，也能用于回归。本文将在不同的小节详细地介绍 KNN 算法在分类和回归两种任务下的运用原理。 KNN 算法的思想非常简单：对于任意的 n 维输入向量，其对应于特征空间一个点，输出为该特征向量所对应的类别标签或者预测值。KNN 算法在机器学习算法中有一个十分特别的">
+<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15260483350913.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/KNN1.html"/>
+
+
+
+
+
+  <title>KNN——不需要学习的算法 | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/KNN1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">KNN——不需要学习的算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-11T23:38:21+08:00">
+                2018-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h1 id="KNN——不需要学习的算法"><a href="#KNN——不需要学习的算法" class="headerlink" title="KNN——不需要学习的算法"></a>KNN——不需要学习的算法</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>KNN（K-Nearest Neighbor）算法是机器学习中算法中最基础和简单的算法之一。它既能用于分类，也能用于回归。本文将在不同的小节详细地介绍 KNN 算法在分类和回归两种任务下的运用原理。</p>
+<p>KNN 算法的思想非常简单：对于任意的 n 维输入向量，其对应于特征空间一个点，输出为该特征向量所对应的类别标签或者预测值。KNN 算法在机器学习算法中有一个十分特别的地方，那就是它没有一个显示的学习过程。它实际上的工作原理是利用训练数据对特征向量空间进行划分，并将其划分的结果作为其最终的算法模型。</p>
+<h2 id="1-KNN分类算法"><a href="#1-KNN分类算法" class="headerlink" title="1. KNN分类算法"></a>1. KNN分类算法</h2><p>KNN 分类算法的分类预测过程十分的简单和容易理解：对于一个需要预测的输入向量 x，我们只需要在训练数据集中寻找 k 个与向量 x 最近的向量的集合，然后把 x 的类标预测为这 k 个样本中类标数最多的那一类。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15260483350913.jpg" alt=""><br>如图所示，$w_1,w_2,w_3$分别代表的是训练机中的三个类别。图中$x_u$最相近的5（k=5）个点如图中箭头所指，很明显与$x_u$最相近的5个点中最多的泪标为$w_1$，因此KNN算法将$x_u$的类别预测为$w_1$。</p>
+<p>基于上述思想给出KNN算法公式原理：</p>
+<h3 id="1-1-KNN算法原理"><a href="#1-1-KNN算法原理" class="headerlink" title="1.1 KNN算法原理"></a>1.1 KNN算法原理</h3><p><strong>输入</strong>：训练数据集</p>
+<p>$T={(x_1,y_1),(x_2,y_2),(x_3,y_3),…,(x_N,y_N)}$</p>
+<p>其中：<br>$x_i\in X⊆R^n$ 为 n 维的实例特征向量。<br>$y_i\in Y={c_1,c_2,…,c_K}$为实例的类别，$i=1,2,3,…,N$，预测实例$x$。</p>
+<p><strong>输出</strong>：预测实例$x$所属类别$y$。</p>
+<p><strong>算法执行步骤</strong>：</p>
+<ol>
+<li>根据给定的距离度量方法（一般情况下使用欧氏距离）在训练集$T$中寻找出与$x$最相近的$k$个样本点，并将这$k$个样本点所表示的集合记为$N_k(x)$；</li>
+<li>根据多数投票原则确定实例$x$所属的类别$y$。</li>
+</ol>
+<p>从上述的 KNN 原理中，我们发现有两个因素必须确定才能是 KNN 分类算法真正能勾运行：（1）算法超参数K；（2）模型向量空间的距离度量。</p>
+<h3 id="1-2-K值的确定"><a href="#1-2-K值的确定" class="headerlink" title="1.2 K值的确定"></a>1.2 K值的确定</h3><p>KNN 算法中只有唯一的一个超参数 K，很明显 K 值的选择对最终算法的预测结果会产生至关重要的影响。接下来就简单的讨论一下 K 值的大小对算法结果的影响以及一般情况下如何选择 K 值。</p>
+<p>如果 K 值选择的比较小，这时候我们就相当于使用较小的领域中的训练样本对实例进行预测。这时候，算法的近似误差（Approximate Error）会减小，因为只有与输入实例相近的训练样本才能才会对预测结果起作用。但是它也会有明显的缺点：算法的估计误差会偏大，预测的结果会对近邻点十分敏感，也就是说如果近邻点是噪声点的话，那么预测就会出错。也就是说，K 值太小会使得 KNN 算法容易过拟合。</p>
+<p>同理，如果 K 值选的比较大的话，这时候距离较远的训练样本都能够对实例的预测结果产生影响。这时候，而模型相对比较鲁棒，不会因个别噪声点对最终的预测产生影响。但是缺点也是十分明显的：算法的近似误差会偏大，距离较远的点（与预测实例不相似）也会同样对预测结果产生作用，使得预测产生较大偏差。此时相当于模型发生欠拟合。</p>
+<p>因此，在实际的工程实践过程中，我们一般<strong>采用交叉验证的方式选取 K 值</strong>。从上面的分析也可以知道，一般 K 值取得比较小。<em>我们会选取 K 值在较小的范围，同时在测试集上准确率最高的那一个确定为最终的算法超参数 K。</em></p>
+<h3 id="1-3-距离的度量"><a href="#1-3-距离的度量" class="headerlink" title="1.3 距离的度量"></a>1.3 距离的度量</h3><p>样本空间中两个点之间的距离度量表示的是两个样本点之间的相似程度：距离越短，表示相似程度越高；相反，距离越大，表示两个样本的相似程度低。</p>
+<p>常用的距离度量方式有：</p>
+<ol>
+<li>闵可夫斯基距离；</li>
+<li>欧氏距离；</li>
+<li>曼哈顿距离；</li>
+<li>切比雪夫距离；</li>
+<li>余弦距离。</li>
+</ol>
+<h4 id="1-3-1-闵可夫斯基距离"><a href="#1-3-1-闵可夫斯基距离" class="headerlink" title="1.3.1 闵可夫斯基距离"></a>1.3.1 闵可夫斯基距离</h4><p>闵可夫斯基距离不是一种距离，而是一类距离的定义。对于 n 维空间中的两个点 $x(x_1,x_2,x_3,…,x_n)$和$y(y_1,y_2,y_3,…,y_n)$，那么$x$和$y$亮点之间的闵可夫斯基距离为：$$d_{xy}=\sqrt{\sum_{i=1}^{n}{\left( x_{i}-y_{i} \right)^{p}}}$$<br>其中p是一个可变参数：</p>
+<ul>
+<li>当p=1时，被称为曼哈顿距离；</li>
+<li>当p=2时，被称为欧式距离；</li>
+<li>当p=$\infty $时，被称为切比雪夫距离。</li>
+</ul>
+<h4 id="1-3-2-欧式距离"><a href="#1-3-2-欧式距离" class="headerlink" title="1.3.2 欧式距离"></a>1.3.2 欧式距离</h4><p>由以上说明可知，欧式距离的计算公式为：<br>$$d_{xy}=\sqrt{\sum_{i=1}^{n}{\left( x_{i}-y_{i} \right)^{2}}}$$</p>
+<p>欧式距离（L2 范数）是最易于理解的一种距离计算方法，源自欧式空间中两点间的距离公式，也是最常用的距离度量方式。</p>
+<h4 id="1-3-3-曼哈顿距离"><a href="#1-3-3-曼哈顿距离" class="headerlink" title="1.3.3 曼哈顿距离"></a>1.3.3 曼哈顿距离</h4><p>由闵可夫斯基距离定义可知，曼哈顿距离的计算公式为：<br>$$d_{xy}=\sum_{i=1}^{n}{\left| x_{i}-y_{i} \right|}$$</p>
+<h2 id="KNN-算法核心：KDTree"><a href="#KNN-算法核心：KDTree" class="headerlink" title="KNN 算法核心：KDTree"></a>KNN 算法核心：KDTree</h2><p>通过以上的分析，我们知道 KNN 分类算法的思想非常简单，它采用的就是 K 最近邻多数投票的思想。所以，算法的关键就是在给定的距离度量下，对预测实例如何准确快速地找到它的最近的 K 个邻居？</p>
+<p>也许绝大多数初学者会说，直接暴力寻找呗，反正 K 一般取值不会特别大。确实，特征空间维度不高并且训练样本容量小的时候确实可行，但是当特征空间维度特别高或者样本容量大时，计算就会非常耗时，因此该方法并不可行。</p>
+<p>因此，为了快速查找到 K 近邻，我们可以考虑使用特殊的数据结构存储训练数据，用来减少搜索次数。其中，KDTree 就是最著名的一种。</p>
+<h3 id="KD-树简介"><a href="#KD-树简介" class="headerlink" title="KD 树简介"></a>KD 树简介</h3><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15260517984690.jpg" alt=""><br>KD 树（K-dimension Tree）是一种对 K 维空间中的实例点进行存储以便对其进行快速检索的树形数据结构。KD 树是是一种二叉树，表示对 K 维空间的一个划分，构造 KD 树相当于不断地用垂直于坐标轴的超平面将 K 维空间切分，构成一系列的 K 维超矩形区域。KD 树的每个结点对应于一个 K 维超矩形区域。利用 KD 树可以省去对大部分数据点的搜索，从而减少搜索的计算量。</p>
+<h3 id="KD-树的构造"><a href="#KD-树的构造" class="headerlink" title="KD 树的构造"></a>KD 树的构造</h3><p>KD 树的构造是一个递归的方法：（1）构造根节点，使根节点对应于 K 维空间中包含的所有点的超矩形区域；（2）不断地对 K 维空间进行切分，生成子节点。</p>
+<ul>
+<li><p><strong>构造跟节点</strong></p>
+<p>  首先，在包含所有节点的超矩形区域选择一个坐标轴和在此坐标轴上的一个切分点，确定一个垂直于该坐标轴的超平面，这个超平面将当前区域划分为两个子区域（也即二叉树的两左右孩子节点）。</p>
+</li>
+<li><p><strong>递归构造子节点</strong></p>
+<p>  递归地对两个子区域进行相同的划分，直到子区域内没有实例时终止（此时只有叶子节点）。</p>
+<p>  通常我们循环地选择坐标轴对空间进行划分，当选定一个维度坐标时，切分点我们选择所有训练实例在该坐标轴上的中位数。此时我们来构造的 KD 树是平衡二叉树，但是平衡二叉树在搜索时不一定是最高效的。</p>
+</li>
+</ul>
+<h2 id="KNN-回归算法"><a href="#KNN-回归算法" class="headerlink" title="KNN 回归算法"></a>KNN 回归算法</h2><p>上面我们讲的 KNN 算法主要是用于分类的情况，实际上，KNN 算法也能够用于回归预测。下面介绍一下 KNN 算法如何用于回归的情况。</p>
+<p>众所周知，KNN 算法用于分类的方法如下：首先，对于一个新来的预测实例，我们在训练集上寻找它的最相近的 K 个近邻；然后，采用投票法将它分到这 K 个邻居中的最多的那个类。</p>
+<p>但是，怎么将 KNN 算法用于回归呢？其实大致的步骤是一样的，也是对新来的预测实例寻找 K 近邻，然后对这 K 个样本的目标值去均值即可作为新样本的预测值：</p>
+<p>$$f\left( x \right)=\frac{1}{K}\sum_{i=1}^{K}{x_{i}}$$</p>
+<h2 id="KNN-预测代码演示"><a href="#KNN-预测代码演示" class="headerlink" title="KNN 预测代码演示"></a>KNN 预测代码演示</h2><p>接下来，我们使用 scikit-learn 库中的 KNN 对 iris 数据集分类效果进行预测实战。众所周知，iris 数据集有四个维度的特征，但是为了方便展示效果，我们只使用其中的两个维度。完整的代码实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> ListedColormap</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> neighbors, datasets</span><br><span class="line"></span><br><span class="line">n_neighbors = <span class="number">15</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># import some data to play with</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line"></span><br><span class="line"><span class="comment"># we only take the first two features. We could avoid this ugly</span></span><br><span class="line"><span class="comment"># slicing by using a two-dim dataset</span></span><br><span class="line">X = iris.data[:, :<span class="number">2</span>]</span><br><span class="line">y = iris.target</span><br><span class="line"></span><br><span class="line">h = <span class="number">.02</span>  <span class="comment"># step size in the mesh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create color maps</span></span><br><span class="line">cmap_light = ListedColormap([<span class="string">'#FFAAAA'</span>, <span class="string">'#AAFFAA'</span>, <span class="string">'#AAAAFF'</span>])</span><br><span class="line">cmap_bold = ListedColormap([<span class="string">'#FF0000'</span>, <span class="string">'#00FF00'</span>, <span class="string">'#0000FF'</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> weights <span class="keyword">in</span> [<span class="string">'uniform'</span>, <span class="string">'distance'</span>]:</span><br><span class="line">    <span class="comment"># we create an instance of Neighbours Classifier and fit the data.</span></span><br><span class="line">    clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)</span><br><span class="line">    clf.fit(X, y)</span><br><span class="line">    print(<span class="string">"train_score"</span>, clf.score(X,y))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Plot the decision boundary. For that, we will assign a color to each</span></span><br><span class="line">    <span class="comment"># point in the mesh [x_min, x_max]x[y_min, y_max].</span></span><br><span class="line">    x_min, x_max = X[:, <span class="number">0</span>].min() - <span class="number">1</span>, X[:, <span class="number">0</span>].max() + <span class="number">1</span></span><br><span class="line">    y_min, y_max = X[:, <span class="number">1</span>].min() - <span class="number">1</span>, X[:, <span class="number">1</span>].max() + <span class="number">1</span></span><br><span class="line">    xx, yy = np.meshgrid(np.arange(x_min, x_max, h),</span><br><span class="line">                         np.arange(y_min, y_max, h))</span><br><span class="line">    Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Put the result into a color plot</span></span><br><span class="line">    Z = Z.reshape(xx.shape)</span><br><span class="line">    plt.figure()</span><br><span class="line">    plt.pcolormesh(xx, yy, Z, cmap=cmap_light)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Plot also the training points</span></span><br><span class="line">    plt.scatter(X[:, <span class="number">0</span>], X[:, <span class="number">1</span>], c=y, cmap=cmap_bold,</span><br><span class="line">                edgecolor=<span class="string">'k'</span>, s=<span class="number">20</span>)</span><br><span class="line">    plt.xlim(xx.min(), xx.max())</span><br><span class="line">    plt.ylim(yy.min(), yy.max())</span><br><span class="line">    plt.title(<span class="string">"3-Class classification (k = %i, weights = '%s')"</span></span><br><span class="line">              % (n_neighbors, weights))</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15260528682435.jpg" alt=""></p>
+<ul>
+<li><p><strong>代码解释</strong></p>
+<p>  代码中邻居数使用的是 n_neighbors = 15，只使用 iris 的前两维特征作为分类特征。权重度量采用了两种方式：<strong>均值（uniform）和距离（distance）</strong>。均值代表的是所有的 K 个近邻在分类时重要性选取的是一样的，该参数是默认参数；距离也就是说，分类时 K 个邻居中每个邻居所占的权重与它与预测实例的距离成反比。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/SparkSQL1.html" rel="next" title="Spark SQL （一）基础框架和核心组件">
+                <i class="fa fa-chevron-left"></i> Spark SQL （一）基础框架和核心组件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/2018-05-11.html" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KNN——不需要学习的算法"><span class="nav-number">1.</span> <span class="nav-text">KNN——不需要学习的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-KNN分类算法"><span class="nav-number">1.2.</span> <span class="nav-text">1. KNN分类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-KNN算法原理"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.1 KNN算法原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-K值的确定"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2 K值的确定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-距离的度量"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.3 距离的度量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-闵可夫斯基距离"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">1.3.1 闵可夫斯基距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-欧式距离"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">1.3.2 欧式距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-曼哈顿距离"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">1.3.3 曼哈顿距离</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KNN-算法核心：KDTree"><span class="nav-number">1.3.</span> <span class="nav-text">KNN 算法核心：KDTree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KD-树简介"><span class="nav-number">1.3.1.</span> <span class="nav-text">KD 树简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KD-树的构造"><span class="nav-number">1.3.2.</span> <span class="nav-text">KD 树的构造</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KNN-回归算法"><span class="nav-number">1.4.</span> <span class="nav-text">KNN 回归算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KNN-预测代码演示"><span class="nav-number">1.5.</span> <span class="nav-text">KNN 预测代码演示</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

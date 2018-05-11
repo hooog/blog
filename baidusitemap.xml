@@ -4,8 +4,43 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
+    <lastmod>2018-05-11T15:40:12.207Z</lastmod>
+    <data>
+        <display>
+        <title>KNN——不需要学习的算法</title>
+        <pubTime>2018-05-11T15:38:21.000Z</pubTime>
+        
+        <tag>algorithm</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/2018-05-11.html</loc>
+    <lastmod>2018-05-11T15:39:41.371Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2018-05-11T15:39:41.371Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/pymysql.html</loc>
-    <lastmod>2018-05-10T03:05:51.920Z</lastmod>
+    <lastmod>2018-05-10T03:08:28.235Z</lastmod>
     <data>
         <display>
         <title>利用Pyecharts连接Mysql并对数据进行可视化</title>
@@ -844,50 +879,12 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
-        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>KNN-糖尿病预测-学习曲线的应用</title>
-        <pubTime>2018-03-29T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
-        <pubTime>2018-03-17T09:05:59.000Z</pubTime>
+        <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</title>
+        <pubTime>2018-03-24T09:05:59.000Z</pubTime>
         
         <tag>scikit-learn</tag>
          
@@ -920,12 +917,12 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
+    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</title>
-        <pubTime>2018-03-24T09:05:59.000Z</pubTime>
+        <title>scikit-learn逻辑回归</title>
+        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
         
         <tag>scikit-learn</tag>
          
@@ -940,12 +937,50 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
+    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>scikit-learn逻辑回归</title>
-        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
+        <title>KNN-糖尿病预测-学习曲线的应用</title>
+        <pubTime>2018-03-29T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
+        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
+        <pubTime>2018-03-17T09:05:59.000Z</pubTime>
         
         <tag>scikit-learn</tag>
          
