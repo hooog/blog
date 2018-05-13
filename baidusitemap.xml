@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/LR.html</loc>
+    <lastmod>2018-05-13T13:20:25.319Z</lastmod>
+    <data>
+        <display>
+        <title>LR 逻辑回归</title>
+        <pubTime>2018-05-13T15:38:21.000Z</pubTime>
+        
+        <tag>algorithm</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
+    <lastmod>2018-05-13T10:53:46.467Z</lastmod>
+    <data>
+        <display>
+        <title>KNN——不需要学习的算法</title>
+        <pubTime>2018-05-11T15:38:21.000Z</pubTime>
+        
+        <tag>algorithm</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/SparkSQL1.html</loc>
     <lastmod>2018-05-13T07:57:33.027Z</lastmod>
     <data>
@@ -17,26 +57,6 @@
            
              
               <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
-    <lastmod>2018-05-13T07:07:06.188Z</lastmod>
-    <data>
-        <display>
-        <title>KNN——不需要学习的算法</title>
-        <pubTime>2018-05-11T15:38:21.000Z</pubTime>
-        
-        <tag>algorithm</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -884,17 +904,57 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/hadoop.html</loc>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？</title>
-        <pubTime>2018-03-26T16:28:59.000Z</pubTime>
+        <title>DStream的基本操作</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        
+        <tag>MLlib</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
+        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
+        <pubTime>2018-03-17T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
           
         </display>
     </data>
@@ -942,57 +1002,17 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <loc>http://www.ihoge.cn/2018/hadoop.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
-        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
+        <title>如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？</title>
+        <pubTime>2018-03-26T16:28:59.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>DStream的基本操作</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
-        <pubTime>2018-03-17T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+              <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
           
         </display>
     </data>
