@@ -83,22 +83,25 @@
 
 
 
-<meta name="description" content="Spark SQL （一）基础框架和核心组件今天被问到Spark Sql和Dataframe的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。 1. Spark SQL发展史在Spark的早期版本，为什么解决Hive查询在性能上的问题，在Spark生态圈引入了一个名为Shark的项目。（使用Spark的计算引">
+<meta name="description" content="Spark SQL 基础框架和核心组件今天被问到Spark Sql和Dataframe的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。 1. Spark SQL发展史在Spark的早期版本，为什么解决Hive查询在性能上的问题，在Spark生态圈引入了一个名为Shark的项目。（使用Spark的计算引擎而不">
 <meta name="keywords" content="spark sql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spark SQL （一）基础框架和核心组件">
+<meta property="og:title" content="Spark SQL 基础框架和核心组件">
 <meta property="og:url" content="http://www.ihoge.cn/2018/SparkSQL1.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
-<meta property="og:description" content="Spark SQL （一）基础框架和核心组件今天被问到Spark Sql和Dataframe的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。 1. Spark SQL发展史在Spark的早期版本，为什么解决Hive查询在性能上的问题，在Spark生态圈引入了一个名为Shark的项目。（使用Spark的计算引">
+<meta property="og:description" content="Spark SQL 基础框架和核心组件今天被问到Spark Sql和Dataframe的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。 1. Spark SQL发展史在Spark的早期版本，为什么解决Hive查询在性能上的问题，在Spark生态圈引入了一个名为Shark的项目。（使用Spark的计算引擎而不">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258813010356.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258818229539.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258850302556.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258851101623.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258847849628.jpg">
-<meta property="og:updated_time" content="2018-05-09T17:01:16.311Z">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15261969377501.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15261970734054.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15261972316614.jpg">
+<meta property="og:updated_time" content="2018-05-13T07:57:33.027Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spark SQL （一）基础框架和核心组件">
-<meta name="twitter:description" content="Spark SQL （一）基础框架和核心组件今天被问到Spark Sql和Dataframe的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。 1. Spark SQL发展史在Spark的早期版本，为什么解决Hive查询在性能上的问题，在Spark生态圈引入了一个名为Shark的项目。（使用Spark的计算引">
+<meta name="twitter:title" content="Spark SQL 基础框架和核心组件">
+<meta name="twitter:description" content="Spark SQL 基础框架和核心组件今天被问到Spark Sql和Dataframe的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。 1. Spark SQL发展史在Spark的早期版本，为什么解决Hive查询在性能上的问题，在Spark生态圈引入了一个名为Shark的项目。（使用Spark的计算引擎而不">
 <meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15258813010356.jpg">
 
 
@@ -135,7 +138,7 @@
 
 
 
-  <title>Spark SQL （一）基础框架和核心组件 | Hoooge's Blog</title>
+  <title>Spark SQL 基础框架和核心组件 | Hoooge's Blog</title>
   
 
 
@@ -195,7 +198,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -205,7 +208,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            About
           </a>
         </li>
       
@@ -225,7 +228,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -235,7 +238,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -289,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spark SQL （一）基础框架和核心组件</h1>
+          <h1 class="post-title" itemprop="name headline">Spark SQL 基础框架和核心组件</h1>
         
 
         <div class="post-meta">
@@ -299,7 +302,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-10T01:00:21+08:00">
                 2018-05-10
@@ -320,7 +323,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -367,7 +370,7 @@
 
       
         <a id="more"></a>
-<h1 id="Spark-SQL-（一）基础框架和核心组件"><a href="#Spark-SQL-（一）基础框架和核心组件" class="headerlink" title="Spark SQL （一）基础框架和核心组件"></a>Spark SQL （一）基础框架和核心组件</h1><p>今天被问到<code>Spark Sql</code>和<code>Dataframe</code>的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。</p>
+<h1 id="Spark-SQL-基础框架和核心组件"><a href="#Spark-SQL-基础框架和核心组件" class="headerlink" title="Spark SQL 基础框架和核心组件"></a>Spark SQL 基础框架和核心组件</h1><p>今天被问到<code>Spark Sql</code>和<code>Dataframe</code>的关系，当时没有描述好。事后脑海中关于它们的一些细节才一一涌现出来。还是理解的不够深刻，所以这里重新做下相关概念知识的整理也算是一种复习。</p>
 <h2 id="1-Spark-SQL发展史"><a href="#1-Spark-SQL发展史" class="headerlink" title="1. Spark SQL发展史"></a>1. Spark SQL发展史</h2><p>在<code>Spark</code>的早期版本，为什么解决<code>Hive</code>查询在性能上的问题，在<code>Spark</code>生态圈引入了一个名为<code>Shark</code>的项目。（使用<code>Spark</code>的计算引擎而不是<code>MapReduce</code>来执行<code>Hive</code>查询）。<code>Shark</code>是在<code>Hive</code>代码库上构建的，使用<code>Hive</code>查询编译器来解析<code>Hive</code>查询并生成一个抽象语法树，它会转化为一个具有某些基本优化的逻辑计划。<code>Shark</code>应用了额外的优化手段并创建了一个<code>RDD</code>操作额度物理计划，然后在<code>Spark</code>上执行。基于这种对<code>Hive</code>的过分依赖，也让<code>Shark</code>本身具有一些问题：</p>
 <ol>
 <li>只适用于查询<code>Hive</code>表。无法在RDD上进行关系查询。</li>
@@ -409,6 +412,28 @@
 </code></pre><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15258847849628.jpg" alt=""></p>
 </li>
 </ul>
+<h2 id="4-Dataframe-和-DataSet-的演变与优势"><a href="#4-Dataframe-和-DataSet-的演变与优势" class="headerlink" title="4. Dataframe 和 DataSet 的演变与优势"></a>4. Dataframe 和 DataSet 的演变与优势</h2><p>Spark SQL 的 DataFrame 相比 R 语言或 Python 的 DataFrame，有更丰富的隐藏后台优化。 条吗可以从文件、Pandas DataFrame、 Hive 中的表、像 MySQL 这样的外部数据库或者 RDD 中创建。 Scala、Java、Python、R 都支持 DataFrame API。 虽然 DataFrame 提供了关系操作和更高的性能，但缺乏类型安全性，这会导致运行时错误。</p>
+<p>在 1.6 版本， DataSet 和 DataFrame 还是单独的类。在 2.0 版本中， DataSet 和 DataFrame API 被统一起来，为开发人员提供单一的 API。 DataFrame 时一个特定的 DataSet[T]，其中 T = Row 的类型， 因此 DataFrame 和 DataSet 共享相同的方法。</p>
+<p>DataSet API 支持 Scala 和 Java，还不支持 Python 和 R。 但是， DataSet API 的许多优点已经天然在 Python 和 R 语言中存在了。 DataFrame 则支持所有这四种语言。</p>
+<h3 id="4-1-为什么使用-DataFrame-和-DataSet"><a href="#4-1-为什么使用-DataFrame-和-DataSet" class="headerlink" title="4.1 为什么使用 DataFrame 和 DataSet"></a>4.1 为什么使用 DataFrame 和 DataSet</h3><p>Spark 要对闭包进行计算、将其序列话，并将他们发送到执行进程。这意味着代码是以原始形式发送的，没有经过优化。 在 RDD 中无法表示结构化数据，对 RDD 进行查询也不可行。使用 RDD 很容易但有时候处理远足会把代码弄乱。与 Hadoop 的世界相比，纯手写的 MapReduce 作业可能比 Hive 和 Pig 作业慢，因为自爱 Hive 和 Pig 下会进行隐含的优化。 DataFrame 也可以用类似的方式看待。</p>
+<p>因此，为什么要使用 DataFrame 和 DataSet，简单的答案是：<strong>速度和易用</strong>！</p>
+<p>DataFrame 提供了优化、速度、自动模式发现、使用多中数据源和多语言的支持。</p>
+<h3 id="4-2-优化"><a href="#4-2-优化" class="headerlink" title="4.2 优化"></a>4.2 优化</h3><p>Catalyst 为 DataFrame 提供了两种优化方式：</p>
+<ol>
+<li>谓词下推到数据源，只读取需要的数据</li>
+<li>创建用于执行的物理计划，并生成比手写代码更优化的 JVM 字节码。</li>
+</ol>
+<p>和 RDD 不同， DataFrame 并不定义 DAG 图。 它会创建抽象语法书， Catalyst 引擎会使用基于规则和机遇开销的优化方法对其进行解析、检查和改进。<br><img src="media/15261969377501.jpg" alt=""></p>
+<h3 id="4-3-速度"><a href="#4-3-速度" class="headerlink" title="4.3 速度"></a>4.3 速度</h3><p><img src="media/15261970734054.jpg" alt=""><br>上图展示了在单个机器上对1000万个证书对的 groupby 聚合操作。 Scala 和 Python 的 DataFrame 操作具有类似的执行时间，因为条吗都被便衣为相同的 JVM 字节码用来执行。</p>
+<p>DataSet 使用优化的编译器把对象进行序列话和反序列化，以便进行处理并通过网络传输。 这些编码器比 Java 或 Kryo 序列话具有更高的性能。</p>
+<p><img src="media/15261972316614.jpg" alt=""></p>
+<h3 id="4-4-自动模式发现"><a href="#4-4-自动模式发现" class="headerlink" title="4.4 自动模式发现"></a>4.4 自动模式发现</h3><p>要从 RDD 创建 DataFrame，必须提供一个模式。而从 JSON、Parquet 和 ORC 文件创建 DataFrame 时，会自动发现一个模式，包括分区的发现。 Data Sources API 框架让这种情况成为可能。</p>
+<h3 id="4-5-多数据源，多编程语言"><a href="#4-5-多数据源，多编程语言" class="headerlink" title="4.5 多数据源，多编程语言"></a>4.5 多数据源，多编程语言</h3><p>DataFrame API 支持按照最常用的格式（JSON、Parquet、ORC 和 Hive 表）进行读写</p>
+<p>DataFrame API 支持本地文件系统、HDFS、S3和采用 JDBC 协议的外部 RDBMS 数据库读取数据</p>
+<p>DataFrame API 支持第三方扩展：Avro、CSV、XML、HBase、ElasticSearch、Cassandra等。（<a href="http://spark-packages.org" target="_blank" rel="noopener">http://spark-packages.org</a>) 提供了第三方组件包的完整列表</p>
+<p>Spark SQL 可以在 Java、Scala、Python、R中实现。利用 Spark SQL 的分布式 SQL 引擎，我们也可以编写纯 SQL 语句。</p>
+<h3 id="4-6-RDD-和其他-API-的互操作性"><a href="#4-6-RDD-和其他-API-的互操作性" class="headerlink" title="4.6 RDD 和其他 API 的互操作性"></a>4.6 RDD 和其他 API 的互操作性</h3><p>Dataframe 可以使用 <strong>.rdd .toDF .toPandas .toDS</strong> 方法转换为 RDD 和 Pandas Dataframe。此外 DataFrame 可以与 Spark Streaming 和机器学习组件库配合使用。</p>
+<h3 id="4-7-仅选择和读取必要的数据"><a href="#4-7-仅选择和读取必要的数据" class="headerlink" title="4.7 仅选择和读取必要的数据"></a>4.7 仅选择和读取必要的数据</h3><p>DataFrame API 、 DataSet API 和 DataSources API 的一个优点是通过将谓词下推到数据源系统，从而提供更丰富的优化手段。 <strong>列修剪、谓词下推、分区修剪</strong>会有这些框架自动完成。 这样，只有需要用到的数据才会读取和处理。</p>
 
       
     </div>
@@ -516,10 +541,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -539,8 +564,8 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -551,7 +576,7 @@
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">Kategorien</span>
+                  <span class="site-state-item-name">categories</span>
                 </a>
               </div>
             
@@ -562,7 +587,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">15</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -623,7 +648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-SQL-（一）基础框架和核心组件"><span class="nav-number">1.</span> <span class="nav-text">Spark SQL （一）基础框架和核心组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Spark-SQL发展史"><span class="nav-number">1.1.</span> <span class="nav-text">1. Spark SQL发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Spark-SQL的构架"><span class="nav-number">1.2.</span> <span class="nav-text">2. Spark SQL的构架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Spark-SQL的四个组件"><span class="nav-number">1.3.</span> <span class="nav-text">3. Spark SQL的四个组件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-SQL-基础框架和核心组件"><span class="nav-number">1.</span> <span class="nav-text">Spark SQL 基础框架和核心组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Spark-SQL发展史"><span class="nav-number">1.1.</span> <span class="nav-text">1. Spark SQL发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Spark-SQL的构架"><span class="nav-number">1.2.</span> <span class="nav-text">2. Spark SQL的构架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Spark-SQL的四个组件"><span class="nav-number">1.3.</span> <span class="nav-text">3. Spark SQL的四个组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Dataframe-和-DataSet-的演变与优势"><span class="nav-number">1.4.</span> <span class="nav-text">4. Dataframe 和 DataSet 的演变与优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-为什么使用-DataFrame-和-DataSet"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 为什么使用 DataFrame 和 DataSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-优化"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-速度"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 速度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-自动模式发现"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 自动模式发现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-多数据源，多编程语言"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.5 多数据源，多编程语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-RDD-和其他-API-的互操作性"><span class="nav-number">1.4.6.</span> <span class="nav-text">4.6 RDD 和其他 API 的互操作性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-仅选择和读取必要的数据"><span class="nav-number">1.4.7.</span> <span class="nav-text">4.7 仅选择和读取必要的数据</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
