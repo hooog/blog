@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2018/GradientDescent.html</loc>
+    
+    <lastmod>2018-05-14T03:59:02.233Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/2018/LR.html</loc>
     
     <lastmod>2018-05-13T13:27:16.244Z</lastmod>
@@ -345,13 +352,6 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
-    
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
@@ -359,7 +359,7 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     
@@ -367,6 +367,13 @@
   
   <url>
     <loc>http://www.ihoge.cn/2018/hadoop.html</loc>
+    
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
     
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     
