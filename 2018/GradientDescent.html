@@ -86,7 +86,7 @@
 <meta name="description" content="引言李航老师在《统计学习方法》中将机器学习的三要素总结为：模型、策略和算法。其大致含义如下： 模型：其实就是机器学习训练的过程中所要学习的条件概率分布或者决策函数。 策略：就是使用一种什么样的评价，度量模型训练过程中的学习好坏的方法，同时根据这个方法去实施的调整模型的参数，以期望训练的模型将来对未知的数据具有最好的预测准确度。 算法：算法是指模型的具体计算方法。它基于训练数据集，根据学习策略，从">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="梯度下降、随机梯度下降、批量梯度下降和牛顿法、拟牛顿法、共轭梯度法">
+<meta property="og:title" content="梯度下降、随机梯度下降、批量梯度下降">
 <meta property="og:url" content="http://www.ihoge.cn/2018/GradientDescent.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
 <meta property="og:description" content="引言李航老师在《统计学习方法》中将机器学习的三要素总结为：模型、策略和算法。其大致含义如下： 模型：其实就是机器学习训练的过程中所要学习的条件概率分布或者决策函数。 策略：就是使用一种什么样的评价，度量模型训练过程中的学习好坏的方法，同时根据这个方法去实施的调整模型的参数，以期望训练的模型将来对未知的数据具有最好的预测准确度。 算法：算法是指模型的具体计算方法。它基于训练数据集，根据学习策略，从">
@@ -94,9 +94,9 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262224519674.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262225198545.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262225480705.jpg">
-<meta property="og:updated_time" content="2018-05-14T03:59:02.233Z">
+<meta property="og:updated_time" content="2018-05-14T04:05:28.621Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="梯度下降、随机梯度下降、批量梯度下降和牛顿法、拟牛顿法、共轭梯度法">
+<meta name="twitter:title" content="梯度下降、随机梯度下降、批量梯度下降">
 <meta name="twitter:description" content="引言李航老师在《统计学习方法》中将机器学习的三要素总结为：模型、策略和算法。其大致含义如下： 模型：其实就是机器学习训练的过程中所要学习的条件概率分布或者决策函数。 策略：就是使用一种什么样的评价，度量模型训练过程中的学习好坏的方法，同时根据这个方法去实施的调整模型的参数，以期望训练的模型将来对未知的数据具有最好的预测准确度。 算法：算法是指模型的具体计算方法。它基于训练数据集，根据学习策略，从">
 <meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262278257042.jpg">
 
@@ -134,7 +134,7 @@
 
 
 
-  <title>梯度下降、随机梯度下降、批量梯度下降和牛顿法、拟牛顿法、共轭梯度法 | Hoooge's Blog</title>
+  <title>梯度下降、随机梯度下降、批量梯度下降 | Hoooge's Blog</title>
   
 
 
@@ -288,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">梯度下降、随机梯度下降、批量梯度下降和牛顿法、拟牛顿法、共轭梯度法</h1>
+          <h1 class="post-title" itemprop="name headline">梯度下降、随机梯度下降、批量梯度下降</h1>
         
 
         <div class="post-meta">
@@ -397,8 +397,7 @@
 <p>  随机梯度下降—最小化每条样本的损失函数，虽然不是每次迭代得到的损失函数都向着全局最优方向， 但是大的整体的方向是向全局最优解的，最终的结果往往是在全局最优解附近，适用于大规模训练样本情况。</p>
 </li>
 </ul>
-<!--### 梯度下降代码:
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="comment">#This is a sample to simulate a function y = theta1*x1 + theta2*x2</span></span><br><span class="line">input_x = [[<span class="number">1</span>,<span class="number">4</span>], [<span class="number">2</span>,<span class="number">5</span>], [<span class="number">5</span>,<span class="number">1</span>], [<span class="number">4</span>,<span class="number">2</span>]]  </span><br><span class="line">y = [<span class="number">19</span>,<span class="number">26</span>,<span class="number">19</span>,<span class="number">20</span>]  </span><br><span class="line">theta = [<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line">loss = <span class="number">10</span></span><br><span class="line">step_size = <span class="number">0.001</span></span><br><span class="line">eps =<span class="number">0.0001</span></span><br><span class="line">max_iters = <span class="number">10000</span></span><br><span class="line">error =<span class="number">0</span></span><br><span class="line">iter_count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span>( loss &gt; eps <span class="keyword">and</span> iter_count &lt; max_iters):</span><br><span class="line">    loss = <span class="number">0</span></span><br><span class="line">    <span class="comment">#这里更新权重的时候所有的样本点都用上了</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (<span class="number">3</span>):</span><br><span class="line">        pred_y = theta[<span class="number">0</span>]*input_x[i][<span class="number">0</span>]+theta[<span class="number">1</span>]*input_x[i][<span class="number">1</span>]</span><br><span class="line">        theta[<span class="number">0</span>] = theta[<span class="number">0</span>] - step_size * (pred_y - y[i]) * input_x[i][<span class="number">0</span>]</span><br><span class="line">        theta[<span class="number">1</span>] = theta[<span class="number">1</span>] - step_size * (pred_y - y[i]) * input_x[i][<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (<span class="number">3</span>):</span><br><span class="line">        pred_y = theta[<span class="number">0</span>]*input_x[i][<span class="number">0</span>]+theta[<span class="number">1</span>]*input_x[i][<span class="number">1</span>]</span><br><span class="line">        error = <span class="number">0.5</span>*(pred_y - y[i])**<span class="number">2</span></span><br><span class="line">        loss = loss + error</span><br><span class="line">    iter_count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'iters_count'</span>, iter_count</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">'theta: '</span>,theta </span><br><span class="line"><span class="keyword">print</span> <span class="string">'final loss: '</span>, loss</span><br><span class="line"><span class="keyword">print</span> <span class="string">'iters: '</span>, iter_count</span><br></pre></td></tr></table></figure>
+<h3 id="梯度下降代码"><a href="#梯度下降代码" class="headerlink" title="梯度下降代码:"></a>梯度下降代码:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="comment">#This is a sample to simulate a function y = theta1*x1 + theta2*x2</span></span><br><span class="line">input_x = [[<span class="number">1</span>,<span class="number">4</span>], [<span class="number">2</span>,<span class="number">5</span>], [<span class="number">5</span>,<span class="number">1</span>], [<span class="number">4</span>,<span class="number">2</span>]]  </span><br><span class="line">y = [<span class="number">19</span>,<span class="number">26</span>,<span class="number">19</span>,<span class="number">20</span>]  </span><br><span class="line">theta = [<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line">loss = <span class="number">10</span></span><br><span class="line">step_size = <span class="number">0.001</span></span><br><span class="line">eps =<span class="number">0.0001</span></span><br><span class="line">max_iters = <span class="number">10000</span></span><br><span class="line">error =<span class="number">0</span></span><br><span class="line">iter_count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span>( loss &gt; eps <span class="keyword">and</span> iter_count &lt; max_iters):</span><br><span class="line">    loss = <span class="number">0</span></span><br><span class="line">    <span class="comment">#这里更新权重的时候所有的样本点都用上了</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (<span class="number">3</span>):</span><br><span class="line">        pred_y = theta[<span class="number">0</span>]*input_x[i][<span class="number">0</span>]+theta[<span class="number">1</span>]*input_x[i][<span class="number">1</span>]</span><br><span class="line">        theta[<span class="number">0</span>] = theta[<span class="number">0</span>] - step_size * (pred_y - y[i]) * input_x[i][<span class="number">0</span>]</span><br><span class="line">        theta[<span class="number">1</span>] = theta[<span class="number">1</span>] - step_size * (pred_y - y[i]) * input_x[i][<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (<span class="number">3</span>):</span><br><span class="line">        pred_y = theta[<span class="number">0</span>]*input_x[i][<span class="number">0</span>]+theta[<span class="number">1</span>]*input_x[i][<span class="number">1</span>]</span><br><span class="line">        error = <span class="number">0.5</span>*(pred_y - y[i])**<span class="number">2</span></span><br><span class="line">        loss = loss + error</span><br><span class="line">    iter_count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'iters_count'</span>, iter_count</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">'theta: '</span>,theta </span><br><span class="line"><span class="keyword">print</span> <span class="string">'final loss: '</span>, loss</span><br><span class="line"><span class="keyword">print</span> <span class="string">'iters: '</span>, iter_count</span><br></pre></td></tr></table></figure>
 <pre><code>output:
 
 iters_count 219
@@ -436,46 +435,7 @@ iters_count 549
 theta: [3.0023012574840764, 3.997553282857357]
 final loss: 9.81717138358e-05
 iters: 549
-</code></pre><p>–&gt;</p>
-<h1 id="2-牛顿法（Newton’s-method"><a href="#2-牛顿法（Newton’s-method" class="headerlink" title="2. 牛顿法（Newton’s method)"></a>2. 牛顿法（Newton’s method)</h1><h2 id="2-1-牛顿法原理"><a href="#2-1-牛顿法原理" class="headerlink" title="2.1 牛顿法原理"></a>2.1 牛顿法原理</h2><p><strong>具体步骤：</strong></p>
-<p>首先，选择一个接近函数 $f (x)$零点的 $x_0$，计算相应的 $f (x_0)$ 和切线斜率$f’(x_0)$（这里$f’(x_0)$ 表示函数 $f(x_0)$的导数）。然后我们计算穿过点$(x_0,  f(x_0))$ 并且斜率为$f’(x_0)$的直线和 x 轴的交点的x坐标，也就是求如下方程的解：</p>
-<p>$x\; \cdot \; f’\left( x_{0} \right)+f\left( x_{0} \right)-x_{0\; }\cdot \; f’\left( x_{0} \right)=0$</p>
-<p>或：</p>
-<p>$f\left( x_{0} \right)+\left( x-x_{0} \right)f’’\left( x_{0} \right)=0$</p>
-<p>我们将新求得的点的 x 坐标命名为x1，通常x1会比x0更接近方程f  (x) = 0的解。因此我们现在可以利用x1开始下一轮迭代。迭代公式可化简为如下所示：</p>
-<p>$x_{n+1}=x_{n}\; -\; \frac{f\; \left( x_{n} \right)}{f\; ‘\; \left( x_{n} \right)}\; $</p>
-<p>已经证明，如果f  ‘ 是连续的，并且待求的零点x是孤立的，那么在零点x周围存在一个区域，只要初始值x0位于这个邻近区域内，那么牛顿法必定收敛。 并且，如果f’(x)不为0, 那么牛顿法将具有平方收敛的性能. 粗略的说，这意味着每迭代一次，牛顿法结果的有效数字将增加一倍。下图为一个牛顿法执行过程的例子。</p>
-<p>由于牛顿法是基于当前位置的切线来确定下一次的位置，所以牛顿法又被很形象地称为是”切线法”。牛顿法的搜索路径（二维情况）如下图所示：</p>
-<p>牛顿法搜索动态示例图：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/1022856-20170916202719078-1588446775.gif" alt="1022856-20170916202719078-1588446775">
-　</p>
-<p><strong>从本质上去看，牛顿法是二阶收敛，梯度下降是一阶收敛，所以牛顿法更快。比如你想找一条最短的路径走到一个盆地的最底部，梯度下降法每次只从你当前所处位置选一个坡度最大的方向走一步，牛顿法在选择方向时，不仅会考虑坡度是否够大，还会考虑你走了一步之后，坡度是否会变得更大。所以，可以说牛顿法比梯度下降法看得更远一点，能更快地走到最底部。（牛顿法目光更加长远，所以少走弯路；相对而言，梯度下降法只考虑了局部的最优，没有全局思想。</strong></p>
-<p>也可以这么理解：梯度下降主要是从一阶目标函数的一阶导推导而来的，形象点说，就是每次朝着当前梯度最大的方向收敛；二牛顿法是二阶收敛，每次考虑收敛方向的时候，还会考虑下一次的收敛的方向是否是最大（也就是梯度的梯度）。</p>
-<p>从几何上说，牛顿法就是用一个二次曲面去拟合你当前所处位置的局部曲面，而梯度下降法是用一个平面去拟合当前的局部曲面，通常情况下，二次曲面的拟合会比平面更好，所以牛顿法选择的下降路径会更符合真实的最优下降路径。如下图是一个最小化一个目标方程的例子，红色曲线是利用牛顿法迭代求解，绿色曲线是利用梯度下降法求解。</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15262579878778.jpg" alt=""></p>
-<p>总结一下，就是牛顿法对目标函数的一阶导再求导，即可算出收敛的方向。</p>
-<p><strong>梯度法和牛顿法对比</strong>： </p>
-<pre><code>梯度法：又称最速下降法，是早期的解析法，收敛速度较慢。 
-牛顿法：收敛速度快，但不稳定，计算也较困难。
-</code></pre><p><strong>牛顿法的优缺点总结：</strong></p>
-<pre><code>优点：二阶收敛，收敛速度快；
-
-缺点：牛顿法是一种迭代算法，每一步都需要求解目标函数的Hessian矩阵的逆矩阵，计算比较复杂。
-</code></pre><p>在上面讨论的是2维情况，高维情况的牛顿迭代公式是：<br>$$x_{n+1}=x_n-[Hf(x_n)^{-1}]\nabla f(x_n)，n≥0$$<br>其中H时hessian矩阵，定义为：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262581746410.jpg" alt=""><br>高维情况也可以用牛顿迭代求解，但是Hessian矩阵引入的复杂性，使得牛顿迭代求解的难度增加，解决这个问题的办法是<strong>拟牛顿法</strong>（Quasi-Newton methond）：</p>
-<h2 id="2-2-拟牛顿法（Quasi-Newton-Methods）"><a href="#2-2-拟牛顿法（Quasi-Newton-Methods）" class="headerlink" title="2.2 拟牛顿法（Quasi-Newton Methods）"></a>2.2 拟牛顿法（Quasi-Newton Methods）</h2><p>拟牛顿法是求解非线性优化问题最有效的方法之一，于20世纪50年代由美国Argonne国家实验室的物理学家W.C.Davidon所提出来。Davidon设计的这种算法在当时看来是非线性优化领域最具创造性的发明之一。不久R. Fletcher和M. J. D. Powell证实了这种新的算法远比其他方法快速和可靠，使得非线性优化这门学科在一夜之间突飞猛进。</p>
-<p><strong>拟牛顿法的本质思想是改善牛顿法每次需要求解复杂的Hessian矩阵的逆矩阵的缺陷，它使用正定矩阵来近似Hessian矩阵的逆，从而简化了运算的复杂度。</strong>拟牛顿法和最速下降法一样只要求每一步迭代时知道目标函数的梯度。通过测量梯度的变化，构造一个目标函数的模型使之足以产生超线性收敛性。这类方法大大优于最速下降法，尤其对于困难的问题。另外，因为拟牛顿法不需要二阶导数的信息，所以有时比牛顿法更为有效。如今，优化软件中包含了大量的拟牛顿算法用来解决无约束，约束，和大规模的优化问题。</p>
-<p><strong>具体步骤：</strong></p>
-<p>拟牛顿法的基本思想如下。首先构造目标函数在当前迭代$x_k$的二次模型：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262661663849.jpg" alt=""><br>这里$B_k$是一个对称正定（正交）矩阵，于是我们取这个二次模型的最优解作为搜索方向，并且得到新的迭代点：<br>$x_{k+1}=x_k+\alpha _kp_k$<br>其中我们要求步长$\alpha_k$ 满足Wolfe条件。这样的迭代与牛顿法类似，区别就在于用近似的Hesse矩阵$B_k$  代替真实的Hesse矩阵。所以拟牛顿法最关键的地方就是每一步迭代中矩阵$B_k$ 的更新。现在假设得到一个新的迭代$x_{k+1}$，并得到一个新的二次模型：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262663848192.jpg" alt=""><br>我们尽可能地利用上一步的信息来选取$B_k$。具体地，我们要求 :</p>
-<p>$\nabla f(x_{k+1})-\nabla f(x_k)=\alpha _kB_{k+1}p_k$</p>
-<p>从而得到：</p>
-<p>$B_{k+1}(x_{k+1}-x_k)=\nabla f(x_{k+1})-\nabla f(x_k)$</p>
-<p>这个公式被称为<strong>割线方程</strong>。常用的拟牛顿法有<strong>DFP算法</strong>和<strong>BFGS算法</strong>。</p>
-<h1 id="3-共轭梯度法（Conjugate-Gradient）"><a href="#3-共轭梯度法（Conjugate-Gradient）" class="headerlink" title="3. 共轭梯度法（Conjugate Gradient）"></a>3. 共轭梯度法（Conjugate Gradient）</h1><p>共轭梯度法是介于最速下降法与牛顿法之间的一个方法，它仅需利用一阶导数信息，但克服了最速下降法收敛慢的缺点，又避免了牛顿法需要存储和计算Hesse矩阵并求逆的缺点，共轭梯度法不仅是解决大型线性方程组最有用的方法之一，也是解大型非线性最优化最有效的算法之一。 在各种优化算法中，共轭梯度法是非常重要的一种。其优点是所需存储量小，具有步收敛性，稳定性高，而且不需要任何外来参数。</p>
-<p>具体的实现步骤请参加<a href="https://en.wikipedia.org/wiki/Conjugate_gradient_method#Example_code_in_MATLAB">wiki百科共轭梯度法</a>。</p>
-<p>下图为共轭梯度法和梯度下降法搜索最优解的路径对比示意图：(绿色为梯度下降法，红色代表共轭梯度法)<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262668307656.jpg" alt=""></p>
-<h1 id="4-其他优化方法"><a href="#4-其他优化方法" class="headerlink" title="4. 其他优化方法"></a>4. 其他优化方法</h1><h2 id="4-1-启发式优化方法"><a href="#4-1-启发式优化方法" class="headerlink" title="4.1 启发式优化方法"></a>4.1 启发式优化方法</h2><p>启发式方法指人在解决问题时所采取的一种根据经验规则进行发现的方法。其特点是在解决问题时,利用过去的经验,选择已经行之有效的方法，而不是系统地、以确定的步骤去寻求答案。启发式优化方法种类繁多，包括经典的模拟退火方法、遗传算法、蚁群算法以及粒子群算法等等。</p>
-<p>还有一种特殊的优化算法被称之多目标优化算法，它主要针对同时优化多个目标（两个及两个以上）的优化问题，这方面比较经典的算法有NSGAII算法、MOEA/D算法以及人工免疫算法等。</p>
-<h2 id="4-2-解决约束优化问题——拉格朗日乘数法"><a href="#4-2-解决约束优化问题——拉格朗日乘数法" class="headerlink" title="4.2 解决约束优化问题——拉格朗日乘数法"></a>4.2 解决约束优化问题——拉格朗日乘数法</h2><p>有关拉格朗日乘数法的介绍请见另一篇博客：<a href="http://www.cnblogs.com/maybe2030/p/4946256.html">《拉格朗日乘数法》</a></p>
--->
+</code></pre>
       
     </div>
     
@@ -514,6 +474,10 @@ iters: 549
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/Newton.html" rel="prev" title="和牛顿法、拟牛顿法、共轭梯度法">
+                和牛顿法、拟牛顿法、共轭梯度法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -601,7 +565,7 @@ iters: 549
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
@@ -685,7 +649,7 @@ iters: 549
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-梯度下降法（Gradient-Descent）"><span class="nav-number">2.</span> <span class="nav-text">1. 梯度下降法（Gradient Descent）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-一般解释"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 一般解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-梯度下降算法用途"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 梯度下降算法用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-梯度下降、随机梯度下降、批量梯度下降"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 梯度下降、随机梯度下降、批量梯度下降</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-梯度下降法（Gradient-Descent）"><span class="nav-number">2.</span> <span class="nav-text">1. 梯度下降法（Gradient Descent）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-一般解释"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 一般解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-梯度下降算法用途"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 梯度下降算法用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-梯度下降、随机梯度下降、批量梯度下降"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 梯度下降、随机梯度下降、批量梯度下降</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度下降代码"><span class="nav-number">2.3.1.</span> <span class="nav-text">梯度下降代码:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机梯度下降代码"><span class="nav-number">2.3.2.</span> <span class="nav-text">随机梯度下降代码:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量随机梯度下降代码："><span class="nav-number">2.3.3.</span> <span class="nav-text">批量随机梯度下降代码：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

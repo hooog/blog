@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="algorithm," />
 
 
 
@@ -83,16 +83,24 @@
 
 
 
-<meta name="description" content="方式一1、这里需要删除next目录及根目录下的.git,（或者修改添加你不需要上传到远程的部分）同时删除bolg根目录下的.gitignore。这里我选择在主目录做了备份。 2、现在回到bolg根目录分别执行：  git init  初始化本地仓库 git checkout -b hexo 创建并切换hexo分支 git remote add origin https://github.com/">
+<meta name="description" content="牛顿法（Newton’s method)牛顿法原理具体步骤： 首先，选择一个接近函数 $f (x)$零点的 $x_0$，计算相应的 $f (x_0)$ 和切线斜率$f’(x_0)$（这里$f’(x_0)$ 表示函数 $f(x_0)$的导数）。然后我们计算穿过点$(x_0,  f(x_0))$ 并且斜率为$f’(x_0)$的直线和 x 轴的交点的x坐标，也就是求如下方程的解： $x\; \cdot">
+<meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="github 创建分支位作为云端备份解决hexo博客多PC间同步的问题">
-<meta property="og:url" content="http://www.ihoge.cn/2018/githubhexos.html">
+<meta property="og:title" content="和牛顿法、拟牛顿法、共轭梯度法">
+<meta property="og:url" content="http://www.ihoge.cn/2018/Newton.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
-<meta property="og:description" content="方式一1、这里需要删除next目录及根目录下的.git,（或者修改添加你不需要上传到远程的部分）同时删除bolg根目录下的.gitignore。这里我选择在主目录做了备份。 2、现在回到bolg根目录分别执行：  git init  初始化本地仓库 git checkout -b hexo 创建并切换hexo分支 git remote add origin https://github.com/">
-<meta property="og:updated_time" content="2018-04-22T14:57:33.172Z">
+<meta property="og:description" content="牛顿法（Newton’s method)牛顿法原理具体步骤： 首先，选择一个接近函数 $f (x)$零点的 $x_0$，计算相应的 $f (x_0)$ 和切线斜率$f’(x_0)$（这里$f’(x_0)$ 表示函数 $f(x_0)$的导数）。然后我们计算穿过点$(x_0,  f(x_0))$ 并且斜率为$f’(x_0)$的直线和 x 轴的交点的x坐标，也就是求如下方程的解： $x\; \cdot">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/1022856-20170916202719078-1588446775.gif">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262579878778.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262581746410.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262661663849.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262663848192.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262668307656.jpg">
+<meta property="og:updated_time" content="2018-05-14T04:05:55.047Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="github 创建分支位作为云端备份解决hexo博客多PC间同步的问题">
-<meta name="twitter:description" content="方式一1、这里需要删除next目录及根目录下的.git,（或者修改添加你不需要上传到远程的部分）同时删除bolg根目录下的.gitignore。这里我选择在主目录做了备份。 2、现在回到bolg根目录分别执行：  git init  初始化本地仓库 git checkout -b hexo 创建并切换hexo分支 git remote add origin https://github.com/">
+<meta name="twitter:title" content="和牛顿法、拟牛顿法、共轭梯度法">
+<meta name="twitter:description" content="牛顿法（Newton’s method)牛顿法原理具体步骤： 首先，选择一个接近函数 $f (x)$零点的 $x_0$，计算相应的 $f (x_0)$ 和切线斜率$f’(x_0)$（这里$f’(x_0)$ 表示函数 $f(x_0)$的导数）。然后我们计算穿过点$(x_0,  f(x_0))$ 并且斜率为$f’(x_0)$的直线和 x 轴的交点的x坐标，也就是求如下方程的解： $x\; \cdot">
+<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/1022856-20170916202719078-1588446775.gif">
 
 
 
@@ -122,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/githubhexos.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/Newton.html"/>
 
 
 
 
 
-  <title>github 创建分支位作为云端备份解决hexo博客多PC间同步的问题 | Hoooge's Blog</title>
+  <title>和牛顿法、拟牛顿法、共轭梯度法 | Hoooge's Blog</title>
   
 
 
@@ -265,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/githubhexos.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/Newton.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -282,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">github 创建分支位作为云端备份解决hexo博客多PC间同步的问题</h1>
+          <h1 class="post-title" itemprop="name headline">和牛顿法、拟牛顿法、共轭梯度法</h1>
         
 
         <div class="post-meta">
@@ -294,8 +302,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-05T17:05:59+08:00">
-                2018-04-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-14T12:20:21+08:00">
+                2018-05-14
               </time>
             
 
@@ -317,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -360,28 +368,44 @@
 
       
         <a id="more"></a>
-<h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><p>1、这里需要删除next目录及根目录下的<code>.git</code>,（或者修改添加你不需要上传到远程的部分）同时删除bolg根目录下的<code>.gitignore</code>。这里我选择在主目录做了备份。</p>
-<p>2、现在回到bolg根目录分别执行：</p>
-<ul>
-<li><code>git init</code>  初始化本地仓库</li>
-<li><code>git checkout -b hexo</code> 创建并切换hexo分支</li>
-<li><code>git remote add origin https://github.com/hooog/hooog.github.io.git</code>给hexo分支关联远程映射</li>
-<li><code>git add .</code>  添加blog目录下所有文件，注意有个<code>.</code>（<code>.gitignore</code>声明过的文件不包含在内)</li>
-<li><code>git commit -m &#39;添加描述&#39;</code></li>
-<li><code>git push origin hexo</code> 将hexo分支上传到远程仓库 </li>
-<li>如果加错了的话执行<code>git rm -r --cached .</code><br>到这里，云端备份就完成了。<br>同理也可以把分支备份到<code>Coding</code>的私密仓库上。（如果源代码涉及保密信息的话）</li>
-</ul>
-<p>3、将远程仓库的内容拷贝到新<code>PC</code>端端本地：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote add origin https://github.com/hooog/hooog.github.io.git</span><br><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br></pre></td></tr></table></figure></p>
-<p><code>fetch</code>是将云端所有内容拉取下来。<code>reset</code>则是不做任何合并处理，强制将本地内容指向刚刚同步下来的云端内容（正常pull的话需要考虑不少冲突的问题，比较麻烦。）</p>
-<p>4、更新文章后的同步操作：<br>假设在B电脑写完了文章，也<code>hexo d -g</code>发布成功，这时候需要将新文章的md文件更新上去。</p>
-<p><code>git add .</code></p>
-<p>这时候可以使用<code>git status</code>查看下状态，一般只显示刚刚更改过的文件状态。</p>
-<p>然后执行：<br><code>git commit -m &quot;更新信息&quot;</code><br><code>git push origin hexo</code></p>
-<p>在回到A电脑上的时候，只需要<br><code>git pull</code><br>即可同步更新</p>
-<p>5、日常改动<br>平时我们对源文件有修改的时候记得先pull一遍代码，再将代码push到Hexo分支，就和日常的使用git一样~<br>依次执行：<br><code>git add .</code><br><code>git commit -m “…”</code><br><code>git push origin hexo</code>指令将改动推送到GitHub（此时当前分支应为hexo）；然后执行：<br><code>hexo g -d</code>发布网站到master分支上。</p>
-<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><p>把Hexo的源码备份到Github分支里面，思路就是上传到分支里存储，修改本地的时候先上传存储，再发布。更换电脑的时候再下载下来源文件</p>
-<p>打开git-bash<br><code>git init</code><br><code>git remote add origin git@github.com:username/username.github.io.git</code><br><code>git add .</code><br><code>git commit -m &quot;blog&quot;</code><br><code>git push origin master:hexo</code></p>
-<p>现在你会发现github你的博客仓库已经有了一个新分支<code>hexo</code>，我们的备份工作完成。后续以后，本地写好博文之后，可以先执行<br><code>git add .</code><br><code>git commit -m &quot;blog&quot;</code><br><code>git push origin master:hexo</code>进行备份，然后<br><code>hexo d -g</code>进行更新静态文件。这里推荐先进行备份，因为万一更新网站之后不小心丢失了源文件，就又得重新再来了。</p>
+<h1 id="牛顿法（Newton’s-method"><a href="#牛顿法（Newton’s-method" class="headerlink" title="牛顿法（Newton’s method)"></a>牛顿法（Newton’s method)</h1><h2 id="牛顿法原理"><a href="#牛顿法原理" class="headerlink" title="牛顿法原理"></a>牛顿法原理</h2><p><strong>具体步骤：</strong></p>
+<p>首先，选择一个接近函数 $f (x)$零点的 $x_0$，计算相应的 $f (x_0)$ 和切线斜率$f’(x_0)$（这里$f’(x_0)$ 表示函数 $f(x_0)$的导数）。然后我们计算穿过点$(x_0,  f(x_0))$ 并且斜率为$f’(x_0)$的直线和 x 轴的交点的x坐标，也就是求如下方程的解：</p>
+<p>$x\; \cdot \; f’\left( x_{0} \right)+f\left( x_{0} \right)-x_{0\; }\cdot \; f’\left( x_{0} \right)=0$</p>
+<p>或：</p>
+<p>$f\left( x_{0} \right)+\left( x-x_{0} \right)f’’\left( x_{0} \right)=0$</p>
+<p>我们将新求得的点的 x 坐标命名为x1，通常x1会比x0更接近方程f  (x) = 0的解。因此我们现在可以利用x1开始下一轮迭代。迭代公式可化简为如下所示：</p>
+<p>$x_{n+1}=x_{n}\; -\; \frac{f\; \left( x_{n} \right)}{f\; ‘\; \left( x_{n} \right)}\; $</p>
+<p>已经证明，如果f  ‘ 是连续的，并且待求的零点x是孤立的，那么在零点x周围存在一个区域，只要初始值x0位于这个邻近区域内，那么牛顿法必定收敛。 并且，如果f’(x)不为0, 那么牛顿法将具有平方收敛的性能. 粗略的说，这意味着每迭代一次，牛顿法结果的有效数字将增加一倍。下图为一个牛顿法执行过程的例子。</p>
+<p>由于牛顿法是基于当前位置的切线来确定下一次的位置，所以牛顿法又被很形象地称为是”切线法”。牛顿法的搜索路径（二维情况）如下图所示：</p>
+<p>牛顿法搜索动态示例图：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/1022856-20170916202719078-1588446775.gif" alt="1022856-20170916202719078-1588446775">
+　</p>
+<p><strong>从本质上去看，牛顿法是二阶收敛，梯度下降是一阶收敛，所以牛顿法更快。比如你想找一条最短的路径走到一个盆地的最底部，梯度下降法每次只从你当前所处位置选一个坡度最大的方向走一步，牛顿法在选择方向时，不仅会考虑坡度是否够大，还会考虑你走了一步之后，坡度是否会变得更大。所以，可以说牛顿法比梯度下降法看得更远一点，能更快地走到最底部。（牛顿法目光更加长远，所以少走弯路；相对而言，梯度下降法只考虑了局部的最优，没有全局思想。</strong></p>
+<p>也可以这么理解：梯度下降主要是从一阶目标函数的一阶导推导而来的，形象点说，就是每次朝着当前梯度最大的方向收敛；二牛顿法是二阶收敛，每次考虑收敛方向的时候，还会考虑下一次的收敛的方向是否是最大（也就是梯度的梯度）。</p>
+<p>从几何上说，牛顿法就是用一个二次曲面去拟合你当前所处位置的局部曲面，而梯度下降法是用一个平面去拟合当前的局部曲面，通常情况下，二次曲面的拟合会比平面更好，所以牛顿法选择的下降路径会更符合真实的最优下降路径。如下图是一个最小化一个目标方程的例子，红色曲线是利用牛顿法迭代求解，绿色曲线是利用梯度下降法求解。</p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15262579878778.jpg" alt=""></p>
+<p>总结一下，就是牛顿法对目标函数的一阶导再求导，即可算出收敛的方向。</p>
+<p><strong>梯度法和牛顿法对比</strong>： </p>
+<pre><code>梯度法：又称最速下降法，是早期的解析法，收敛速度较慢。 
+牛顿法：收敛速度快，但不稳定，计算也较困难。
+</code></pre><p><strong>牛顿法的优缺点总结：</strong></p>
+<pre><code>优点：二阶收敛，收敛速度快；
+
+缺点：牛顿法是一种迭代算法，每一步都需要求解目标函数的Hessian矩阵的逆矩阵，计算比较复杂。
+</code></pre><p>在上面讨论的是2维情况，高维情况的牛顿迭代公式是：<br>$$x_{n+1}=x_n-[Hf(x_n)^{-1}]\nabla f(x_n)，n≥0$$<br>其中H时hessian矩阵，定义为：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262581746410.jpg" alt=""><br>高维情况也可以用牛顿迭代求解，但是Hessian矩阵引入的复杂性，使得牛顿迭代求解的难度增加，解决这个问题的办法是<strong>拟牛顿法</strong>（Quasi-Newton methond）：</p>
+<h2 id="拟牛顿法（Quasi-Newton-Methods）"><a href="#拟牛顿法（Quasi-Newton-Methods）" class="headerlink" title="拟牛顿法（Quasi-Newton Methods）"></a>拟牛顿法（Quasi-Newton Methods）</h2><p>拟牛顿法是求解非线性优化问题最有效的方法之一，于20世纪50年代由美国Argonne国家实验室的物理学家W.C.Davidon所提出来。Davidon设计的这种算法在当时看来是非线性优化领域最具创造性的发明之一。不久R. Fletcher和M. J. D. Powell证实了这种新的算法远比其他方法快速和可靠，使得非线性优化这门学科在一夜之间突飞猛进。</p>
+<p><strong>拟牛顿法的本质思想是改善牛顿法每次需要求解复杂的Hessian矩阵的逆矩阵的缺陷，它使用正定矩阵来近似Hessian矩阵的逆，从而简化了运算的复杂度。</strong>拟牛顿法和最速下降法一样只要求每一步迭代时知道目标函数的梯度。通过测量梯度的变化，构造一个目标函数的模型使之足以产生超线性收敛性。这类方法大大优于最速下降法，尤其对于困难的问题。另外，因为拟牛顿法不需要二阶导数的信息，所以有时比牛顿法更为有效。如今，优化软件中包含了大量的拟牛顿算法用来解决无约束，约束，和大规模的优化问题。</p>
+<p><strong>具体步骤：</strong></p>
+<p>拟牛顿法的基本思想如下。首先构造目标函数在当前迭代$x_k$的二次模型：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262661663849.jpg" alt=""><br>这里$B_k$是一个对称正定（正交）矩阵，于是我们取这个二次模型的最优解作为搜索方向，并且得到新的迭代点：<br>$x_{k+1}=x_k+\alpha _kp_k$<br>其中我们要求步长$\alpha_k$ 满足Wolfe条件。这样的迭代与牛顿法类似，区别就在于用近似的Hesse矩阵$B_k$  代替真实的Hesse矩阵。所以拟牛顿法最关键的地方就是每一步迭代中矩阵$B_k$ 的更新。现在假设得到一个新的迭代$x_{k+1}$，并得到一个新的二次模型：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262663848192.jpg" alt=""><br>我们尽可能地利用上一步的信息来选取$B_k$。具体地，我们要求 :</p>
+<p>$\nabla f(x_{k+1})-\nabla f(x_k)=\alpha _kB_{k+1}p_k$</p>
+<p>从而得到：</p>
+<p>$B_{k+1}(x_{k+1}-x_k)=\nabla f(x_{k+1})-\nabla f(x_k)$</p>
+<p>这个公式被称为<strong>割线方程</strong>。常用的拟牛顿法有<strong>DFP算法</strong>和<strong>BFGS算法</strong>。</p>
+<h2 id="共轭梯度法（Conjugate-Gradient）"><a href="#共轭梯度法（Conjugate-Gradient）" class="headerlink" title="共轭梯度法（Conjugate Gradient）"></a>共轭梯度法（Conjugate Gradient）</h2><p>共轭梯度法是介于最速下降法与牛顿法之间的一个方法，它仅需利用一阶导数信息，但克服了最速下降法收敛慢的缺点，又避免了牛顿法需要存储和计算Hesse矩阵并求逆的缺点，共轭梯度法不仅是解决大型线性方程组最有用的方法之一，也是解大型非线性最优化最有效的算法之一。 在各种优化算法中，共轭梯度法是非常重要的一种。其优点是所需存储量小，具有步收敛性，稳定性高，而且不需要任何外来参数。</p>
+<p>具体的实现步骤请参加<a href="https://en.wikipedia.org/wiki/Conjugate_gradient_method#Example_code_in_MATLAB" target="_blank" rel="noopener">wiki百科共轭梯度法</a>。</p>
+<p>下图为共轭梯度法和梯度下降法搜索最优解的路径对比示意图：(绿色为梯度下降法，红色代表共轭梯度法)<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262668307656.jpg" alt=""></p>
+<h2 id="其他优化方法"><a href="#其他优化方法" class="headerlink" title="其他优化方法"></a>其他优化方法</h2><h3 id="1、启发式优化方法"><a href="#1、启发式优化方法" class="headerlink" title="1、启发式优化方法"></a>1、启发式优化方法</h3><p>启发式方法指人在解决问题时所采取的一种根据经验规则进行发现的方法。其特点是在解决问题时,利用过去的经验,选择已经行之有效的方法，而不是系统地、以确定的步骤去寻求答案。启发式优化方法种类繁多，包括经典的模拟退火方法、遗传算法、蚁群算法以及粒子群算法等等。</p>
+<p>还有一种特殊的优化算法被称之多目标优化算法，它主要针对同时优化多个目标（两个及两个以上）的优化问题，这方面比较经典的算法有NSGAII算法、MOEA/D算法以及人工免疫算法等。</p>
+<h3 id="2、解决约束优化问题——拉格朗日乘数法"><a href="#2、解决约束优化问题——拉格朗日乘数法" class="headerlink" title="2、解决约束优化问题——拉格朗日乘数法"></a>2、解决约束优化问题——拉格朗日乘数法</h3><p>有关拉格朗日乘数法的介绍请见另一篇博客：<a href="http://www.cnblogs.com/maybe2030/p/4946256.html" target="_blank" rel="noopener">《拉格朗日乘数法》</a></p>
 
       
     </div>
@@ -397,6 +421,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+          
+        </div>
+      
 
       
       
@@ -406,8 +436,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/githubhexocodingbaidu.html" rel="next" title="使用Github和Coding共同托管hexo博客解决无法被百度收录的问题">
-                <i class="fa fa-chevron-left"></i> 使用Github和Coding共同托管hexo博客解决无法被百度收录的问题
+              <a href="/2018/GradientDescent.html" rel="next" title="梯度下降、随机梯度下降、批量梯度下降">
+                <i class="fa fa-chevron-left"></i> 梯度下降、随机梯度下降、批量梯度下降
               </a>
             
           </div>
@@ -415,10 +445,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/Logistic-regression.html" rel="prev" title="scikit-learn逻辑回归">
-                scikit-learn逻辑回归 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -590,7 +616,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方式一"><span class="nav-number">1.</span> <span class="nav-text">方式一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方式二"><span class="nav-number">2.</span> <span class="nav-text">方式二</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#牛顿法（Newton’s-method"><span class="nav-number">1.</span> <span class="nav-text">牛顿法（Newton’s method)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#牛顿法原理"><span class="nav-number">1.1.</span> <span class="nav-text">牛顿法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拟牛顿法（Quasi-Newton-Methods）"><span class="nav-number">1.2.</span> <span class="nav-text">拟牛顿法（Quasi-Newton Methods）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共轭梯度法（Conjugate-Gradient）"><span class="nav-number">1.3.</span> <span class="nav-text">共轭梯度法（Conjugate Gradient）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他优化方法"><span class="nav-number">1.4.</span> <span class="nav-text">其他优化方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、启发式优化方法"><span class="nav-number">1.4.1.</span> <span class="nav-text">1、启发式优化方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、解决约束优化问题——拉格朗日乘数法"><span class="nav-number">1.4.2.</span> <span class="nav-text">2、解决约束优化问题——拉格朗日乘数法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
