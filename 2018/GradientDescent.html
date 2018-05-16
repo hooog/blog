@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262224519674.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262225198545.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262225480705.jpg">
-<meta property="og:updated_time" content="2018-05-14T04:05:28.621Z">
+<meta property="og:updated_time" content="2018-05-15T13:29:27.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="梯度下降、随机梯度下降、批量梯度下降">
 <meta name="twitter:description" content="引言李航老师在《统计学习方法》中将机器学习的三要素总结为：模型、策略和算法。其大致含义如下： 模型：其实就是机器学习训练的过程中所要学习的条件概率分布或者决策函数。 策略：就是使用一种什么样的评价，度量模型训练过程中的学习好坏的方法，同时根据这个方法去实施的调整模型的参数，以期望训练的模型将来对未知的数据具有最好的预测准确度。 算法：算法是指模型的具体计算方法。它基于训练数据集，根据学习策略，从">
@@ -372,11 +372,6 @@
 <p><strong>算法</strong>：算法是指模型的具体计算方法。它基于训练数据集，根据学习策略，从假设空间中选择最优模型，最后考虑用什么样的计算方法去求解这个最优模型。</p>
 <p>很多时候机器学习工程师又戏称调参工程师, 由此可见参数调优时作为机器学习工程师必须掌握的一项核心技能。</p>
 <p>这篇文章的目的旨在对常用的参数调优算法进行一次梳理便于随时翻阅。</p>
-<ul>
-<li>梯度下降法 （梯度下降、随机梯度下降、批量梯度下降）</li>
-<li>牛顿法 （牛顿法、拟牛顿法）</li>
-<li>共轭梯度法（Conjugate Gradient）</li>
-</ul>
 <h1 id="1-梯度下降法（Gradient-Descent）"><a href="#1-梯度下降法（Gradient-Descent）" class="headerlink" title="1. 梯度下降法（Gradient Descent）"></a>1. 梯度下降法（Gradient Descent）</h1><h2 id="1-1-一般解释"><a href="#1-1-一般解释" class="headerlink" title="1.1 一般解释"></a>1.1 一般解释</h2><p>$f(x)$在$x_0$的梯度：就是$f(x)$变化最快的方向。梯度下降法是一个最优化算法，通常也称为<em>最速下降法</em>。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262278257042.jpg" alt=""><br>假设$f(x)$是一座山，站在半山腰，往x方向走1米，高度上升0.4米，也就是说x方向上的偏导是 0.4；往y方向走1米，高度上升0.3米，也就是说y方向上的偏导是 0.3；这样梯度方向就是 (0.4 , 0.3)，也就是往这个方向走1米，所上升的高度最高。梯度不仅仅是$f(x)$在某一点变化最快的方向，而且是上升最快的方向；如果想下山，下降最快的方向就是逆着梯度的方向，这就是梯度下降法，又叫最速下降法。</p>
 <h2 id="1-2-梯度下降算法用途"><a href="#1-2-梯度下降算法用途" class="headerlink" title="1.2 梯度下降算法用途"></a>1.2 梯度下降算法用途</h2><p>最速下降法是求解无约束优化问题最简单和最古老的方法之一，虽然现在已经不具有实用性，但是许多有效算法都是以它为基础进行改进和修正而得到的。最速下降法是用负梯度方向为搜索方向的，最速下降法越接近目标值，步长越小，前进越慢。 </p>
 <p>在梯度下降算法中，都是围绕以下这个式子展开：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262224519674.jpg" alt=""><br>其中在上面的式子中$h_θ(x)$代表，输入为x的时候的其当时θ参数下的输出值，与y相减则是一个相对误差，之后再平方乘以1/2，并且其中:<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262225198545.jpg" alt=""><br>这里我列举了一个简单的例子，当然实际的x可以有n多个维度。我们知道曲面上方向导数的最大值的方向就代表了梯度的方向，因此我们在做梯度下降的时候，应该是沿着梯度的反方向进行权重的更新，可以有效的找到全局的最优解。这个θ的更新过程可以描述为:<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262225480705.jpg" alt=""><br>这里就是根据每一个 x 的分量以及当时的偏差值进行 θ 的更新，其中 α 为步长，这个参数如果设置的太大，那么很容易就在最优值附加徘徊；相反，如果设置的太小，则会导致收敛速度过慢。</p>
@@ -475,8 +470,8 @@ iters: 549
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/Newton.html" rel="prev" title="和牛顿法、拟牛顿法、共轭梯度法">
-                和牛顿法、拟牛顿法、共轭梯度法 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/newton.html" rel="prev" title="牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结">
+                牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

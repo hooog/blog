@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/Newton.html</loc>
-    <lastmod>2018-05-14T04:05:55.047Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/newton.html</loc>
+    <lastmod>2018-05-16T13:09:43.355Z</lastmod>
     <data>
         <display>
-        <title>和牛顿法、拟牛顿法、共轭梯度法</title>
-        <pubTime>2018-05-14T04:20:21.000Z</pubTime>
+        <title>牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结</title>
+        <pubTime>2018-05-16T04:20:21.000Z</pubTime>
         
         <tag>algorithm</tag>
          
@@ -25,7 +25,7 @@
     
   <url>
     <loc>http://www.ihoge.cn/2018/GradientDescent.html</loc>
-    <lastmod>2018-05-14T04:05:28.621Z</lastmod>
+    <lastmod>2018-05-15T13:29:27.451Z</lastmod>
     <data>
         <display>
         <title>梯度下降、随机梯度下降、批量梯度下降</title>
@@ -944,70 +944,12 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>DStream的基本操作</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
         <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
         <pubTime>2018-03-17T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
-        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</title>
-        <pubTime>2018-03-24T09:05:59.000Z</pubTime>
         
         <tag>scikit-learn</tag>
          
@@ -1053,6 +995,64 @@
            
              
               <breadCrumb title="Hadoop" url="http://www.ihoge.cn/categories/Hadoop/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
+        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>DStream的基本操作</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        
+        <tag>MLlib</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</title>
+        <pubTime>2018-03-24T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
           
         </display>
     </data>
