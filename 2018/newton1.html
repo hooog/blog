@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="algorithm," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言：线性最小二乘问题，我们可以通过理论推导可以得到其解析解，但是对于非线性最小二乘问题，则需要依赖迭代优化的方法，牛顿算法是解决非线性最优的常见算法之一。最近整理了几篇关于牛顿法及其优化算法都不甚满意，网上大多相关技术博客很多是拼凑起来的，多数不全面（某些推导中间过程被省略），或者数学公式的符号表达方式不统一，造成看起来非常凌乱。因此本文旨在对基于牛顿法的非线性最小二乘优化问题的基本概念和算法">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结">
+<meta property="og:url" content="http://www.ihoge.cn/2018/newton1.html">
+<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:description" content="前言：线性最小二乘问题，我们可以通过理论推导可以得到其解析解，但是对于非线性最小二乘问题，则需要依赖迭代优化的方法，牛顿算法是解决非线性最优的常见算法之一。最近整理了几篇关于牛顿法及其优化算法都不甚满意，网上大多相关技术博客很多是拼凑起来的，多数不全面（某些推导中间过程被省略），或者数学公式的符号表达方式不统一，造成看起来非常凌乱。因此本文旨在对基于牛顿法的非线性最小二乘优化问题的基本概念和算法">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263936905896.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263938618855.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263939236262.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263940046795.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263940899460.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263961508272.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/1022856-20170916202719078-1588446775.gif">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262668307656.jpg">
+<meta property="og:updated_time" content="2018-05-16T13:18:32.469Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结">
+<meta name="twitter:description" content="前言：线性最小二乘问题，我们可以通过理论推导可以得到其解析解，但是对于非线性最小二乘问题，则需要依赖迭代优化的方法，牛顿算法是解决非线性最优的常见算法之一。最近整理了几篇关于牛顿法及其优化算法都不甚满意，网上大多相关技术博客很多是拼凑起来的，多数不全面（某些推导中间过程被省略），或者数学公式的符号表达方式不统一，造成看起来非常凌乱。因此本文旨在对基于牛顿法的非线性最小二乘优化问题的基本概念和算法">
+<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263936905896.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/newton1.html"/>
+
+
+
+
+
+  <title>牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结 | Hoooge's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hoooge's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/newton1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hoooge's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T12:20:21+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>线性最小二乘问题，我们可以通过理论推导可以得到其解析解，但是对于非线性最小二乘问题，则需要依赖迭代优化的方法，牛顿算法是解决非线性最优的常见算法之一。<br>最近整理了几篇关于牛顿法及其优化算法都不甚满意，网上大多相关技术博客很多是拼凑起来的，多数不全面（某些推导中间过程被省略），或者数学公式的符号表达方式不统一，造成看起来非常凌乱。因此本文旨在对基于牛顿法的非线性最小二乘优化问题的基本概念和算法推导做个系统的梳理。</p>
+<ul>
+<li>基本数学名词及概念</li>
+<li>海赛矩阵和雅可比矩阵</li>
+<li>牛顿算法推导</li>
+<li>拟牛顿算法（DFP和BFGS）</li>
+<li>高斯牛顿算法</li>
+<li>共轭梯度法</li>
+<li>补充优化算法</li>
+</ul>
+<hr>
+<h2 id="一、基本概念定义"><a href="#一、基本概念定义" class="headerlink" title="一、基本概念定义"></a>一、基本概念定义</h2><h3 id="1-非线性方程定义及最优化方法简述"><a href="#1-非线性方程定义及最优化方法简述" class="headerlink" title="1.非线性方程定义及最优化方法简述"></a>1.非线性方程定义及最优化方法简述</h3><p>指因变量与自变量之间的关系不是线性的关系，比如平方关系、对数关系、指数关系、三角函数关系等等。对于此类方程，求解n元实函数f在整个n维向量空间Rn上的最优值点往往很难得到精确解，经常需要求近似解问题。</p>
+<p>求解该最优化问题的方法大多是逐次一维搜索的迭代算法，基本思想是在一个近似点处选定一个有利于搜索方向，沿这个方向进行一维搜索，得到新的近似点。如此反复迭代，知道满足预定的精度要求为止。根据搜索方向的取法不同，这类迭代算法可分为两类：</p>
+<ul>
+<li><strong>解析法</strong> 需要用目标函数的倒函数</li>
+<li><strong>梯度法</strong> 又称最速下降法，是早期的解析法，收敛速度较慢</li>
+<li><strong>牛顿法</strong> 收敛速度快，但不稳定，计算也较困难。高斯牛顿法基于其改进，但目标作用不同</li>
+<li><strong>共轭梯度法</strong> 介于最速下降法与牛顿法之间。收敛较快，效果好</li>
+<li><strong>变尺度法</strong> 效率较高，常用DFP法(Davidon Fletcher Powell)</li>
+<li><strong>直接法</strong> 不涉及导数,只用到函数值。有交替方向法(又称坐标轮换法)、模式搜索法、旋转方向法、鲍威尔共轭方向法和单纯形加速法等。</li>
+</ul>
+<h3 id="2-非线性最小二乘问题"><a href="#2-非线性最小二乘问题" class="headerlink" title="2.非线性最小二乘问题"></a>2.非线性最小二乘问题</h3><p>非线性最小二乘问题来自于非线性回归，即通过观察自变量和因变量数据，求非线性目标函数的系数参数，使得函数模型与观测量尽量相似。</p>
+<p><strong>高斯牛顿法</strong>是解决非线性最小二乘问题的最基本方法，并且它<strong>只能处理二次函数。(使用时必须将目标函数转化为二次的)</strong></p>
+<h3 id="3-基本数学表达"><a href="#3-基本数学表达" class="headerlink" title="3.基本数学表达"></a>3.基本数学表达</h3><ol>
+<li><p><strong>梯度(gradient)</strong></p>
+<p> 常用 $\nabla $ 表示，由多元函数的哥哥偏导数组成的问题。以二元函数为例，其梯度为：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15263936905896.jpg" alt=""></p>
+</li>
+<li><p><strong>海赛矩阵(Hessian matrix)</strong></p>
+<p> 由多元函数的二阶偏导数组成的方阵，描述函数的局部曲率，以二元函数为例：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15263938618855.jpg" alt=""></p>
+</li>
+<li><p><strong>雅可比矩阵(Jacobian matrix)</strong></p>
+<p> 是多元函数一阶偏导数以一定方式排列成的矩阵，体现了一个可微方程与给出点的最优线性逼近。以二元函数为例：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15263939236262.jpg" alt=""><br> 如果扩展多维的话$F: R_n -&gt; R_m$，则雅可比矩阵是一个$m$行$n$列的矩阵，表示为：$J_F(x_1,x_2,…,x_n)$<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15263940046795.jpg" alt=""><br> 雅可比矩阵作用，如果$P$是$R_n$中的一点，$F$在$P$点可微分，那么在这一点的导数由$J_F(P)$给出，在此情况下，由$F(P)$描述的线性算子即接近点$P$的$F$的最优线性逼近，$x$逼近于$P$：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15263940899460.jpg" alt=""></p>
+</li>
+</ol>
+<p>黑森和雅可比矩阵参考：<a href="http://jacoxu.com/jacobian矩阵和hessian矩阵/" target="_blank" rel="noopener">http://jacoxu.com/jacobian矩阵和hessian矩阵/</a></p>
+<ol start="4">
+<li><p><strong>残差(residual)</strong></p>
+<p> 表示实际观测值与估计值(拟合值)之间的差。</p>
+</li>
+</ol>
+<hr>
+<h2 id="二、牛顿法"><a href="#二、牛顿法" class="headerlink" title="二、牛顿法"></a>二、牛顿法</h2><p>从本质上去看，牛顿法是二阶收敛，梯度下降是一阶收敛，所以牛顿法更快。比如你想找一条最短的路径走到一个盆地的最底部，梯度下降法每次只从你当前所处位置选一个坡度最大的方向走一步，牛顿法在选择方向时，不仅会考虑坡度是否够大，还会考虑你走了一步之后，坡度是否会变得更大。所以，可以说牛顿法比梯度下降法看得更远一点，能更快地走到最底部。（牛顿法目光更加长远，所以少走弯路；相对而言，梯度下降法只考虑了局部的最优，没有全局思想。</p>
+<p>从几何上说，牛顿法就是用一个二次曲面去拟合你当前所处位置的局部曲面，而梯度下降法是用一个平面去拟合当前的局部曲面，通常情况下，二次曲面的拟合会比平面更好，所以牛顿法选择的下降路径会更符合真实的最优下降路径。如下图是一个最小化一个目标方程的例子，红色曲线是利用牛顿法迭代求解，绿色曲线是利用梯度下降法求解。</p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15263961508272.jpg" alt=""></p>
+<h3 id="1-求解方程"><a href="#1-求解方程" class="headerlink" title="1.求解方程"></a>1.求解方程</h3><p>并不是所有的方程都有求根公式，或者求根公式很复杂，导致求解困难。利用牛顿法，可以迭代求解。</p>
+<p>原理是利用泰勒公式，在$x^{(0)}$处展开，且展开到一阶，即$f(x)=f(x^{(0)})+(x-x^{(0)})f’(x^{(0)}) $</p>
+<p>求解方程$f(x)=0$，即$f(x^{(0)})+(x-x^{(0)})f’(x^{(0)})=0 $</p>
+<p>求解$x=x^{(1)}=x^{(0)}-\frac {f(x^{(0)})}{f’(x^{(0)})}$</p>
+<p>因为这是利用泰勒公式的一阶展开，$f(x)=f(x^{(0)})+(x-x^{(0)})f’(x^{(0)}) $此处并非完全相等，而是近似相等。这里求得的$x^{(1)}$并不能让$f(x)=0$，只能说$f(x^{(1)})$比$f(x^{(0)})$更接近$f(x)=0$，这样就可以通过不断迭代去逼近$f(x)$。</p>
+<p>进而推出：$x^{(k+1)}=x^{(k)}-\frac {f(x^{(k)})}{f’(x^{(k)})}$</p>
+<p>通过迭代，这恶搞狮子必然在$f(x^*)=0 $的时候收敛，如下图：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/1022856-20170916202719078-1588446775.gif" alt="1022856-20170916202719078-1588446775"></p>
+<p>在最优化的问题中， 线性最优化至少可以使用单纯形法(或称不动点算法)求解， 但对于非线性优化问题， 牛顿法提供了一种求解的办法。 假设任务是优化一个目标函数$f$, 求函数$f$的极大极小问题, 可以转化为求解函数$f$的导数$f′=0$的问题, 这样求可以把优化问题看成方程求解问题。剩下的就和上面的牛顿法求解很相似了。</p>
+<h3 id="2-一维无约束极值最优化"><a href="#2-一维无约束极值最优化" class="headerlink" title="2.一维无约束极值最优化"></a>2.一维无约束极值最优化</h3><p>$$min f(x),x\in R^1 $$</p>
+<p>其中$x^*$为目标函数的极小点即$f’(x)$的根</p>
+<p>首先把$f(x)$在探索点$x^{(k)}$处泰勒展开到2阶形式进行近似：<br>$$f (x)=f(x^{(k)})+f’(x^{(k)})(x-x^{(k)})+\frac 12f’’(x^{(k)})(x-x^{(k)})^2 $$<br>然后用$f(x)$的最小点作为新的探索点$x^{(k+1)}$</p>
+<p>据此令：<br>$$f’(x)=f’(x^{(k)})+f’’(x^{(k)})(x-x^{(k)})=0 $$</p>
+<p>求出迭代公式：<br>$$x^{(k+1)}=x^{(k)}-\frac {f’(x^{(k)})}{f’’(x^{(k)})}, k=0,1,…$$</p>
+<p>因此，一维牛顿法最优化问题的<strong>计算步骤</strong>如下：<br>（1）给定初始点$x^{(0)}$，允许误差$\epsilon &gt;0$，置$k=0$<br>（2）如果$f’(x^{(k)})&lt; \epsilon $，则停止迭代，得到$x^{(k)}$；否则继续<br>（3）计算点$x^{(k+1)}$，$x^{(k+1)}=x^{(k)}-\frac {f(x^{(k)})}{f’’(x^{(k)})}$，置$k=k+1$，转（2）</p>
+<p>需要注意的是，牛顿法在求极值的时候，如果初始点选取不好，则可能不收敛于极小点</p>
+<h3 id="3-多维无约束极值最优化"><a href="#3-多维无约束极值最优化" class="headerlink" title="3.多维无约束极值最优化"></a>3.多维无约束极值最优化</h3><p>$$minf(x), x\in R^n$$<br>其中$x^*$为目标函数的极小点。</p>
+<p>假设$f(x)$具有二阶连续偏导数，若第$k$次迭代值为$x^{(k)}$，则可将$f(x)$在$x^{(k)}$附近进行二阶泰勒展开：<br>$$f(x)=f(x^{(k)})+\nabla f(x^{(k)})^T(x-x^{(k)})+\frac 12(x-x^{(k)})^TH(x^{(k)})(x-x^{(k)})     (式一) $$<br>这里$\nabla f(x^{(k)})$是$f(x)$的梯度向量在点$x^{(k)}$的值；</p>
+<p>$H(x^{(k)})$是$f(x)$的海赛矩阵（Hesse matrix）$H(x)=[\frac {ϑ^2f}{ϑ_{x_i}ϑ_{x_j}}]_{n*n} $在点$x^{(k)}$的值；</p>
+<p>函数$f(x)$有极值的必要条件是在极值点处一阶导数为0，即梯度向量为0。特别是当$H(x^{(k)})$是正定矩阵时，函数$f(x)$的极值为极小值。</p>
+<p>牛顿利用极小点的必要条件：$\nabla f(x)=0$</p>
+<p>每次迭代中从点$x^{(k)} $开始，求目标函数的极小点，作为第$k+1$次迭代值$x^{(k+1)}$</p>
+<p>假设：$x^{(k+1)}$满足$\nabla f(x^{(k+1)})=0 $ </p>
+<p>由式二得：$$\nabla f(x)=\nabla f(x^{(k)})+H(x^{(k)})(x-x^{(k)})$$</p>
+<p>由于：$$\nabla f(x^{(k+1)})=0 $$</p>
+<p>即：$$\nabla f(x^{k)})+H(x^{(k)})(x^{(k+1)}-x^{(k)})=0 $$</p>
+<p>得：$$x^{(k+1)}=x^{(k)}-H(x^{(k)})^{-1}\nabla f(x^{(k)})$$<br>简写为：$$x^{(k+1)}=x^{(k)}-H_k^{-1}g_k $$<br><strong>用该公式作为迭代公式的算法就是牛顿法。</strong>其中，$H_kp_k=-g_k$</p>
+<p>下面给出<strong>计算步骤</strong>：</p>
+<p>输入：目标函数$f(x)$，梯度为$g(x)=\nabla f(x)$，海赛矩阵$H(x)$，精度要求$\epsilon $;</p>
+<p>输出：$f(x)$的极小点$x^*$</p>
+<p>（1）取初始点$x^{(0)}$，置$k=0$<br>（2）计算梯度$g_k=\nabla f(x^{(k)})$<br>（3）若$||g_k||&lt;\epsilon $，停止计算，得近似解$x^*=x^{(k)}$；否则转（3）<br>（4）计算$H_k=H(x^{(k)})$，并根据迭代公式求出：$p_k=H(x^{(k)})^{-1}\nabla f(x^{(k)})$<br>（5）置$x^{(k+1)}=x^{(k)}+p_k$<br>（6）置$k=k+1$，转（2）</p>
+<p>步骤（4）求$p_k$，需要求$H_K^{-1}$，计算比较复杂，所以有其他改进方法。</p>
+<hr>
+<h2 id="三、拟牛顿法"><a href="#三、拟牛顿法" class="headerlink" title="三、拟牛顿法"></a>三、拟牛顿法</h2><p>在牛顿法的迭代中，需要计算海赛矩阵的逆矩阵$H^{-1}$,这一计算比较复杂，考虑用一个正定矩阵$G_k=G(x^{(k)})$来近似代替$H_K^{-1}=H^{-1}(x^{(k)}) $。这就是拟牛顿法的基本想法。</p>
+<h3 id="1-拟牛顿法推导"><a href="#1-拟牛顿法推导" class="headerlink" title="1.拟牛顿法推导"></a>1.拟牛顿法推导</h3><p>先看牛顿迭代中海赛矩阵$H_k$满足的条件。</p>
+<p>首先，$H_k $满足以下关系:</p>
+<p>在$$\nabla f(x)=\nabla f(x^{(k)})+H(x^{(k)})(x-x^{(k)})$$中取$$x=x^{(k+1)}$$</p>
+<p>即得：$$g_{k+1}-g_k=H(x^{(k)})(x^{(k+1)}-x^{(k)}) $$</p>
+<p>记：$g_k=\nabla f(x^{(k)})$；$y_k=g_{k+1}-g_k$；$\delta _k=x^{(k+1)}-x^{(k)} $；$H_k=H(x^{(k)})$；$p_k=-H_k^{-1}g_k$</p>
+<p>则：$$y_k=H_k\delta _k$$<br>或 $$H_k^{-1}y_k=\delta _k$$</p>
+<p>该式称为<strong>拟牛顿条件</strong></p>
+<p>如果$H_k$是正定的（$H_k^{-1}$也是正定的），那么可以保证牛顿法搜索方向$p_k$是下降方向。这是因为搜索方向是$p_k=-H_k^{-1}g_k$</p>
+<p>由式：$$x^{(k+1)}=x^{(k)}-H_k^{-1}g_k $$</p>
+<p>有：$$x=x^{(k)}+ \lambda p_k =x^{(k)} - \lambda H_k^{(-1)}g_k$$</p>
+<p>所以$f(x)$在$x^{(k)}$得泰勒展开式（见上文）可以近似写成：$$f(x)=f(x^{(k)})-\lambda g^T_kH^{-1}_kg_k $$</p>
+<p>因$H^{-1}_k$正定，故有$g_k^TH^{-1}_kg_k&gt;0 $，当$\lambda $为一个充分小得正数时，总有$f(x)&lt;f(x^{(k)})$，也就是说$p_k$是下降方向。</p>
+<p>拟牛顿法将$G_k$作为$H_k^{-1}$的近似，要求矩阵$G_k$满足同样的条件。首先，每次迭代矩阵$G_k$是正定的。同时，$G_k$满足拟牛顿条件：$G_{k+1}y_k=\delta _k$</p>
+<p>按照拟牛顿条件选择$G_k$作为$H_k^{-1}$的近似或选择$B_k$作为$H_k$的近似的算法成为拟牛顿法。</p>
+<p><strong>按照拟牛顿条件选择$G_k$作为$H_k^{-1}$的近似；或者选择$B_k$作为$H_k$的近似的算法称为拟牛顿法。</strong></p>
+<p>按照拟牛顿条件，在每次迭代中可以选择更新矩阵$G_{k+1}$：<br>$$G_{k+1}=G_k+\nabla G_k$$</p>
+<p>这种选择有一定的灵活性，因此有多种具体实现方法。下面介绍Broyden类拟牛顿法。</p>
+<h3 id="2-DFP（Davidon-Fletcher-Powell）算法（DFP-algorithm）"><a href="#2-DFP（Davidon-Fletcher-Powell）算法（DFP-algorithm）" class="headerlink" title="2.DFP（Davidon-Fletcher-Powell）算法（DFP algorithm）"></a>2.DFP（Davidon-Fletcher-Powell）算法（DFP algorithm）</h3><p>DFP算法选择$G_{k+1}$的方法是，假设每一步迭代中矩阵$G_{k+1}$是由$G_k$加上两个附加项构成的，即：<br>$$G_{k+1}=G_k+P_k+Q_k $$<br>其中$P_k，Q_k$是待定矩阵。这时：<br>$$G_{k+1}y_k=G_ky_k+P_ky_k+Q_ky_k $$</p>
+<p>为使$G_{k+1}$满足拟牛顿条件$y_k=H_k\delta _k$，可使$P_k$和$Q_k$满足：<br>$$P_ky_k=\delta _k$$<br>$$Q_ky_k=-G_ky_k$$</p>
+<p>事实上，不难找出这样的$P_k$和$Q_k$，例如取：<br>$$P_k=\frac {\delta _k\delta _k^T}{\delta _k^Ty_k}$$<br>$$Q_k=- \frac {G_ky_ky_k^TG_k}{y^T_kG_ky_k}$$</p>
+<p>这样就可以得到矩阵$G_{k+1}$的迭代公式：<br>$$G_{k+1}=G_k+\frac {\delta _k\delta _k^T}{\delta _k^Ty_k}-\frac {G_ky_ky_k^TG_k}{y^T_kG_ky_k}$$<br>称为<strong>DFP算法</strong>。</p>
+<pre><code>可以证明，如果初始矩阵$G_0$是正定的，则迭代过程中的每个矩阵$G_k$都是正定的。
+</code></pre><p><strong>DFP算法步骤迭代如下</strong></p>
+<p>输入：目标函数$f(x)$，梯度$g(x)=\nabla f(x)$，精度要求为$\epsilon $<br>输出：$f(x)$的极小点$x^*$。</p>
+<p>（1）选定初始点$x^{(0)}$，取$G_0$为正定对称矩阵，置$k=0$<br>（2）计算$g_k=g(x^{(k)})$。若$||g_k||&lt;\epsilon $，则停止计算，得近似解$x^<em>=x^{(k)}$，否则转（3）<br>（3）置$p_k=-G_kg_k$<code>（这里与BFGS不同）</code><br>（4）一维搜索：求$\lambda _k$使得：$$f(x^{(k)}+\lambda _kp_k)=Min(f(x^{(k)}+\lambda p_k)),{(\lambda ≥0)}$$<br>（5）置$x^{(k+1)}=x^{(k)}+\lambda _kp_k$<br>（6）计算$g_{k+1}=g(x^{(k+1)})$，若$||g_{k+1}||&lt;\epsilon $，则停止计算，得近似解$x^</em>=x^{(k+1)}$；否则，按$G_{k+1}$的迭代公式（上文）计算出$G_{k+1}$<code>（这里与BFGS不同）</code><br>（7）置$k=k+1$，转（3）</p>
+<h3 id="3-BFGS算法（Broyden-Fletcher-Goldfarb-Shanno）"><a href="#3-BFGS算法（Broyden-Fletcher-Goldfarb-Shanno）" class="headerlink" title="3.BFGS算法（Broyden-Fletcher-Goldfarb-Shanno）"></a>3.BFGS算法（Broyden-Fletcher-Goldfarb-Shanno）</h3><p><strong>BFGS算法是最流行的拟牛顿算法。</strong></p>
+<p>考虑用$G_k$逼近海赛矩阵的逆矩阵$H^{-1} $，也可以考虑用$B_k$逼近海赛矩阵。</p>
+<p>这时，相应的拟牛顿条件是：$$B_{k+1}\delta _k=y_k$$</p>
+<p>可以用同样的方法得到另一迭代公式.首先，令：<br>$$B_{k+1}=B_k+P_k+Q_k$$<br>$$B_{k+1}\delta _k=B_k\delta _k+P_k\delta _k+Q_k\delta_k $$</p>
+<p>考虑使$P_k和Q_k$满足：<br>$$P_k\delta_k=y_k$$<br>$$Q_k\delta_k=-B_k\delta_k$$<br>找出适合条件的$P_k和Q_k$，得到<strong>BFGS算法矩阵$B_{k+1}$的迭代公式：</strong><br>$$B_{k+1}=B_k+\frac {y_ky_k^T}{y^T_k\delta_k}-\frac {B_k\delta_k\delta_k^TB_k}{\delta_k^TB_k\delta_k} $$</p>
+<p>可以证明，如果初始矩阵$B_0$是正定的，则迭代过程中的每个矩阵$B_k$都是正定的。</p>
+<p><strong>BFGS拟牛顿算法的迭代步骤</strong>：</p>
+<p>输入：目标函数$f(x)$，$g(x)=\nabla f(x)$，精度要求$\epsilon$；<br>输出：$f(x)$的极小点$x^*$</p>
+<p>（1）选定初始点$x^{(0)}$，取$B_0$为正定矩阵的对称矩阵，置$k=0$<br>（2）计算$g_k=g(x^{(k)})$。若$||g_k||&lt;\epsilon $，则停止计算，得近似解$x^<em>=x^{(k)}$；否则转（3）<br>（3）由$B_kp_k=-g_k$求出$p_k$ <code>(这里与DFP不同)</code><br>（4）一维搜索：求$\lambda _k$使得：$$f(x^{(k)}+\lambda _kp_k)=Min(f(x^{(k)}+\lambda p_k)),{(\lambda ≥0)}$$<br>（5）置$x^{(k+1)}=x^{(k)}+\lambda _kp_k$<br>（6）计算$g_{k+1}=g(x^{(k+1)})$，若$||g_{k+1}||&lt;\epsilon $，则停止计算，得近似解$x^</em>=x^{(k+1)}$；否则，按$B_{k+1}$的迭代公式（上文）计算出$B_{k+1}$<code>（这里与DFP不同）</code><br>（7）置$k=k+1$，转（3）</p>
+<h3 id="4-Broyden类算法（Broyden’s-algorithm）"><a href="#4-Broyden类算法（Broyden’s-algorithm）" class="headerlink" title="4.Broyden类算法（Broyden’s algorithm）"></a>4.Broyden类算法（Broyden’s algorithm）</h3><p><strong>该算法是由DFP算法和BFGS算法相结合派生出的一类拟牛顿法。</strong></p>
+<p>我们可以从BFDS算法矩阵$B_k$的迭代式（$B_{k+1}=B_k+\frac {y_ky_k^T}{y^T_k\delta_k}-\frac {B_k\delta_k\delta_k^TB_k}{\delta_k^TB_k\delta_k} $）得到BFGS算法关于$G_k$的迭代公式。</p>
+<p>事实上，若记$G_k=B^{-1}<em>k,G</em>{k+1}=B^{-1}_{k+1} $</p>
+<p>那么对以上BFDS算法矩阵$B_k$的迭代式两次应用Sherman-Morrison公式得：<br>$$G_{k+1}=(I-\frac {\delta _ky_k^T}{\delta_k^Ty_k })G_k(I-\frac {\delta _ky_k^T}{\delta_k^Ty_k })^T+\frac {\delta_k\delta_k^T}{\delta _k^Ty_k} $$<br>称为<strong>BFGS算法关于G_k的迭代公式</strong>。</p>
+<p>将DFP算法的迭代公式：$$G_{k+1}=G_k+\frac {\delta _k\delta _k^T}{\delta _k^Ty_k}-\frac {G_ky_ky_k^TG_k}{y^T_kG_ky_k}$$<br><strong>记作</strong>$G^{DFP}$</p>
+<p>将BFGS算法迭代公式：<br>$$B_{k+1}=B_k+\frac {y_ky_k^T}{y^T_k\delta_k}-\frac {B_k\delta_k\delta_k^TB_k}{\delta_k^TB_k\delta_k} $$<br><strong>记作</strong>$G^{BFGS}$</p>
+<p>他们都满足方程拟牛顿条件式，所以他们的线性组合<br>$$G_{k+1}=\alpha G^{DFP}+(1-\alpha)G^{BFGS}$$也满足拟牛顿条件式，而且是正定的。</p>
+<p>其中$0≤\alpha≤1$，这样就得到了一类拟牛顿法，称为Broyden类算法。其步骤与上文类似，唯（3）和（6）步有所不同。</p>
+<p>⚠️ Sherman-Morrison公式：假设$A$是$n$阶可逆矩阵，$u,v$是$n$维向量，且$A+uv^T$也是可逆矩阵，则有：$$(A+uv^T)^{-1}=A^{-1}-\frac {A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u} $$</p>
+<h2 id="四、高斯牛顿法"><a href="#四、高斯牛顿法" class="headerlink" title="四、高斯牛顿法"></a>四、高斯牛顿法</h2><p>以后再补充。</p>
+<h2 id="五、共轭梯度法（Conjugate-Gradient）"><a href="#五、共轭梯度法（Conjugate-Gradient）" class="headerlink" title="五、共轭梯度法（Conjugate Gradient）"></a>五、共轭梯度法（Conjugate Gradient）</h2><p>共轭梯度法是介于最速下降法与牛顿法之间的一个方法，它仅需利用一阶导数信息，但克服了最速下降法收敛慢的缺点，又避免了牛顿法需要存储和计算Hesse矩阵并求逆的缺点，共轭梯度法不仅是解决大型线性方程组最有用的方法之一，也是解大型非线性最优化最有效的算法之一。 在各种优化算法中，共轭梯度法是非常重要的一种。其优点是所需存储量小，具有步收敛性，稳定性高，而且不需要任何外来参数。</p>
+<p>具体的实现步骤请参加<a href="https://en.wikipedia.org/wiki/Conjugate_gradient_method#Example_code_in_MATLAB" target="_blank" rel="noopener">wiki百科共轭梯度法</a>。</p>
+<p>下图为共轭梯度法和梯度下降法搜索最优解的路径对比示意图：(绿色为梯度下降法，红色代表共轭梯度法)<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15262668307656.jpg" alt=""></p>
+<h2 id="六、其他优化方法"><a href="#六、其他优化方法" class="headerlink" title="六、其他优化方法"></a>六、其他优化方法</h2><h3 id="1、启发式优化方法"><a href="#1、启发式优化方法" class="headerlink" title="1、启发式优化方法"></a>1、启发式优化方法</h3><p>启发式方法指人在解决问题时所采取的一种根据经验规则进行发现的方法。其特点是在解决问题时,利用过去的经验,选择已经行之有效的方法，而不是系统地、以确定的步骤去寻求答案。启发式优化方法种类繁多，包括经典的模拟退火方法、遗传算法、蚁群算法以及粒子群算法等等。</p>
+<p>还有一种特殊的优化算法被称之多目标优化算法，它主要针对同时优化多个目标（两个及两个以上）的优化问题，这方面比较经典的算法有NSGAII算法、MOEA/D算法以及人工免疫算法等。</p>
+<h3 id="2、解决约束优化问题——拉格朗日乘数法"><a href="#2、解决约束优化问题——拉格朗日乘数法" class="headerlink" title="2、解决约束优化问题——拉格朗日乘数法"></a>2、解决约束优化问题——拉格朗日乘数法</h3><p>有关拉格朗日乘数法的介绍请见另一篇博客：<a href="http://www.cnblogs.com/maybe2030/p/4946256.html" target="_blank" rel="noopener">《拉格朗日乘数法》</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/GradientDescent.html" rel="next" title="梯度下降、随机梯度下降、批量梯度下降">
+                <i class="fa fa-chevron-left"></i> 梯度下降、随机梯度下降、批量梯度下降
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基本概念定义"><span class="nav-number">2.</span> <span class="nav-text">一、基本概念定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-非线性方程定义及最优化方法简述"><span class="nav-number">2.1.</span> <span class="nav-text">1.非线性方程定义及最优化方法简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-非线性最小二乘问题"><span class="nav-number">2.2.</span> <span class="nav-text">2.非线性最小二乘问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-基本数学表达"><span class="nav-number">2.3.</span> <span class="nav-text">3.基本数学表达</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、牛顿法"><span class="nav-number">3.</span> <span class="nav-text">二、牛顿法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-求解方程"><span class="nav-number">3.1.</span> <span class="nav-text">1.求解方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-一维无约束极值最优化"><span class="nav-number">3.2.</span> <span class="nav-text">2.一维无约束极值最优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-多维无约束极值最优化"><span class="nav-number">3.3.</span> <span class="nav-text">3.多维无约束极值最优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、拟牛顿法"><span class="nav-number">4.</span> <span class="nav-text">三、拟牛顿法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-拟牛顿法推导"><span class="nav-number">4.1.</span> <span class="nav-text">1.拟牛顿法推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-DFP（Davidon-Fletcher-Powell）算法（DFP-algorithm）"><span class="nav-number">4.2.</span> <span class="nav-text">2.DFP（Davidon-Fletcher-Powell）算法（DFP algorithm）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-BFGS算法（Broyden-Fletcher-Goldfarb-Shanno）"><span class="nav-number">4.3.</span> <span class="nav-text">3.BFGS算法（Broyden-Fletcher-Goldfarb-Shanno）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Broyden类算法（Broyden’s-algorithm）"><span class="nav-number">4.4.</span> <span class="nav-text">4.Broyden类算法（Broyden’s algorithm）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、高斯牛顿法"><span class="nav-number">5.</span> <span class="nav-text">四、高斯牛顿法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、共轭梯度法（Conjugate-Gradient）"><span class="nav-number">6.</span> <span class="nav-text">五、共轭梯度法（Conjugate Gradient）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、其他优化方法"><span class="nav-number">7.</span> <span class="nav-text">六、其他优化方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、启发式优化方法"><span class="nav-number">7.1.</span> <span class="nav-text">1、启发式优化方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、解决约束优化问题——拉格朗日乘数法"><span class="nav-number">7.2.</span> <span class="nav-text">2、解决约束优化问题——拉格朗日乘数法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
