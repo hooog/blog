@@ -944,6 +944,24 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
+        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
@@ -964,14 +982,14 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>scikit-learn逻辑回归</title>
-        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
+        <title>DStream的基本操作</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
         
-        <tag>scikit-learn</tag>
+        <tag>MLlib</tag>
          
          
            
@@ -984,32 +1002,14 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/JavaMap.html</loc>
+    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
     <lastmod>2018-04-06T17:31:08.000Z</lastmod>
     <data>
         <display>
-        <title>Java map 详解 - 用法、遍历、排序、常用API等</title>
-        <pubTime>2018-03-16T09:05:59.000Z</pubTime>
+        <title>scikit-learn逻辑回归</title>
+        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
         
-         
-           
-             
-              <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
-    <lastmod>2018-04-06T17:31:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>DStream的基本操作</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>MLlib</tag>
+        <tag>scikit-learn</tag>
          
          
            
