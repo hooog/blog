@@ -90,19 +90,19 @@
 <meta property="og:url" content="http://www.ihoge.cn/2018/newton.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
 <meta property="og:description" content="前言：线性最小二乘问题，我们可以通过理论推导可以得到其解析解，但是对于非线性最小二乘问题，则需要依赖迭代优化的方法，牛顿算法是解决非线性最优的常见算法之一。最近整理了几篇关于牛顿法及其优化算法都不甚满意，网上大多相关技术博客很多是拼凑起来的，多数不全面（某些推导中间过程被省略），或者数学公式的符号表达方式不统一，造成看起来非常凌乱。因此本文旨在对基于牛顿法的非线性最小二乘优化问题的基本概念和算法">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/15263936905896.jpg">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/15263938618855.jpg">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/15263939236262.jpg">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/15263940046795.jpg">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/15263940899460.jpg">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/15263961508272.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263936905896.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263938618855.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263939236262.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263940046795.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263940899460.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263961508272.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/1022856-20170916202719078-1588446775.gif">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262668307656.jpg">
-<meta property="og:updated_time" content="2018-05-16T13:09:43.355Z">
+<meta property="og:updated_time" content="2018-05-16T13:12:02.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结">
 <meta name="twitter:description" content="前言：线性最小二乘问题，我们可以通过理论推导可以得到其解析解，但是对于非线性最小二乘问题，则需要依赖迭代优化的方法，牛顿算法是解决非线性最优的常见算法之一。最近整理了几篇关于牛顿法及其优化算法都不甚满意，网上大多相关技术博客很多是拼凑起来的，多数不全面（某些推导中间过程被省略），或者数学公式的符号表达方式不统一，造成看起来非常凌乱。因此本文旨在对基于牛顿法的非线性最小二乘优化问题的基本概念和算法">
-<meta name="twitter:image" content="http://www.ihoge.cn/2018/media/15263936905896.jpg">
+<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263936905896.jpg">
 
 
 
@@ -395,13 +395,13 @@
 <p><strong>高斯牛顿法</strong>是解决非线性最小二乘问题的最基本方法，并且它<strong>只能处理二次函数。(使用时必须将目标函数转化为二次的)</strong></p>
 <h3 id="3-基本数学表达"><a href="#3-基本数学表达" class="headerlink" title="3.基本数学表达"></a>3.基本数学表达</h3><ol>
 <li><p><strong>梯度(gradient)</strong></p>
-<p> 常用 $\nabla $ 表示，由多元函数的哥哥偏导数组成的问题。以二元函数为例，其梯度为：<br><img src="media/15263936905896.jpg" alt=""></p>
+<p> 常用 $\nabla $ 表示，由多元函数的哥哥偏导数组成的问题。以二元函数为例，其梯度为：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15263936905896.jpg" alt=""></p>
 </li>
 <li><p><strong>海赛矩阵(Hessian matrix)</strong></p>
-<p> 由多元函数的二阶偏导数组成的方阵，描述函数的局部曲率，以二元函数为例：<br><img src="media/15263938618855.jpg" alt=""></p>
+<p> 由多元函数的二阶偏导数组成的方阵，描述函数的局部曲率，以二元函数为例：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15263938618855.jpg" alt=""></p>
 </li>
 <li><p><strong>雅可比矩阵(Jacobian matrix)</strong></p>
-<p> 是多元函数一阶偏导数以一定方式排列成的矩阵，体现了一个可微方程与给出点的最优线性逼近。以二元函数为例：<br><img src="media/15263939236262.jpg" alt=""><br> 如果扩展多维的话$F: R_n -&gt; R_m$，则雅可比矩阵是一个$m$行$n$列的矩阵，表示为：$J_F(x_1,x_2,…,x_n)$<br><img src="media/15263940046795.jpg" alt=""><br> 雅可比矩阵作用，如果$P$是$R_n$中的一点，$F$在$P$点可微分，那么在这一点的导数由$J_F(P)$给出，在此情况下，由$F(P)$描述的线性算子即接近点$P$的$F$的最优线性逼近，$x$逼近于$P$：<br><img src="media/15263940899460.jpg" alt=""></p>
+<p> 是多元函数一阶偏导数以一定方式排列成的矩阵，体现了一个可微方程与给出点的最优线性逼近。以二元函数为例：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15263939236262.jpg" alt=""><br> 如果扩展多维的话$F: R_n -&gt; R_m$，则雅可比矩阵是一个$m$行$n$列的矩阵，表示为：$J_F(x_1,x_2,…,x_n)$<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15263940046795.jpg" alt=""><br> 雅可比矩阵作用，如果$P$是$R_n$中的一点，$F$在$P$点可微分，那么在这一点的导数由$J_F(P)$给出，在此情况下，由$F(P)$描述的线性算子即接近点$P$的$F$的最优线性逼近，$x$逼近于$P$：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15263940899460.jpg" alt=""></p>
 </li>
 </ol>
 <p>黑森和雅可比矩阵参考：<a href="http://jacoxu.com/jacobian矩阵和hessian矩阵/" target="_blank" rel="noopener">http://jacoxu.com/jacobian矩阵和hessian矩阵/</a></p>
@@ -413,7 +413,7 @@
 <hr>
 <h2 id="二、牛顿法"><a href="#二、牛顿法" class="headerlink" title="二、牛顿法"></a>二、牛顿法</h2><p>从本质上去看，牛顿法是二阶收敛，梯度下降是一阶收敛，所以牛顿法更快。比如你想找一条最短的路径走到一个盆地的最底部，梯度下降法每次只从你当前所处位置选一个坡度最大的方向走一步，牛顿法在选择方向时，不仅会考虑坡度是否够大，还会考虑你走了一步之后，坡度是否会变得更大。所以，可以说牛顿法比梯度下降法看得更远一点，能更快地走到最底部。（牛顿法目光更加长远，所以少走弯路；相对而言，梯度下降法只考虑了局部的最优，没有全局思想。</p>
 <p>从几何上说，牛顿法就是用一个二次曲面去拟合你当前所处位置的局部曲面，而梯度下降法是用一个平面去拟合当前的局部曲面，通常情况下，二次曲面的拟合会比平面更好，所以牛顿法选择的下降路径会更符合真实的最优下降路径。如下图是一个最小化一个目标方程的例子，红色曲线是利用牛顿法迭代求解，绿色曲线是利用梯度下降法求解。</p>
-<p><img src="media/15263961508272.jpg" alt=""></p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15263961508272.jpg" alt=""></p>
 <h3 id="1-求解方程"><a href="#1-求解方程" class="headerlink" title="1.求解方程"></a>1.求解方程</h3><p>并不是所有的方程都有求根公式，或者求根公式很复杂，导致求解困难。利用牛顿法，可以迭代求解。</p>
 <p>原理是利用泰勒公式，在$x^{(0)}$处展开，且展开到一阶，即$f(x)=f(x^{(0)})+(x-x^{(0)})f’(x^{(0)}) $</p>
 <p>求解方程$f(x)=0$，即$f(x^{(0)})+(x-x^{(0)})f’(x^{(0)})=0 $</p>
