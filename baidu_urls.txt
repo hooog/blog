@@ -42,8 +42,8 @@ http://www.ihoge.cn/2018/hive.html
 http://www.ihoge.cn/2018/MLLearning.html
 http://www.ihoge.cn/2018/Hbaseproblom.html
 http://www.ihoge.cn/2018/Pyhive.html
-http://www.ihoge.cn/2018/关于科学数据处理的统计学习教程.html
 http://www.ihoge.cn/2018/pymysql.html
+http://www.ihoge.cn/2018/关于科学数据处理的统计学习教程.html
 http://www.ihoge.cn/2018/s-klearn.html
 http://www.ihoge.cn/2018/JavaMap.html
 http://www.ihoge.cn/2018/JavaExtends.html

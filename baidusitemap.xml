@@ -4,64 +4,8 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/DataMining.html</loc>
-    <lastmod>2018-05-17T12:22:43.879Z</lastmod>
-    <data>
-        <display>
-        <title>数据挖掘的9大成熟技术和商业应用</title>
-        <pubTime>2018-04-10T17:05:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%9F%BA%E4%BA%8E%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6%E7%A0%94%E7%A9%B6%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%BB%BA%E6%A8%A1%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%E5%8F%8A%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96.html</loc>
-    <lastmod>2018-05-17T12:20:17.023Z</lastmod>
-    <data>
-        <display>
-        <title>基于计量经济学研究线性回归建模的一般步骤及模型优化</title>
-        <pubTime>2018-03-31T09:05:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
-    <lastmod>2018-05-17T12:20:13.503Z</lastmod>
-    <data>
-        <display>
-        <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</title>
-        <pubTime>2018-03-24T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/JavaMysql.html</loc>
-    <lastmod>2018-05-17T12:18:43.783Z</lastmod>
+    <lastmod>2018-05-17T12:38:04.757Z</lastmod>
     <data>
         <display>
         <title>JavaMysql</title>
@@ -79,7 +23,7 @@
     
   <url>
     <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
-    <lastmod>2018-05-17T12:18:41.023Z</lastmod>
+    <lastmod>2018-05-17T12:37:46.454Z</lastmod>
     <data>
         <display>
         <title>使用 scikit-learn 识别手写数字介绍机器学习</title>
@@ -90,7 +34,7 @@
          
            
              
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -99,7 +43,7 @@
     
   <url>
     <loc>http://www.ihoge.cn/2018/sklearn1.html</loc>
-    <lastmod>2018-05-17T12:18:34.454Z</lastmod>
+    <lastmod>2018-05-17T12:37:41.398Z</lastmod>
     <data>
         <display>
         <title>支持向量机、学习曲线、查准率和召回率</title>
@@ -110,7 +54,423 @@
          
            
              
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
+    <lastmod>2018-05-17T12:37:31.823Z</lastmod>
+    <data>
+        <display>
+        <title>DStream的基本操作</title>
+        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
+    <lastmod>2018-05-17T12:37:15.255Z</lastmod>
+    <data>
+        <display>
+        <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</title>
+        <pubTime>2018-03-24T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%9F%BA%E4%BA%8E%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6%E7%A0%94%E7%A9%B6%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%BB%BA%E6%A8%A1%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%E5%8F%8A%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96.html</loc>
+    <lastmod>2018-05-17T12:37:08.686Z</lastmod>
+    <data>
+        <display>
+        <title>基于计量经济学研究线性回归建模的一般步骤及模型优化</title>
+        <pubTime>2018-03-31T09:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
+    <lastmod>2018-05-17T12:37:02.582Z</lastmod>
+    <data>
+        <display>
+        <title>KNN-糖尿病预测-学习曲线的应用</title>
+        <pubTime>2018-03-29T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
+    <lastmod>2018-05-17T12:36:58.231Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习scikit-learn 中的设置以及预估对象</title>
+        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
+    <lastmod>2018-05-17T12:36:53.326Z</lastmod>
+    <data>
+        <display>
+        <title>scikit-learn逻辑回归</title>
+        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/SVM.html</loc>
+    <lastmod>2018-05-17T12:36:42.798Z</lastmod>
+    <data>
+        <display>
+        <title>SVM支持向量机原理及核函数</title>
+        <pubTime>2018-04-07T12:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/DecisionTree.html</loc>
+    <lastmod>2018-05-17T12:36:38.958Z</lastmod>
+    <data>
+        <display>
+        <title>DecisionTree决策树大全</title>
+        <pubTime>2018-04-06T17:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/sklearnLiner.html</loc>
+    <lastmod>2018-05-17T12:36:35.310Z</lastmod>
+    <data>
+        <display>
+        <title>一个自编译线性回归的案例</title>
+        <pubTime>2018-04-02T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/SVWSVC.html</loc>
+    <lastmod>2018-05-17T12:36:27.431Z</lastmod>
+    <data>
+        <display>
+        <title>SVM支持向量机SVC实现</title>
+        <pubTime>2018-04-08T17:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/sklearn-ensemble.html</loc>
+    <lastmod>2018-05-17T12:36:14.591Z</lastmod>
+    <data>
+        <display>
+        <title>sklearn聚合算法整理</title>
+        <pubTime>2018-04-08T16:19:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/SVMPLOT.html</loc>
+    <lastmod>2018-05-17T12:36:07.600Z</lastmod>
+    <data>
+        <display>
+        <title>SVM绘图</title>
+        <pubTime>2018-04-08T17:10:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/MultinomialNB.html</loc>
+    <lastmod>2018-05-17T12:36:03.525Z</lastmod>
+    <data>
+        <display>
+        <title>朴素贝叶斯--文档分类</title>
+        <pubTime>2018-04-09T12:10:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/DataMining.html</loc>
+    <lastmod>2018-05-17T12:35:59.270Z</lastmod>
+    <data>
+        <display>
+        <title>数据挖掘的9大成熟技术和商业应用</title>
+        <pubTime>2018-04-10T17:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/PCA+SVM%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.html</loc>
+    <lastmod>2018-05-17T12:35:54.729Z</lastmod>
+    <data>
+        <display>
+        <title>PCA主成分分析+SVM人脸识别准确率97%+</title>
+        <pubTime>2018-04-09T17:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/ML1.html</loc>
+    <lastmod>2018-05-17T12:35:32.769Z</lastmod>
+    <data>
+        <display>
+        <title>Spark ML - 协同过滤</title>
+        <pubTime>2018-05-05T17:59:21.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/ML2.html</loc>
+    <lastmod>2018-05-17T12:35:28.273Z</lastmod>
+    <data>
+        <display>
+        <title>Spark ML - 聚类算法</title>
+        <pubTime>2018-05-05T18:00:21.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
+    <lastmod>2018-05-17T12:35:21.744Z</lastmod>
+    <data>
+        <display>
+        <title>KNN——不需要学习的算法</title>
+        <pubTime>2018-05-11T15:38:21.000Z</pubTime>
+        
+        <tag>algorithm</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/LR.html</loc>
+    <lastmod>2018-05-17T12:35:17.401Z</lastmod>
+    <data>
+        <display>
+        <title>LR 逻辑回归</title>
+        <pubTime>2018-05-13T13:20:21.000Z</pubTime>
+        
+        <tag>algorithm</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/GradientDescent.html</loc>
+    <lastmod>2018-05-17T12:35:13.176Z</lastmod>
+    <data>
+        <display>
+        <title>梯度下降、随机梯度下降、批量梯度下降</title>
+        <pubTime>2018-05-14T03:20:21.000Z</pubTime>
+        
+        <tag>algorithm</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/newton1.html</loc>
+    <lastmod>2018-05-17T12:35:04.764Z</lastmod>
+    <data>
+        <display>
+        <title>牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结</title>
+        <pubTime>2018-05-16T04:20:21.000Z</pubTime>
+        
+        <tag>algorithm</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine-Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -183,26 +543,6 @@
            
              
               <breadCrumb title="Hexo" url="http://www.ihoge.cn/categories/Hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
-    <lastmod>2018-05-17T12:18:08.862Z</lastmod>
-    <data>
-        <display>
-        <title>DStream的基本操作</title>
-        <pubTime>2018-03-13T03:59:21.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -300,66 +640,6 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/KNN.html</loc>
-    <lastmod>2018-05-17T12:17:15.890Z</lastmod>
-    <data>
-        <display>
-        <title>KNN-糖尿病预测-学习曲线的应用</title>
-        <pubTime>2018-03-29T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%85%B3%E4%BA%8E%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B.html</loc>
-    <lastmod>2018-05-17T12:17:08.628Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习scikit-learn 中的设置以及预估对象</title>
-        <pubTime>2018-03-18T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/Logistic-regression.html</loc>
-    <lastmod>2018-05-17T12:17:05.335Z</lastmod>
-    <data>
-        <display>
-        <title>scikit-learn逻辑回归</title>
-        <pubTime>2018-04-05T13:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/hive.html</loc>
     <lastmod>2018-05-17T12:16:54.883Z</lastmod>
     <data>
@@ -389,26 +669,6 @@
            
              
               <breadCrumb title="Hexo" url="http://www.ihoge.cn/categories/Hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/PCA+SVM%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.html</loc>
-    <lastmod>2018-05-17T12:16:11.684Z</lastmod>
-    <data>
-        <display>
-        <title>PCA主成分分析+SVM人脸识别准确率97%+</title>
-        <pubTime>2018-04-09T17:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -602,46 +862,6 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/ML1.html</loc>
-    <lastmod>2018-05-17T12:15:08.515Z</lastmod>
-    <data>
-        <display>
-        <title>Spark ML - 协同过滤</title>
-        <pubTime>2018-05-05T17:59:21.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/ML2.html</loc>
-    <lastmod>2018-05-17T12:15:06.827Z</lastmod>
-    <data>
-        <display>
-        <title>Spark ML - 聚类算法</title>
-        <pubTime>2018-05-05T18:00:21.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/SparkSQL1.html</loc>
     <lastmod>2018-05-17T12:15:04.868Z</lastmod>
     <data>
@@ -653,86 +873,6 @@
            
              
               <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
-    <lastmod>2018-05-17T12:15:02.716Z</lastmod>
-    <data>
-        <display>
-        <title>KNN——不需要学习的算法</title>
-        <pubTime>2018-05-11T15:38:21.000Z</pubTime>
-        
-        <tag>algorithm</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/LR.html</loc>
-    <lastmod>2018-05-17T12:15:00.753Z</lastmod>
-    <data>
-        <display>
-        <title>LR 逻辑回归</title>
-        <pubTime>2018-05-13T13:20:21.000Z</pubTime>
-        
-        <tag>algorithm</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/GradientDescent.html</loc>
-    <lastmod>2018-05-17T12:14:59.572Z</lastmod>
-    <data>
-        <display>
-        <title>梯度下降、随机梯度下降、批量梯度下降</title>
-        <pubTime>2018-05-14T03:20:21.000Z</pubTime>
-        
-        <tag>algorithm</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/newton1.html</loc>
-    <lastmod>2018-05-17T12:14:57.044Z</lastmod>
-    <data>
-        <display>
-        <title>牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结</title>
-        <pubTime>2018-05-16T04:20:21.000Z</pubTime>
-        
-        <tag>algorithm</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
           
         </display>
     </data>
@@ -769,146 +909,6 @@
            
              
               <breadCrumb title="Python" url="http://www.ihoge.cn/categories/Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/SVM.html</loc>
-    <lastmod>2018-05-17T12:14:11.906Z</lastmod>
-    <data>
-        <display>
-        <title>SVM支持向量机原理及核函数</title>
-        <pubTime>2018-04-07T12:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/DecisionTree.html</loc>
-    <lastmod>2018-05-17T12:14:07.667Z</lastmod>
-    <data>
-        <display>
-        <title>DecisionTree决策树大全</title>
-        <pubTime>2018-04-06T17:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/sklearnLiner.html</loc>
-    <lastmod>2018-05-17T12:14:04.243Z</lastmod>
-    <data>
-        <display>
-        <title>一个自编译线性回归的案例</title>
-        <pubTime>2018-04-02T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/SVWSVC.html</loc>
-    <lastmod>2018-05-17T12:13:58.363Z</lastmod>
-    <data>
-        <display>
-        <title>SVM支持向量机SVC实现</title>
-        <pubTime>2018-04-08T17:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/sklearn-ensemble.html</loc>
-    <lastmod>2018-05-17T12:13:54.083Z</lastmod>
-    <data>
-        <display>
-        <title>sklearn聚合算法整理</title>
-        <pubTime>2018-04-08T16:19:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/SVMPLOT.html</loc>
-    <lastmod>2018-05-17T12:13:49.250Z</lastmod>
-    <data>
-        <display>
-        <title>SVM绘图</title>
-        <pubTime>2018-04-08T17:10:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/MultinomialNB.html</loc>
-    <lastmod>2018-05-17T12:13:45.235Z</lastmod>
-    <data>
-        <display>
-        <title>朴素贝叶斯--文档分类</title>
-        <pubTime>2018-04-09T12:10:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
           
         </display>
     </data>
