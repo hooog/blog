@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="spark," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,7 +84,6 @@
 
 
 <meta name="description" content="Apache Spark是一个开源的，强大的分布式查询和处理引擎。它提供MapReduce的灵活性和可扩展性，但速度明显更高。 Spark的核心是根据RDD来实现的，Spark Scheduler则为Spark核心实现的重要一环，其作用就是任务调度。Spark的任务调度就是如何组织任务去处理RDD中每个分区的数据，根据RDD的依赖关系构建DAG，基于DAG划分Stage，将每个Stage中的任务">
-<meta name="keywords" content="spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark运行原理剖析">
 <meta property="og:url" content="http://www.ihoge.cn/2018/Spark Scheduler.html">
@@ -106,7 +105,7 @@
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fqdah2m113j31ho0gstau.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fqdaj1pwd0j31au11oq9z.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fqdak8sm5bj31kw0uj16a.jpg">
-<meta property="og:updated_time" content="2018-05-09T12:38:03.223Z">
+<meta property="og:updated_time" content="2018-05-17T12:15:40.956Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark运行原理剖析">
 <meta name="twitter:description" content="Apache Spark是一个开源的，强大的分布式查询和处理引擎。它提供MapReduce的灵活性和可扩展性，但速度明显更高。 Spark的核心是根据RDD来实现的，Spark Scheduler则为Spark核心实现的重要一环，其作用就是任务调度。Spark的任务调度就是如何组织任务去处理RDD中每个分区的数据，根据RDD的依赖关系构建DAG，基于DAG划分Stage，将每个Stage中的任务">
@@ -456,12 +455,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/spark/" rel="tag"><i class="fa fa-tag"></i> spark</a>
-          
-        </div>
-      
 
       
       
@@ -471,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/pyspark.html" rel="next" title="弹性式分布数据集RDD——Pyspark基础 （二）">
-                <i class="fa fa-chevron-left"></i> 弹性式分布数据集RDD——Pyspark基础 （二）
+              <a href="/2018/Sparksql0.html" rel="next" title="SparkSQL DataFrame进阶篇">
+                <i class="fa fa-chevron-left"></i> SparkSQL DataFrame进阶篇
               </a>
             
           </div>
@@ -481,8 +474,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/Databrickes.html" rel="prev" title="免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould">
-                免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould <i class="fa fa-chevron-right"></i>
+              <a href="/2018/pyspark.html" rel="prev" title="弹性式分布数据集RDD——Pyspark基础 （二）">
+                弹性式分布数据集RDD——Pyspark基础 （二） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -582,7 +575,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">Kategorien</span>
                 </a>
               </div>
@@ -593,7 +586,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">Tags</span>
                 </a>
               </div>
