@@ -4,6 +4,62 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/DataMining.html</loc>
+    <lastmod>2018-05-17T12:20:52.279Z</lastmod>
+    <data>
+        <display>
+        <title>数据挖掘的9大成熟技术和商业应用</title>
+        <pubTime>2018-04-10T17:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%9F%BA%E4%BA%8E%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6%E7%A0%94%E7%A9%B6%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%BB%BA%E6%A8%A1%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%E5%8F%8A%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96.html</loc>
+    <lastmod>2018-05-17T12:20:17.023Z</lastmod>
+    <data>
+        <display>
+        <title>基于计量经济学研究线性回归建模的一般步骤及模型优化</title>
+        <pubTime>2018-03-31T09:05:59.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
+    <lastmod>2018-05-17T12:20:13.503Z</lastmod>
+    <data>
+        <display>
+        <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</title>
+        <pubTime>2018-03-24T09:05:59.000Z</pubTime>
+        
+        <tag>scikit-learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://www.ihoge.cn/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/JavaMysql.html</loc>
     <lastmod>2018-05-17T12:18:43.783Z</lastmod>
     <data>
@@ -208,26 +264,6 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
-    <lastmod>2018-05-17T12:17:32.048Z</lastmod>
-    <data>
-        <display>
-        <title>监督学习实例（多项式回归器、数据预处理、计算准确性和特征相对重要性）</title>
-        <pubTime>2018-03-24T09:05:59.000Z</pubTime>
-        
-        <tag>scikit-learn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.ihoge.cn/2018/JavaExtends.html</loc>
     <lastmod>2018-05-17T12:17:30.097Z</lastmod>
     <data>
@@ -239,24 +275,6 @@
            
              
               <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%9F%BA%E4%BA%8E%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6%E7%A0%94%E7%A9%B6%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%BB%BA%E6%A8%A1%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%E5%8F%8A%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96.html</loc>
-    <lastmod>2018-05-17T12:17:28.529Z</lastmod>
-    <data>
-        <display>
-        <title>基于计量经济学研究线性回归建模的一般步骤及模型优化</title>
-        <pubTime>2018-03-31T09:05:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
           
         </display>
     </data>
@@ -964,24 +982,6 @@
            
              
               <breadCrumb title="Java" url="http://www.ihoge.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/DataMining.html</loc>
-    <lastmod>2018-04-22T14:55:57.331Z</lastmod>
-    <data>
-        <display>
-        <title>数据挖掘的9大成熟技术和商业应用</title>
-        <pubTime>2018-04-10T17:05:59.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Machine learning" url="http://www.ihoge.cn/categories/Machine-learning/"/>
           
         </display>
     </data>
