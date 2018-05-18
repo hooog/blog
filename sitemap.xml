@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
+    
+    <lastmod>2018-05-18T06:34:02.060Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/LR.html</loc>
+    
+    <lastmod>2018-05-18T06:33:58.799Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/GradientDescent.html</loc>
+    
+    <lastmod>2018-05-18T06:33:55.008Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/newton1.html</loc>
+    
+    <lastmod>2018-05-18T06:33:49.187Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/adaboost.html</loc>
+    
+    <lastmod>2018-05-18T06:33:44.649Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
     
     <lastmod>2018-05-17T12:48:09.853Z</lastmod>
@@ -131,34 +166,6 @@
     <loc>http://www.ihoge.cn/2018/ML2.html</loc>
     
     <lastmod>2018-05-17T12:45:52.127Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
-    
-    <lastmod>2018-05-17T12:45:46.919Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/LR.html</loc>
-    
-    <lastmod>2018-05-17T12:45:43.823Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/GradientDescent.html</loc>
-    
-    <lastmod>2018-05-17T12:45:37.750Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/newton1.html</loc>
-    
-    <lastmod>2018-05-17T12:45:34.919Z</lastmod>
     
   </url>
   

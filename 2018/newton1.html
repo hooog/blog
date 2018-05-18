@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="algorithm," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,7 +84,6 @@
 
 
 <meta name="description" content="前言：线性最小二乘问题，我们可以通过理论推导可以得到其解析解，但是对于非线性最小二乘问题，则需要依赖迭代优化的方法，牛顿算法是解决非线性最优的常见算法之一。最近整理了几篇关于牛顿法及其优化算法都不甚满意，网上大多相关技术博客很多是拼凑起来的，多数不全面（某些推导中间过程被省略），或者数学公式的符号表达方式不统一，造成看起来非常凌乱。因此本文旨在对基于牛顿法的非线性最小二乘优化问题的基本概念和算法">
-<meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结">
 <meta property="og:url" content="http://www.ihoge.cn/2018/newton1.html">
@@ -98,7 +97,7 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15263961508272.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/1022856-20170916202719078-1588446775.gif">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262668307656.jpg">
-<meta property="og:updated_time" content="2018-05-17T12:45:34.919Z">
+<meta property="og:updated_time" content="2018-05-18T06:33:49.187Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结">
 <meta name="twitter:description" content="前言：线性最小二乘问题，我们可以通过理论推导可以得到其解析解，但是对于非线性最小二乘问题，则需要依赖迭代优化的方法，牛顿算法是解决非线性最优的常见算法之一。最近整理了几篇关于牛顿法及其优化算法都不甚满意，网上大多相关技术博客很多是拼凑起来的，多数不全面（某些推导中间过程被省略），或者数学公式的符号表达方式不统一，造成看起来非常凌乱。因此本文旨在对基于牛顿法的非线性最小二乘优化问题的基本概念和算法">
@@ -198,7 +197,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -208,7 +207,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            About
           </a>
         </li>
       
@@ -228,7 +227,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -238,7 +237,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -302,7 +301,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T12:20:21+08:00">
                 2018-05-16
@@ -323,12 +322,12 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MachineLearning/" itemprop="url" rel="index">
-                    <span itemprop="name">MachineLearning</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -512,12 +511,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
-          
-        </div>
-      
 
       
       
@@ -536,6 +529,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/adaboost.html" rel="prev" title="提升方法-AdaBoost提升树学习笔记">
+                提升方法-AdaBoost提升树学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -600,10 +597,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -623,8 +620,8 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">54</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -634,8 +631,8 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
-                  <span class="site-state-item-name">Kategorien</span>
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
                 </a>
               </div>
             
@@ -645,8 +642,8 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             

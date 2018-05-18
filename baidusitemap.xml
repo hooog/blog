@@ -4,6 +4,96 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
+    <lastmod>2018-05-18T06:34:02.060Z</lastmod>
+    <data>
+        <display>
+        <title>KNN——不需要学习的算法</title>
+        <pubTime>2018-05-11T15:38:21.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/LR.html</loc>
+    <lastmod>2018-05-18T06:33:58.799Z</lastmod>
+    <data>
+        <display>
+        <title>LR 逻辑回归</title>
+        <pubTime>2018-05-13T13:20:21.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/GradientDescent.html</loc>
+    <lastmod>2018-05-18T06:33:55.008Z</lastmod>
+    <data>
+        <display>
+        <title>梯度下降、随机梯度下降、批量梯度下降</title>
+        <pubTime>2018-05-14T03:20:21.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/newton1.html</loc>
+    <lastmod>2018-05-18T06:33:49.187Z</lastmod>
+    <data>
+        <display>
+        <title>牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结</title>
+        <pubTime>2018-05-16T04:20:21.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/adaboost.html</loc>
+    <lastmod>2018-05-18T06:33:44.649Z</lastmod>
+    <data>
+        <display>
+        <title>提升方法-AdaBoost提升树学习笔记</title>
+        <pubTime>2018-05-18T04:20:21.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/s-klearn.html</loc>
     <lastmod>2018-05-17T12:48:09.853Z</lastmod>
     <data>
@@ -368,86 +458,6 @@
         <pubTime>2018-05-05T18:00:21.000Z</pubTime>
         
         <tag>ML</tag>
-         
-         
-           
-             
-              <breadCrumb title="MachineLearning" url="http://www.ihoge.cn/categories/MachineLearning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
-    <lastmod>2018-05-17T12:45:46.919Z</lastmod>
-    <data>
-        <display>
-        <title>KNN——不需要学习的算法</title>
-        <pubTime>2018-05-11T15:38:21.000Z</pubTime>
-        
-        <tag>algorithm</tag>
-         
-         
-           
-             
-              <breadCrumb title="MachineLearning" url="http://www.ihoge.cn/categories/MachineLearning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/LR.html</loc>
-    <lastmod>2018-05-17T12:45:43.823Z</lastmod>
-    <data>
-        <display>
-        <title>LR 逻辑回归</title>
-        <pubTime>2018-05-13T13:20:21.000Z</pubTime>
-        
-        <tag>algorithm</tag>
-         
-         
-           
-             
-              <breadCrumb title="MachineLearning" url="http://www.ihoge.cn/categories/MachineLearning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/GradientDescent.html</loc>
-    <lastmod>2018-05-17T12:45:37.750Z</lastmod>
-    <data>
-        <display>
-        <title>梯度下降、随机梯度下降、批量梯度下降</title>
-        <pubTime>2018-05-14T03:20:21.000Z</pubTime>
-        
-        <tag>algorithm</tag>
-         
-         
-           
-             
-              <breadCrumb title="MachineLearning" url="http://www.ihoge.cn/categories/MachineLearning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/newton1.html</loc>
-    <lastmod>2018-05-17T12:45:34.919Z</lastmod>
-    <data>
-        <display>
-        <title>牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结</title>
-        <pubTime>2018-05-16T04:20:21.000Z</pubTime>
-        
-        <tag>algorithm</tag>
          
          
            

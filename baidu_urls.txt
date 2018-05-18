@@ -1,3 +1,4 @@
+http://www.ihoge.cn/2018/adaboost.html
 http://www.ihoge.cn/2018/newton1.html
 http://www.ihoge.cn/2018/GradientDescent.html
 http://www.ihoge.cn/2018/LR.html

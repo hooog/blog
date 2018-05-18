@@ -83,28 +83,21 @@
 
 
 
-<meta name="description" content="摘要：本文带你畅游Databrickes Spark Clould云服务。小白迅速上手大数据Spark开发环境，从此告别集群Bug的烦恼，彻底解放物理机负担让你随时随地想Run就Run😎。 目录： Databrickes是个啥？ Databrickes注册 Databrickes快速入门 其他进阶神操作   Databrickes是个啥？YouTube简介，自备云梯Databricks 属于">
+<meta name="description" content="提升方法-AdaBoost提升树学习笔记作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。  一、AdaBoost核心概念总结 提升方法是将弱学习算法提升为强学习算法的统计学习方法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould">
-<meta property="og:url" content="http://www.ihoge.cn/2018/Databrickes.html">
+<meta property="og:title" content="提升方法-AdaBoost提升树学习笔记">
+<meta property="og:url" content="http://www.ihoge.cn/2018/adaboost.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
-<meta property="og:description" content="摘要：本文带你畅游Databrickes Spark Clould云服务。小白迅速上手大数据Spark开发环境，从此告别集群Bug的烦恼，彻底解放物理机负担让你随时随地想Run就Run😎。 目录： Databrickes是个啥？ Databrickes注册 Databrickes快速入门 其他进阶神操作   Databrickes是个啥？YouTube简介，自备云梯Databricks 属于">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238167919311.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238177684915.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238199155320.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238206713516.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238208963616.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238209363742.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238214224410.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238214940209.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238216319562.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15238217238654.jpg">
-<meta property="og:updated_time" content="2018-05-17T12:15:33.836Z">
+<meta property="og:description" content="提升方法-AdaBoost提升树学习笔记作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。  一、AdaBoost核心概念总结 提升方法是将弱学习算法提升为强学习算法的统计学习方法。">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15266077461675.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15266159564936.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15266164023757.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15266248077288.jpg">
+<meta property="og:updated_time" content="2018-05-18T06:33:44.649Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould">
-<meta name="twitter:description" content="摘要：本文带你畅游Databrickes Spark Clould云服务。小白迅速上手大数据Spark开发环境，从此告别集群Bug的烦恼，彻底解放物理机负担让你随时随地想Run就Run😎。 目录： Databrickes是个啥？ Databrickes注册 Databrickes快速入门 其他进阶神操作   Databrickes是个啥？YouTube简介，自备云梯Databricks 属于">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg">
+<meta name="twitter:title" content="提升方法-AdaBoost提升树学习笔记">
+<meta name="twitter:description" content="提升方法-AdaBoost提升树学习笔记作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。  一、AdaBoost核心概念总结 提升方法是将弱学习算法提升为强学习算法的统计学习方法。">
+<meta name="twitter:image" content="http://www.ihoge.cn/2018/media/15266077461675.jpg">
 
 
 
@@ -134,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/Databrickes.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/adaboost.html"/>
 
 
 
 
 
-  <title>免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould | Hoooge's Blog</title>
+  <title>提升方法-AdaBoost提升树学习笔记 | Hoooge's Blog</title>
   
 
 
@@ -277,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/Databrickes.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/adaboost.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -294,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">免安装免配置 还免费的Spark 集群 --Databrickes Spark Clould</h1>
+          <h1 class="post-title" itemprop="name headline">提升方法-AdaBoost提升树学习笔记</h1>
         
 
         <div class="post-meta">
@@ -306,8 +299,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-16T03:59:21+08:00">
-                2018-04-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-18T12:20:21+08:00">
+                2018-05-18
               </time>
             
 
@@ -329,8 +322,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -372,36 +365,64 @@
 
       
         <a id="more"></a>
-<p>摘要：本文带你畅游<code>Databrickes Spark Clould</code>云服务。小白迅速上手大数据Spark开发环境，从此告别集群<code>Bug</code>的烦恼，彻底解放物理机负担让你随时随地想<code>Run</code>就<code>Run</code>😎。</p>
-<h2 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h2><ol>
-<li>Databrickes是个啥？</li>
-<li>Databrickes注册</li>
-<li>Databrickes快速入门</li>
-<li>其他进阶神操作</li>
-</ol>
+<h1 id="提升方法-AdaBoost提升树学习笔记"><a href="#提升方法-AdaBoost提升树学习笔记" class="headerlink" title="提升方法-AdaBoost提升树学习笔记"></a>提升方法-AdaBoost提升树学习笔记</h1><p>作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？<br>这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。</p>
 <hr>
-<h2 id="Databrickes是个啥？"><a href="#Databrickes是个啥？" class="headerlink" title="Databrickes是个啥？"></a>Databrickes是个啥？</h2><p><a href="https://databricks.com" target="_blank" rel="noopener">YouTube简介，自备云梯</a><br>Databricks 属于 Spark 的商业化公司，由美国伯克利大学 AMP 实验室著名的 Spark 大数据处理系统多位创始人联合创立。Databricks 致力于提供基于 Spark 的云服务，可用于数据集成，数据管道等任务。<br>Databricks 公司的云解决方案由三部分组成：Databricks 平台、Spark 和 Databricks 工作区。该产品背后的理念是提供处理数据的单独空间，不受托管环境和 Hadoop 集群管理的影响，整个过程在云中完成。该产品有几个核心概念：由 Notebooks 提供一种与数据交互并构建图形的方法，当用户了解了显示数据的方式时，就可以开始构建主控面板以监视某些类型的数据。最后，用户可以通过该平台的任务启动器来规划 Apache Spark 的运行时间。</p>
-<p>说白了就是<code>Databricks</code>捞钱的，老是开源spark 也不收你钱，大家也要吃饭不是，干脆搞个 spark on cloud，服务懒人或小公司，你既不用搭建集群也不用维护，交点儿钱直接用他们提供的在线集群。当然还有一个作用，推广普及spark ，所以也就有了<code>Community</code>版，即免费版</p>
-<p><code>Databricks</code>相当于给你了一个在线spark 集群，即：<code>Spark online</code>（听着怎么这么像网游 (⊙﹏⊙)b），我等尚处spark初级阶段的小白们刚好可以用他们提供的免费版来学习，省去了搭建和维护配置的过程，用来学习或温习Spark API真是完美！<br>（笔者比较懒，下面<code>Databricks Spark Cloud</code>都用<code>DSC</code>代替😂）<br>话不多说，开搞！！！</p>
-<h2 id="注册Databricks"><a href="#注册Databricks" class="headerlink" title="注册Databricks"></a>注册Databricks</h2><p><a href="https://databricks.com" target="_blank" rel="noopener">官网直达</a></p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fqdwayuscdj31kw0pg1kx.jpg" alt=""><br><code>Do you want to TRY DATACRICKS FREE?</code><br><code>Yeah, click here!</code></p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238167919311.jpg" alt=""></p>
-<p>下面就是注册页面，不再啰嗦。注意的是左下角要进行人际身份验证，网络不好的童鞋请自备云梯😎。然后验证邮箱，点击链接到登录界面：</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238177684915.jpg" alt=""></p>
-<p>💡<code>If you don&#39;t want to pay for money, pelese click here!</code></p>
-<h2 id="搭建云上Spark集群环境"><a href="#搭建云上Spark集群环境" class="headerlink" title="搭建云上Spark集群环境"></a>搭建云上Spark集群环境</h2><p><a href="https://docs.databricks.com/getting-started/index.html" target="_blank" rel="noopener">入门指南</a><br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238199155320.jpg" alt=""></p>
-<p>这货长这样～界面清爽颜值高，功能齐全效率高。</p>
-<h2 id="基本使用流程："><a href="#基本使用流程：" class="headerlink" title="基本使用流程："></a>基本使用流程：</h2><ol>
-<li>创建集群<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238206713516.jpg" alt=""></li>
+<h2 id="一、AdaBoost核心概念总结"><a href="#一、AdaBoost核心概念总结" class="headerlink" title="一、AdaBoost核心概念总结"></a>一、AdaBoost核心概念总结</h2><ol>
+<li><p>提升方法是将弱学习算法提升为强学习算法的统计学习方法。在分类学习中，提升方法通过反复修改训练数据的权值分布，构建一系列基本分类器（弱分类器），并将这些基本分类器线性组合，构成一个强分类器。代表性的提升方法是AdaBoost算法。（重点是：更新<strong>分类器的参数</strong>和<strong>训练集的权重见下2</strong>）</p>
+<p> <strong>AdaBoost模型是弱分类器的线性组合：</strong><br> $$f(x)=∑^M_{m=1}\alpha _mG_m(x)$$</p>
+<ul>
+<li>$M$表示该提升树共有$M$个弱分类器组成</li>
+<li>$G_m(x)$表示第$m$个弱分类器</li>
+<li>$\alpha_m$为第$m$个弱分类器的参数（反应该分类器的重要性）</li>
+</ul>
+</li>
+<li><p>AdaBoost算法的特点是通过迭代每次学习一个基本分类器。每次迭代中，<strong>核心思想是：<code>提高那些被前一轮分类器错误分类数据的权值，而降低那些被正确分类的数据的权值</code></strong>。最后，AdaBoost将基本分类器的线性组合作为强分类器，其中<strong><code>给分类误差率小的基本分类器以大的权值，给分类误差率大的基本分类器以小的权值</code></strong>。</p>
+</li>
+<li>AdaBoost的训练误差分析表明，AdaBoost的每次迭代可以减少它在训练数据集上的分类误差率，这说明了它作为提升方法的有效性。（<strong>每次迭代误差递减且误差$0≤\epsilon &lt;0.5$</strong>）</li>
+<li>AdaBoost算法的一个解释是该算法实际是前向分步算法的一个实现。在这个方法里，<strong><code>模型是加法模型，损失函数是指数损失，算法是前向分步算法</code></strong>。每一步中极小化损失函数。</li>
+<li>提升树是以分类树或回归树为基本分类器的提升方法。提升树被认为是统计学习中最有效的方法之一。</li>
 </ol>
-<p>没办法，笔者已经有一个集群在运行了，作为免费用户只能拥有一个活动集群，或者升级<code>高级用户</code>😎</p>
-<p>2.创建nootebook<br>选择集群，选择语言，新建项目，凯撸～<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238208963616.jpg" alt=""><br>创建笔记、加载依赖资源、创建文件夹</p>
-<p>3.创建Table<br>上传本地数据，速度有点慢，耐心等待一会～😅<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238209363742.jpg" alt=""></p>
-<h2 id="任务流程可视化、数据可视化"><a href="#任务流程可视化、数据可视化" class="headerlink" title="任务流程可视化、数据可视化"></a>任务流程可视化、数据可视化</h2><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238214224410.jpg" alt=""><br>自动生成任务阶段流程，生成DAG。</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238214940209.jpg" alt=""><br>丰富的画图工具，只需点点点即可完成高颜值图表。</p>
-<h2 id="其他操作："><a href="#其他操作：" class="headerlink" title="其他操作："></a>其他操作：</h2><p>下面是重点！！<br>下面是重点！！<br>下面是重点！！</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15238216319562.jpg" alt=""><br>这里提供了丰富的适合不同场景的训练数据、源代码及简介。<br>只需找到<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15238217238654.jpg" alt=""><br>即可快速导入到工作台。只可惜自己英文太烂，啃的很慢😂😂😂</p>
-<p><code>DSC</code>不仅提供了方便高可用的云集群服务，而且提供了丰富的学习资料，对像我等来说简直是完美的产品。感谢各位大佬给我们提供了如此便捷的学习环境和资源，<code>Life is short</code>，只争朝夕！<br><a href="https://youtu.be/fn3WeMZZcCk?t=17m19s" target="_blank" rel="noopener">油管视频自备云梯</a></p>
+<p>通过上面的总结我们看到，AdaBoost是一个神奇的算法，以精妙的方式通过更新数据集的权重以及各个弱分类器的参数组合成一个强分类器。那么它具体是怎么做到的呢？</p>
+<h2 id="二、AdaBoost算法推导"><a href="#二、AdaBoost算法推导" class="headerlink" title="二、AdaBoost算法推导"></a>二、AdaBoost算法推导</h2><p><strong>输入</strong>：训练数据集$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中$x_i\in X ⊆R^n,y_i\in Y={-1,1}$，弱学习算法$G_m(x)$;</p>
+<p><strong>输出：</strong>最终强化算法分类器$G(x)$<br>（1）初始化训练数据总和为1的权值分布：（初始权重为归一化后的均值既$\frac 1N$）<br>$$D_1=(w_{11},…,w_{1i},…w_{1N}),w_{1i}=\frac 1N, i=1,2,…N$$<br>（2）对$m=1,2,…M$：（弱分类器的个数）</p>
+<p>（a）使用具有权值分布的$D_m$的训练数据集学习，得到基本分类器：(数据集$X$到{-1,1}的映射)<br>$$G_m(x):X-&gt;{-1,1}$$<br>（b）计算$Gm(x)$在训练数据集上的分类误差率：（公式不够简洁明了，其实总结下来非常好理解：误差率$e_m$=误分类样本的权值之和）<br>$$e_m=∑^N_{i=1}P(G_m(x_i)≠y_i)=∑^N_{i=1}w_{mi}I(G_m(x_i)≠y_i)$$</p>
+<ul>
+<li>我们来考虑下误差$e_m$的取值空间：由于训练集权制之和为1，因此误差$0≤e_m≤1$。但是这样还不够。因为我们在选择分裂阈值的时候会选择一个最优或局部最优的取值来分裂，且当$e_m=0.5$是表明该分裂阈值对预测无贡献。因此最终得到的$e_m$的实际取值应小于$e_m≤0.5$。</li>
+<li>所以最终：$0≤e_m≤0.5$，且每次迭代误差$e_m$递减。这点对下面的参数理解很重要。</li>
+</ul>
+<p>（c）计算$G_m(x)$的系数:(这里对数为自然对数)<br>$$\alpha_m=\frac 12log\frac{1-e_m}{e_m} $$</p>
+<ul>
+<li>那么问题来了，为什么要用这个公式来计算更新每个基分类器的参数？我们先画个图出来观察下这个函数。（其中y轴为$\alpha _m$，x轴为误差$e_m$）</li>
+</ul>
+<p><img src="media/15266077461675.jpg" alt=""></p>
+<ul>
+<li>由（2-b）我们得到误差$e_m$的取值范围为$0≤e_m&lt;0.5$，结合该图可以可知$0&lt;\alpha_m&lt;1$。</li>
+<li>另外可以发现，通过该函数的转换，弱分类器$G_m(x)$的误差的越小，参数$\alpha_m$越大。即实现了<strong><code>给分类误差率小的基本分类器以大的权值，给分类误差率大的基本分类器以小的权值</code></strong></li>
+</ul>
+<p>（d）更新训练数据集的权值分布：（该权值决定数据集的重要性，并让误差的计算变得简单）<br>$$D_{m+1}=(w_{m+1,1},…,w_{m+1,i},…w_{m+1,N})$$<br>$$w_{m+1,i}=\frac {w_{mi}}{Z_m}exp(-\alpha_my_iG_m(x-i)),i=1,2,…N$$</p>
+<ul>
+<li>这里$y_i={-1,1} $为真实值，$G_m(x_i)={-1,1}$为预测值。当预测正确时$y_iG_m(x_i)$为1，反之为-1。</li>
+<li>令$\delta_{m_i}=\alpha_my_iG_m(x_i)$，$\theta_{mi}=\frac {w_{mi}}{Z_m}$(把它看作一个用于归一化权值的加权平均常数)。权重$w_{m+1,i}$的更新函数可以简化为$$w_{m+1,i}=\theta_{mi}exp(\delta <em>{mi}),i=1,2,…N$$画出$y=w</em>{m+1,i}=exp(\delta_{mi})$的图形来看一下：<img src="media/15266159564936.jpg" alt="">由于$0&lt;\alpha_m&lt;1$，所以$-1&lt;\delta_{m,i }&lt;1$。且<strong>使得预测错误的数据集样本点更新后的权重变大，预测正确的权值变小，然后对所有权值进行归一化</strong>。这就是该函数实现的作用。(图中y=1是当$\alpha$无限接近于0时的情况：解释为，当$\alpha_m$权值越大，权重$w_{m+1,i}$更新改变的效果越明显。)</li>
+<li>这里，$Z_m$是规范化因子，目的是使各数据集的权重进行归一化。理解为$Z_m$=更新后的各数据集权重之和。<br>$$Z_m=∑^N_{i=1}w_{mi}exp(-\alpha_my_iG_m(x_i))$$</li>
+</ul>
+<p>（3）构建基本分类器的新型组合$f(x)=∑^M_{m=1}\alpha_mG_m(x)$，即：<br>$$G(x)=sign(f(x))=sign(∑^M_{m=1}\alpha_mG_m(x))$$</p>
+<ul>
+<li>函数$sign()$的意义是将正数判别为1，负数判别为-1，最终达到分类的目的。如图：<img src="media/15266164023757.jpg" alt=""></li>
+</ul>
+<h2 id="三、AdaBoost算法实现步骤"><a href="#三、AdaBoost算法实现步骤" class="headerlink" title="三、AdaBoost算法实现步骤"></a>三、AdaBoost算法实现步骤</h2><p>上面解释了AdaBoost算法的具体内容。这里写出它的分布实现步骤再对上文算法加深下理解：</p>
+<p>（1）假设训练数据集具有均匀的权值分布，即每个训练样本在基本分类器的学习中作用相同，这一假设保证第1步能够在原始数据上学习基本分类器$G_1(x)$。</p>
+<p>（2）AdaBoost反复学习基本分类器，在每一轮$m＝1,2,…,M$顺次地执行下列操作：</p>
+<p>（a）使用当前分布$D_m$加权的训练数据集，学习基本分类器$G_m(x)$</p>
+<p>（b）计算基本分类器$G_m(x)$再加权训练数据集上的分类误差率（即误分类样本的权值之和。这里要注意$w_{mi}$表示第$m$轮中第$i$个实例的权值，且权值之和为1，即$∑^N_{i=1}w_{mi}=1$）：<br>$$e_m=P(G_m(x_i)≠y_i)=∑_{G_m(x_i)≠y_i}w_{mi}$$</p>
+<p>（c）计算基本分类器$G_m (x)$的系数$\alpha_m$。$alpha_m$表示$G_m(x)$在最终分类器中的重要性。由上面（2-c）可知，<strong>当$e_m≤1/2$时，$alpha_m≥0$，并且$\alpha_m$随着$e_m$的减小而增大，所以分类误差率越小的分类器在最终分类器中的作用越大。</strong></p>
+<p>（d）更新训练数据的权值分布为下一轮作准备。式（2-d）的权重更新函数可以写成：</p>
+<ul>
+<li><p><img src="media/15266248077288.jpg" alt=""></p>
+</li>
+<li><p>由此可知，被基本分类器$G_m (x)$误分类样本的权值得以扩大，而被正确分类样本的权值却得以缩小。两相比较，误分类样本的权值被放大$e^{(2\alpha_m)}=\frac{e_m}{1-e_m} $倍。因此，误分类样本在下一轮学习中起更大的作用。不改变所给的训练数据，而不断改变训练数据权值的分布，使得训练数据在基本分类器的学习中起不同的作用，这是AdaBoost的一个特点。</p>
+</li>
+</ul>
+<p>（3）线性组合f(x)实现M个基本分类器的加权表决。系数a m 表示了基本分类器G m (x)的重要性，这里，所有a m 之和并不为1.f(x)的符号决定实例x的类，f(x)的绝对值表示分类的确信度。利用基本分类器的线性组合构建最终分类器是AdaBoost的另一特点。</p>
 
       
     </div>
@@ -426,8 +447,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/Spark Scheduler.html" rel="next" title="Spark运行原理剖析">
-                <i class="fa fa-chevron-left"></i> Spark运行原理剖析
+              <a href="/2018/newton1.html" rel="next" title="牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结">
+                <i class="fa fa-chevron-left"></i> 牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结
               </a>
             
           </div>
@@ -435,10 +456,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/hbase.html" rel="prev" title="分布式数据库HBase原理">
-                分布式数据库HBase原理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -610,7 +627,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录："><span class="nav-number">1.</span> <span class="nav-text">目录：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Databrickes是个啥？"><span class="nav-number">2.</span> <span class="nav-text">Databrickes是个啥？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册Databricks"><span class="nav-number">3.</span> <span class="nav-text">注册Databricks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建云上Spark集群环境"><span class="nav-number">4.</span> <span class="nav-text">搭建云上Spark集群环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用流程："><span class="nav-number">5.</span> <span class="nav-text">基本使用流程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务流程可视化、数据可视化"><span class="nav-number">6.</span> <span class="nav-text">任务流程可视化、数据可视化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他操作："><span class="nav-number">7.</span> <span class="nav-text">其他操作：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#提升方法-AdaBoost提升树学习笔记"><span class="nav-number">1.</span> <span class="nav-text">提升方法-AdaBoost提升树学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、AdaBoost核心概念总结"><span class="nav-number">1.1.</span> <span class="nav-text">一、AdaBoost核心概念总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、AdaBoost算法推导"><span class="nav-number">1.2.</span> <span class="nav-text">二、AdaBoost算法推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、AdaBoost算法实现步骤"><span class="nav-number">1.3.</span> <span class="nav-text">三、AdaBoost算法实现步骤</span></a></li></ol></li></ol></div>
             
 
           </div>
