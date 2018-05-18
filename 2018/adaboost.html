@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266159564936.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266164023757.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266248077288.jpg">
-<meta property="og:updated_time" content="2018-05-18T06:37:16.669Z">
+<meta property="og:updated_time" content="2018-05-18T06:41:59.878Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AdaBoost提升树学习笔记">
 <meta name="twitter:description" content="提升方法-AdaBoost提升树学习笔记作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。  一、AdaBoost核心概念总结 提升方法是将弱学习算法提升为强学习算法的统计学习方法。">
@@ -422,7 +422,7 @@
 <li><p>由此可知，被基本分类器$G_m (x)$误分类样本的权值得以扩大，而被正确分类样本的权值却得以缩小。两相比较，误分类样本的权值被放大$e^{(2\alpha_m)}=\frac{e_m}{1-e_m} $倍。因此，误分类样本在下一轮学习中起更大的作用。不改变所给的训练数据，而不断改变训练数据权值的分布，使得训练数据在基本分类器的学习中起不同的作用，这是AdaBoost的一个特点。</p>
 </li>
 </ul>
-<p>（3）线性组合f(x)实现M个基本分类器的加权表决。系数a m 表示了基本分类器G m (x)的重要性，这里，所有a m 之和并不为1.f(x)的符号决定实例x的类，f(x)的绝对值表示分类的确信度。利用基本分类器的线性组合构建最终分类器是AdaBoost的另一特点。</p>
+<p>（3）线性组合$f(x)$实现$M$个基本分类器的加权表决。系数$\alpha_m$ 表示了基本分类器$G_m (x)$的重要性，这里，所有$\alpha_m$ 之和并不为1。$f(x)$的符号决定实例x的类，$f(x)$的绝对值表示分类的确信度。利用基本分类器的线性组合构建最终分类器是AdaBoost的另一特点。</p>
 
       
     </div>
