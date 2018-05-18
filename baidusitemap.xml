@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/adaboost.html</loc>
+    <lastmod>2018-05-18T06:37:16.669Z</lastmod>
+    <data>
+        <display>
+        <title>AdaBoost提升树学习笔记</title>
+        <pubTime>2018-05-18T04:20:21.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
     <lastmod>2018-05-18T06:34:02.060Z</lastmod>
     <data>
@@ -64,24 +82,6 @@
         <display>
         <title>牛顿法、拟牛顿法、高斯-牛顿法、共轭梯度法推导总结</title>
         <pubTime>2018-05-16T04:20:21.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/adaboost.html</loc>
-    <lastmod>2018-05-18T06:33:44.649Z</lastmod>
-    <data>
-        <display>
-        <title>提升方法-AdaBoost提升树学习笔记</title>
-        <pubTime>2018-05-18T04:20:21.000Z</pubTime>
         
          
            

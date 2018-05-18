@@ -85,19 +85,19 @@
 
 <meta name="description" content="提升方法-AdaBoost提升树学习笔记作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。  一、AdaBoost核心概念总结 提升方法是将弱学习算法提升为强学习算法的统计学习方法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="提升方法-AdaBoost提升树学习笔记">
+<meta property="og:title" content="AdaBoost提升树学习笔记">
 <meta property="og:url" content="http://www.ihoge.cn/2018/adaboost.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
 <meta property="og:description" content="提升方法-AdaBoost提升树学习笔记作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。  一、AdaBoost核心概念总结 提升方法是将弱学习算法提升为强学习算法的统计学习方法。">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/15266077461675.jpg">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/15266159564936.jpg">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/15266164023757.jpg">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/15266248077288.jpg">
-<meta property="og:updated_time" content="2018-05-18T06:33:44.649Z">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266077461675.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266159564936.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266164023757.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266248077288.jpg">
+<meta property="og:updated_time" content="2018-05-18T06:37:16.669Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="提升方法-AdaBoost提升树学习笔记">
+<meta name="twitter:title" content="AdaBoost提升树学习笔记">
 <meta name="twitter:description" content="提升方法-AdaBoost提升树学习笔记作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。  一、AdaBoost核心概念总结 提升方法是将弱学习算法提升为强学习算法的统计学习方法。">
-<meta name="twitter:image" content="http://www.ihoge.cn/2018/media/15266077461675.jpg">
+<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266077461675.jpg">
 
 
 
@@ -133,7 +133,7 @@
 
 
 
-  <title>提升方法-AdaBoost提升树学习笔记 | Hoooge's Blog</title>
+  <title>AdaBoost提升树学习笔记 | Hoooge's Blog</title>
   
 
 
@@ -193,7 +193,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -203,7 +203,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            About
+            Über
           </a>
         </li>
       
@@ -223,7 +223,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Categories
+            Kategorien
           </a>
         </li>
       
@@ -233,7 +233,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -287,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">提升方法-AdaBoost提升树学习笔记</h1>
+          <h1 class="post-title" itemprop="name headline">AdaBoost提升树学习笔记</h1>
         
 
         <div class="post-meta">
@@ -297,7 +297,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-18T12:20:21+08:00">
                 2018-05-18
@@ -318,7 +318,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -394,7 +394,7 @@
 <ul>
 <li>那么问题来了，为什么要用这个公式来计算更新每个基分类器的参数？我们先画个图出来观察下这个函数。（其中y轴为$\alpha _m$，x轴为误差$e_m$）</li>
 </ul>
-<p><img src="media/15266077461675.jpg" alt=""></p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15266077461675.jpg" alt=""></p>
 <ul>
 <li>由（2-b）我们得到误差$e_m$的取值范围为$0≤e_m&lt;0.5$，结合该图可以可知$0&lt;\alpha_m&lt;1$。</li>
 <li>另外可以发现，通过该函数的转换，弱分类器$G_m(x)$的误差的越小，参数$\alpha_m$越大。即实现了<strong><code>给分类误差率小的基本分类器以大的权值，给分类误差率大的基本分类器以小的权值</code></strong></li>
@@ -402,12 +402,12 @@
 <p>（d）更新训练数据集的权值分布：（该权值决定数据集的重要性，并让误差的计算变得简单）<br>$$D_{m+1}=(w_{m+1,1},…,w_{m+1,i},…w_{m+1,N})$$<br>$$w_{m+1,i}=\frac {w_{mi}}{Z_m}exp(-\alpha_my_iG_m(x-i)),i=1,2,…N$$</p>
 <ul>
 <li>这里$y_i={-1,1} $为真实值，$G_m(x_i)={-1,1}$为预测值。当预测正确时$y_iG_m(x_i)$为1，反之为-1。</li>
-<li>令$\delta_{m_i}=\alpha_my_iG_m(x_i)$，$\theta_{mi}=\frac {w_{mi}}{Z_m}$(把它看作一个用于归一化权值的加权平均常数)。权重$w_{m+1,i}$的更新函数可以简化为$$w_{m+1,i}=\theta_{mi}exp(\delta <em>{mi}),i=1,2,…N$$画出$y=w</em>{m+1,i}=exp(\delta_{mi})$的图形来看一下：<img src="media/15266159564936.jpg" alt="">由于$0&lt;\alpha_m&lt;1$，所以$-1&lt;\delta_{m,i }&lt;1$。且<strong>使得预测错误的数据集样本点更新后的权重变大，预测正确的权值变小，然后对所有权值进行归一化</strong>。这就是该函数实现的作用。(图中y=1是当$\alpha$无限接近于0时的情况：解释为，当$\alpha_m$权值越大，权重$w_{m+1,i}$更新改变的效果越明显。)</li>
+<li>令$\delta_{m_i}=\alpha_my_iG_m(x_i)$，$\theta_{mi}=\frac {w_{mi}}{Z_m}$(把它看作一个用于归一化权值的加权平均常数)。权重$w_{m+1,i}$的更新函数可以简化为$$w_{m+1,i}=\theta_{mi}exp(\delta <em>{mi}),i=1,2,…N$$画出$y=w</em>{m+1,i}=exp(\delta_{mi})$的图形来看一下：<img src="http://p6rvh6ej2.bkt.clouddn.com/15266159564936.jpg" alt="">由于$0&lt;\alpha_m&lt;1$，所以$-1&lt;\delta_{m,i }&lt;1$。且<strong>使得预测错误的数据集样本点更新后的权重变大，预测正确的权值变小，然后对所有权值进行归一化</strong>。这就是该函数实现的作用。(图中y=1是当$\alpha$无限接近于0时的情况：解释为，当$\alpha_m$权值越大，权重$w_{m+1,i}$更新改变的效果越明显。)</li>
 <li>这里，$Z_m$是规范化因子，目的是使各数据集的权重进行归一化。理解为$Z_m$=更新后的各数据集权重之和。<br>$$Z_m=∑^N_{i=1}w_{mi}exp(-\alpha_my_iG_m(x_i))$$</li>
 </ul>
 <p>（3）构建基本分类器的新型组合$f(x)=∑^M_{m=1}\alpha_mG_m(x)$，即：<br>$$G(x)=sign(f(x))=sign(∑^M_{m=1}\alpha_mG_m(x))$$</p>
 <ul>
-<li>函数$sign()$的意义是将正数判别为1，负数判别为-1，最终达到分类的目的。如图：<img src="media/15266164023757.jpg" alt=""></li>
+<li>函数$sign()$的意义是将正数判别为1，负数判别为-1，最终达到分类的目的。如图：<img src="http://p6rvh6ej2.bkt.clouddn.com/15266164023757.jpg" alt=""></li>
 </ul>
 <h2 id="三、AdaBoost算法实现步骤"><a href="#三、AdaBoost算法实现步骤" class="headerlink" title="三、AdaBoost算法实现步骤"></a>三、AdaBoost算法实现步骤</h2><p>上面解释了AdaBoost算法的具体内容。这里写出它的分布实现步骤再对上文算法加深下理解：</p>
 <p>（1）假设训练数据集具有均匀的权值分布，即每个训练样本在基本分类器的学习中作用相同，这一假设保证第1步能够在原始数据上学习基本分类器$G_1(x)$。</p>
@@ -417,7 +417,7 @@
 <p>（c）计算基本分类器$G_m (x)$的系数$\alpha_m$。$alpha_m$表示$G_m(x)$在最终分类器中的重要性。由上面（2-c）可知，<strong>当$e_m≤1/2$时，$alpha_m≥0$，并且$\alpha_m$随着$e_m$的减小而增大，所以分类误差率越小的分类器在最终分类器中的作用越大。</strong></p>
 <p>（d）更新训练数据的权值分布为下一轮作准备。式（2-d）的权重更新函数可以写成：</p>
 <ul>
-<li><p><img src="media/15266248077288.jpg" alt=""></p>
+<li><p><img src="http://p6rvh6ej2.bkt.clouddn.com/15266248077288.jpg" alt=""></p>
 </li>
 <li><p>由此可知，被基本分类器$G_m (x)$误分类样本的权值得以扩大，而被正确分类样本的权值却得以缩小。两相比较，误分类样本的权值被放大$e^{(2\alpha_m)}=\frac{e_m}{1-e_m} $倍。因此，误分类样本在下一轮学习中起更大的作用。不改变所给的训练数据，而不断改变训练数据权值的分布，使得训练数据在基本分类器的学习中起不同的作用，这是AdaBoost的一个特点。</p>
 </li>
@@ -520,10 +520,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -544,7 +544,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">55</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
             
@@ -555,7 +555,7 @@
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">categories</span>
+                  <span class="site-state-item-name">Kategorien</span>
                 </a>
               </div>
             
@@ -566,7 +566,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">tags</span>
+                  <span class="site-state-item-name">Tags</span>
                 </a>
               </div>
             
