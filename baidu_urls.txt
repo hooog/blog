@@ -1,3 +1,4 @@
+http://www.ihoge.cn/2018/XGBoost1.html
 http://www.ihoge.cn/2018/adaboost.html
 http://www.ihoge.cn/2018/newton1.html
 http://www.ihoge.cn/2018/GradientDescent.html
@@ -9,8 +10,8 @@ http://www.ihoge.cn/2018/ML1.html
 http://www.ihoge.cn/2018/DataPreprocessing3.html
 http://www.ihoge.cn/2018/DataPreprocessing2.html
 http://www.ihoge.cn/2018/DataPreprocessing1.html
-http://www.ihoge.cn/2018/StructuredStreaming.html
 http://www.ihoge.cn/2018/strame.html
+http://www.ihoge.cn/2018/StructuredStreaming.html
 http://www.ihoge.cn/2018/IntroductionToSpark.html
 http://www.ihoge.cn/2018/hbase.html
 http://www.ihoge.cn/2018/Databrickes.html
@@ -43,8 +44,8 @@ http://www.ihoge.cn/2018/hive.html
 http://www.ihoge.cn/2018/MLLearning.html
 http://www.ihoge.cn/2018/Hbaseproblom.html
 http://www.ihoge.cn/2018/Pyhive.html
-http://www.ihoge.cn/2018/pymysql.html
 http://www.ihoge.cn/2018/关于科学数据处理的统计学习教程.html
+http://www.ihoge.cn/2018/pymysql.html
 http://www.ihoge.cn/2018/s-klearn.html
 http://www.ihoge.cn/2018/JavaMap.html
 http://www.ihoge.cn/2018/JavaExtends.html

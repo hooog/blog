@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266159564936.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266164023757.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266248077288.jpg">
-<meta property="og:updated_time" content="2018-05-18T06:41:59.878Z">
+<meta property="og:updated_time" content="2018-05-18T07:15:20.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AdaBoost提升树学习笔记">
 <meta name="twitter:description" content="提升方法-AdaBoost提升树学习笔记作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。  一、AdaBoost核心概念总结 提升方法是将弱学习算法提升为强学习算法的统计学习方法。">
@@ -379,9 +379,12 @@
 <li><p>AdaBoost算法的特点是通过迭代每次学习一个基本分类器。每次迭代中，<strong>核心思想是：<code>提高那些被前一轮分类器错误分类数据的权值，而降低那些被正确分类的数据的权值</code></strong>。最后，AdaBoost将基本分类器的线性组合作为强分类器，其中<strong><code>给分类误差率小的基本分类器以大的权值，给分类误差率大的基本分类器以小的权值</code></strong>。</p>
 </li>
 <li>AdaBoost的训练误差分析表明，AdaBoost的每次迭代可以减少它在训练数据集上的分类误差率，这说明了它作为提升方法的有效性。（<strong>每次迭代误差递减且误差$0≤\epsilon &lt;0.5$</strong>）</li>
-<li>AdaBoost算法的一个解释是该算法实际是前向分步算法的一个实现。在这个方法里，<strong><code>模型是加法模型，损失函数是指数损失，算法是前向分步算法</code></strong>。每一步中极小化损失函数。</li>
+<li>AdaBoost算法的一个解释是该算法实际是前向分步算法的一个实现。在这个方法里，<strong><code>模型是加法模型，损失函数是指数损失，算法是前向分步算法时的二分类学习方法</code></strong>。每一步中极小化损失函数。</li>
 <li>提升树是以分类树或回归树为基本分类器的提升方法。提升树被认为是统计学习中最有效的方法之一。</li>
 </ol>
+<blockquote>
+<p>AdaBoost是一种典型的提升树算法。</p>
+</blockquote>
 <p>通过上面的总结我们看到，AdaBoost是一个神奇的算法，以精妙的方式通过更新数据集的权重以及各个弱分类器的参数组合成一个强分类器。那么它具体是怎么做到的呢？</p>
 <h2 id="二、AdaBoost算法推导"><a href="#二、AdaBoost算法推导" class="headerlink" title="二、AdaBoost算法推导"></a>二、AdaBoost算法推导</h2><p><strong>输入</strong>：训练数据集$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中$x_i\in X ⊆R^n,y_i\in Y={-1,1}$，弱学习算法$G_m(x)$;</p>
 <p><strong>输出：</strong>最终强化算法分类器$G(x)$<br>（1）初始化训练数据总和为1的权值分布：（初始权重为归一化后的均值既$\frac 1N$）<br>$$D_1=(w_{11},…,w_{1i},…w_{1N}),w_{1i}=\frac 1N, i=1,2,…N$$<br>（2）对$m=1,2,…M$：（弱分类器的个数）</p>
@@ -409,6 +412,9 @@
 <ul>
 <li>函数$sign()$的意义是将正数判别为1，负数判别为-1，最终达到分类的目的。如图：<img src="http://p6rvh6ej2.bkt.clouddn.com/15266164023757.jpg" alt=""></li>
 </ul>
+<blockquote>
+<p><strong>参数$\alpha_m$公式及权重$w_{m+1,i} $</strong>其实是通过前向分步算法分别得到的$\alpha_m$和$G_m(x)$并使得$f_m(x)$再训练数据集$T$上的指数损失最小。具体的推导过程可参考《统计学习方法》–李航  第145～146页</p>
+</blockquote>
 <h2 id="三、AdaBoost算法实现步骤"><a href="#三、AdaBoost算法实现步骤" class="headerlink" title="三、AdaBoost算法实现步骤"></a>三、AdaBoost算法实现步骤</h2><p>上面解释了AdaBoost算法的具体内容。这里写出它的分布实现步骤再对上文算法加深下理解：</p>
 <p>（1）假设训练数据集具有均匀的权值分布，即每个训练样本在基本分类器的学习中作用相同，这一假设保证第1步能够在原始数据上学习基本分类器$G_1(x)$。</p>
 <p>（2）AdaBoost反复学习基本分类器，在每一轮$m＝1,2,…,M$顺次地执行下列操作：</p>
@@ -423,6 +429,12 @@
 </li>
 </ul>
 <p>（3）线性组合$f(x)$实现$M$个基本分类器的加权表决。系数$\alpha_m$ 表示了基本分类器$G_m (x)$的重要性，这里，所有$\alpha_m$ 之和并不为1。$f(x)$的符号决定实例x的类，$f(x)$的绝对值表示分类的确信度。利用基本分类器的线性组合构建最终分类器是AdaBoost的另一特点。</p>
+<blockquote>
+<p>提升方法是即采用加法模型（即基数函数的线性组合）与前向分步算法，以决策树为基函数的提升方法称为提升树（boosting tree）。对分类问题决策树是二叉分类树，对回归问题决策树是二叉回归树。</p>
+</blockquote>
+<blockquote>
+<p>喜欢本文的伙伴请关注我的博客<a href="http://ihoge.cn" target="_blank" rel="noopener">http://ihoge.cn</a></p>
+</blockquote>
 
       
     </div>
@@ -456,6 +468,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/XGBoost1.html" rel="prev" title="XGBoost简单案例实现">
+                XGBoost简单案例实现 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -543,7 +559,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
