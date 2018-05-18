@@ -90,12 +90,13 @@
 <meta property="og:url" content="http://www.ihoge.cn/2018/XGBoost1.html">
 <meta property="og:site_name" content="Hoooge&#39;s Blog">
 <meta property="og:description" content="XGBoost案例本文中，我们用到印第安人发病的糖尿病数据集。右键点击下载 该数据集由8个描述患者医疗细节的输入变量和一个输出变量组成，以指示患者是否会在5年内发生糖尿病。 对于第一个XGBoost模型来说，这是一个很好的数据集，因为所有的输入变量都是数值型的，是一个简单的二元分类问题。 1pip3 install xgboost 一、基础应用引入 XGBoost 包 1234from numpy">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/output_15_0.png">
-<meta property="og:updated_time" content="2018-05-18T14:03:37.660Z">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/output_15_0-1.png">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266532194941.jpg">
+<meta property="og:updated_time" content="2018-05-18T14:21:16.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XGBoost简单案例实现">
 <meta name="twitter:description" content="XGBoost案例本文中，我们用到印第安人发病的糖尿病数据集。右键点击下载 该数据集由8个描述患者医疗细节的输入变量和一个输出变量组成，以指示患者是否会在5年内发生糖尿病。 对于第一个XGBoost模型来说，这是一个很好的数据集，因为所有的输入变量都是数值型的，是一个简单的二元分类问题。 1pip3 install xgboost 一、基础应用引入 XGBoost 包 1234from numpy">
-<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/output_15_0.png">
+<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/output_15_0-1.png">
 
 
 
@@ -390,26 +391,23 @@
 <pre><code>[0]    validation_0-logloss:0.660999
 Will train until validation_0-logloss hasn&apos;t improved in 10 rounds.
 [1]    validation_0-logloss:0.630583
+[2]    validation_0-logloss:0.605378
 ...
-[70]    validation_0-logloss:0.419831
-[71]    validation_0-logloss:0.419166
-[72]    validation_0-logloss:0.420782
-[73]    validation_0-logloss:0.421896
+...
 [74]    validation_0-logloss:0.421685
 Stopping. Best iteration:
 [64]    validation_0-logloss:0.417813
-</code></pre><p><strong>打印出Early Stopping 的点：</strong></p>
-<pre><code>Stopping. Best iteration:
-[35]    validation_0-logloss:0.438338
-</code></pre><h2 id="三、输出重要特征"><a href="#三、输出重要特征" class="headerlink" title="三、输出重要特征"></a>三、输出重要特征</h2><p>gradient boosting 还有一个优点是可以给出训练好的模型的特征重要性，<br>这样就可以知道哪些变量需要被保留，哪些可以舍弃</p>
+</code></pre><p><strong>打印出Early Stopping 的点：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stopping. Best iteration:</span><br><span class="line">[64]	validation_0-logloss:0.417813</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、输出重要特征"><a href="#三、输出重要特征" class="headerlink" title="三、输出重要特征"></a>三、输出重要特征</h2><p>gradient boosting 还有一个优点是可以给出训练好的模型的特征重要性，<br>这样就可以知道哪些变量需要被保留，哪些可以舍弃</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> xgboost <span class="keyword">import</span> plot_importance</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model.fit(X, y)</span><br><span class="line"></span><br><span class="line">plot_importance(model)</span><br><span class="line">pyplot.show()</span><br></pre></td></tr></table></figure>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/output_15_0.png" alt="output_15_0"></p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/output_15_0-1.png" alt="output_15_0"></p>
 <h2 id="四、模型调参"><a href="#四、模型调参" class="headerlink" title="四、模型调参"></a>四、模型调参</h2><p>如何调参呢，下面是三个超参数的一般实践最佳值，可以先将它们设定为这个范围，然后画出 learning curves，再调解参数找到最佳模型：</p>
 <ul>
 <li>learning_rate ＝ 0.1 或更小，越小就需要加入更多弱学习器；</li>
-<li>tree_depth ＝ 2～8；</li>
+<li>max_depth ＝ 2～8；</li>
 <li>subsample ＝ 训练集的 30%～80%；</li>
 </ul>
+<p>更多<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15266532194941.jpg" alt=""></p>
 <p>接下来我们用 GridSearchCV 来进行调参会更方便一些：</p>
 <p>可以调的超参数组合有：</p>
 <ol>
@@ -418,17 +416,18 @@ Stopping. Best iteration:
 <li>行列的 subsampling rates (subsample, colsample_bytree and colsample_bylevel).</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> StratifiedKFold</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">model = XGBClassifier()</span><br><span class="line">learning_rate = [<span class="number">0.0001</span>, <span class="number">0.001</span>, <span class="number">0.01</span>, <span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>]</span><br><span class="line">param_grid = dict(learning_rate=learning_rate)</span><br><span class="line">kfold = StratifiedKFold(n_splits=<span class="number">10</span>, shuffle=<span class="keyword">True</span>, random_state=<span class="number">7</span>)</span><br><span class="line">grid_search = GridSearchCV(model, param_grid, scoring=<span class="string">"neg_log_loss"</span>, n_jobs=<span class="number">-1</span>, cv=kfold)</span><br><span class="line">grid_result = grid_search.fit(X, Y)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Best: %f using %s"</span> % (grid_result.best_score_, grid_result.best_params_))</span><br></pre></td></tr></table></figure>
-<p><strong>结果显示最佳学习率为0.1</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Best: -0.483304 using &#123;&apos;learning_rate&apos;: 0.1&#125;</span><br></pre></td></tr></table></figure>
-<p>我们还可以用下面的代码打印出每一个学习率对应的得分：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">model = XGBClassifier()</span><br><span class="line">learning_rate = [<span class="number">0.0001</span>, <span class="number">0.001</span>, <span class="number">0.01</span>, <span class="number">0.1</span>, <span class="number">0.2</span>]</span><br><span class="line">max_depth = [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">param_grid = dict(learning_rate=learning_rate, max_depth=max_depth)</span><br><span class="line">kfold = StratifiedKFold(n_splits=<span class="number">10</span>, shuffle=<span class="keyword">True</span>, random_state=<span class="number">7</span>)</span><br><span class="line">grid_search = GridSearchCV(model, param_grid, scoring=<span class="string">"neg_log_loss"</span>, n_jobs=<span class="number">-1</span>, cv=kfold)</span><br><span class="line">grid_result = grid_search.fit(X, Y)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Best: %f using %s"</span> % (grid_result.best_score_, grid_result.best_params_))</span><br></pre></td></tr></table></figure>
+<pre><code>Best: -0.474370 using {&apos;learning_rate&apos;: 0.1, &apos;max_depth&apos;: 2}
+</code></pre><p><strong>显示最佳参数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Best: -0.474370 using &#123;&apos;learning_rate&apos;: 0.1, &apos;max_depth&apos;: 2&#125;</span><br></pre></td></tr></table></figure>
+<p>我们还可以用下面的代码打印出每一个参数组合对应的得分：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">means = grid_result.cv_results_[<span class="string">'mean_test_score'</span>]</span><br><span class="line">stds = grid_result.cv_results_[<span class="string">'std_test_score'</span>]</span><br><span class="line">params = grid_result.cv_results_[<span class="string">'params'</span>]</span><br><span class="line"><span class="keyword">for</span> mean, stdev, param <span class="keyword">in</span> zip(means, stds, params):</span><br><span class="line">    print(<span class="string">"平均得分：%f (得分标准差：%f) %r"</span> % (mean, stdev, param))</span><br></pre></td></tr></table></figure>
-<pre><code>平均得分：-0.689811 (得分标准差：0.000475) {&apos;learning_rate&apos;: 0.0001}
-平均得分：-0.661827 (得分标准差：0.004625) {&apos;learning_rate&apos;: 0.001}
-平均得分：-0.531155 (得分标准差：0.028945) {&apos;learning_rate&apos;: 0.01}
-平均得分：-0.483304 (得分标准差：0.055151) {&apos;learning_rate&apos;: 0.1}
-平均得分：-0.515642 (得分标准差：0.061723) {&apos;learning_rate&apos;: 0.2}
-平均得分：-0.554158 (得分标准差：0.067557) {&apos;learning_rate&apos;: 0.3}
+<pre><code>平均得分：-0.690191 (得分标准差：0.000436) {&apos;learning_rate&apos;: 0.0001, &apos;max_depth&apos;: 2}
+平均得分：-0.689811 (得分标准差：0.000475) {&apos;learning_rate&apos;: 0.0001, &apos;max_depth&apos;: 3}
+...
+...
+平均得分：-0.607988 (得分标准差：0.098076) {&apos;learning_rate&apos;: 0.2, &apos;max_depth&apos;: 5}
+平均得分：-0.647131 (得分标准差：0.098951) {&apos;learning_rate&apos;: 0.2, &apos;max_depth&apos;: 6}
 </code></pre>
       
     </div>
