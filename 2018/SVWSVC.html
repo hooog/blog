@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -76,7 +76,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="Student" type="application/atom+xml" />
 
 
 
@@ -88,8 +88,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVM支持向量机SVC实现">
 <meta property="og:url" content="http://www.ihoge.cn/2018/SVWSVC.html">
-<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:site_name" content="Student">
 <meta property="og:description" content="支持向量机(support vector machine)是一种分类算法，但是也可以做回归，根据输入的数据不同可做不同的模型（若输入标签为连续值则做回归，若输入标签为分类值则用SVC()做分类）。通过寻求结构化风险最小来提高学习机泛化能力，实现经验风险和置信范围的最小化，从而达到在统计样本量较少的情况下，亦能获得良好统计规律的目的。通俗来讲，它是一种二类分类模型，其基本模型定义为特征空间上的间隔">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fq5iil2vlrj30ma07iwex.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fq5iizji9fj31140v2q7c.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fq5kp9xbugj319e0wmn3e.jpg">
@@ -114,7 +115,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -134,7 +135,7 @@
 
 
 
-  <title>SVM支持向量机SVC实现 | Hoooge's Blog</title>
+  <title>SVM支持向量机SVC实现 | Student</title>
   
 
 
@@ -146,7 +147,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -164,7 +165,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hoooge's Blog</span>
+        <span class="site-title">Student</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -194,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -204,7 +205,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            关于
           </a>
         </li>
       
@@ -214,7 +215,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -224,7 +225,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            分类
           </a>
         </li>
       
@@ -234,7 +235,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -280,7 +281,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hoooge's Blog">
+      <meta itemprop="name" content="Student">
     </span>
 
     
@@ -298,9 +299,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-09T01:05:59+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-09T01:05:59+08:00">
                 2018-04-09
               </time>
             
@@ -319,7 +320,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -558,10 +559,10 @@ F1： 0.9801324503311258
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -571,7 +572,7 @@ F1： 0.9801324503311258
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">刘知行</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">机器学习</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -582,7 +583,7 @@ F1： 0.9801324503311258
                 <a href="/archives/">
               
                   <span class="site-state-item-count">56</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -593,7 +594,7 @@ F1： 0.9801324503311258
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">Kategorien</span>
+                  <span class="site-state-item-name">分类</span>
                 </a>
               </div>
             
@@ -604,7 +605,7 @@ F1： 0.9801324503311258
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">标签</span>
                 </a>
               </div>
             
@@ -705,7 +706,7 @@ F1： 0.9801324503311258
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 

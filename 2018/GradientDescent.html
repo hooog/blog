@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -76,7 +76,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Hoooge's Blog" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="Student" type="application/atom+xml" />
 
 
 
@@ -87,8 +87,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="梯度下降、随机梯度下降、批量梯度下降">
 <meta property="og:url" content="http://www.ihoge.cn/2018/GradientDescent.html">
-<meta property="og:site_name" content="Hoooge&#39;s Blog">
+<meta property="og:site_name" content="Student">
 <meta property="og:description" content="引言李航老师在《统计学习方法》中将机器学习的三要素总结为：模型、策略和算法。其大致含义如下： 模型：其实就是机器学习训练的过程中所要学习的条件概率分布或者决策函数。 策略：就是使用一种什么样的评价，度量模型训练过程中的学习好坏的方法，同时根据这个方法去实施的调整模型的参数，以期望训练的模型将来对未知的数据具有最好的预测准确度。 算法：算法是指模型的具体计算方法。它基于训练数据集，根据学习策略，从">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262278257042.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262224519674.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15262225198545.jpg">
@@ -113,7 +114,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -133,7 +134,7 @@
 
 
 
-  <title>梯度下降、随机梯度下降、批量梯度下降 | Hoooge's Blog</title>
+  <title>梯度下降、随机梯度下降、批量梯度下降 | Student</title>
   
 
 
@@ -145,7 +146,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -163,7 +164,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hoooge's Blog</span>
+        <span class="site-title">Student</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -193,7 +194,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -203,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            关于
           </a>
         </li>
       
@@ -213,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -223,7 +224,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            分类
           </a>
         </li>
       
@@ -233,7 +234,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -279,7 +280,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hoooge's Blog">
+      <meta itemprop="name" content="Student">
     </span>
 
     
@@ -297,9 +298,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-14T11:20:21+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-14T11:20:21+08:00">
                 2018-05-14
               </time>
             
@@ -318,7 +319,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -530,10 +531,10 @@ iters: 549
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -543,7 +544,7 @@ iters: 549
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">刘知行</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">机器学习</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -554,7 +555,7 @@ iters: 549
                 <a href="/archives/">
               
                   <span class="site-state-item-count">56</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -565,7 +566,7 @@ iters: 549
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">Kategorien</span>
+                  <span class="site-state-item-name">分类</span>
                 </a>
               </div>
             
@@ -576,7 +577,7 @@ iters: 549
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">标签</span>
                 </a>
               </div>
             
@@ -677,7 +678,7 @@ iters: 549
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
