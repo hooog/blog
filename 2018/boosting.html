@@ -83,13 +83,13 @@
 
 
 
-<meta name="description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含：  一、Boosting基本概念 二、前向分步加法模型 加法模型 前向分步算法   三、Boosting成员 四、AdaBoost 算法解析 模型构建 算法缺点   五、二叉分类树 六、回归分类树 算法解析 模型构建   七、梯度提升树（GBDT） 算法解析 模型构建   八、概要总结  九、参考文献     提升树模型实际采用加法模型（即基函数">
+<meta name="description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、Boosting成员 四、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 五、二叉分类树 六、回归分类树     1. 算法解析     2. 模型构建 七、梯度提升树（GBDT）     1.">
 <meta name="keywords" content="boosting">
 <meta property="og:type" content="article">
 <meta property="og:title" content="提升树（Boosting tree）算法总结">
 <meta property="og:url" content="http://www.ihoge.cn/2018/boosting.html">
 <meta property="og:site_name" content="Student">
-<meta property="og:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含：  一、Boosting基本概念 二、前向分步加法模型 加法模型 前向分步算法   三、Boosting成员 四、AdaBoost 算法解析 模型构建 算法缺点   五、二叉分类树 六、回归分类树 算法解析 模型构建   七、梯度提升树（GBDT） 算法解析 模型构建   八、概要总结  九、参考文献     提升树模型实际采用加法模型（即基函数">
+<meta property="og:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、Boosting成员 四、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 五、二叉分类树 六、回归分类树     1. 算法解析     2. 模型构建 七、梯度提升树（GBDT）     1.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267180767470.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266077461675.jpg">
@@ -98,10 +98,10 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266248077288.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267353730899.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267354146996.jpg">
-<meta property="og:updated_time" content="2018-05-19T13:30:07.833Z">
+<meta property="og:updated_time" content="2018-05-19T13:31:41.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="提升树（Boosting tree）算法总结">
-<meta name="twitter:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含：  一、Boosting基本概念 二、前向分步加法模型 加法模型 前向分步算法   三、Boosting成员 四、AdaBoost 算法解析 模型构建 算法缺点   五、二叉分类树 六、回归分类树 算法解析 模型构建   七、梯度提升树（GBDT） 算法解析 模型构建   八、概要总结  九、参考文献     提升树模型实际采用加法模型（即基函数">
+<meta name="twitter:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、Boosting成员 四、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 五、二叉分类树 六、回归分类树     1. 算法解析     2. 模型构建 七、梯度提升树（GBDT）     1.">
 <meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267180767470.jpg">
 
 
@@ -371,35 +371,25 @@
       
         <a id="more"></a>
 <p>本文是综合了之前的以往多个笔记汇总而成，内容包含：</p>
-<ul>
-<li>一、Boosting基本概念</li>
-<li>二、前向分步加法模型<ol>
-<li>加法模型</li>
-<li>前向分步算法</li>
-</ol>
-</li>
-<li>三、Boosting成员</li>
-<li>四、AdaBoost<ol>
-<li>算法解析</li>
-<li>模型构建</li>
-<li>算法缺点</li>
-</ol>
-</li>
-<li>五、二叉分类树</li>
-<li>六、回归分类树<ol>
-<li>算法解析</li>
-<li>模型构建</li>
-</ol>
-</li>
-<li>七、梯度提升树（GBDT）<ol>
-<li>算法解析</li>
-<li>模型构建</li>
-</ol>
-</li>
-<li>八、概要总结 </li>
-<li>九、参考文献   </li>
-</ul>
-<p>提升树模型实际采用加法模型（即基函数的线性组合）与前向分步算法，以决策树为基函数的提升方法称为提升树（Boosting Tree）。</p>
+<pre><code>一、Boosting基本概念
+二、前向分步加法模型
+    1. 加法模型
+    2. 前向分步算法
+三、Boosting成员
+四、AdaBoost
+    1. 算法解析
+    2. 模型构建
+    3. 算法缺点
+五、二叉分类树
+六、回归分类树
+    1. 算法解析
+    2. 模型构建
+七、梯度提升树（GBDT）
+    1. 算法解析
+    2. 模型构建
+八、概要总结 
+九、参考文献   
+</code></pre><p>提升树模型实际采用加法模型（即基函数的线性组合）与前向分步算法，以决策树为基函数的提升方法称为提升树（Boosting Tree）。</p>
 <p><strong>对分类问题决策树是二叉分类树</strong>，<strong>对回归问题决策树是二叉回归树</strong>。</p>
 <p>提升树模型可以表示为决策树的加法模型：<br>$$f_M(x)=∑^M_{i=1}T(x;\Theta _m)$$其中$T(x;\Theta _m)$表示决策树；$\Theta_m$表示决策树的参数；$M$为树的个数。</p>
 <p>不同问题的提升树学习算法，其主要区别在于损失函数不同。<strong>平方损失函数常用于回归问题，用指数损失函数用于分类问题，以及绝对损失函数用于决策问题</strong>。</p>
