@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="boosting," />
 
 
 
@@ -84,6 +84,7 @@
 
 
 <meta name="description" content="提升方法-AdaBoost提升树学习笔记作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。  一、AdaBoost核心概念总结 提升方法是将弱学习算法提升为强学习算法的统计学习方法。">
+<meta name="keywords" content="boosting">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AdaBoost提升树学习笔记">
 <meta property="og:url" content="http://www.ihoge.cn/2018/adaboost.html">
@@ -94,7 +95,7 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266159564936.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266164023757.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266248077288.jpg">
-<meta property="og:updated_time" content="2018-05-18T07:15:20.299Z">
+<meta property="og:updated_time" content="2018-05-19T13:12:29.170Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AdaBoost提升树学习笔记">
 <meta name="twitter:description" content="提升方法-AdaBoost提升树学习笔记作为非数学专业出身看到密密麻麻的数学公式刚开始真的是非常头疼。算法的物理逻辑的时候尚能理解，但是涉及到具体的数学公式实现就开始懵逼了：为什么要用这个公式，这个公式是怎么推到的，这个公式达到什么样的效果？这里结合自己的理解和画图，用最直白的语言对每个公式作用进行解剖。  一、AdaBoost核心概念总结 提升方法是将弱学习算法提升为强学习算法的统计学习方法。">
@@ -387,7 +388,7 @@
 <p>AdaBoost是一种典型的提升树算法。</p>
 </blockquote>
 <p>通过上面的总结我们看到，AdaBoost是一个神奇的算法，以精妙的方式通过更新数据集的权重以及各个弱分类器的参数组合成一个强分类器。那么它具体是怎么做到的呢？</p>
-<h2 id="二、AdaBoost算法推导"><a href="#二、AdaBoost算法推导" class="headerlink" title="二、AdaBoost算法推导"></a>二、AdaBoost算法推导</h2><p><strong>输入</strong>：训练数据集$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中$x_i\in X ⊆R^n,y_i\in Y={-1,1}$，弱学习算法$G_m(x)$;</p>
+<h2 id="二、AdaBoost算法学习过程"><a href="#二、AdaBoost算法学习过程" class="headerlink" title="二、AdaBoost算法学习过程"></a>二、AdaBoost算法学习过程</h2><p><strong>输入</strong>：训练数据集$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中$x_i\in X ⊆R^n,y_i\in Y={-1,1}$，弱学习算法$G_m(x)$;</p>
 <p><strong>输出：</strong>最终强化算法分类器$G(x)$<br>（1）初始化训练数据总和为1的权值分布：（初始权重为归一化后的均值既$\frac 1N$）<br>$$D_1=(w_{11},…,w_{1i},…w_{1N}),w_{1i}=\frac 1N, i=1,2,…N$$<br>（2）对$m=1,2,…M$：（弱分类器的个数）</p>
 <p>（a）使用具有权值分布的$D_m$的训练数据集学习，得到基本分类器：(数据集$X$到{-1,1}的映射)<br>$$G_m(x):X-&gt;{-1,1}$$<br>（b）计算$Gm(x)$在训练数据集上的分类误差率：（公式不够简洁明了，其实总结下来非常好理解：误差率$e_m$=误分类样本的权值之和）<br>$$e_m=∑^N_{i=1}P(G_m(x_i)≠y_i)=∑^N_{i=1}w_{mi}I(G_m(x_i)≠y_i)$$</p>
 <ul>
@@ -450,6 +451,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/boosting/" rel="tag"><i class="fa fa-tag"></i> boosting</a>
+          
+        </div>
       
 
       
@@ -560,7 +567,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -582,7 +589,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -644,7 +651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#提升方法-AdaBoost提升树学习笔记"><span class="nav-number">1.</span> <span class="nav-text">提升方法-AdaBoost提升树学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、AdaBoost核心概念总结"><span class="nav-number">1.1.</span> <span class="nav-text">一、AdaBoost核心概念总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、AdaBoost算法推导"><span class="nav-number">1.2.</span> <span class="nav-text">二、AdaBoost算法推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、AdaBoost算法实现步骤"><span class="nav-number">1.3.</span> <span class="nav-text">三、AdaBoost算法实现步骤</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#提升方法-AdaBoost提升树学习笔记"><span class="nav-number">1.</span> <span class="nav-text">提升方法-AdaBoost提升树学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、AdaBoost核心概念总结"><span class="nav-number">1.1.</span> <span class="nav-text">一、AdaBoost核心概念总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、AdaBoost算法学习过程"><span class="nav-number">1.2.</span> <span class="nav-text">二、AdaBoost算法学习过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、AdaBoost算法实现步骤"><span class="nav-number">1.3.</span> <span class="nav-text">三、AdaBoost算法实现步骤</span></a></li></ol></li></ol></div>
             
 
           </div>

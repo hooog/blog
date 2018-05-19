@@ -3,53 +3,16 @@
 
 
     
-    
   <url>
-    <loc>http://www.ihoge.cn/2018/XGBoost1.html</loc>
-    <lastmod>2018-05-18T14:21:43.962Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/boosting.html</loc>
+    <lastmod>2018-05-19T13:21:52.847Z</lastmod>
     <data>
         <display>
-        <title>XGBoost简单案例实现</title>
-        <pubTime>2018-05-18T12:10:59.000Z</pubTime>
+        <title>提升树（Boosting tree）算法总结</title>
+        <pubTime>2018-05-19T04:20:21.000Z</pubTime>
         
-        <tag>scikit-learn</tag>
+        <tag>boosting</tag>
          
-         
-           
-             
-              <breadCrumb title="MachineLearning" url="http://www.ihoge.cn/categories/MachineLearning/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/adaboost.html</loc>
-    <lastmod>2018-05-18T07:15:20.299Z</lastmod>
-    <data>
-        <display>
-        <title>AdaBoost提升树学习笔记</title>
-        <pubTime>2018-05-18T04:20:21.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
-    <lastmod>2018-05-18T06:34:02.060Z</lastmod>
-    <data>
-        <display>
-        <title>KNN——不需要学习的算法</title>
-        <pubTime>2018-05-11T15:38:21.000Z</pubTime>
-        
          
            
              
@@ -62,11 +25,70 @@
     
   <url>
     <loc>http://www.ihoge.cn/2018/LR.html</loc>
-    <lastmod>2018-05-18T06:33:58.799Z</lastmod>
+    <lastmod>2018-05-19T13:12:33.754Z</lastmod>
     <data>
         <display>
         <title>LR 逻辑回归</title>
         <pubTime>2018-05-13T13:20:21.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/adaboost.html</loc>
+    <lastmod>2018-05-19T13:12:29.170Z</lastmod>
+    <data>
+        <display>
+        <title>AdaBoost提升树学习笔记</title>
+        <pubTime>2018-05-18T04:20:21.000Z</pubTime>
+        
+        <tag>boosting</tag>
+         
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/XGBoost1.html</loc>
+    <lastmod>2018-05-19T13:12:24.827Z</lastmod>
+    <data>
+        <display>
+        <title>XGBoost简单案例实现</title>
+        <pubTime>2018-05-18T12:10:59.000Z</pubTime>
+        
+        <tag>boosting</tag>
+         
+         
+           
+             
+              <breadCrumb title="MachineLearning" url="http://www.ihoge.cn/categories/MachineLearning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
+    <lastmod>2018-05-18T06:34:02.060Z</lastmod>
+    <data>
+        <display>
+        <title>KNN——不需要学习的算法</title>
+        <pubTime>2018-05-11T15:38:21.000Z</pubTime>
         
          
            

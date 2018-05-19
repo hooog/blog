@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2018/boosting.html</loc>
+    
+    <lastmod>2018-05-19T13:21:52.847Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/LR.html</loc>
+    
+    <lastmod>2018-05-19T13:12:33.754Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/adaboost.html</loc>
+    
+    <lastmod>2018-05-19T13:12:29.170Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/XGBoost1.html</loc>
+    
+    <lastmod>2018-05-19T13:12:24.827Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/about/index.html</loc>
     
     <lastmod>2018-05-19T03:58:26.741Z</lastmod>
@@ -9,30 +37,9 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/XGBoost1.html</loc>
-    
-    <lastmod>2018-05-18T14:21:43.962Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/adaboost.html</loc>
-    
-    <lastmod>2018-05-18T07:15:20.299Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
     
     <lastmod>2018-05-18T06:34:02.060Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/LR.html</loc>
-    
-    <lastmod>2018-05-18T06:33:58.799Z</lastmod>
     
   </url>
   
