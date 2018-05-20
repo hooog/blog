@@ -102,10 +102,7 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15268013497837.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15268027278380.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267180767470.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267862619800.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267867095187.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267866670834.jpg">
-<meta property="og:updated_time" content="2018-05-20T08:45:31.128Z">
+<meta property="og:updated_time" content="2018-05-20T08:51:32.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="提升树（Boosting tree）算法总结">
 <meta name="twitter:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 四、二叉分类树 五、回归分类树     1. 算法解析     2. 模型构建 六、梯度提升树（GBDT）     1. 算法解析     2. 模">
@@ -556,12 +553,12 @@
 <h4 id="决策树函数的定义"><a href="#决策树函数的定义" class="headerlink" title="决策树函数的定义"></a>决策树函数的定义</h4><p>为此，我们首先重新定义树：我们将树定义为一个该树中所有叶子节点的值的向量。并且，每个叶子的索引映射函数映射实例到每个叶子节点上：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15268011299685.jpg" alt=""></p>
 <h4 id="定义决策树的复杂度"><a href="#定义决策树的复杂度" class="headerlink" title="定义决策树的复杂度"></a>定义决策树的复杂度</h4><p>我们将决策树的复杂度，也就是目标函数定义如下：<br>$$\Omega (f_m)=\gamma T+\frac 12\lambda∑^T_{j=1}w_j^2$$</p>
 <p>其中，$T$树中叶子结点的个数计算如下：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15268013497837.jpg" alt=""></p>
-<h4 id="新目标函数的优化"><a href="#新目标函数的优化" class="headerlink" title="新目标函数的优化"></a>新目标函数的优化</h4><p>首先，我们对叶子节点$j$中的实例进行如下定义：<br>$$I_j={i|q(x_i)=j }$$<br>此时目标函数为：<br>$$Obj_m\approx ∑^N_{i=1}[g_if_m(x_i)+\frac 12 h_if_m^2(x_i)]+\Omega(f_m)+const$$<br>$=∑^N_{i=1}[g_iw_{q(x_i)}+\frac 12h_iw^2_{q(x_i)}]+\gamma T+\frac 12 \lambda ∑^T_{j=1}w^2_j$<br>$=∑^T_{j=1}[(∑_{i\in I_j}g_i)w_i+\frac 12(∑_{i \in I_j}h_i+\lambda)w^2_j]+\gamma T $</p>
+<h4 id="新目标函数的优化"><a href="#新目标函数的优化" class="headerlink" title="新目标函数的优化"></a>新目标函数的优化</h4><p>首先，我们对叶子节点$j$中的实例进行如下定义：<br>$$I_j={i|q(x_i)=j }$$<br>此时目标函数为：<br>$$Obj_m\approx ∑^N_{i=1}[g_if_m(x_i)+\frac 12 h_if_m^2(x_i)]+\Omega(f_m)+const$$<br>$$=∑^N_{i=1}[g_iw_{q(x_i)}+\frac 12h_iw^2_{q(x_i)}]+\gamma T+\frac 12 \lambda ∑^T_{j=1}w^2_j$$<br>$$=∑^T_{j=1}[(∑_{i\in I_j}g_i)w_i+\frac 12(∑_{i \in I_j}h_i+\lambda)w^2_j]+\gamma T $$</p>
 <p>首先，我们进行如下定义：</p>
 <p>$$G_j=∑_{i \in I_j}g_i,H_j=∑_{i \in I_j}h_i$$</p>
 <p>进一步简化目标函数：<br>$$Obj_m=∑^T_{j=1}[G_jw_j+\frac 12(H_i+\lambda)w^2_j]+\gamma T$$</p>
 <p>众所周知，对于一元二次函数，由如下两条结论：<br>$$arg \min _xG_x + \frac 12Hx^2=-\frac GH,H&gt;0$$<br>$$\min _xG_x+\frac 12Hx^2=- \frac {G^2}{2H}$$</p>
-<p>因此对于目标函数进行最小化，当$w_j=-\frac {G_j}{H_j+\lambda }$时，我们得到：<br>$$\min _{Obj_m}=∑^T_{j=1}[G_jw_j+\frac 12(H_j+\lambda)w^2_j]+\gamma T$$<br>$=-\frac 12 ∑^T_{j=1}\frac {G^2_j}{H_j+\lambda }+\gamma T$<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15268027278380.jpg" alt=""></p>
+<p>因此对于目标函数进行最小化，当$w_j=-\frac {G_j}{H_j+\lambda }$时，我们得到：<br>$$\min _{Obj_m}=∑^T_{j=1}[G_jw_j+\frac 12(H_j+\lambda)w^2_j]+\gamma T$$<br>$$=-\frac 12 ∑^T_{j=1}\frac {G^2_j}{H_j+\lambda }+\gamma T$$<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15268027278380.jpg" alt=""></p>
 <p>至此，对于第 t 轮的一颗已经分裂好的决策树，我们能够求出其对应的最小化的目标函数。但是到目前为止，到底如何进行分裂我们还不知道具体的做法，接下来让我们一起学习 XGBoost 是如何寻找分裂点的。</p>
 <h3 id="6-决策树构建"><a href="#6-决策树构建" class="headerlink" title="6. 决策树构建"></a>6. 决策树构建</h3><h4 id="决策树的生成策略"><a href="#决策树的生成策略" class="headerlink" title="决策树的生成策略"></a>决策树的生成策略</h4><p>对于回归决策树来说，在目标函数已经确定的情况下，接下来我们的问题是如何寻找对于当前训练样本的最优的决策树结构。当然，我们最容易想到的是穷举法。如果按照穷举法，我们列出所有的可能的决策树的结构$q$，然后基于决策树结构$q$去计算它的目标函数值，在计算完所有可能的决策树结构后，选择目标函数值最小的决策树结构$\hat q$作为最终决策树。</p>
 <p>虽然理论上来说，穷举法能够寻找到最优的决策树结构，但是在有限的时间内我们无法去寻找到最优的决策树结构，因为可能的树结构有无穷多种。因此，在应用中我们采用的是贪心的策略来一步步地增长树的结构。也就是从根节点开始，不断地进行递归地分裂，直至在给定的准则下无法进行分裂为止。所以，接下来我们需要知道递归时如何进行合适并有效地分裂当前节点。</p>
@@ -648,15 +645,13 @@
 <li>回归提升树通过平方损失函数计算残差，GBDT通过计算负梯度作为伪残差。</li>
 </ol>
 <h3 id="5-XGBoost-和-GBDT"><a href="#5-XGBoost-和-GBDT" class="headerlink" title="5. XGBoost 和 GBDT"></a>5. XGBoost 和 GBDT</h3><ul>
-<li><p>Xgboost 是 GB 算法的高效实现，xgboost 中的基学习器除了可以是CART（gbtree）也可以是线性分类器（gblinear）。</p>
+<li><p>Xgboost 是 GB 算法的高效实现，xgboost 中的基学习器除了可以是CART（gbtree）也可以是线性分类器（gblinear）</p>
 </li>
-<li><p>xgboost在目标函数中显示的加上了正则化项：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15267862619800.jpg" alt=""></p>
+<li><p>xgboost在目标函数中显示的加上了正则化项</p>
 </li>
-</ul>
-<ul>
-<li><p>GB 中使用 Loss Function 对 f(x) 的一阶导数计算出伪残差用于学习生成$f_m$，xgboost 不仅使用到了一阶导数，还使用二阶导数：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15267867095187.jpg" alt=""></p>
+<li><p>GB 中使用 Loss Function 对 f(x) 的一阶导数计算出伪残差用于学习生成$f_m$，xgboost 不仅使用到了一阶导数，还使用二阶导数</p>
 </li>
-<li><p>CART 回归树中寻找最佳分割点的衡量标准是最小化均方差，xgboost 寻找分割点的标准是最大化，lamda，gama 与正则化项相关：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15267866670834.jpg" alt=""></p>
+<li><p>CART 回归树中寻找最佳分割点的衡量标准是最小化均方差，xgboost 寻找分割点的标准是最大化，lamda，gama 与正则化项相关</p>
 </li>
 </ul>
 <h3 id="6-参考文献"><a href="#6-参考文献" class="headerlink" title="6. 参考文献"></a>6. 参考文献</h3><p>[1] 《统计学习方法》  ——李航 2012 清华大学出版社<br>[2] 《机器学习》  ——周志华 2016 清华大学出版社<br>[3] <a href="http://ihoge.cn/2018/adaboost.html" target="_blank" rel="noopener">http://ihoge.cn/2018/adaboost.html</a><br>[4] <a href="https://www.jianshu.com/nb/7305482" target="_blank" rel="noopener">https://www.jianshu.com/nb/7305482</a><br>[5] <a href="http://www.52caml.com/head_first_ml/ml-chapter6-boosting-family/#Gradient_Boosting" target="_blank" rel="noopener">http://www.52caml.com/head_first_ml/ml-chapter6-boosting-family/#Gradient_Boosting</a><br>[6] <a href="https://www.jianshu.com/p/d55f7aaac4a7" target="_blank" rel="noopener">https://www.jianshu.com/p/d55f7aaac4a7</a><br>[7] <a href="http://gitbook.cn/gitchat/column/5ac2f0509e924a1dc029dd84/topic/5ac9e0e5dbd50e7493d35d3f" target="_blank" rel="noopener">http://gitbook.cn/gitchat/column/5ac2f0509e924a1dc029dd84/topic/5ac9e0e5dbd50e7493d35d3f</a></p>
@@ -690,8 +685,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/XGBoost1.html" rel="next" title="XGBoost简单案例实现">
-                <i class="fa fa-chevron-left"></i> XGBoost简单案例实现
+              <a href="/2018/XGBoost.html" rel="next" title="XGBoost算法学习总结">
+                <i class="fa fa-chevron-left"></i> XGBoost算法学习总结
               </a>
             
           </div>
@@ -699,10 +694,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/XGBoost.html" rel="prev" title="XGBoost算法学习总结">
-                XGBoost算法学习总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
