@@ -5,11 +5,31 @@
     
   <url>
     <loc>http://www.ihoge.cn/2018/boosting.html</loc>
-    <lastmod>2018-05-19T13:40:49.430Z</lastmod>
+    <lastmod>2018-05-20T08:41:23.631Z</lastmod>
     <data>
         <display>
         <title>提升树（Boosting tree）算法总结</title>
-        <pubTime>2018-05-19T04:20:21.000Z</pubTime>
+        <pubTime>2018-05-20T04:20:21.000Z</pubTime>
+        
+        <tag>boosting</tag>
+         
+         
+           
+             
+              <breadCrumb title="Algorithm" url="http://www.ihoge.cn/categories/Algorithm/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/XGBoost.html</loc>
+    <lastmod>2018-05-20T08:37:23.429Z</lastmod>
+    <data>
+        <display>
+        <title>XGBoost算法学习总结</title>
+        <pubTime>2018-05-20T04:20:21.000Z</pubTime>
         
         <tag>boosting</tag>
          
