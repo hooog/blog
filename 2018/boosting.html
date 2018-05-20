@@ -83,13 +83,13 @@
 
 
 
-<meta name="description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、Boosting成员 四、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 五、二叉分类树 六、回归分类树     1. 算法解析     2. 模型构建 七、梯度提升树（GBDT）     1.">
+<meta name="description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 四、二叉分类树 五、回归分类树     1. 算法解析     2. 模型构建 六、梯度提升树（GBDT）     1. 算法解析     2. 模">
 <meta name="keywords" content="boosting">
 <meta property="og:type" content="article">
 <meta property="og:title" content="提升树（Boosting tree）算法总结">
 <meta property="og:url" content="http://www.ihoge.cn/2018/boosting.html">
 <meta property="og:site_name" content="Student">
-<meta property="og:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、Boosting成员 四、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 五、二叉分类树 六、回归分类树     1. 算法解析     2. 模型构建 七、梯度提升树（GBDT）     1.">
+<meta property="og:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 四、二叉分类树 五、回归分类树     1. 算法解析     2. 模型构建 六、梯度提升树（GBDT）     1. 算法解析     2. 模">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266077461675.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266159564936.jpg">
@@ -105,10 +105,10 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267862619800.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267867095187.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267866670834.jpg">
-<meta property="og:updated_time" content="2018-05-20T08:41:23.631Z">
+<meta property="og:updated_time" content="2018-05-20T08:45:31.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="提升树（Boosting tree）算法总结">
-<meta name="twitter:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、Boosting成员 四、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 五、二叉分类树 六、回归分类树     1. 算法解析     2. 模型构建 七、梯度提升树（GBDT）     1.">
+<meta name="twitter:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 四、二叉分类树 五、回归分类树     1. 算法解析     2. 模型构建 六、梯度提升树（GBDT）     1. 算法解析     2. 模">
 <meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15266077461675.jpg">
 
 
@@ -382,19 +382,18 @@
 二、前向分步加法模型
     1. 加法模型
     2. 前向分步算法
-三、Boosting成员
-四、AdaBoost
+三、AdaBoost
     1. 算法解析
     2. 模型构建
     3. 算法缺点
-五、二叉分类树
-六、回归分类树
+四、二叉分类树
+五、回归分类树
     1. 算法解析
     2. 模型构建
-七、梯度提升树（GBDT）
+六、梯度提升树（GBDT）
     1. 算法解析
     2. 模型构建
-八、XGBoost
+七、XGBoost
     1. 原理详解
     2. 目标函数
     3. 学习过程
@@ -403,7 +402,13 @@
     6. 决策树的构建
     7. 流程步骤
     8. 优缺点
-九、参考文献   
+八、总结
+    1. Boosting家族
+    2. AdaBoost
+    3. 回归提升树和AdaBoost
+    4. GBDT和回归提升树   
+    5. XGBoost和GBDT
+    6. 参考文献
 </code></pre><p>提升(Boosting)是集成学习方法里的一个重要方法，其主要思想是将弱分类器组装成一个强分类器。在 PAC（概率近似正确）学习框架下，则一定可以将弱分类器组装成一个强分类器。</p>
 <p>提升树模型实际采用加法模型（即基函数的线性组合）与前向分步算法，以决策树为基函数的提升方法称为提升树（Boosting Tree）。</p>
 <p><strong>对分类问题决策树是二叉分类树</strong>，<strong>对回归问题决策树是二叉回归树</strong>。</p>
@@ -441,7 +446,7 @@
 <p>（3）得到加法模型<br>$$f(x)=f_M(x)=∑^M_{m=1}\beta_mb(x;\gamma_m)$$<br>这样。前向分步算法将同时求解从$m=1$到$m=M$所有参数$\beta_m,\gamma_m$的优化问题简化为逐次求解$\beta_m,\gamma_m$的优化问题。<br>前向分布算法学习的是加法模型，当基函数为基本分类器是，该加法模型等价于Adaboost的最终分类器。（AdaBoost算法参数迭代公式就是由此而来）</p>
 <p><strong>基学习器</strong>：基函数为同一类型；反之称为<strong>组件学习器</strong>或直接成个体学习器</p>
 </blockquote>
-<h2 id="四、AdaBoost"><a href="#四、AdaBoost" class="headerlink" title="四、AdaBoost"></a>四、AdaBoost</h2><p>AdaBoost算法是前向分步算法的特例，其模型是由基本分类器组成的加法模型，损失函数是指数函数。</p>
+<h2 id="三、AdaBoost"><a href="#三、AdaBoost" class="headerlink" title="三、AdaBoost"></a>三、AdaBoost</h2><p>AdaBoost算法是前向分步算法的特例，其模型是由基本分类器组成的加法模型，损失函数是指数函数。</p>
 <h3 id="1-AdaBoost算法解析"><a href="#1-AdaBoost算法解析" class="headerlink" title="1. AdaBoost算法解析"></a>1. AdaBoost算法解析</h3><p> <strong>AdaBoost模型是弱分类器的线性组合：</strong><br>    $$f(x)=∑^M_{m=1}\alpha _mG_m(x)$$</p>
 <ul>
 <li>$M$表示该提升树共有$M$个弱分类器组成</li>
@@ -468,10 +473,10 @@
 <p>指数损失存在的一个问题是不断增加误分类样本的权重（指数上升）。如果数据样本是异常点（outlier），会极大的干扰后面基本分类器学习效果；</p>
 <p><strong>3. 模型无法用于概率估计</strong></p>
 <p>对于取值为$\hat y \in {-1,1}$的随机变量说，$e^{-\hat yf}$不是任何概率密度函数的对数形式，模型$f(x)$的结果无法用概率解释。<br>MLAPP中的原话：$e^{-\hat y f}$is not the logarithm of any pmf for binary variables $\hat y \in {-1,1}$; consequently we cannot recover probability estimate from $f(x)$.”</p>
-<h2 id="五、二叉分类提升树（如AdaBoost）"><a href="#五、二叉分类提升树（如AdaBoost）" class="headerlink" title="五、二叉分类提升树（如AdaBoost）"></a>五、二叉分类提升树（如AdaBoost）</h2><p>对于二类分类问题，提升树算法只需要将AdaBoost算法例子中的基本分类器限制为二叉分类树即可，可以说<strong>此时的决策树算法时AdaBoost算法的特殊情况</strong>。</p>
+<h2 id="四、二叉分类提升树（如AdaBoost）"><a href="#四、二叉分类提升树（如AdaBoost）" class="headerlink" title="四、二叉分类提升树（如AdaBoost）"></a>四、二叉分类提升树（如AdaBoost）</h2><p>对于二类分类问题，提升树算法只需要将AdaBoost算法例子中的基本分类器限制为二叉分类树即可，可以说<strong>此时的决策树算法时AdaBoost算法的特殊情况</strong>。</p>
 <p><strong>二叉分类树中用基尼指数作为最优特征选择的度量标准。</strong></p>
 <p>在实际操作中，通过遍历所有特征（如果是连续值，需做离散化）及其取值，选择基尼指数最小所对应的特征和特征值。</p>
-<h2 id="六、二叉回归提升树"><a href="#六、二叉回归提升树" class="headerlink" title="六、二叉回归提升树"></a>六、二叉回归提升树</h2><p><strong>二叉回归树采用平方误差最小化作为特征选择和切分点选择的依据</strong>。</p>
+<h2 id="五、二叉回归提升树"><a href="#五、二叉回归提升树" class="headerlink" title="五、二叉回归提升树"></a>五、二叉回归提升树</h2><p><strong>二叉回归树采用平方误差最小化作为特征选择和切分点选择的依据</strong>。</p>
 <p>下面要解决的问题是：如何划分特征空间？</p>
 <p>一个启发式的方式就是选择特征空间中第$m$个特征$f_m$和它的取值$s$,作为划分特征和划分点，然后寻找最优划分特征$f_m$和最优划分点$s$。</p>
 <p><strong>具体操作就是遍历所有未划分过的特征集合和对应的取值（集合）</strong>求解得出另损失函数最小的参数$f_m和s$。</p>
@@ -492,7 +497,7 @@
 <p>（a）计算或更新残差<br>$$\gamma _{mi}=y_i-f_{m-1}(x_i),i=1,2,…,N$$<br>（b）拟合残差$\gamma_{mi}$学习一个回归树，得到$T(x; \Theta_m)$<br>（c）更新$f_m(x)=f_{m-1}(x)+T(x;\Theta_m)$<br>（d）重复步骤（a～c）知道满足终止条件</p>
 <p>（3）得到回归问题提升树<br>$$f(x)=f_M(x)=∑^M_{m=1}T(x;\Theta_m)$$</p>
 </blockquote>
-<h2 id="七、梯度提升树（GBDT）"><a href="#七、梯度提升树（GBDT）" class="headerlink" title="七、梯度提升树（GBDT）"></a>七、梯度提升树（GBDT）</h2><h3 id="1-梯度提升树-GBDT-算法解析"><a href="#1-梯度提升树-GBDT-算法解析" class="headerlink" title="1. 梯度提升树(GBDT)算法解析"></a>1. 梯度提升树(GBDT)算法解析</h3><p><strong>Gradient boosting</strong> 就是通过加入新的弱学习器，来努力纠正前面所有弱学习器的残差，最终这样多个学习器相加在一起用来进行最终预测，准确率就会比单独的一个要高。之所以称为 Gradient，是因为在添加新模型时使用了梯度下降算法来最小化的损失。<br><strong>利用损失函数的负梯度在当前模型的值作为回归问题提升树算法中残差的近似值，拟合一个回归树。</strong></p>
+<h2 id="六、梯度提升树（GBDT）"><a href="#六、梯度提升树（GBDT）" class="headerlink" title="六、梯度提升树（GBDT）"></a>六、梯度提升树（GBDT）</h2><h3 id="1-梯度提升树-GBDT-算法解析"><a href="#1-梯度提升树-GBDT-算法解析" class="headerlink" title="1. 梯度提升树(GBDT)算法解析"></a>1. 梯度提升树(GBDT)算法解析</h3><p><strong>Gradient boosting</strong> 就是通过加入新的弱学习器，来努力纠正前面所有弱学习器的残差，最终这样多个学习器相加在一起用来进行最终预测，准确率就会比单独的一个要高。之所以称为 Gradient，是因为在添加新模型时使用了梯度下降算法来最小化的损失。<br><strong>利用损失函数的负梯度在当前模型的值作为回归问题提升树算法中残差的近似值，拟合一个回归树。</strong></p>
 <p>损失函数的负梯度为：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15267353730899.jpg" alt=""></p>
 <p>也就是说梯度提升树（GBDT）本质上和提升回归树类似，唯一不同的是使用损失函数的负梯度在当前模型的值取近似替代回归提升树中的残差去拟合回归树。这里算法解析部分可以参考上文回归提升树。</p>
 <h3 id="2-梯度回归树（GBDT）构建步骤"><a href="#2-梯度回归树（GBDT）构建步骤" class="headerlink" title="2. 梯度回归树（GBDT）构建步骤"></a>2. 梯度回归树（GBDT）构建步骤</h3><blockquote>
@@ -511,7 +516,7 @@
 <li>第（2d）步更新回归树，然后输出最终模型$\hat{y}(x)$。</li>
 </ol>
 <h3 id="3-GBDT缺点"><a href="#3-GBDT缺点" class="headerlink" title="3. GBDT缺点"></a>3. GBDT缺点</h3><p> <strong>效率低</strong>：gradient boosting 的实现是比较慢的，因为每次都要先构造出一个树并添加到整个模型序列中。所以就有了<strong>XGBoost</strong>。</p>
-<h2 id="八、XGBoost"><a href="#八、XGBoost" class="headerlink" title="八、XGBoost"></a>八、XGBoost</h2><h3 id="1-XGBoost原理详解"><a href="#1-XGBoost原理详解" class="headerlink" title="1. XGBoost原理详解"></a>1. XGBoost原理详解</h3><p>前面介绍了提升树算法，其实 XGBoost 就是一种特殊的提升树算法，准确的说它是一种梯度提升决策树（GBDT ，Gradient Boosting Decision Trees）。GBDT 与前面介绍的提升树方法主要的区别就是利用损失函数的负梯度在当前模型的值作为回归问题提升树算法中残差的近似值，来拟合一颗回归树，即：</p>
+<h2 id="七、XGBoost"><a href="#七、XGBoost" class="headerlink" title="七、XGBoost"></a>七、XGBoost</h2><h3 id="1-XGBoost原理详解"><a href="#1-XGBoost原理详解" class="headerlink" title="1. XGBoost原理详解"></a>1. XGBoost原理详解</h3><p>前面介绍了提升树算法，其实 XGBoost 就是一种特殊的提升树算法，准确的说它是一种梯度提升决策树（GBDT ，Gradient Boosting Decision Trees）。GBDT 与前面介绍的提升树方法主要的区别就是利用损失函数的负梯度在当前模型的值作为回归问题提升树算法中残差的近似值，来拟合一颗回归树，即：</p>
 <p><img src="http://p6rvh6ej2.bkt.clouddn.com/15267877818108.jpg" alt=""></p>
 <p>XGBoost 就是对 GBDT 的实现，但是一般来说，gradient boosting 的实现是比较慢的，因为每次都要先构造出一个树并添加到整个模型序列中。</p>
 <p>而 XGBoost 的特点就是<strong>计算速度快</strong>，<strong>模型表现好</strong>，这两点也正是这个项目的目标。</p>
@@ -631,18 +636,18 @@
 <li><strong>不适合处理超高维特征数据</strong></li>
 </ol>
 <p>XGBoost 算法对于中低维数据具有很好的处理速度和精度，但是对于例如大规模图像物体识别，或者是推荐算法的某些场景中会出现的超高维特征的数据就无能为力了，这时候我们就需要借助于深度学习等算法。</p>
-<h2 id="九、-总结"><a href="#九、-总结" class="headerlink" title="九、 总结"></a>九、 总结</h2><h3 id="1-Boosting家族"><a href="#1-Boosting家族" class="headerlink" title="1. Boosting家族"></a>1. Boosting家族</h3><p>提升(Boosting)是集成学习方法里的一个重要方法，其主要思想是将弱分类器组装成一个强分类器。在 PAC（概率近似正确）学习框架下，则一定可以将弱分类器组装成一个强分类器。</p>
+<h2 id="八、-总结"><a href="#八、-总结" class="headerlink" title="八、 总结"></a>八、 总结</h2><h3 id="1-Boosting家族"><a href="#1-Boosting家族" class="headerlink" title="1. Boosting家族"></a>1. Boosting家族</h3><p>提升(Boosting)是集成学习方法里的一个重要方法，其主要思想是将弱分类器组装成一个强分类器。在 PAC（概率近似正确）学习框架下，则一定可以将弱分类器组装成一个强分类器。</p>
 <p><strong>AdaBoost、GBDT、XGBoost</strong>都属于（加法模型、前向分步、指数损失函数）家族，都实现了通过将多个弱学习器组合成强学习器已达到提升预测准确度的目的。实现的过程略有不同且适用于不同场景。<br>Boosting并非是一个方法，而是一类方法。这里按照损失函数的不同，将其细分为若干类算法，下表给出了4种不同损失函数对应的Boosting方法：</p>
 <p><img src="http://p6rvh6ej2.bkt.clouddn.com/15267180767470.jpg" alt=""></p>
-<h3 id="3-Adaboost"><a href="#3-Adaboost" class="headerlink" title="3. Adaboost"></a>3. Adaboost</h3><p><strong>AdaBoost</strong>是一种典型的分类回归树，适合解决二分类问题。多分类问题解决起来比较麻烦（参考上文）</p>
+<h3 id="2-Adaboost"><a href="#2-Adaboost" class="headerlink" title="2. Adaboost"></a>2. Adaboost</h3><p><strong>AdaBoost</strong>是一种典型的分类回归树，适合解决二分类问题。多分类问题解决起来比较麻烦（参考上文）</p>
 <p><strong>AdaBoost</strong>是一种采用加法模型、前向分步算法、指数损失函数的提升树。可以表示为 Boosting 的前向分布算法的一个特例。 <a href="http://ihoge.cn/2018/adaboost.html" target="_blank" rel="noopener">更多内容请参考</a></p>
-<h3 id="4-回归提升树和-Adaboost"><a href="#4-回归提升树和-Adaboost" class="headerlink" title="4. 回归提升树和 Adaboost"></a>4. 回归提升树和 Adaboost</h3><p><strong>回归提升树</strong>与<strong>AdaBoot</strong>不同的地方在于它使用的是平方损失函数来解决回归的问题，通过计算残差发现模型的不足，并不断拟合更新<strong>残差</strong>来构建新树。（这里残差的实现的功能与Adaboost有些类似）</p>
-<h3 id="5-GBDT-和回归提升树"><a href="#5-GBDT-和回归提升树" class="headerlink" title="5. GBDT 和回归提升树"></a>5. GBDT 和回归提升树</h3><ol>
+<h3 id="3-回归提升树和-Adaboost"><a href="#3-回归提升树和-Adaboost" class="headerlink" title="3. 回归提升树和 Adaboost"></a>3. 回归提升树和 Adaboost</h3><p><strong>回归提升树</strong>与<strong>AdaBoot</strong>不同的地方在于它使用的是平方损失函数来解决回归的问题，通过计算残差发现模型的不足，并不断拟合更新<strong>残差</strong>来构建新树。（这里残差的实现的功能与Adaboost有些类似）</p>
+<h3 id="4-GBDT-和回归提升树"><a href="#4-GBDT-和回归提升树" class="headerlink" title="4. GBDT 和回归提升树"></a>4. GBDT 和回归提升树</h3><ol>
 <li><strong>梯度提升树</strong>可以看作是特殊的一种回归提升树。它通过计算损失函数的负梯度在当前模型的值来近似回归树中的“残差”发现模型的不足，并通过拟合该“残差”构建新树。</li>
 <li>回归提升树初始化另$f_0(x)=0$；GBDT初始化时令$f_{ 0 }(x)=arg\min _{ c } \sum _{ i=1 }^{ N }{ L(y_i,c) } $估计是损失函数极小化的常数值。</li>
 <li>回归提升树通过平方损失函数计算残差，GBDT通过计算负梯度作为伪残差。</li>
 </ol>
-<h3 id="6-XGBoost-和-GBDT"><a href="#6-XGBoost-和-GBDT" class="headerlink" title="6. XGBoost 和 GBDT"></a>6. XGBoost 和 GBDT</h3><ul>
+<h3 id="5-XGBoost-和-GBDT"><a href="#5-XGBoost-和-GBDT" class="headerlink" title="5. XGBoost 和 GBDT"></a>5. XGBoost 和 GBDT</h3><ul>
 <li><p>Xgboost 是 GB 算法的高效实现，xgboost 中的基学习器除了可以是CART（gbtree）也可以是线性分类器（gblinear）。</p>
 </li>
 <li><p>xgboost在目标函数中显示的加上了正则化项：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15267862619800.jpg" alt=""></p>
@@ -654,7 +659,7 @@
 <li><p>CART 回归树中寻找最佳分割点的衡量标准是最小化均方差，xgboost 寻找分割点的标准是最大化，lamda，gama 与正则化项相关：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15267866670834.jpg" alt=""></p>
 </li>
 </ul>
-<h3 id="7-参考文献"><a href="#7-参考文献" class="headerlink" title="7. 参考文献"></a>7. 参考文献</h3><p>[1] 《统计学习方法》  ——李航 2012 清华大学出版社<br>[2] 《机器学习》  ——周志华 2016 清华大学出版社<br>[3] <a href="http://ihoge.cn/2018/adaboost.html" target="_blank" rel="noopener">http://ihoge.cn/2018/adaboost.html</a><br>[4] <a href="https://www.jianshu.com/nb/7305482" target="_blank" rel="noopener">https://www.jianshu.com/nb/7305482</a><br>[5] <a href="http://www.52caml.com/head_first_ml/ml-chapter6-boosting-family/#Gradient_Boosting" target="_blank" rel="noopener">http://www.52caml.com/head_first_ml/ml-chapter6-boosting-family/#Gradient_Boosting</a><br>[6] <a href="https://www.jianshu.com/p/d55f7aaac4a7" target="_blank" rel="noopener">https://www.jianshu.com/p/d55f7aaac4a7</a><br>[7] <a href="http://gitbook.cn/gitchat/column/5ac2f0509e924a1dc029dd84/topic/5ac9e0e5dbd50e7493d35d3f" target="_blank" rel="noopener">http://gitbook.cn/gitchat/column/5ac2f0509e924a1dc029dd84/topic/5ac9e0e5dbd50e7493d35d3f</a></p>
+<h3 id="6-参考文献"><a href="#6-参考文献" class="headerlink" title="6. 参考文献"></a>6. 参考文献</h3><p>[1] 《统计学习方法》  ——李航 2012 清华大学出版社<br>[2] 《机器学习》  ——周志华 2016 清华大学出版社<br>[3] <a href="http://ihoge.cn/2018/adaboost.html" target="_blank" rel="noopener">http://ihoge.cn/2018/adaboost.html</a><br>[4] <a href="https://www.jianshu.com/nb/7305482" target="_blank" rel="noopener">https://www.jianshu.com/nb/7305482</a><br>[5] <a href="http://www.52caml.com/head_first_ml/ml-chapter6-boosting-family/#Gradient_Boosting" target="_blank" rel="noopener">http://www.52caml.com/head_first_ml/ml-chapter6-boosting-family/#Gradient_Boosting</a><br>[6] <a href="https://www.jianshu.com/p/d55f7aaac4a7" target="_blank" rel="noopener">https://www.jianshu.com/p/d55f7aaac4a7</a><br>[7] <a href="http://gitbook.cn/gitchat/column/5ac2f0509e924a1dc029dd84/topic/5ac9e0e5dbd50e7493d35d3f" target="_blank" rel="noopener">http://gitbook.cn/gitchat/column/5ac2f0509e924a1dc029dd84/topic/5ac9e0e5dbd50e7493d35d3f</a></p>
 
       
     </div>
@@ -685,8 +690,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/XGBoost.html" rel="next" title="XGBoost算法学习总结">
-                <i class="fa fa-chevron-left"></i> XGBoost算法学习总结
+              <a href="/2018/XGBoost1.html" rel="next" title="XGBoost简单案例实现">
+                <i class="fa fa-chevron-left"></i> XGBoost简单案例实现
               </a>
             
           </div>
@@ -694,6 +699,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/XGBoost.html" rel="prev" title="XGBoost算法学习总结">
+                XGBoost算法学习总结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -865,7 +874,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基本概念"><span class="nav-number">1.</span> <span class="nav-text">一、基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、前向分步加法模型（Forward-Stagewise-Additive-Modeling）"><span class="nav-number">2.</span> <span class="nav-text">二、前向分步加法模型（Forward Stagewise Additive Modeling）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-加法模型"><span class="nav-number">2.1.</span> <span class="nav-text">1. 加法模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-前向分步算法"><span class="nav-number">2.2.</span> <span class="nav-text">2. 前向分步算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、AdaBoost"><span class="nav-number">3.</span> <span class="nav-text">四、AdaBoost</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-AdaBoost算法解析"><span class="nav-number">3.1.</span> <span class="nav-text">1. AdaBoost算法解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-AdaBoost构建步骤"><span class="nav-number">3.2.</span> <span class="nav-text">2. AdaBoost构建步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-AdaBoost算法缺点"><span class="nav-number">3.3.</span> <span class="nav-text">3. AdaBoost算法缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、二叉分类提升树（如AdaBoost）"><span class="nav-number">4.</span> <span class="nav-text">五、二叉分类提升树（如AdaBoost）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、二叉回归提升树"><span class="nav-number">5.</span> <span class="nav-text">六、二叉回归提升树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-回归问题提升树算法解析"><span class="nav-number">5.1.</span> <span class="nav-text">1. 回归问题提升树算法解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-回归提升树构建步骤"><span class="nav-number">5.2.</span> <span class="nav-text">2. 回归提升树构建步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、梯度提升树（GBDT）"><span class="nav-number">6.</span> <span class="nav-text">七、梯度提升树（GBDT）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-梯度提升树-GBDT-算法解析"><span class="nav-number">6.1.</span> <span class="nav-text">1. 梯度提升树(GBDT)算法解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-梯度回归树（GBDT）构建步骤"><span class="nav-number">6.2.</span> <span class="nav-text">2. 梯度回归树（GBDT）构建步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-GBDT缺点"><span class="nav-number">6.3.</span> <span class="nav-text">3. GBDT缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、XGBoost"><span class="nav-number">7.</span> <span class="nav-text">八、XGBoost</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-XGBoost原理详解"><span class="nav-number">7.1.</span> <span class="nav-text">1. XGBoost原理详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-XGBoost的目标函数"><span class="nav-number">7.2.</span> <span class="nav-text">2. XGBoost的目标函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-XGBoost算法学习过程"><span class="nav-number">7.3.</span> <span class="nav-text">3. XGBoost算法学习过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-泰勒展开时近似损失函数"><span class="nav-number">7.4.</span> <span class="nav-text">4. 泰勒展开时近似损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-正则化的处理"><span class="nav-number">7.5.</span> <span class="nav-text">5. 正则化的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#决策树函数的定义"><span class="nav-number">7.5.1.</span> <span class="nav-text">决策树函数的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义决策树的复杂度"><span class="nav-number">7.5.2.</span> <span class="nav-text">定义决策树的复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新目标函数的优化"><span class="nav-number">7.5.3.</span> <span class="nav-text">新目标函数的优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-决策树构建"><span class="nav-number">7.6.</span> <span class="nav-text">6. 决策树构建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#决策树的生成策略"><span class="nav-number">7.6.1.</span> <span class="nav-text">决策树的生成策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找最优分裂点"><span class="nav-number">7.6.2.</span> <span class="nav-text">寻找最优分裂点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#离散变量处理"><span class="nav-number">7.6.3.</span> <span class="nav-text">离散变量处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#剪枝策略"><span class="nav-number">7.6.4.</span> <span class="nav-text">剪枝策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前向分步的步长"><span class="nav-number">7.6.5.</span> <span class="nav-text">前向分步的步长</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-XGBoost构建步骤流程"><span class="nav-number">7.7.</span> <span class="nav-text">7. XGBoost构建步骤流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-XGBoost优缺点"><span class="nav-number">7.8.</span> <span class="nav-text">8. XGBoost优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">7.8.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-number">7.8.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、-总结"><span class="nav-number">8.</span> <span class="nav-text">九、 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Boosting家族"><span class="nav-number">8.1.</span> <span class="nav-text">1. Boosting家族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Adaboost"><span class="nav-number">8.2.</span> <span class="nav-text">3. Adaboost</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-回归提升树和-Adaboost"><span class="nav-number">8.3.</span> <span class="nav-text">4. 回归提升树和 Adaboost</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-GBDT-和回归提升树"><span class="nav-number">8.4.</span> <span class="nav-text">5. GBDT 和回归提升树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-XGBoost-和-GBDT"><span class="nav-number">8.5.</span> <span class="nav-text">6. XGBoost 和 GBDT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-参考文献"><span class="nav-number">8.6.</span> <span class="nav-text">7. 参考文献</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基本概念"><span class="nav-number">1.</span> <span class="nav-text">一、基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、前向分步加法模型（Forward-Stagewise-Additive-Modeling）"><span class="nav-number">2.</span> <span class="nav-text">二、前向分步加法模型（Forward Stagewise Additive Modeling）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-加法模型"><span class="nav-number">2.1.</span> <span class="nav-text">1. 加法模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-前向分步算法"><span class="nav-number">2.2.</span> <span class="nav-text">2. 前向分步算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、AdaBoost"><span class="nav-number">3.</span> <span class="nav-text">三、AdaBoost</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-AdaBoost算法解析"><span class="nav-number">3.1.</span> <span class="nav-text">1. AdaBoost算法解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-AdaBoost构建步骤"><span class="nav-number">3.2.</span> <span class="nav-text">2. AdaBoost构建步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-AdaBoost算法缺点"><span class="nav-number">3.3.</span> <span class="nav-text">3. AdaBoost算法缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、二叉分类提升树（如AdaBoost）"><span class="nav-number">4.</span> <span class="nav-text">四、二叉分类提升树（如AdaBoost）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、二叉回归提升树"><span class="nav-number">5.</span> <span class="nav-text">五、二叉回归提升树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-回归问题提升树算法解析"><span class="nav-number">5.1.</span> <span class="nav-text">1. 回归问题提升树算法解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-回归提升树构建步骤"><span class="nav-number">5.2.</span> <span class="nav-text">2. 回归提升树构建步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、梯度提升树（GBDT）"><span class="nav-number">6.</span> <span class="nav-text">六、梯度提升树（GBDT）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-梯度提升树-GBDT-算法解析"><span class="nav-number">6.1.</span> <span class="nav-text">1. 梯度提升树(GBDT)算法解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-梯度回归树（GBDT）构建步骤"><span class="nav-number">6.2.</span> <span class="nav-text">2. 梯度回归树（GBDT）构建步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-GBDT缺点"><span class="nav-number">6.3.</span> <span class="nav-text">3. GBDT缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、XGBoost"><span class="nav-number">7.</span> <span class="nav-text">七、XGBoost</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-XGBoost原理详解"><span class="nav-number">7.1.</span> <span class="nav-text">1. XGBoost原理详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-XGBoost的目标函数"><span class="nav-number">7.2.</span> <span class="nav-text">2. XGBoost的目标函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-XGBoost算法学习过程"><span class="nav-number">7.3.</span> <span class="nav-text">3. XGBoost算法学习过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-泰勒展开时近似损失函数"><span class="nav-number">7.4.</span> <span class="nav-text">4. 泰勒展开时近似损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-正则化的处理"><span class="nav-number">7.5.</span> <span class="nav-text">5. 正则化的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#决策树函数的定义"><span class="nav-number">7.5.1.</span> <span class="nav-text">决策树函数的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义决策树的复杂度"><span class="nav-number">7.5.2.</span> <span class="nav-text">定义决策树的复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新目标函数的优化"><span class="nav-number">7.5.3.</span> <span class="nav-text">新目标函数的优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-决策树构建"><span class="nav-number">7.6.</span> <span class="nav-text">6. 决策树构建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#决策树的生成策略"><span class="nav-number">7.6.1.</span> <span class="nav-text">决策树的生成策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找最优分裂点"><span class="nav-number">7.6.2.</span> <span class="nav-text">寻找最优分裂点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#离散变量处理"><span class="nav-number">7.6.3.</span> <span class="nav-text">离散变量处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#剪枝策略"><span class="nav-number">7.6.4.</span> <span class="nav-text">剪枝策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前向分步的步长"><span class="nav-number">7.6.5.</span> <span class="nav-text">前向分步的步长</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-XGBoost构建步骤流程"><span class="nav-number">7.7.</span> <span class="nav-text">7. XGBoost构建步骤流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-XGBoost优缺点"><span class="nav-number">7.8.</span> <span class="nav-text">8. XGBoost优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">7.8.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-number">7.8.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、-总结"><span class="nav-number">8.</span> <span class="nav-text">八、 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Boosting家族"><span class="nav-number">8.1.</span> <span class="nav-text">1. Boosting家族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Adaboost"><span class="nav-number">8.2.</span> <span class="nav-text">2. Adaboost</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-回归提升树和-Adaboost"><span class="nav-number">8.3.</span> <span class="nav-text">3. 回归提升树和 Adaboost</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-GBDT-和回归提升树"><span class="nav-number">8.4.</span> <span class="nav-text">4. GBDT 和回归提升树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-XGBoost-和-GBDT"><span class="nav-number">8.5.</span> <span class="nav-text">5. XGBoost 和 GBDT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-参考文献"><span class="nav-number">8.6.</span> <span class="nav-text">6. 参考文献</span></a></li></ol></li></ol></div>
             
 
           </div>
