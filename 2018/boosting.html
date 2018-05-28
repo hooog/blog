@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="boosting," />
+  <meta name="keywords" content="集合算法," />
 
 
 
@@ -84,7 +84,7 @@
 
 
 <meta name="description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 四、二叉分类树 五、回归分类树     1. 算法解析     2. 模型构建 六、梯度提升树（GBDT）     1. 算法解析     2. 模">
-<meta name="keywords" content="boosting">
+<meta name="keywords" content="集合算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="提升树（Boosting tree）算法总结">
 <meta property="og:url" content="http://www.ihoge.cn/2018/boosting.html">
@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15268013497837.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15268027278380.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267180767470.jpg">
-<meta property="og:updated_time" content="2018-05-20T08:51:32.736Z">
+<meta property="og:updated_time" content="2018-05-28T07:52:54.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="提升树（Boosting tree）算法总结">
 <meta name="twitter:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 四、二叉分类树 五、回归分类树     1. 算法解析     2. 模型构建 六、梯度提升树（GBDT）     1. 算法解析     2. 模">
@@ -331,8 +331,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithm</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -454,7 +454,7 @@
 <blockquote>
 <p><strong>输入</strong>：训练数据集$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中$x_i\in \chi ⊆R^n,y_i\in Y={-1,1}$，弱学习算法$G_m(x)$;<br><strong>输出：</strong>最终强化算法分类器$G(x)$<br>（1）初始化训练数据总和为1的权值分布：（初始权重为归一化后的均值既$\frac 1N$）<br>$$D_1=(w_{11},…,w_{1i},…w_{1N}),w_{1i}=\frac 1N, i=1,2,…N$$<br>（2）对$m=1,2,…M$：（弱分类器的个数）<br>（a）使用具有权值分布的$D_m$的训练数据集学习，得到基本分类器：(数据集$X$到{-1,1}的映射)<br>$$G_m(x):X-&gt;{-1,1}$$<br>（b）计算$Gm(x)$在训练数据集上的分类误差率：（公式不够简洁明了，其实总结下来非常好理解：误差率$e_m$=误分类样本的权值之和）<br>$$e_m=∑^N_{i=1}P(G_m(x_i)≠y_i)=∑^N_{i=1}w_{mi}I(G_m(x_i)≠y_i)$$<br>我们来考虑下误差$e_m$的取值空间：由于训练集权制之和为1，因此误差$0≤e_m≤1$。但是这样还不够。因为我们在选择分裂阈值的时候会选择一个最优或局部最优的取值来分裂，且当$e_m=0.5$是表明该分裂阈值对预测无贡献。因此最终得到的$e_m$的实际取值应小于$e_m≤0.5$。<br>所以最终：$0≤e_m≤0.5$，且每次迭代误差$e_m$递减。这点对下面的参数理解很重要。<br>（c）计算$G_m(x)$的系数:(这里对数为自然对数)<br>$$\alpha_m=\frac 12log\frac{1-e_m}{e_m} $$<br>那么问题来了，为什么要用这个公式来计算更新每个基分类器的参数？我们先画个图出来观察下这个函数。（其中y轴为$\alpha _m$，x轴为误差$e_m$）</p>
 <p><img src="http://p6rvh6ej2.bkt.clouddn.com/15266077461675.jpg" alt=""></p>
-<p>由（2-b）我们得到误差$e_m$的取值范围为$0≤e_m&lt;0.5$，结合该图可以可知$0&lt;\alpha_m&lt;1$。<br>另外可以发现，通过该函数的转换，弱分类器$G_m(x)$的误差的越小，参数$\alpha_m$越大。即实现了<strong><code>给分类误差率小的基本分类器以大的权值，给分类误差率大的基本分类器以小的权值</code></strong><br>（d）更新训练数据集的权值分布：（该权值决定数据集的重要性，并让误差的计算变得简单）<br>$$D_{m+1}=(w_{m+1,1},…,w_{m+1,i},…w_{m+1,N})$$<br>$$w_{m+1,i}=\frac {w_{mi}}{Z_m}exp(-\alpha_my_iG_m(x-i)),i=1,2,…N$$<br>这里$y_i={-1,1} $为真实值，$G_m(x_i)={-1,1}$为预测值。当预测正确时$y_iG_m(x_i)$为1，反之为-1。<br>令$\delta_{m_i}=\alpha_my_iG_m(x_i)$，$\theta_{mi}=\frac {w_{mi}}{Z_m}$(把它看作一个用于归一化权值的加权平均常数)。权重$w_{m+1,i}$的更新函数可以简化为$$w_{m+1,i}=\theta_{mi}exp(\delta <em>{mi}),i=1,2,…N$$画出$y=w</em>{m+1,i}=exp(\delta_{mi})$的图形来看一下：</p>
+<p>由（2-b）我们得到误差$e_m$的取值范围为$0≤e_m&lt;0.5$，结合该图可以可知$0&lt;\alpha_m&lt;+\infty $。<br>另外可以发现，通过该函数的转换，弱分类器$G_m(x)$的误差的越小，参数$\alpha_m$越大。即实现了<strong><code>给分类误差率小的基本分类器以大的权值，给分类误差率大的基本分类器以小的权值</code></strong><br>（d）更新训练数据集的权值分布：（该权值决定数据集的重要性，并让误差的计算变得简单）<br>$$D_{m+1}=(w_{m+1,1},…,w_{m+1,i},…w_{m+1,N})$$<br>$$w_{m+1,i}=\frac {w_{mi}}{Z_m}exp(-\alpha_my_iG_m(x-i)),i=1,2,…N$$<br>这里$y_i={-1,1} $为真实值，$G_m(x_i)={-1,1}$为预测值。当预测正确时$y_iG_m(x_i)$为1，反之为-1。<br>令$\delta_{m_i}=\alpha_my_iG_m(x_i)$，$\theta_{mi}=\frac {w_{mi}}{Z_m}$(把它看作一个用于归一化权值的加权平均常数)。权重$w_{m+1,i}$的更新函数可以简化为$$w_{m+1,i}=\theta_{mi}exp(\delta <em>{mi}),i=1,2,…N$$画出$y=w</em>{m+1,i}=exp(\delta_{mi})$的图形来看一下：</p>
 <p><img src="http://p6rvh6ej2.bkt.clouddn.com/15266159564936.jpg" alt=""></p>
 <p>由于$0&lt;\alpha_m&lt;1$，所以$-1&lt;\delta_{m,i }&lt;1$。且<strong>使得预测错误的数据集样本点更新后的权重变大，预测正确的权值变小，然后对所有权值进行归一化</strong>。这就是该函数实现的作用。(图中y=1是当$\alpha$无限接近于0时的情况：解释为，当$\alpha_m$权值越大，权重$w_{m+1,i}$更新改变的效果越明显。)<br>这里，$Z_m$是规范化因子，目的是使各数据集的权重进行归一化。理解为$Z_m$=更新后的各数据集权重之和。<br>$$Z_m=∑^N_{i=1}w_{mi}exp(-\alpha_my_iG_m(x_i))$$<br>（3）构建基本分类器的新型组合$f(x)=∑^M_{m=1}\alpha_mG_m(x)$，即：<br>$$G(x)=sign(f(x))=sign(∑^M_{m=1}\alpha_mG_m(x))$$<br>函数$sign()$的意义是将正数判别为1，负数判别为-1，最终达到分类的目的。如图：</p>
 <p><img src="http://p6rvh6ej2.bkt.clouddn.com/15266164023757.jpg" alt=""></p>
@@ -672,7 +672,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/boosting/" rel="tag"><i class="fa fa-tag"></i> boosting</a>
+            <a href="/tags/集合算法/" rel="tag"><i class="fa fa-tag"></i> 集合算法</a>
           
         </div>
       
@@ -685,8 +685,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/XGBoost.html" rel="next" title="XGBoost算法学习总结">
-                <i class="fa fa-chevron-left"></i> XGBoost算法学习总结
+              <a href="/2018/XGBoost1.html" rel="next" title="XGBoost简单案例实现">
+                <i class="fa fa-chevron-left"></i> XGBoost简单案例实现
               </a>
             
           </div>
@@ -694,6 +694,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/XGBoost.html" rel="prev" title="XGBoost算法学习总结">
+                XGBoost算法学习总结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -803,7 +807,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
