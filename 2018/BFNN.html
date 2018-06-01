@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="BF神经网络," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Student" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="传送门：BF神经网络（一）算法原理与实现 BF神经网络预测共享单车使用情况BF实现算法基础BF神经网络算法的原理及实现参考前一篇博客：http://ihoge.cn/2018/DL_BFNN.html 加载和准备数据构建神经网络的关键一步是正确地准备数据。不同尺度级别的变量使网络难以高效地掌握正确的权重。我们在下方已经提供了加载和准备数据的代码。你很快将进一步学习这些代码！ 123456%mat">
+<meta name="keywords" content="BF神经网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BF神经网络（二）预测共享单车使用情况">
+<meta property="og:url" content="http://www.ihoge.cn/2018/BFNN.html">
+<meta property="og:site_name" content="Student">
+<meta property="og:description" content="传送门：BF神经网络（一）算法原理与实现 BF神经网络预测共享单车使用情况BF实现算法基础BF神经网络算法的原理及实现参考前一篇博客：http://ihoge.cn/2018/DL_BFNN.html 加载和准备数据构建神经网络的关键一步是正确地准备数据。不同尺度级别的变量使网络难以高效地掌握正确的权重。我们在下方已经提供了加载和准备数据的代码。你很快将进一步学习这些代码！ 123456%mat">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15278638061796.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15278473558848.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15278639194549.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15278473911244.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15278475026241.jpg">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15278475263318.jpg">
+<meta property="og:updated_time" content="2018-06-01T14:45:35.230Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BF神经网络（二）预测共享单车使用情况">
+<meta name="twitter:description" content="传送门：BF神经网络（一）算法原理与实现 BF神经网络预测共享单车使用情况BF实现算法基础BF神经网络算法的原理及实现参考前一篇博客：http://ihoge.cn/2018/DL_BFNN.html 加载和准备数据构建神经网络的关键一步是正确地准备数据。不同尺度级别的变量使网络难以高效地掌握正确的权重。我们在下方已经提供了加载和准备数据的代码。你很快将进一步学习这些代码！ 123456%mat">
+<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15278638061796.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/BFNN.html"/>
+
+
+
+
+
+  <title>BF神经网络（二）预测共享单车使用情况 | Student</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Student</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/BFNN.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Student">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BF神经网络（二）预测共享单车使用情况</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T12:20:21+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p>传送门：<br><a href="http://ihoge.cn/2018/DL_BFNN.html" target="_blank" rel="noopener">BF神经网络（一）算法原理与实现</a></p>
+<h1 id="BF神经网络预测共享单车使用情况"><a href="#BF神经网络预测共享单车使用情况" class="headerlink" title="BF神经网络预测共享单车使用情况"></a>BF神经网络预测共享单车使用情况</h1><h2 id="BF实现算法基础"><a href="#BF实现算法基础" class="headerlink" title="BF实现算法基础"></a>BF实现算法基础</h2><p>BF神经网络算法的原理及实现参考前一篇博客：<a href="http://ihoge.cn/2018/DL_BFNN.html" target="_blank" rel="noopener">http://ihoge.cn/2018/DL_BFNN.html</a></p>
+<h2 id="加载和准备数据"><a href="#加载和准备数据" class="headerlink" title="加载和准备数据"></a>加载和准备数据</h2><p>构建神经网络的关键一步是正确地准备数据。不同尺度级别的变量使网络难以高效地掌握正确的权重。我们在下方已经提供了加载和准备数据的代码。你很快将进一步学习这些代码！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line">%config InlineBackend.figure_format = <span class="string">'retina'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data_path = <span class="string">'Bike-Sharing-Dataset/hour.csv'</span></span><br><span class="line"></span><br><span class="line">rides = pd.read_csv(data_path)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rides.head()</span><br></pre></td></tr></table></figure>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15278638061796.jpg" alt=""></p>
+<h2 id="数据简介"><a href="#数据简介" class="headerlink" title="数据简介"></a>数据简介</h2><p>此数据集包含的是从 2011 年 1 月 1 日到 2012 年 12 月 31 日期间每天每小时的骑车人数。骑车用户分成临时用户和注册用户，cnt 列是骑车用户数汇总列。你可以在上方看到前几行数据。</p>
+<p>下图展示的是数据集中前 10 天左右的骑车人数（某些天不一定是 24 个条目，所以不是精确的 10 天）。你可以在这里看到每小时租金。这些数据很复杂！周末的骑行人数少些，工作日上下班期间是骑行高峰期。我们还可以从上方的数据中看到温度、湿度和风速信息，所有这些信息都会影响骑行人数。你需要用你的模型展示所有这些数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rides[:<span class="number">24</span>*<span class="number">10</span>].plot(x=<span class="string">'dteday'</span>, y=<span class="string">'cnt'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15278473558848.jpg" alt=""></p>
+<h3 id="虚拟变量（哑变量）"><a href="#虚拟变量（哑变量）" class="headerlink" title="虚拟变量（哑变量）"></a>虚拟变量（哑变量）</h3><p>下面是一些分类变量，例如季节、天气、月份。要在我们的模型中包含这些数据，我们需要创建二进制虚拟变量。用 Pandas 库中的 <code>get_dummies()</code> 就可以轻松实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dummy_fields = [<span class="string">'season'</span>, <span class="string">'weathersit'</span>, <span class="string">'mnth'</span>, <span class="string">'hr'</span>, <span class="string">'weekday'</span>]</span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> dummy_fields:</span><br><span class="line">    dummies = pd.get_dummies(rides[each], prefix=each, drop_first=<span class="keyword">False</span>)</span><br><span class="line">    rides = pd.concat([rides, dummies], axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">fields_to_drop = [<span class="string">'instant'</span>, <span class="string">'dteday'</span>, <span class="string">'season'</span>, <span class="string">'weathersit'</span>, </span><br><span class="line">                  <span class="string">'weekday'</span>, <span class="string">'atemp'</span>, <span class="string">'mnth'</span>, <span class="string">'workingday'</span>, <span class="string">'hr'</span>]</span><br><span class="line">data = rides.drop(fields_to_drop, axis=<span class="number">1</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15278639194549.jpg" alt=""></p>
+<h3 id="调整目标变量"><a href="#调整目标变量" class="headerlink" title="调整目标变量"></a>调整目标变量</h3><p>为了更轻松地训练网络，我们将对每个连续变量标准化，即转换和调整变量，使它们的均值为 0，标准差为 1。</p>
+<p>我们会保存换算因子，以便当我们使用网络进行预测时可以还原数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">quant_features = [<span class="string">'casual'</span>, <span class="string">'registered'</span>, <span class="string">'cnt'</span>, <span class="string">'temp'</span>, <span class="string">'hum'</span>, <span class="string">'windspeed'</span>]</span><br><span class="line"><span class="comment"># Store scalings in a dictionary so we can convert back later</span></span><br><span class="line">scaled_features = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> quant_features:</span><br><span class="line">    mean, std = data[each].mean(), data[each].std()</span><br><span class="line">    scaled_features[each] = [mean, std]</span><br><span class="line">    data.loc[:, each] = (data[each] - mean)/std</span><br></pre></td></tr></table></figure>
+<h3 id="将数据拆分为训练、测试和验证数据集"><a href="#将数据拆分为训练、测试和验证数据集" class="headerlink" title="将数据拆分为训练、测试和验证数据集"></a>将数据拆分为训练、测试和验证数据集</h3><p>我们将大约最后 21 天的数据保存为测试数据集，这些数据集会在训练完网络后使用。我们将使用该数据集进行预测，并与实际的骑行人数进行对比。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Save data for approximately the last 21 days </span></span><br><span class="line">test_data = data[<span class="number">-21</span>*<span class="number">24</span>:]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Now remove the test data from the data set </span></span><br><span class="line">data = data[:<span class="number">-21</span>*<span class="number">24</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Separate the data into features and targets</span></span><br><span class="line">target_fields = [<span class="string">'cnt'</span>, <span class="string">'casual'</span>, <span class="string">'registered'</span>]</span><br><span class="line">features, targets = data.drop(target_fields, axis=<span class="number">1</span>), data[target_fields]</span><br><span class="line">test_features, test_targets = test_data.drop(target_fields, axis=<span class="number">1</span>), test_data[target_fields]</span><br></pre></td></tr></table></figure>
+<p>我们将数据拆分为两个数据集，一个用作训练，一个在网络训练完后用来验证网络。因为数据是有时间序列特性的，所以我们用历史数据进行训练，然后尝试预测未来数据（验证数据集）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Hold out the last 60 days or so of the remaining data as a validation set</span></span><br><span class="line">train_features, train_targets = features[:<span class="number">-60</span>*<span class="number">24</span>], targets[:<span class="number">-60</span>*<span class="number">24</span>]</span><br><span class="line">val_features, val_targets = features[<span class="number">-60</span>*<span class="number">24</span>:], targets[<span class="number">-60</span>*<span class="number">24</span>:]</span><br></pre></td></tr></table></figure>
+<h2 id="开始构建网络"><a href="#开始构建网络" class="headerlink" title="开始构建网络"></a>开始构建网络</h2><p>下面你将构建自己的网络。我们已经构建好结构和反向传递部分。你将实现网络的前向传递部分。还需要设置超参数：学习速率、隐藏单元的数量，以及训练传递数量。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15278473911244.jpg" alt=""></p>
+<p>该网络有两个层级，一个隐藏层和一个输出层。隐藏层级将使用 S 型函数作为激活函数。输出层只有一个节点，用于递归，节点的输出和节点的输入相同。即激活函数是 $f(x)=x$。这种函数获得输入信号，并生成输出信号，但是会考虑阈值，称为激活函数。我们完成网络的每个层级，并计算每个神经元的输出。一个层级的所有输出变成下一层级神经元的输入。这一流程叫做前向传播（forward propagation）。</p>
+<p>我们在神经网络中使用权重将信号从输入层传播到输出层。我们还使用权重将错误从输出层传播回网络，以便更新权重。这叫做反向传播（backpropagation）。</p>
+<blockquote>
+<p><strong>提示</strong>：你需要为反向传播实现计算输出激活函数 ($f(x) = x$) 的导数。如果你不熟悉微积分，其实该函数就等同于等式 $y = x$。该等式的斜率是多少？也就是导数 $f(x)$。</p>
+</blockquote>
+<p>你需要完成以下任务：</p>
+<ol>
+<li>实现 S 型激活函数。将 <code>__init__</code> 中的 <code>self.activation_function</code>  设为你的 S 型函数。</li>
+<li>在 <code>train</code> 方法中实现前向传递。</li>
+<li>在 <code>train</code> 方法中实现反向传播算法，包括计算输出错误。</li>
+<li>在 <code>run</code> 方法中实现前向传递。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NeuralNetwork</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">( self, input_nodes, hidden_nodes, output_nodes, learning_rate )</span>:</span></span><br><span class="line">        <span class="comment"># Set the number of nodes in input, hidden and output layers</span></span><br><span class="line">        self.input_nodes = input_nodes</span><br><span class="line">        self.hidden_nodes = hidden_nodes</span><br><span class="line">        self.output_nodes = output_nodes</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Set the learning rate</span></span><br><span class="line">        self.lr = learning_rate</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Initialize weights</span></span><br><span class="line">        self.weights_input_to_hidden = np.random.normal( <span class="number">0.0</span>, self.input_nodes**<span class="number">-0.5</span>, (self.input_nodes, self.hidden_nodes) )</span><br><span class="line">        self.weights_hidden_to_output = np.random.normal( <span class="number">0.0</span>, self.hidden_nodes**<span class="number">-0.5</span>, (self.hidden_nodes, self.output_nodes) )</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Activation function</span></span><br><span class="line">        self.activation_function = <span class="keyword">lambda</span> x : <span class="number">1</span> / ( <span class="number">1</span> + np.exp(-x) )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, features, targets)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        Arguments</span></span><br><span class="line"><span class="string">        ---------</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        features: 2D array, each row is one data record, each column is a feature</span></span><br><span class="line"><span class="string">        targets: 1D array of target values</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line"></span><br><span class="line">        n_record = features.shape[<span class="number">0</span>]</span><br><span class="line">        delta_weights_i_h = np.zeros( self.weights_input_to_hidden.shape )</span><br><span class="line">        delta_weights_h_o = np.zeros( self.weights_hidden_to_output.shape )</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> X, y <span class="keyword">in</span> zip( features, targets ):</span><br><span class="line">            hidden_inputs = np.dot( X, self.weights_input_to_hidden )</span><br><span class="line">            hidden_outputs = self.activation_function( hidden_inputs )</span><br><span class="line"></span><br><span class="line">            final_inputs = np.dot( hidden_outputs, self.weights_hidden_to_output )</span><br><span class="line">            final_outputs = final_inputs</span><br><span class="line"></span><br><span class="line">            error = y - final_outputs</span><br><span class="line"></span><br><span class="line">            output_error_term = error <span class="comment"># error * 1</span></span><br><span class="line"></span><br><span class="line">            hidden_error = np.dot( self.weights_hidden_to_output, output_error_term )</span><br><span class="line"></span><br><span class="line">            hidden_error_term = hidden_error * hidden_outputs * (<span class="number">1</span> - hidden_outputs) <span class="comment"># f'(hidden_input)</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># Weight step</span></span><br><span class="line">            delta_weights_i_h += hidden_error_term * X[:,<span class="keyword">None</span>]</span><br><span class="line">            </span><br><span class="line">            delta_weights_h_o += output_error_term * hidden_outputs[:,<span class="keyword">None</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Update the weights</span></span><br><span class="line">        self.weights_input_to_hidden += self.lr * delta_weights_i_h/n_record</span><br><span class="line">        self.weights_hidden_to_output += self.lr * delta_weights_h_o/n_record</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, features)</span>:</span></span><br><span class="line">        hidden_inputs = np.dot( features, self.weights_input_to_hidden )</span><br><span class="line">        hidden_output = self.activation_function( hidden_inputs )</span><br><span class="line"></span><br><span class="line">        final_inputs = np.dot( hidden_output, self.weights_hidden_to_output )</span><br><span class="line">        final_outputs = final_inputs</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> final_outputs</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MSE</span><span class="params">(y, Y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.mean((y-Y)**<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><p>运行这些单元测试，检查你的网络实现是否正确。这样可以帮助你确保网络已正确实现，然后再开始训练网络。这些测试必须成功才能通过此项目。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line">inputs = np.array([[<span class="number">0.5</span>, <span class="number">-0.2</span>, <span class="number">0.1</span>]])</span><br><span class="line">targets = np.array([[<span class="number">0.4</span>]])</span><br><span class="line">test_w_i_h = np.array([[<span class="number">0.1</span>, <span class="number">-0.2</span>],</span><br><span class="line">                       [<span class="number">0.4</span>, <span class="number">0.5</span>],</span><br><span class="line">                       [<span class="number">-0.3</span>, <span class="number">0.2</span>]])</span><br><span class="line">test_w_h_o = np.array([[<span class="number">0.3</span>],</span><br><span class="line">                       [<span class="number">-0.1</span>]])</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestMethods</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">##########</span></span><br><span class="line">    <span class="comment"># Unit tests for data loading</span></span><br><span class="line">    <span class="comment">##########</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_data_path</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># Test that file path to dataset has been unaltered</span></span><br><span class="line">        self.assertTrue(data_path.lower() == <span class="string">'bike-sharing-dataset/hour.csv'</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_data_loaded</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># Test that data frame loaded</span></span><br><span class="line">        self.assertTrue(isinstance(rides, pd.DataFrame))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">##########</span></span><br><span class="line">    <span class="comment"># Unit tests for network functionality</span></span><br><span class="line">    <span class="comment">##########</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_activation</span><span class="params">(self)</span>:</span></span><br><span class="line">        network = NeuralNetwork(<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0.5</span>)</span><br><span class="line">        <span class="comment"># Test that the activation function is a sigmoid</span></span><br><span class="line">        self.assertTrue(np.all(network.activation_function(<span class="number">0.5</span>) == <span class="number">1</span>/(<span class="number">1</span>+np.exp(<span class="number">-0.5</span>))))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_train</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># Test that weights are updated correctly on training</span></span><br><span class="line">        network = NeuralNetwork(<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0.5</span>)</span><br><span class="line">        network.weights_input_to_hidden = test_w_i_h.copy()</span><br><span class="line">        network.weights_hidden_to_output = test_w_h_o.copy()</span><br><span class="line">        </span><br><span class="line">        network.train(inputs, targets)</span><br><span class="line">        self.assertTrue(np.allclose(network.weights_hidden_to_output, </span><br><span class="line">                                    np.array([[ <span class="number">0.37275328</span>], </span><br><span class="line">                                              [<span class="number">-0.03172939</span>]])))</span><br><span class="line">        self.assertTrue(np.allclose(network.weights_input_to_hidden,</span><br><span class="line">                                    np.array([[ <span class="number">0.10562014</span>, <span class="number">-0.20185996</span>], </span><br><span class="line">                                              [<span class="number">0.39775194</span>, <span class="number">0.50074398</span>], </span><br><span class="line">                                              [<span class="number">-0.29887597</span>, <span class="number">0.19962801</span>]])))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_run</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># Test correctness of run method</span></span><br><span class="line">        network = NeuralNetwork(<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0.5</span>)</span><br><span class="line">        network.weights_input_to_hidden = test_w_i_h.copy()</span><br><span class="line">        network.weights_hidden_to_output = test_w_h_o.copy()</span><br><span class="line"></span><br><span class="line">        self.assertTrue(np.allclose(network.run(inputs), <span class="number">0.09998924</span>))</span><br><span class="line"></span><br><span class="line">suite = unittest.TestLoader().loadTestsFromModule(TestMethods())</span><br><span class="line">unittest.TextTestRunner().run(suite)</span><br></pre></td></tr></table></figure>
+<pre><code>.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.008s
+
+OK
+
+
+
+
+
+&lt;unittest.runner.TextTestResult run=5 errors=0 failures=0&gt;
+</code></pre><h2 id="训练网络"><a href="#训练网络" class="headerlink" title="训练网络"></a>训练网络</h2><p>现在你将设置网络的超参数。策略是设置的超参数使训练集上的错误很小但是数据不会过拟合。如果网络训练时间太长，或者有太多的隐藏节点，可能就会过于针对特定训练集，无法泛化到验证数据集。即当训练集的损失降低时，验证集的损失将开始增大。</p>
+<p>你还将采用随机梯度下降 (SGD) 方法训练网络。对于每次训练，都获取随机样本数据，而不是整个数据集。与普通梯度下降相比，训练次数要更多，但是每次时间更短。这样的话，网络训练效率更高。稍后你将详细了解 SGD。</p>
+<h3 id="选择迭代次数"><a href="#选择迭代次数" class="headerlink" title="选择迭代次数"></a>选择迭代次数</h3><p>也就是训练网络时从训练数据中抽样的批次数量。迭代次数越多，模型就与数据越拟合。但是，如果迭代次数太多，模型就无法很好地泛化到其他数据，这叫做过拟合。你需要选择一个使训练损失很低并且验证损失保持中等水平的数字。当你开始过拟合时，你会发现训练损失继续下降，但是验证损失开始上升。</p>
+<h3 id="选择学习速率"><a href="#选择学习速率" class="headerlink" title="选择学习速率"></a>选择学习速率</h3><p>速率可以调整权重更新幅度。如果速率太大，权重就会太大，导致网络无法与数据相拟合。建议从 0.1 开始。如果网络在与数据拟合时遇到问题，尝试降低学习速率。注意，学习速率越低，权重更新的步长就越小，神经网络收敛的时间就越长。</p>
+<h3 id="选择隐藏节点数量"><a href="#选择隐藏节点数量" class="headerlink" title="选择隐藏节点数量"></a>选择隐藏节点数量</h3><p>隐藏节点越多，模型的预测结果就越准确。尝试不同的隐藏节点的数量，看看对性能有何影响。你可以查看损失字典，寻找网络性能指标。如果隐藏单元的数量太少，那么模型就没有足够的空间进行学习，如果太多，则学习方向就有太多的选择。选择隐藏单元数量的技巧在于找到合适的平衡点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment">### Set the hyperparameters here ###</span></span><br><span class="line">iterations = <span class="number">2000</span></span><br><span class="line">learning_rate = <span class="number">0.7</span></span><br><span class="line">hidden_nodes = <span class="number">15</span></span><br><span class="line">output_nodes = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">N_i = train_features.shape[<span class="number">1</span>]</span><br><span class="line">network = NeuralNetwork(N_i, hidden_nodes, output_nodes, learning_rate)</span><br><span class="line"></span><br><span class="line">losses = &#123;<span class="string">'train'</span>:[], <span class="string">'validation'</span>:[]&#125;</span><br><span class="line"><span class="keyword">for</span> ii <span class="keyword">in</span> range(iterations):</span><br><span class="line">    <span class="comment"># Go through a random batch of 128 records from the training data set</span></span><br><span class="line">    batch = np.random.choice(train_features.index, size=<span class="number">128</span>)</span><br><span class="line">    X, y = train_features.ix[batch].values, train_targets.ix[batch][<span class="string">'cnt'</span>]</span><br><span class="line">                             </span><br><span class="line">    network.train(X, y)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Printing out the training progress</span></span><br><span class="line">    train_loss = MSE(network.run(train_features).T, train_targets[<span class="string">'cnt'</span>].values)</span><br><span class="line">    val_loss = MSE(network.run(val_features).T, val_targets[<span class="string">'cnt'</span>].values)</span><br><span class="line">    sys.stdout.write(<span class="string">"\rProgress: &#123;:2.1f&#125;"</span>.format(<span class="number">100</span> * ii/float(iterations)) \</span><br><span class="line">                     + <span class="string">"% ... Training loss: "</span> + str(train_loss)[:<span class="number">5</span>] \</span><br><span class="line">                     + <span class="string">" ... Validation loss: "</span> + str(val_loss)[:<span class="number">5</span>])</span><br><span class="line">    sys.stdout.flush()</span><br><span class="line">    </span><br><span class="line">    losses[<span class="string">'train'</span>].append(train_loss)</span><br><span class="line">    losses[<span class="string">'validation'</span>].append(val_loss)</span><br></pre></td></tr></table></figure>
+<pre><code>Progress: 100.0% ... Training loss: 0.092 ... Validation loss: 0.186
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(losses[<span class="string">'train'</span>], label=<span class="string">'Training loss'</span>)</span><br><span class="line">plt.plot(losses[<span class="string">'validation'</span>], label=<span class="string">'Validation loss'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">_ = plt.ylim()</span><br></pre></td></tr></table></figure>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15278475026241.jpg" alt=""></p>
+<h2 id="检查预测结果"><a href="#检查预测结果" class="headerlink" title="检查预测结果"></a>检查预测结果</h2><p>使用测试数据看看网络对数据建模的效果如何。如果完全错了，请确保网络中的每步都正确实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">mean, std = scaled_features[<span class="string">'cnt'</span>]</span><br><span class="line">predictions = network.run(test_features).T*std + mean</span><br><span class="line">ax.plot(predictions[<span class="number">0</span>], label=<span class="string">'Prediction'</span>)</span><br><span class="line">ax.plot((test_targets[<span class="string">'cnt'</span>]*std + mean).values, label=<span class="string">'Data'</span>)</span><br><span class="line">ax.set_xlim(right=len(predictions))</span><br><span class="line">ax.legend()</span><br><span class="line"></span><br><span class="line">dates = pd.to_datetime(rides.ix[test_data.index][<span class="string">'dteday'</span>])</span><br><span class="line">dates = dates.apply(<span class="keyword">lambda</span> d: d.strftime(<span class="string">'%b %d'</span>))</span><br><span class="line">ax.set_xticks(np.arange(len(dates))[<span class="number">12</span>::<span class="number">24</span>])</span><br><span class="line">_ = ax.set_xticklabels(dates[<span class="number">12</span>::<span class="number">24</span>], rotation=<span class="number">45</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15278475263318.jpg" alt=""></p>
+<h2 id="可选：思考下你的结果（我们不会评估这道题的答案）"><a href="#可选：思考下你的结果（我们不会评估这道题的答案）" class="headerlink" title="可选：思考下你的结果（我们不会评估这道题的答案）"></a>可选：思考下你的结果（我们不会评估这道题的答案）</h2><p>请针对你的结果回答以下问题。模型对数据的预测效果如何？哪里出现问题了？为何出现问题呢？</p>
+<blockquote>
+<p><strong>注意</strong>：你可以通过双击该单元编辑文本。如果想要预览文本，请按 Control + Enter</p>
+</blockquote>
+<h4 id="请将你的答案填写在下方"><a href="#请将你的答案填写在下方" class="headerlink" title="请将你的答案填写在下方"></a>请将你的答案填写在下方</h4><p>问题1:Dec 24 开始至Dec 28这四天的预测误差比较大的原因？</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/BF神经网络/" rel="tag"><i class="fa fa-tag"></i> BF神经网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/DL_BFNN.html" rel="next" title="BF神经网络（一）算法原理与实现">
+                <i class="fa fa-chevron-left"></i> BF神经网络（一）算法原理与实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description">机器学习</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BF神经网络预测共享单车使用情况"><span class="nav-number">1.</span> <span class="nav-text">BF神经网络预测共享单车使用情况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BF实现算法基础"><span class="nav-number">1.1.</span> <span class="nav-text">BF实现算法基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载和准备数据"><span class="nav-number">1.2.</span> <span class="nav-text">加载和准备数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据简介"><span class="nav-number">1.3.</span> <span class="nav-text">数据简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟变量（哑变量）"><span class="nav-number">1.3.1.</span> <span class="nav-text">虚拟变量（哑变量）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调整目标变量"><span class="nav-number">1.3.2.</span> <span class="nav-text">调整目标变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将数据拆分为训练、测试和验证数据集"><span class="nav-number">1.3.3.</span> <span class="nav-text">将数据拆分为训练、测试和验证数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始构建网络"><span class="nav-number">1.4.</span> <span class="nav-text">开始构建网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单元测试"><span class="nav-number">1.5.</span> <span class="nav-text">单元测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练网络"><span class="nav-number">1.6.</span> <span class="nav-text">训练网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择迭代次数"><span class="nav-number">1.6.1.</span> <span class="nav-text">选择迭代次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择学习速率"><span class="nav-number">1.6.2.</span> <span class="nav-text">选择学习速率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择隐藏节点数量"><span class="nav-number">1.6.3.</span> <span class="nav-text">选择隐藏节点数量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查预测结果"><span class="nav-number">1.7.</span> <span class="nav-text">检查预测结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可选：思考下你的结果（我们不会评估这道题的答案）"><span class="nav-number">1.8.</span> <span class="nav-text">可选：思考下你的结果（我们不会评估这道题的答案）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#请将你的答案填写在下方"><span class="nav-number">1.8.0.1.</span> <span class="nav-text">请将你的答案填写在下方</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

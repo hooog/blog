@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/BFNN.html</loc>
+    <lastmod>2018-06-01T14:45:35.230Z</lastmod>
+    <data>
+        <display>
+        <title>BF神经网络（二）预测共享单车使用情况</title>
+        <pubTime>2018-06-01T04:20:21.000Z</pubTime>
+        
+        <tag>BF神经网络</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="http://www.ihoge.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/DL_BFNN.html</loc>
+    <lastmod>2018-06-01T14:44:40.432Z</lastmod>
+    <data>
+        <display>
+        <title>BF神经网络（一）算法原理与实现</title>
+        <pubTime>2018-05-30T04:20:21.000Z</pubTime>
+        
+        <tag>BF神经网络</tag>
+         
+         
+           
+             
+              <breadCrumb title="深度学习" url="http://www.ihoge.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/clustering.html</loc>
     <lastmod>2018-05-28T08:01:37.166Z</lastmod>
     <data>
