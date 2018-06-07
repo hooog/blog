@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15283834240973.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15283834482119.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15283834792298.jpg">
-<meta property="og:updated_time" content="2018-06-07T15:01:57.178Z">
+<meta property="og:updated_time" content="2018-06-07T15:24:52.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keras初探">
 <meta name="twitter:description" content="Keras简单示例Keras 层就像神经网络层。有全连接层、最大池化层和激活层。你可以使用模型的 add() 函数添加层。例如，简单的模型可以如下所示： 1234567891011121314151617from keras.models import Sequentialfrom keras.layers.core import Dense, Activation, Flatten#创建序列模">
@@ -511,6 +511,15 @@ Label:
 <li>损失函数 (Loss function)：categorical_crossentropy，mean_squared_error</li>
 <li>优化器 (Optimizer)：rmsprop，adam，ada</li>
 </ul>
+<p><strong>几种优化器简介</strong></p>
+<p><strong>SGD</strong><br>这是随机梯度下降。它使用了以下参数：</p>
+<ul>
+<li>学习速率</li>
+<li>动量（获取前几步的加权平均值，以便获得动量而不至于陷在局部最低点）。</li>
+<li>Nesterov 动量（当最接近解决方案时，它会减缓梯度）。</li>
+</ul>
+<p><strong>Adam</strong><br>Adam (Adaptive Moment Estimation) 使用更复杂的指数衰减，不仅仅会考虑平均值（第一个动量），并且会考虑前几步的方差（第二个动量）。</p>
+<p><strong>RMSProp</strong><br>RMSProp (RMS 表示均方根误差）通过除以按指数衰减的平方梯度均值来减小学习速率。</p>
 
       
     </div>
