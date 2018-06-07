@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="keras," />
 
 
 
@@ -83,17 +83,18 @@
 
 
 
-<meta name="description" content="方式一1、这里需要删除next目录及根目录下的.git,（或者修改添加你不需要上传到远程的部分）同时删除bolg根目录下的.gitignore。这里我选择在主目录做了备份。 2、现在回到bolg根目录分别执行：  git init  初始化本地仓库 git checkout -b hexo 创建并切换hexo分支 git remote add origin https://github.com/">
+<meta name="description" content="使用 Keras 分析 IMDB 电影数据1234567891011# Importsimport numpy as npimport kerasfrom keras.datasets import imdbfrom keras.models import Sequentialfrom keras.layers import Dense, Dropout, Activationfrom kera">
+<meta name="keywords" content="keras">
 <meta property="og:type" content="article">
-<meta property="og:title" content="github 创建分支位作为云端备份解决hexo博客多PC间同步的问题">
-<meta property="og:url" content="http://www.ihoge.cn/2018/githubhexos.html">
+<meta property="og:title" content="使用 Keras 分析 IMDB 电影数据">
+<meta property="og:url" content="http://www.ihoge.cn/2018/Keras2.html">
 <meta property="og:site_name" content="Student">
-<meta property="og:description" content="方式一1、这里需要删除next目录及根目录下的.git,（或者修改添加你不需要上传到远程的部分）同时删除bolg根目录下的.gitignore。这里我选择在主目录做了备份。 2、现在回到bolg根目录分别执行：  git init  初始化本地仓库 git checkout -b hexo 创建并切换hexo分支 git remote add origin https://github.com/">
+<meta property="og:description" content="使用 Keras 分析 IMDB 电影数据1234567891011# Importsimport numpy as npimport kerasfrom keras.datasets import imdbfrom keras.models import Sequentialfrom keras.layers import Dense, Dropout, Activationfrom kera">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-17T12:17:26.296Z">
+<meta property="og:updated_time" content="2018-06-07T16:20:09.650Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="github 创建分支位作为云端备份解决hexo博客多PC间同步的问题">
-<meta name="twitter:description" content="方式一1、这里需要删除next目录及根目录下的.git,（或者修改添加你不需要上传到远程的部分）同时删除bolg根目录下的.gitignore。这里我选择在主目录做了备份。 2、现在回到bolg根目录分别执行：  git init  初始化本地仓库 git checkout -b hexo 创建并切换hexo分支 git remote add origin https://github.com/">
+<meta name="twitter:title" content="使用 Keras 分析 IMDB 电影数据">
+<meta name="twitter:description" content="使用 Keras 分析 IMDB 电影数据1234567891011# Importsimport numpy as npimport kerasfrom keras.datasets import imdbfrom keras.models import Sequentialfrom keras.layers import Dense, Dropout, Activationfrom kera">
 
 
 
@@ -123,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/githubhexos.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/Keras2.html"/>
 
 
 
 
 
-  <title>github 创建分支位作为云端备份解决hexo博客多PC间同步的问题 | Student</title>
+  <title>使用 Keras 分析 IMDB 电影数据 | Student</title>
   
 
 
@@ -266,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/githubhexos.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/Keras2.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -283,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">github 创建分支位作为云端备份解决hexo博客多PC间同步的问题</h1>
+          <h1 class="post-title" itemprop="name headline">使用 Keras 分析 IMDB 电影数据</h1>
         
 
         <div class="post-meta">
@@ -295,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T17:05:59+08:00">
-                2018-04-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T12:20:21+08:00">
+                2018-06-07
               </time>
             
 
@@ -318,8 +319,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
                   </a>
                 </span>
 
@@ -361,29 +362,56 @@
 
       
         <a id="more"></a>
-<h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><p>1、这里需要删除next目录及根目录下的<code>.git</code>,（或者修改添加你不需要上传到远程的部分）同时删除bolg根目录下的<code>.gitignore</code>。这里我选择在主目录做了备份。</p>
-<p>2、现在回到bolg根目录分别执行：</p>
-<ul>
-<li><code>git init</code>  初始化本地仓库</li>
-<li><code>git checkout -b hexo</code> 创建并切换hexo分支</li>
-<li><code>git remote add origin https://github.com/hooog/hooog.github.io.git</code>给hexo分支关联远程映射</li>
-<li><code>git add .</code>  添加blog目录下所有文件，注意有个<code>.</code>（<code>.gitignore</code>声明过的文件不包含在内)</li>
-<li><code>git commit -m &#39;添加描述&#39;</code></li>
-<li><code>git push origin hexo</code> 将hexo分支上传到远程仓库 </li>
-<li>如果加错了的话执行<code>git rm -r --cached .</code><br>到这里，云端备份就完成了。<br>同理也可以把分支备份到<code>Coding</code>的私密仓库上。（如果源代码涉及保密信息的话）</li>
-</ul>
-<p>3、将远程仓库的内容拷贝到新<code>PC</code>端端本地：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote add origin https://github.com/hooog/hooog.github.io.git</span><br><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br></pre></td></tr></table></figure></p>
-<p><code>fetch</code>是将云端所有内容拉取下来。<code>reset</code>则是不做任何合并处理，强制将本地内容指向刚刚同步下来的云端内容（正常pull的话需要考虑不少冲突的问题，比较麻烦。）</p>
-<p>4、更新文章后的同步操作：<br>假设在B电脑写完了文章，也<code>hexo d -g</code>发布成功，这时候需要将新文章的md文件更新上去。</p>
-<p><code>git add .</code></p>
-<p>这时候可以使用<code>git status</code>查看下状态，一般只显示刚刚更改过的文件状态。</p>
-<p>然后执行：<br><code>git commit -m &quot;更新信息&quot;</code><br><code>git push origin hexo</code></p>
-<p>在回到A电脑上的时候，只需要<br><code>git pull</code><br>即可同步更新</p>
-<p>5、日常改动<br>平时我们对源文件有修改的时候记得先pull一遍代码，再将代码push到Hexo分支，就和日常的使用git一样~<br>依次执行：<br><code>git add .</code><br><code>git commit -m “…”</code><br><code>git push origin hexo</code>指令将改动推送到GitHub（此时当前分支应为hexo）；然后执行：<br><code>hexo g -d</code>发布网站到master分支上。</p>
-<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><p>把Hexo的源码备份到Github分支里面，思路就是上传到分支里存储，修改本地的时候先上传存储，再发布。更换电脑的时候再下载下来源文件</p>
-<p>打开git-bash<br><code>git init</code><br><code>git remote add origin git@github.com:username/username.github.io.git</code><br><code>git add .</code><br><code>git commit -m &quot;blog&quot;</code><br><code>git push origin master:hexo</code></p>
-<p>现在你会发现github你的博客仓库已经有了一个新分支<code>hexo</code>，我们的备份工作完成。后续以后，本地写好博文之后，可以先执行<br><code>git add .</code><br><code>git commit -m &quot;blog&quot;</code><br><code>git push origin master:hexo</code>进行备份，然后<br><code>hexo d -g</code>进行更新静态文件。这里推荐先进行备份，因为万一更新网站之后不小心丢失了源文件，就又得重新再来了。</p>
-
+<h1 id="使用-Keras-分析-IMDB-电影数据"><a href="#使用-Keras-分析-IMDB-电影数据" class="headerlink" title="使用 Keras 分析 IMDB 电影数据"></a>使用 Keras 分析 IMDB 电影数据</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Imports</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> keras</span><br><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> imdb</span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense, Dropout, Activation</span><br><span class="line"><span class="keyword">from</span> keras.preprocessing.text <span class="keyword">import</span> Tokenizer</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="1-加载数据"><a href="#1-加载数据" class="headerlink" title="1. 加载数据"></a>1. 加载数据</h2><p>该数据集预先加载了 Keras，所以一个简单的命令就会帮助我们划分训练和测试数据。 这里有一个我们想看多少单词的参数。 这里已将它设置为1000，也可以随时尝试设置为其他数字。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Loading the data (it's preloaded in Keras)</span></span><br><span class="line"><span class="comment"># 这里下载数据集需要翻墙</span></span><br><span class="line">(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">print(x_train.shape)</span><br><span class="line">print(x_test.shape)</span><br><span class="line"></span><br><span class="line">print(y_train.shape)</span><br><span class="line">print(y_test.shape)</span><br></pre></td></tr></table></figure>
+<pre><code>(25000,)
+(25000,)
+</code></pre><h2 id="2-检查数据"><a href="#2-检查数据" class="headerlink" title="2. 检查数据"></a>2. 检查数据</h2><p>请注意，数据已经过预处理，其中所有单词都包含数字，评论作为向量与评论中包含的单词一起出现。 例如，如果单词’the’是我们词典中的第一个单词，并且评论包含单词’the’，那么在相应的向量中有 1。</p>
+<p>输出结果是 1 和 0 的向量，其中 1 表示正面评论，0 是负面评论。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(x_train[<span class="number">0</span>])</span><br><span class="line">print(y_train[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>[1, 14, 22, 16, 43, 530, 973, 2, 2, 65, 458, 2, 66, 2, 4, 173, 36, 256, 5, 25, 100, 43, 838, 112, 50, 670, 2, 9, 35, 480, 284, 5, 150, 4, 172, 112, 167, 2, 336, 385, 39, 4, 172, 2, 2, 17, 546, 38, 13, 447, 4, 192, 50, 16, 6, 147, 2, 19, 14, 22, 4, 2, 2, 469, 4, 22, 71, 87, 12, 16, 43, 530, 38, 76, 15, 13, 2, 4, 22, 17, 515, 17, 12, 16, 626, 18, 2, 5, 62, 386, 12, 8, 316, 8, 106, 5, 4, 2, 2, 16, 480, 66, 2, 33, 4, 130, 12, 16, 38, 619, 5, 25, 124, 51, 36, 135, 48, 25, 2, 33, 6, 22, 12, 215, 28, 77, 52, 5, 14, 407, 16, 82, 2, 8, 4, 107, 117, 2, 15, 256, 4, 2, 7, 2, 5, 723, 36, 71, 43, 530, 476, 26, 400, 317, 46, 7, 4, 2, 2, 13, 104, 88, 4, 381, 15, 297, 98, 32, 2, 56, 26, 141, 6, 194, 2, 18, 4, 226, 22, 21, 134, 476, 26, 480, 5, 144, 30, 2, 18, 51, 36, 28, 224, 92, 25, 104, 4, 226, 65, 16, 38, 2, 88, 12, 16, 283, 5, 16, 2, 113, 103, 32, 15, 16, 2, 19, 178, 32]
+1
+</code></pre><h2 id="3-输出的-One-hot-编码"><a href="#3-输出的-One-hot-编码" class="headerlink" title="3. 输出的 One-hot 编码"></a>3. 输出的 One-hot 编码</h2><p>在这里，我们将输入向量转换为 (0,1)-向量。 例如，如果预处理的向量包含数字 14，则在处理的向量中，第 14 个输入将是 1。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># One-hot encoding the output into vector mode, each of length 1000</span></span><br><span class="line">tokenizer = Tokenizer(num_words=<span class="number">1000</span>)</span><br><span class="line">X_train = tokenizer.sequences_to_matrix(x_train, mode=<span class="string">'binary'</span>)</span><br><span class="line">X_test = tokenizer.sequences_to_matrix(x_test, mode=<span class="string">'binary'</span>)</span><br><span class="line"><span class="comment"># print(x_train[0])</span></span><br></pre></td></tr></table></figure>
+<p>同时我们将对输出进行 one-hot 编码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_classes = <span class="number">2</span></span><br><span class="line">y_train = keras.utils.to_categorical(y_train, num_classes)</span><br><span class="line">y_test = keras.utils.to_categorical(y_test, num_classes)</span><br></pre></td></tr></table></figure>
+<h2 id="4-模型构建"><a href="#4-模型构建" class="headerlink" title="4. 模型构建"></a>4. 模型构建</h2><p>使用 sequential 在这里构建模型。 可以随意尝试不同的层和大小！ 此外，你可以尝试添加 dropout 层以减少过拟合。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train.shape</span><br></pre></td></tr></table></figure>
+<pre><code>(25000, 1000)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Build the model architecture</span></span><br><span class="line">model = Sequential()</span><br><span class="line"></span><br><span class="line">model.add(Dense(<span class="number">128</span>, activation=<span class="string">'softmax'</span>, input_dim=<span class="number">1000</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.5</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># model.add(Dense(64, activation='softmax'))</span></span><br><span class="line"><span class="comment"># model.add(Dropout(0.2))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># model.add(Dense(32, activation='softmax'))</span></span><br><span class="line"><span class="comment"># model.add(Dropout(0.2))</span></span><br><span class="line"></span><br><span class="line">model.add(Dense(<span class="number">8</span>, activation=<span class="string">'softsign'</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.1</span>))</span><br><span class="line"></span><br><span class="line">model.add(Dense(<span class="number">2</span>, activation=<span class="string">'softmax'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Compile the model using a loss function and an optimizer.</span></span><br><span class="line"></span><br><span class="line">model.compile(loss=<span class="string">'mean_squared_error'</span>, </span><br><span class="line">              optimizer=<span class="string">'Adam'</span>, metrics=[<span class="string">'accuracy'</span>])</span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
+<pre><code>_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_97 (Dense)             (None, 128)               128128    
+_________________________________________________________________
+dropout_60 (Dropout)         (None, 128)               0         
+_________________________________________________________________
+dense_98 (Dense)             (None, 8)                 1032      
+_________________________________________________________________
+dropout_61 (Dropout)         (None, 8)                 0         
+_________________________________________________________________
+dense_99 (Dense)             (None, 2)                 18        
+=================================================================
+Total params: 129,178
+Trainable params: 129,178
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre><h2 id="5-训练模型"><a href="#5-训练模型" class="headerlink" title="5. 训练模型"></a>5. 训练模型</h2><p>运行模型。 你可以尝试不同的 batch_size 和 epoch 数量！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.fit(X_train, y_train, epochs=<span class="number">30</span>, batch_size=<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Epoch 1/30
+25000/25000 [==============================] - 1s 45us/step - loss: 0.2456 - acc: 0.6180
+Epoch 2/30
+25000/25000 [==============================] - 0s 13us/step - loss: 0.0914 - acc: 0.8818
+Epoch 29/30
+25000/25000 [==============================] - 0s 15us/step - loss: 0.0909 - acc: 0.8830
+Epoch 30/30
+25000/25000 [==============================] - 0s 17us/step - loss: 0.0907 - acc: 0.8834
+</code></pre><h2 id="6-评估模型"><a href="#6-评估模型" class="headerlink" title="6. 评估模型"></a>6. 评估模型</h2><p>你可以在测试集上评估模型，这将为你提供模型的准确性。你得出的结果可以大于 85% 吗？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">train_score = model.evaluate(X_train, y_train, verbose=<span class="number">0</span>)</span><br><span class="line">test_score = model.evaluate(X_test, y_test, verbose=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"train_Accuracy: "</span>, train_score[<span class="number">1</span>])</span><br><span class="line">print(<span class="string">"test_Accuracy: "</span>, test_score[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>train_Accuracy:  0.90024
+test_Accuracy:  0.86136
+</code></pre>
       
     </div>
     
@@ -398,6 +426,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/keras/" rel="tag"><i class="fa fa-tag"></i> keras</a>
+          
+        </div>
+      
 
       
       
@@ -407,8 +441,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/githubhexocodingbaidu.html" rel="next" title="使用Github和Coding共同托管hexo博客解决无法被百度收录的问题">
-                <i class="fa fa-chevron-left"></i> 使用Github和Coding共同托管hexo博客解决无法被百度收录的问题
+              <a href="/2018/Keras.html" rel="next" title="Keras初探">
+                <i class="fa fa-chevron-left"></i> Keras初探
               </a>
             
           </div>
@@ -416,10 +450,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/Logistic-regression.html" rel="prev" title="scikit-learn逻辑回归">
-                scikit-learn逻辑回归 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -591,7 +621,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方式一"><span class="nav-number">1.</span> <span class="nav-text">方式一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方式二"><span class="nav-number">2.</span> <span class="nav-text">方式二</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-Keras-分析-IMDB-电影数据"><span class="nav-number">1.</span> <span class="nav-text">使用 Keras 分析 IMDB 电影数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-加载数据"><span class="nav-number">1.1.</span> <span class="nav-text">1. 加载数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-检查数据"><span class="nav-number">1.2.</span> <span class="nav-text">2. 检查数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-输出的-One-hot-编码"><span class="nav-number">1.3.</span> <span class="nav-text">3. 输出的 One-hot 编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-模型构建"><span class="nav-number">1.4.</span> <span class="nav-text">4. 模型构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-训练模型"><span class="nav-number">1.5.</span> <span class="nav-text">5. 训练模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-评估模型"><span class="nav-number">1.6.</span> <span class="nav-text">6. 评估模型</span></a></li></ol></li></ol></div>
             
 
           </div>
