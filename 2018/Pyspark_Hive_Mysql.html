@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="pyspark," />
 
 
 
@@ -83,17 +83,18 @@
 
 
 
-<meta name="description" content="如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？这是知乎上某大神的解释： 学习很重要的是能将纷繁复杂的信息进行归类和抽象。对应到大数据技术体系，虽然各种技术百花齐放，层出不穷，但大数据技术本质上无非解决4个核心问题：  存储，海量的数据怎样有效的存储？主要包括hdfs、Kafka； 计算，海量的数据怎样快速计算？主要包括MapReduce、Spark、F">
+<meta name="description" content="一、前期准备这里默认spark版本支持hive且与hadoop本本相互兼容。这里使用的版本是：  Hadoop 2.7.5 Spark 2.3 Anaconda 3.5 Hive 1.2  1）安装mysql 2）创建hive用户并赋予权限 12345678create user &apos;hive&apos;@&apos;*&apos; identified by &apos;hive&apos;;# 这里允许所有用户连接可以以hive身份登陆mys">
+<meta name="keywords" content="pyspark">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？">
-<meta property="og:url" content="http://www.ihoge.cn/2018/hadoop.html">
+<meta property="og:title" content="Pyspark连接读取Hive和Mysql数据库">
+<meta property="og:url" content="http://www.ihoge.cn/2018/Pyspark_Hive_Mysql.html">
 <meta property="og:site_name" content="Student">
-<meta property="og:description" content="如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？这是知乎上某大神的解释： 学习很重要的是能将纷繁复杂的信息进行归类和抽象。对应到大数据技术体系，虽然各种技术百花齐放，层出不穷，但大数据技术本质上无非解决4个核心问题：  存储，海量的数据怎样有效的存储？主要包括hdfs、Kafka； 计算，海量的数据怎样快速计算？主要包括MapReduce、Spark、F">
+<meta property="og:description" content="一、前期准备这里默认spark版本支持hive且与hadoop本本相互兼容。这里使用的版本是：  Hadoop 2.7.5 Spark 2.3 Anaconda 3.5 Hive 1.2  1）安装mysql 2）创建hive用户并赋予权限 12345678create user &apos;hive&apos;@&apos;*&apos; identified by &apos;hive&apos;;# 这里允许所有用户连接可以以hive身份登陆mys">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-17T12:18:27.039Z">
+<meta property="og:updated_time" content="2018-06-09T08:12:42.948Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？">
-<meta name="twitter:description" content="如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？这是知乎上某大神的解释： 学习很重要的是能将纷繁复杂的信息进行归类和抽象。对应到大数据技术体系，虽然各种技术百花齐放，层出不穷，但大数据技术本质上无非解决4个核心问题：  存储，海量的数据怎样有效的存储？主要包括hdfs、Kafka； 计算，海量的数据怎样快速计算？主要包括MapReduce、Spark、F">
+<meta name="twitter:title" content="Pyspark连接读取Hive和Mysql数据库">
+<meta name="twitter:description" content="一、前期准备这里默认spark版本支持hive且与hadoop本本相互兼容。这里使用的版本是：  Hadoop 2.7.5 Spark 2.3 Anaconda 3.5 Hive 1.2  1）安装mysql 2）创建hive用户并赋予权限 12345678create user &apos;hive&apos;@&apos;*&apos; identified by &apos;hive&apos;;# 这里允许所有用户连接可以以hive身份登陆mys">
 
 
 
@@ -123,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/hadoop.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/Pyspark_Hive_Mysql.html"/>
 
 
 
 
 
-  <title>如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？ | Student</title>
+  <title>Pyspark连接读取Hive和Mysql数据库 | Student</title>
   
 
 
@@ -266,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/hadoop.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/Pyspark_Hive_Mysql.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -283,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？</h1>
+          <h1 class="post-title" itemprop="name headline">Pyspark连接读取Hive和Mysql数据库</h1>
         
 
         <div class="post-meta">
@@ -295,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T00:28:59+08:00">
-                2018-03-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-09T15:59:21+08:00">
+                2018-06-09
               </time>
             
 
@@ -318,8 +319,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
                   </a>
                 </span>
 
@@ -361,35 +362,52 @@
 
       
         <a id="more"></a>
-<p>如何用形象的比喻描述大数据的技术生态？Hadoop、Hive、Spark 之间是什么关系？<br>这是知乎上某大神的解释：</p>
-<p><strong>学习很重要的是能将纷繁复杂的信息进行归类和抽象。</strong><br>对应到大数据技术体系，虽然各种技术百花齐放，层出不穷，但大数据技术本质上无非解决4个核心问题：</p>
+<h2 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h2><p>这里默认spark版本支持hive且与hadoop本本相互兼容。<br>这里使用的版本是：</p>
 <ul>
-<li>存储，海量的数据怎样有效的存储？主要包括hdfs、Kafka；</li>
-<li>计算，海量的数据怎样快速计算？主要包括MapReduce、Spark、Flink等；</li>
-<li>查询，海量数据怎样快速查询？主要为Nosql和Olap，Nosql主要包括Hbase、 Cassandra 等，其中olap包括kylin、impla等，其中Nosql主要解决随机查询，Olap技术主要解决关联查询；挖掘，海量数据怎样挖掘出隐藏的知识？也就是当前火热的机器学习和深度学习等技术，包括TensorFlow、caffe、mahout等；</li>
+<li>Hadoop 2.7.5</li>
+<li>Spark 2.3</li>
+<li>Anaconda 3.5</li>
+<li>Hive 1.2</li>
 </ul>
-<p><strong>大数据技术生态其实是一个江湖….</strong><br>在一个夜黑风高的晚上，江湖第一大帮会Google三本阵法修炼秘籍流出，大数据技术江湖从此纷争四起、永无宁日…<br>这三本秘籍分别为：</p>
-<ul>
-<li>《Google file system》：论述了怎样借助普通机器有效的存储海量的大数据；</li>
-<li>《Google MapReduce》：论述了怎样快速计算海量的数据；</li>
-<li>《Google BigTable》：论述了怎样实现海量数据的快速查询；</li>
-</ul>
-<p><strong>以上三篇论文秘籍是大数据入门的最好文章，通俗易懂，先看此三篇再看其它技术；</strong></p>
-<p>在Google三大秘籍流出之后，江湖上，致力于武学开放的apache根据这三本秘籍分别研究出了对应的武学巨著《hadoop》，并开放给各大门派研习。<br>Hadoop包括三大部分，分别是hdfs、MapReduce和hbase：</p>
-<ul>
-<li>hdfs解决大数据的存储问题。</li>
-<li>mapreduce解决大数据的计算问题。</li>
-<li>hbase解决大数据量的查询问题。</li>
-</ul>
-<p>之后，在各大门派的支持下，Hadoop不断衍生和进化各种分支流派，其中最激烈的当属计算技术，其次是查询技术。存储技术基本无太多变化，hdfs一统天下。以下为大概的演进：</p>
-<ul>
-<li>1，传统数据仓库派说你mapreduce修炼太复杂，老子不会编程，老子以前用sql吃遍天下，为了将这拨人收入门下，并降低大数据修炼难度，遂出了hive，pig、impla等SQL ON Hadoop的简易修炼秘籍；</li>
-<li>2，伯克利派说你MapReduce只重招数，内力无法施展，且不同的场景需要修炼不同的技术，太过复杂，于是推出基于内力（内存）的《Spark》，意图解决所有大数据计算问题。</li>
-<li>3，流式计算相关门派说你hadoop只能憋大招（批量计算），太麻烦，于是出了SparkStreaming、Storm，S4等流式计算技术，能够实现数据一来就即时计算。</li>
-<li>4，apache看各大门派纷争四起，推出flink，想一统流计算和批量计算的修炼；</li>
-</ul>
-<p>以上，如有帮助，别忘了点个赞，谢谢</p>
-<p>作者：有点文<br>链接：<a href="https://www.zhihu.com/question/27974418/answer/156227565" target="_blank" rel="noopener">https://www.zhihu.com/question/27974418/answer/156227565</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>1）安装mysql</p>
+<p>2）创建hive用户并赋予权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create user 'hive'@'*' identified by 'hive';</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里允许所有用户连接可以以hive身份登陆mysql，并赋予hive用户操作所有数据的权限。下面读写mysql时候需要这个权限</span></span><br><span class="line">grant all privileges on *.* to 'hive'@'%' identified by 'hive';</span><br><span class="line"></span><br><span class="line">grant all privileges on *.* to 'root'@'%' identified by '1';</span><br><span class="line"></span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p>3）修改mysql相关配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. 添加以下内容，目的是增加等待时常，避免因默认连接时间较短造成的连接失败</span></span><br><span class="line">[mysqld]</span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">wait_timeout=86400</span><br><span class="line">interactive_timeout=7200</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 修改一下配置，目的是允许所有IP访问本地mysql，这个很重要否则只能通过locaohost访问</span></span><br><span class="line"></span><br><span class="line">bind-address            = 0.0.0.0</span><br></pre></td></tr></table></figure>
+<p>4）配置hive-site.xml文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</span><br><span class="line">&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>JDBC connect string for a JDBC metastore<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Driver class name for a JDBC metastore<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>username to use against metastore database<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>password to use against metastore database<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.quorum<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>master,slave1,slave2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>5）初始化hive元数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schematool -initSchema -dbType mysql</span><br></pre></td></tr></table></figure>
+<p>6）将mysql驱动器分别拷贝到<code>hive/lib</code>和<code>spark/jars/</code></p>
+<p>7）将<code>hive/conf/hive-site.xml</code>拷贝到<code>spark/conf</code></p>
+<h2 id="二、Pyspark读写Hive数据库"><a href="#二、Pyspark读写Hive数据库" class="headerlink" title="二、Pyspark读写Hive数据库"></a>二、Pyspark读写Hive数据库</h2><p><strong>初始化实例</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> HiveContext</span><br><span class="line"></span><br><span class="line">hive = HiveContext(sc)</span><br></pre></td></tr></table></figure>
+<p><strong>读取Hive数据库</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">st_ds = hive.sql(<span class="string">"select * from sparktest.student limit 5"</span>)</span><br><span class="line">st_ds.show()</span><br></pre></td></tr></table></figure>
+<pre><code>+---+-------+------+---+
+| id|   name|gender|age|
++---+-------+------+---+
+|  1|Xueqian|     F| 23|
+|  1|Xueqian|     F| 23|
+|  1|Xueqian|     F| 23|
+|  1|Xueqian|     F| 23|
+|  1|Xueqian|     F| 23|
++---+-------+------+---+
+</code></pre><p><strong>写入Hive数据库</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">st_ds.createTempView(<span class="string">"test"</span>)</span><br><span class="line">hive.sql(<span class="string">"insert into sparktest.student select * from test"</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>DataFrame[]
+</code></pre><h2 id="三、Pyspark-读写Mysql数据库"><a href="#三、Pyspark-读写Mysql数据库" class="headerlink" title="三、Pyspark 读写Mysql数据库"></a>三、Pyspark 读写Mysql数据库</h2><p>疑问：当pyspark 以本地模式启动时可以正常读取mysql，以yarn-client模式启动时无法读取mysql数据库</p>
+<p>解决：初始化连接驱动时使用<code>jdbc:mysql://master:3306</code>即可，前提是修改mysql配置<code>bind-address = 0.0.0.0</code></p>
+<p><strong>读取Mysql数据库</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql_df = spark.read.format(<span class="string">'jdbc'</span>).options(url=<span class="string">'jdbc:mysql://master:3306/hive'</span>,</span><br><span class="line">                                             dbtable=<span class="string">'VERSION'</span>, user=<span class="string">'hive'</span>, </span><br><span class="line">                                             password=<span class="string">'hive'</span>).load()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_df.show(truncate=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>+------+--------------+---------------------------------------+
+|VER_ID|SCHEMA_VERSION|VERSION_COMMENT                        |
++------+--------------+---------------------------------------+
+|1     |1.2.0         |Set by MetaStore hadoop@192.168.221.138|
++------+--------------+---------------------------------------+
+</code></pre><p><strong>写入Mysql数据库</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这里使用上面hive读取的数据</span></span><br><span class="line">st_ds.write.jdbc(<span class="string">"jdbc:mysql://master:3306/test?user=hive&amp;password=hive"</span>,<span class="string">"t1"</span>, <span class="string">"overwrite"</span>)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -405,6 +423,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/pyspark/" rel="tag"><i class="fa fa-tag"></i> pyspark</a>
+          
+        </div>
+      
 
       
       
@@ -414,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/hivewebhui.html" rel="next" title="Hive-2.2.0启动webui端口">
-                <i class="fa fa-chevron-left"></i> Hive-2.2.0启动webui端口
+              <a href="/2018/Keras2.html" rel="next" title="使用 Keras 分析 IMDB 电影数据">
+                <i class="fa fa-chevron-left"></i> 使用 Keras 分析 IMDB 电影数据
               </a>
             
           </div>
@@ -423,10 +447,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/sklearn1.html" rel="prev" title="支持向量机、学习曲线、查准率和召回率">
-                支持向量机、学习曲线、查准率和召回率 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -489,8 +509,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -579,6 +608,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前期准备"><span class="nav-number">1.</span> <span class="nav-text">一、前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Pyspark读写Hive数据库"><span class="nav-number">2.</span> <span class="nav-text">二、Pyspark读写Hive数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Pyspark-读写Mysql数据库"><span class="nav-number">3.</span> <span class="nav-text">三、Pyspark 读写Mysql数据库</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

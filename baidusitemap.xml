@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/Pyspark_Hive_Mysql.html</loc>
+    <lastmod>2018-06-09T08:12:42.948Z</lastmod>
+    <data>
+        <display>
+        <title>Pyspark连接读取Hive和Mysql数据库</title>
+        <pubTime>2018-06-09T07:59:21.000Z</pubTime>
+        
+        <tag>pyspark</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spark" url="http://www.ihoge.cn/categories/Spark/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/Keras2.html</loc>
     <lastmod>2018-06-07T16:20:09.650Z</lastmod>
     <data>
