@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="机器学习——李烨," />
 
 
 
@@ -83,26 +83,23 @@
 
 
 
-<meta name="description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
+<meta name="description" content="第03课：如何学习“机器学习”学习“机器学习”这件事，我走过很长的一段弯路。有一些心得、体会和方法，在此和大家分享。  以模型为驱动，了解“机器学习”的本质本课力图引导大家以模型为驱动，进行学习。 我选择了几种经典模型（例如：线性回归，逻辑回归，决策树，支持向量机，条件随机场，K 均值等），作为入门的进阶。 初次学习模型，不必贪多。但就这些选定的模型，一定要搞清楚其问题域、模型函数、目标函数、训">
+<meta name="keywords" content="机器学习——李烨">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Strutured Streaming(Spark 2.3)">
-<meta property="og:url" content="http://www.ihoge.cn/2018/StructuredStreaming.html">
+<meta property="og:title" content="为什么要学原理和公式推导">
+<meta property="og:url" content="http://www.ihoge.cn/2018/ML03.html">
 <meta property="og:site_name" content="Student">
-<meta property="og:description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
+<meta property="og:description" content="第03课：如何学习“机器学习”学习“机器学习”这件事，我走过很长的一段弯路。有一些心得、体会和方法，在此和大家分享。  以模型为驱动，了解“机器学习”的本质本课力图引导大家以模型为驱动，进行学习。 我选择了几种经典模型（例如：线性回归，逻辑回归，决策树，支持向量机，条件随机场，K 均值等），作为入门的进阶。 初次学习模型，不必贪多。但就这些选定的模型，一定要搞清楚其问题域、模型函数、目标函数、训">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241491220257.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241495217055.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241175216530.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241175635666.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241453518177.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241453673148.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241457085725.jpg">
-<meta property="og:updated_time" content="2018-05-17T12:12:27.498Z">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286224561131.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286225343498.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286226706381.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286227671484.jpg">
+<meta property="og:updated_time" content="2018-06-10T09:47:21.753Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Strutured Streaming(Spark 2.3)">
-<meta name="twitter:description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
-<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg">
+<meta name="twitter:title" content="为什么要学原理和公式推导">
+<meta name="twitter:description" content="第03课：如何学习“机器学习”学习“机器学习”这件事，我走过很长的一段弯路。有一些心得、体会和方法，在此和大家分享。  以模型为驱动，了解“机器学习”的本质本课力图引导大家以模型为驱动，进行学习。 我选择了几种经典模型（例如：线性回归，逻辑回归，决策树，支持向量机，条件随机场，K 均值等），作为入门的进阶。 初次学习模型，不必贪多。但就这些选定的模型，一定要搞清楚其问题域、模型函数、目标函数、训">
+<meta name="twitter:image" content="http://www.ihoge.cn/2018/media/15286224561131.jpg">
 
 
 
@@ -132,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/StructuredStreaming.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/ML03.html"/>
 
 
 
 
 
-  <title>Strutured Streaming(Spark 2.3) | Student</title>
+  <title>为什么要学原理和公式推导 | Student</title>
   
 
 
@@ -275,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/StructuredStreaming.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/ML03.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -292,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Strutured Streaming(Spark 2.3)</h1>
+          <h1 class="post-title" itemprop="name headline">为什么要学原理和公式推导</h1>
         
 
         <div class="post-meta">
@@ -304,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-19T10:59:21+08:00">
-                2018-04-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T15:59:21+08:00">
+                2018-06-10
               </time>
             
 
@@ -327,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
+                  <a href="/categories/转载专栏/" itemprop="url" rel="index">
+                    <span itemprop="name">转载专栏</span>
                   </a>
                 </span>
 
@@ -370,27 +367,73 @@
 
       
         <a id="more"></a>
-<h1 id="Spark-2-3-Strutured-Streaming"><a href="#Spark-2-3-Strutured-Streaming" class="headerlink" title="Spark 2.3 Strutured Streaming"></a>Spark 2.3 Strutured Streaming</h1><p>为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持第四种调度引擎 Kubernetes clusters（其他三种分别是自带的独立模式Standalone，YARN、Mesos）。除了这些比较具有里程碑的重要功能外，Spark  2.3 还有以下几个重要的更新：<br>引入 DataSource v2 APIs<br>矢量化(Vectorized)的 ORC reader<br>Spark History Server v2 with K-V store<br>基于 Structured Streaming 的机器学习管道API模型<br>MLlib 增强<br>Spark SQL 增强<br>这篇文章将简单地介绍上面一些高级功能和改进，更多的特性请参见 <a href="https://spark.apache.org/releases/spark-release-2-3-0.html" target="_blank" rel="noopener">Spark 2.3 release notes</a></p>
-<p>这里主要针对Spark2.3 对Structured Streaming的新特性进行描述。</p>
-<p>The simplest way to perform streaming analytics is not having to reason about streaming.</p>
-<h2 id="毫秒延迟的连续流处理"><a href="#毫秒延迟的连续流处理" class="headerlink" title="毫秒延迟的连续流处理"></a>毫秒延迟的连续流处理</h2><p>Apache Spark 2.0 的 Structured Streaming 将微批次处理(micro-batch processing)从它的高级 APIs 中解耦出去，原因有两个：首先，开发人员更容易学习这些 API，不需要考虑这些 APIs 的微批次处理情况;其次，它允许开发人员将一个流视为一个无限表，他们查询流的数据，就像他们查询静态表一样简便。<br>但是，为了给开发人员提供不同的流处理模式，社区引入了一种新的毫秒级低延迟(millisecond low-latency连续模式(continuous mode)。<br>在内部，结构化的流引擎逐步执行微批中的查询计算，执行周期由触发器间隔决定，这个延迟对大多数真实世界的流应用程序来说是可以容忍的。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg" alt=""></p>
-<h3 id="微批处理（micro-batch）"><a href="#微批处理（micro-batch）" class="headerlink" title="微批处理（micro-batch）"></a>微批处理（micro-batch）</h3><p>Structured Streaming默认使用微量批处理执行模型。这意味着Spark流引擎会定期检查流源，并对自上次批量结束后到达的新数据运行批量查询。At a high-level, it looks like this:<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241491220257.jpg" alt=""></p>
-<p>在微批处理体系结构中，驱动程序通过将记录偏移量保存到<strong>预写的日志中（write-ahead-log）</strong>来检查进度，然后用它来重新启动查询。请注意，为了获得确定性的重新执行和端对端语义，在微批处理启动之前，要在下一个微批处理中处理的范围偏移保存到日志中。因此，数据源中可用的记录可能<strong>不得不等待当前的微批次在其偏移记录之前</strong>完成，并且在下一个微批中处理它。过程看起来像这样。</p>
-<p>In this architecture, the driver checkpoints the progress by saving the records offsets to a write-ahead-log, which may be then used to restart the query. Note that the range offsets to be processed in the next micro-batch is saved to the log before the micro-batch has started in order to get deterministic re-executions and end-to-end semantics. As a result, a record that is available at the source may have to wait for the current micro-batch to be completed before its offset is logged and the next micro-batch processes it. At the record level, the timeline looks like this.<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241495217055.jpg" alt=""><br>这会导致更多的延迟时间。</p>
-<h3 id="连续处理（Continuous-Processing）"><a href="#连续处理（Continuous-Processing）" class="headerlink" title="连续处理（Continuous Processing）"></a>连续处理（Continuous Processing）</h3><p>而对于连续模式，流读取器连续拉取源数据并处理数据，而不是按指定的触发时间间隔读取一批数据。通过不断地查询源数据和处理数据，新的记录在到达时立即被处理，将等待时间缩短到毫秒，满足低延迟的应用程序的需求，具体如下面图所示：</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241175216530.jpg" alt=""></p>
-<p>目前连续模式支持 map-like Dataset 操作，包括投影(projections)、selections以及其他 SQL 函数，但是不支持 current_timestamp(), current_date() 以及聚合函数。它还支持将 Kafka 作为数据源和数据存储目的地(sink)，也支持 console 和 memory sink。<br>现在，开发人员可以根据延迟要求选择模式连续或微量批处理，来构建大规模实时流式传输应用程序，同时这些系统还能够享受到 Structured Streaming 提供的 fault-tolerance 和 reliability guarantees 特性。<br>简单来说，Spark 2.3 中的连续模式是实验性的，它提供了以下特性：<br>端到端的毫秒级延迟<br>至少一次语义保证<br>支持 map-like 的 Dataset 操作</p>
-<h2 id="流与流进行Join"><a href="#流与流进行Join" class="headerlink" title="流与流进行Join"></a>流与流进行Join</h2><p>Spark 2.0 版本的 Structured Streaming 支持流 DataFrame/Dataset 和静态数据集之间的 join，但是 Spark 2.3 带来了期待已久的流和流的 Join 操作。支持内连接和外连接，可用在大量的实时场景中。<br>广告收益是流与流进行Join的典型用例。例如，展示广告流和广告点击流共享您希望进行流式分析的公共关键字(如adId)和相关数据，根据这些数据你可以分析出哪些广告更容易被点击。</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241175635666.jpg" alt=""></p>
-<p>这个例子看起来很简单，但是实现流和流的Join需要解决很多技术难题，如下：</p>
+<h1 id="第03课：如何学习“机器学习”"><a href="#第03课：如何学习“机器学习”" class="headerlink" title="第03课：如何学习“机器学习”"></a>第03课：如何学习“机器学习”</h1><p>学习“机器学习”这件事，我走过很长的一段弯路。有一些心得、体会和方法，在此和大家分享。</p>
+<p><img src="media/15286224561131.jpg" alt=""></p>
+<h2 id="以模型为驱动，了解“机器学习”的本质"><a href="#以模型为驱动，了解“机器学习”的本质" class="headerlink" title="以模型为驱动，了解“机器学习”的本质"></a>以模型为驱动，了解“机器学习”的本质</h2><p>本课力图引导大家以模型为驱动，进行学习。</p>
+<p>我选择了几种经典模型（例如：线性回归，逻辑回归，决策树，支持向量机，条件随机场，K 均值等），作为入门的进阶。</p>
+<p>初次学习模型，不必贪多。但就这些选定的模型，一定要搞清楚其问题域、模型函数、目标函数、训练算法……潜入到数学公式推导的层面，对每一步的公式变换和对应物理意义有所理解，然后再去实践。</p>
+<p>这一个个的模型，就是机器学习的“肌肉”，我们要通过观察学习这一块块肌肉，以其为载体来了解机器学习的核心——将事物转化为数值，将关系、变换转化为运算——<strong>以事实（数据）为依据，以规章（算法）为准绳，通过计算来掌握事物的客观规律（模型）。</strong></p>
+<p><img src="media/15286225343498.jpg" alt=""></p>
+<p>要知道，这些经典模型固然经典，但是到了实际应用中，它们并非神圣不可稍加改变。也不是说机器学习就仅限于这些经典模型。</p>
+<p>只有掌握了机器学习精髓的人，才可能灵活运用现有模型去解决实际问题，甚至进一步针对具体问题发明自己的模型和/或算法。</p>
+<h2 id="反复学习，从记忆到掌握"><a href="#反复学习，从记忆到掌握" class="headerlink" title="反复学习，从记忆到掌握"></a>反复学习，从记忆到掌握</h2><p>当然，达到这种程度并非一撮而就，总要从最简单的模型开始。</p>
+<p>根据我的经验，即使是本课列出的这几个最常用也相对简单的模型，要真正掌握，都需要反复学习。</p>
+<p>有可能第一遍看完有点似是而非，或者感觉自己明白了，但要自己从头推导又会半截断片儿。</p>
+<p>就像刚学完又忘掉生字，或是背诵到一半想不起后续99乘法表的小学生，这都是非常正常的现象。真正原因，就是还没有真正掌握。</p>
+<p><strong>反复多学几遍</strong>，从头到尾掌握整件事情的逻辑，知道一个模型是怎么从最初设定目标，到一步步实现目标的——当真正掌握了这个过程之后，再回头看一个个具体的模型，每一步都是顺利成章的。</p>
+<p>掌握了事物内在的逻辑性，再去记忆，就容易多了。</p>
+<p>学习标准设置得不必太高，比如可以这样：</p>
+<p>第一遍学，只要求自己能完全掌握机器学习数据、模型、算法相互作用的基本关系，训练过程和评价标准。具体的模型，掌握最简单的线性回归就可以。</p>
+<p>只要 end2end 掌握了第一个模型，做到：能够从模型函数开始推导出目标函数，再用梯度下降算法求解，用（伪）代码实现梯度下降求解过程。</p>
+<p>第一遍学习掌握一个模型；第二遍学习就不难掌握2-3个模型；第三遍就有可能掌握本课列出的大部分模型………如此<strong>由易到难，螺旋式推进</strong>。</p>
+<p>对于一些数学模型本身就比较复杂的，比如条件随机场、隐马尔科夫这类涉及场论和势函数的模型，如果直接入手，往往会被卡在模型函数本身上。但是当有了前面几个模型的基础，了解了更抽象层面的原理，掌握起来就容易多了。</p>
+<h2 id="数学需要多精深？"><a href="#数学需要多精深？" class="headerlink" title="数学需要多精深？"></a>数学需要多精深？</h2><p><img src="media/15286226706381.jpg" alt=""></p>
+<p>很多同学，想学机器学习。但是一上来就看模型，看到一大堆炫酷的公式，往往感觉很吓人。</p>
+<p>有些人也就因此萌生退意，要么放弃，要么只用现成工具把模型当作黑盒使用。</p>
+<p>其实，学习经典模型，并不需要多么精深的数学功底，理工科大学本科的数学课就基本够用了。</p>
+<h3 id="基础数学概念"><a href="#基础数学概念" class="headerlink" title="基础数学概念"></a>基础数学概念</h3><p>在学习的最初阶段，只要：</p>
 <ul>
-<li><strong>缓存处理延迟数据：</strong>需要缓存延迟的数据，直到从其他流中找到匹配的事件;</li>
-<li><strong>先置缓冲区大小：</strong>限制流式连接缓冲区大小的唯一方法是将延迟超过某个阈值的数据丢弃。此最大延迟阈值应由用户根据业务需求和系统资源限制之间的平衡进行配置。</li>
-<li><strong>明确定义的语义</strong>：在静态连接和流式连接之间保持一致的SQL连接语义，具有或不具有上述阈值。</li>
+<li>学过坐标系；</li>
+<li>了解函数、向量和矩阵的概念；</li>
+<li>能从直观角度对求导、求微与函数的关系有所理解；</li>
+<li>并掌握最简单的矩阵运算。</li>
 </ul>
-<p>幸运的事Spark2.3解决了所有这些问题，因此我们使用SQL连接的清晰语义来表达计算，并控制相关事件之间的延迟容忍。<br>假设有两个不同的kafka流，我们要通过两个流中的共有的<code>adID</code>属性进行连接。让我们来看看代码是怎么实现的：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241453518177.jpg" alt=""></p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241453673148.jpg" alt=""></p>
-<p>与所有的结构化数据流的查询相同，代码是完全一样的。将kafka流数据当作静态的Dataframe一样去定义。当执行此查询时，结构化流式处理引擎会根据需要将点击和展示作为流状态进行缓冲。对于特定广告，只要接收到两个相关事件（即收到第二个事件后），即会生成联合输出。随着数据到达，连接的输出将逐步生成并写入查询接收器（例如，另一个Kafka）。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241457085725.jpg" alt=""></p>
+<p>就可以对本课中的经典机器学习模型有一定深度的感性认识了。</p>
+<p>本课中的公式都是减了再减的，务必要掌握。如果实在数学工具掌握太少，最次最次，也至少要读懂一组公式推导中的第一个和最后一个式子——</p>
+<ul>
+<li><p>读懂它们都针对哪些变量进行了怎么样的运算；</p>
+</li>
+<li><p>这些变量和运算对应的物理意义是什么；</p>
+</li>
+<li><p>第一个式子是对哪种真实场景的数学描述；</p>
+</li>
+<li><p>最后推导的结果又具备怎样的特征。</p>
+</li>
+</ul>
+<p><img src="media/15286227671484.jpg" alt=""></p>
+<p>初次学习者，可以暂且掌握到这个深度。</p>
+<h3 id="两条路径反刍数学知识"><a href="#两条路径反刍数学知识" class="headerlink" title="两条路径反刍数学知识"></a>两条路径反刍数学知识</h3><p>当然，仅仅这样的程度，套用现成模型还将就，却不可能达到灵活运用的程度。</p>
+<p>所以，还是建议同学们力求理解每一步推导过程。</p>
+<p>如果有可能，可以事先复习一下大学本科的高数（数学分析）、概率统计和线性代数课本。或者，在学习模型的过程中，一旦遇到了数学上的阻碍，就回头去查找相应知识。</p>
+<h3 id="制定数学知识速查手册"><a href="#制定数学知识速查手册" class="headerlink" title="制定数学知识速查手册"></a>制定数学知识速查手册</h3><p>很多数学问题，之所以让人头大，其实并不是真的有多难，而是符号系统比较复杂，运算繁复，或者运算所表达的物理意义多样。</p>
+<p>很多时候造成困扰是因为想不起来这里用到什么定理，哪个公式，或者这样操作表达的含义是什么了。</p>
+<p>如果把常用的细小知识点都记录下来，按主题整理在一起，做成速查手册（小字典），需要用的时候迅速查找一下对应点，效果往往意想不到地好。能让我们学习“机器学习”的道路顺畅不少。</p>
+<p>下面是两个我自己制作的例子，大家可以参考一下：</p>
+<ul>
+<li><a href="http://gitbook.cn/books/59ee907516fc0231837614e3/index.html" target="_blank" rel="noopener">机器学习常用微积分知识速查手册</a></li>
+<li><a href="http://gitbook.cn/books/59ed598e991df70ecd5a0049/index.html" target="_blank" rel="noopener">机器学习常用线性代数知识速查手册</a></li>
+</ul>
+<h2 id="日常学习-Tips"><a href="#日常学习-Tips" class="headerlink" title="日常学习 Tips"></a>日常学习 Tips</h2><h3 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h3><p>把新学到的东西和日常的工作、生活联系起来，进行思考。比如：将理论代入现实，不同领域间事物的类比，相似内容的对比等。</p>
+<p>以身边的实例来检测理论。不仅能够加深理论知识的理解，而且有助于改进日常事物的处理方法。</p>
+<h3 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h3><p>准备一个笔记本，纸的或者电子的。有什么发现、感想、疑问、经验等等，全都记下来。</p>
+<p>如果是对某个话题、题目有比较完整的想法，最好能够及时整理成文，至少记录下要点。</p>
+<p>隔一段时间后把笔记整理一下，把分散的点滴整理成块，一点点填充自己的“思维地图”。</p>
+<h3 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h3><p>知识技能这种东西，学了，就得“得瑟”——把学习到的新知识、理论、方法，分享给更多的人。如此一来，倒逼自己整理体系、记忆要点，堪称与人方便自己方便的最佳实例。</p>
+<p>把自己的感想、体会、经验分享出来也是同理，还多出了锻炼自己逻辑思维能力和归纳总结能力。一举多得，何乐而不为？</p>
+<hr>
+<p>本系列课程转载自Gitbook李烨的达人课——《机器学习极简入门》</p>
+<p>作者关在在机器学习行业的感悟见解独到，总结的很精炼，内容简洁排版优美。好东西就应该分享给更多人，下面是作者在 Gitbook 的主页。支持为知识付费，非常值得。</p>
+<p><a href="http://gitbook.cn/gitchat/author/58af84f50cfb23590c425a27" target="_blank" rel="noopener">李烨</a></p>
 
       
     </div>
@@ -406,6 +449,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习——李烨/" rel="tag"><i class="fa fa-tag"></i> 机器学习——李烨</a>
+          
+        </div>
+      
 
       
       
@@ -415,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/strame.html" rel="next" title="流式处理框架 & Spark Streaming & Flume & Kafka">
-                <i class="fa fa-chevron-left"></i> 流式处理框架 & Spark Streaming & Flume & Kafka
+              <a href="/2018/ML02.html" rel="next" title="为什么要学原理和公式推导">
+                <i class="fa fa-chevron-left"></i> 为什么要学原理和公式推导
               </a>
             
           </div>
@@ -424,10 +473,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/DataPreprocessing1.html" rel="prev" title="spark数据预处理1">
-                spark数据预处理1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -599,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-2-3-Strutured-Streaming"><span class="nav-number">1.</span> <span class="nav-text">Spark 2.3 Strutured Streaming</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#毫秒延迟的连续流处理"><span class="nav-number">1.1.</span> <span class="nav-text">毫秒延迟的连续流处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微批处理（micro-batch）"><span class="nav-number">1.1.1.</span> <span class="nav-text">微批处理（micro-batch）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续处理（Continuous-Processing）"><span class="nav-number">1.1.2.</span> <span class="nav-text">连续处理（Continuous Processing）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流与流进行Join"><span class="nav-number">1.2.</span> <span class="nav-text">流与流进行Join</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第03课：如何学习“机器学习”"><span class="nav-number">1.</span> <span class="nav-text">第03课：如何学习“机器学习”</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#以模型为驱动，了解“机器学习”的本质"><span class="nav-number">1.1.</span> <span class="nav-text">以模型为驱动，了解“机器学习”的本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反复学习，从记忆到掌握"><span class="nav-number">1.2.</span> <span class="nav-text">反复学习，从记忆到掌握</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学需要多精深？"><span class="nav-number">1.3.</span> <span class="nav-text">数学需要多精深？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础数学概念"><span class="nav-number">1.3.1.</span> <span class="nav-text">基础数学概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两条路径反刍数学知识"><span class="nav-number">1.3.2.</span> <span class="nav-text">两条路径反刍数学知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#制定数学知识速查手册"><span class="nav-number">1.3.3.</span> <span class="nav-text">制定数学知识速查手册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日常学习-Tips"><span class="nav-number">1.4.</span> <span class="nav-text">日常学习 Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关联"><span class="nav-number">1.4.1.</span> <span class="nav-text">关联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#记录"><span class="nav-number">1.4.2.</span> <span class="nav-text">记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分享"><span class="nav-number">1.4.3.</span> <span class="nav-text">分享</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

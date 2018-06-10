@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="机器学习——李烨," />
 
 
 
@@ -83,26 +83,23 @@
 
 
 
-<meta name="description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
+<meta name="description" content="第01课：为什么要学原理和公式推导机器学习最直接的应用，就是把模型运用到实际业务上去解决问题。 本课所讲到的几个经典模型，是机器学习发展的几十年间，由前辈总结出的解决特定问题的固定模式，已经在实践中证明有效。 学会这些模型，一则可以以它们为载体理解“机器学习”这件事情本身是一种怎样的机制；二则掌握了模型，也就掌握了当前许多实际问题有效的解决方案。 学模型就要学公式推导吗？ 在实际应用中，如果我们">
+<meta name="keywords" content="机器学习——李烨">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Strutured Streaming(Spark 2.3)">
-<meta property="og:url" content="http://www.ihoge.cn/2018/StructuredStreaming.html">
+<meta property="og:title" content="为什么要学原理和公式推导">
+<meta property="og:url" content="http://www.ihoge.cn/2018/ML01.html">
 <meta property="og:site_name" content="Student">
-<meta property="og:description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
+<meta property="og:description" content="第01课：为什么要学原理和公式推导机器学习最直接的应用，就是把模型运用到实际业务上去解决问题。 本课所讲到的几个经典模型，是机器学习发展的几十年间，由前辈总结出的解决特定问题的固定模式，已经在实践中证明有效。 学会这些模型，一则可以以它们为载体理解“机器学习”这件事情本身是一种怎样的机制；二则掌握了模型，也就掌握了当前许多实际问题有效的解决方案。 学模型就要学公式推导吗？ 在实际应用中，如果我们">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241491220257.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241495217055.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241175216530.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241175635666.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241453518177.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241453673148.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241457085725.jpg">
-<meta property="og:updated_time" content="2018-05-17T12:12:27.498Z">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286216385621.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286216711168.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286218009983.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286220088473.jpg">
+<meta property="og:updated_time" content="2018-06-10T09:47:19.487Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Strutured Streaming(Spark 2.3)">
-<meta name="twitter:description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
-<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg">
+<meta name="twitter:title" content="为什么要学原理和公式推导">
+<meta name="twitter:description" content="第01课：为什么要学原理和公式推导机器学习最直接的应用，就是把模型运用到实际业务上去解决问题。 本课所讲到的几个经典模型，是机器学习发展的几十年间，由前辈总结出的解决特定问题的固定模式，已经在实践中证明有效。 学会这些模型，一则可以以它们为载体理解“机器学习”这件事情本身是一种怎样的机制；二则掌握了模型，也就掌握了当前许多实际问题有效的解决方案。 学模型就要学公式推导吗？ 在实际应用中，如果我们">
+<meta name="twitter:image" content="http://www.ihoge.cn/2018/media/15286216385621.jpg">
 
 
 
@@ -132,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/StructuredStreaming.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/ML01.html"/>
 
 
 
 
 
-  <title>Strutured Streaming(Spark 2.3) | Student</title>
+  <title>为什么要学原理和公式推导 | Student</title>
   
 
 
@@ -275,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/StructuredStreaming.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/ML01.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -292,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Strutured Streaming(Spark 2.3)</h1>
+          <h1 class="post-title" itemprop="name headline">为什么要学原理和公式推导</h1>
         
 
         <div class="post-meta">
@@ -304,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-19T10:59:21+08:00">
-                2018-04-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T15:59:21+08:00">
+                2018-06-10
               </time>
             
 
@@ -327,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
+                  <a href="/categories/转载专栏/" itemprop="url" rel="index">
+                    <span itemprop="name">转载专栏</span>
                   </a>
                 </span>
 
@@ -370,27 +367,90 @@
 
       
         <a id="more"></a>
-<h1 id="Spark-2-3-Strutured-Streaming"><a href="#Spark-2-3-Strutured-Streaming" class="headerlink" title="Spark 2.3 Strutured Streaming"></a>Spark 2.3 Strutured Streaming</h1><p>为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持第四种调度引擎 Kubernetes clusters（其他三种分别是自带的独立模式Standalone，YARN、Mesos）。除了这些比较具有里程碑的重要功能外，Spark  2.3 还有以下几个重要的更新：<br>引入 DataSource v2 APIs<br>矢量化(Vectorized)的 ORC reader<br>Spark History Server v2 with K-V store<br>基于 Structured Streaming 的机器学习管道API模型<br>MLlib 增强<br>Spark SQL 增强<br>这篇文章将简单地介绍上面一些高级功能和改进，更多的特性请参见 <a href="https://spark.apache.org/releases/spark-release-2-3-0.html" target="_blank" rel="noopener">Spark 2.3 release notes</a></p>
-<p>这里主要针对Spark2.3 对Structured Streaming的新特性进行描述。</p>
-<p>The simplest way to perform streaming analytics is not having to reason about streaming.</p>
-<h2 id="毫秒延迟的连续流处理"><a href="#毫秒延迟的连续流处理" class="headerlink" title="毫秒延迟的连续流处理"></a>毫秒延迟的连续流处理</h2><p>Apache Spark 2.0 的 Structured Streaming 将微批次处理(micro-batch processing)从它的高级 APIs 中解耦出去，原因有两个：首先，开发人员更容易学习这些 API，不需要考虑这些 APIs 的微批次处理情况;其次，它允许开发人员将一个流视为一个无限表，他们查询流的数据，就像他们查询静态表一样简便。<br>但是，为了给开发人员提供不同的流处理模式，社区引入了一种新的毫秒级低延迟(millisecond low-latency连续模式(continuous mode)。<br>在内部，结构化的流引擎逐步执行微批中的查询计算，执行周期由触发器间隔决定，这个延迟对大多数真实世界的流应用程序来说是可以容忍的。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg" alt=""></p>
-<h3 id="微批处理（micro-batch）"><a href="#微批处理（micro-batch）" class="headerlink" title="微批处理（micro-batch）"></a>微批处理（micro-batch）</h3><p>Structured Streaming默认使用微量批处理执行模型。这意味着Spark流引擎会定期检查流源，并对自上次批量结束后到达的新数据运行批量查询。At a high-level, it looks like this:<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241491220257.jpg" alt=""></p>
-<p>在微批处理体系结构中，驱动程序通过将记录偏移量保存到<strong>预写的日志中（write-ahead-log）</strong>来检查进度，然后用它来重新启动查询。请注意，为了获得确定性的重新执行和端对端语义，在微批处理启动之前，要在下一个微批处理中处理的范围偏移保存到日志中。因此，数据源中可用的记录可能<strong>不得不等待当前的微批次在其偏移记录之前</strong>完成，并且在下一个微批中处理它。过程看起来像这样。</p>
-<p>In this architecture, the driver checkpoints the progress by saving the records offsets to a write-ahead-log, which may be then used to restart the query. Note that the range offsets to be processed in the next micro-batch is saved to the log before the micro-batch has started in order to get deterministic re-executions and end-to-end semantics. As a result, a record that is available at the source may have to wait for the current micro-batch to be completed before its offset is logged and the next micro-batch processes it. At the record level, the timeline looks like this.<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241495217055.jpg" alt=""><br>这会导致更多的延迟时间。</p>
-<h3 id="连续处理（Continuous-Processing）"><a href="#连续处理（Continuous-Processing）" class="headerlink" title="连续处理（Continuous Processing）"></a>连续处理（Continuous Processing）</h3><p>而对于连续模式，流读取器连续拉取源数据并处理数据，而不是按指定的触发时间间隔读取一批数据。通过不断地查询源数据和处理数据，新的记录在到达时立即被处理，将等待时间缩短到毫秒，满足低延迟的应用程序的需求，具体如下面图所示：</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241175216530.jpg" alt=""></p>
-<p>目前连续模式支持 map-like Dataset 操作，包括投影(projections)、selections以及其他 SQL 函数，但是不支持 current_timestamp(), current_date() 以及聚合函数。它还支持将 Kafka 作为数据源和数据存储目的地(sink)，也支持 console 和 memory sink。<br>现在，开发人员可以根据延迟要求选择模式连续或微量批处理，来构建大规模实时流式传输应用程序，同时这些系统还能够享受到 Structured Streaming 提供的 fault-tolerance 和 reliability guarantees 特性。<br>简单来说，Spark 2.3 中的连续模式是实验性的，它提供了以下特性：<br>端到端的毫秒级延迟<br>至少一次语义保证<br>支持 map-like 的 Dataset 操作</p>
-<h2 id="流与流进行Join"><a href="#流与流进行Join" class="headerlink" title="流与流进行Join"></a>流与流进行Join</h2><p>Spark 2.0 版本的 Structured Streaming 支持流 DataFrame/Dataset 和静态数据集之间的 join，但是 Spark 2.3 带来了期待已久的流和流的 Join 操作。支持内连接和外连接，可用在大量的实时场景中。<br>广告收益是流与流进行Join的典型用例。例如，展示广告流和广告点击流共享您希望进行流式分析的公共关键字(如adId)和相关数据，根据这些数据你可以分析出哪些广告更容易被点击。</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241175635666.jpg" alt=""></p>
-<p>这个例子看起来很简单，但是实现流和流的Join需要解决很多技术难题，如下：</p>
+<h1 id="第01课：为什么要学原理和公式推导"><a href="#第01课：为什么要学原理和公式推导" class="headerlink" title="第01课：为什么要学原理和公式推导"></a>第01课：为什么要学原理和公式推导</h1><p><img src="media/15286216385621.jpg" alt=""><br>机器学习最直接的应用，就是把模型运用到实际业务上去解决问题。</p>
+<p>本课所讲到的几个经典模型，是机器学习发展的几十年间，由前辈总结出的解决特定问题的固定模式，已经在实践中证明有效。</p>
+<p>学会这些模型，一则可以以它们为载体理解“机器学习”这件事情本身是一种怎样的机制；二则掌握了模型，也就掌握了当前许多实际问题有效的解决方案。</p>
+<h2 id="学模型就要学公式推导吗？"><a href="#学模型就要学公式推导吗？" class="headerlink" title="学模型就要学公式推导吗？"></a>学模型就要学公式推导吗？</h2><p><img src="media/15286216711168.jpg" alt=""></p>
+<p>在实际应用中，如果我们要运用一种模型，那么其实有很多现成的算法库、学习框架，只要把输入导入进去，用几行代码指定模型类型和参数，工具、框架就能自动计算出结果。</p>
+<p>既然如此，何必再去学其中的原理，一步步推导让人头晕的数学公式？</p>
+<p>对于这个问题，首先给出我的意见：</p>
+<p><strong>机器学习的原理和数学推导一定要学！</strong></p>
+<p>此处且举个直观的例子：</p>
+<blockquote>
+<p>工具就像是武器，学会使用一种工具只是学会了使用这种武器的最基本的招式和套路。而理论学习则是学习策略，决定了未来在真实对战中，遇到对手攻击时，你选取哪些招式套路，如何组合起来去迎敌。</p>
+</blockquote>
+<p>反过来说，如果根本不学模型原理，只是把一个个应用场景背诵下来，需要的时候直接把模型当黑盒使用——这样做我们能学到什么？</p>
+<p>我们将学到：</p>
+<ol>
+<li>算法库的安装；</li>
+<li>库函数的调用；</li>
+<li>数据的 I/O 转换。</li>
+</ol>
+<p>这和调用任何一个封装好的 API（无论其功能）有什么区别？和调用你自己的同事撰写的模块接口又有什么不同？</p>
+<p>学会这么几件事能让你相对他人产生什么的壁垒？作为一个原本非 AI 领域的开发者，难道因为会安装几个支持库，会调几个接口就身价倍增成为机器学习工程师啦？</p>
+<h2 id="学习原理的必要性"><a href="#学习原理的必要性" class="headerlink" title="学习原理的必要性"></a>学习原理的必要性</h2><p>回过头来，我们从正面来看学习原理的必要性。</p>
+<h3 id="功利层面"><a href="#功利层面" class="headerlink" title="功利层面"></a>功利层面</h3><p><img src="media/15286218009983.jpg" alt=""></p>
+<p>咱们先来看看最直接的用处。</p>
+<p><strong>面试会考</strong></p>
+<p>最起码的一点，找工作的时候，但凡是个稍微靠谱点的企业，对于标明是<strong>“机器学习工程师”的职位，面试时一定会问模型原理和推导过程的！</strong></p>
+<p>而且问到的模型，随着时间推移越来越复杂。</p>
+<p>三四年前或更早些时候，企业技术面试，大多问线性回归。这两年，已经基本上从逻辑回归起步了。再过一两年是否问支持向量机不得而知，不过理论考察越来越难是必然的。</p>
+<p>真想入这行，为了面试也得学呀。</p>
+<p><strong>老板会问</strong></p>
+<p>在日常工作中，编码的时候，可能确实只是在调 API 而已。</p>
+<p>但很多时候，具体用哪个工具哪个框架，调用哪个具体的模型算法，并不是你一个人决定就可以，而是需要向老板、合作方甚至客户做出解释的。</p>
+<blockquote>
+<p>以前谁负责哪个模块都是自己搞定所有事，你怎么还想让别人给你标注数据呀？</p>
+<p>花费这么多时间人力训练的模型，怎么连个 DSAT 都 Fix 不了啊？*</p>
+<p>既然再多投入几倍资源也不能达到95%以上的正确率，为什么不干脆直接用 Rule-Base 来 Handle？</p>
+<p>……</p>
+</blockquote>
+<p>Manager，Tech Lead，PM 都有可能围绕机器学习/深度学习投入产出比，提出各种问题。要在工作中运用这些技术，首先就要说服他们。这个时候，原理就派上用场了。</p>
+<p><strong>同事会质疑</strong></p>
+<p>对于你应用 ML/DL 的疑问不仅来自上司，很多时候也来自于同级别的同事。</p>
+<p>相对于老板对于性价比的关注，同事的注意点更可能在技术细节——质疑用这个新的框架/工具/模型/算法，与之前实施方案在功能、性能方面的差别。</p>
+<blockquote>
+<p>别人都用 TensorFlow，你为什么要用 Caffe 呀？</p>
+<p>以前这个分类器我们用逻辑回归也挺好，你为什么非要换成 RNN 啊？</p>
+<p>你用这个谱聚类做数据预处理，可是归根到底不还是词袋模型算词频嘛，比直接算一下 tf-idf 做排序好多少？</p>
+<p>……</p>
+</blockquote>
+<p>到了这个层面，只是简单概括的说说原理已经不够了，要能细致到对比：</p>
 <ul>
-<li><strong>缓存处理延迟数据：</strong>需要缓存延迟的数据，直到从其他流中找到匹配的事件;</li>
-<li><strong>先置缓冲区大小：</strong>限制流式连接缓冲区大小的唯一方法是将延迟超过某个阈值的数据丢弃。此最大延迟阈值应由用户根据业务需求和系统资源限制之间的平衡进行配置。</li>
-<li><strong>明确定义的语义</strong>：在静态连接和流式连接之间保持一致的SQL连接语义，具有或不具有上述阈值。</li>
+<li>不同模型的特质，适用场景，对当前数据的匹配程度；</li>
+<li>不同算法对于算力和时间的消耗；</li>
+<li>不同框架对软硬件需求和并行化的力度；</li>
+<li>才算是具备了技术讨论的资格。</li>
 </ul>
-<p>幸运的事Spark2.3解决了所有这些问题，因此我们使用SQL连接的清晰语义来表达计算，并控制相关事件之间的延迟容忍。<br>假设有两个不同的kafka流，我们要通过两个流中的共有的<code>adID</code>属性进行连接。让我们来看看代码是怎么实现的：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241453518177.jpg" alt=""></p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241453673148.jpg" alt=""></p>
-<p>与所有的结构化数据流的查询相同，代码是完全一样的。将kafka流数据当作静态的Dataframe一样去定义。当执行此查询时，结构化流式处理引擎会根据需要将点击和展示作为流状态进行缓冲。对于特定广告，只要接收到两个相关事件（即收到第二个事件后），即会生成联合输出。随着数据到达，连接的输出将逐步生成并写入查询接收器（例如，另一个Kafka）。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241457085725.jpg" alt=""></p>
+<h3 id="实用层面"><a href="#实用层面" class="headerlink" title="实用层面"></a>实用层面</h3><p><img src="media/15286220088473.jpg" alt=""></p>
+<p>当然，在日常工作中可以完全不理会 Peer 的质疑，对于 Boss 的决定也可以全盘遵守绝无二话。Engineer 嘛，只是埋头干活也就可以了。但总得把活儿干好吧。</p>
+<p>作为一个机器学习工程师，把活干好的<strong>基本内容</strong>是：针对技术需求提供高质量的模型。</p>
+<p><strong>再高一个层次</strong>的好处是：针对业务需求提供高质量的解决方案。</p>
+<p><strong>优化模型</strong></p>
+<p>在基本面上，机器学习工程师又被戏称为调参工程师。</p>
+<p>所要做的，就是在限定的数据上，规定时间内，为具体技术需求（比如：训练一个分类器）提供性能尽量高，消耗资源尽量小的模型。</p>
+<p>调参工程师的三板斧：选特征、调超参、换模型，要想能够有章法的使用出来，理论基础还是必不可少的。</p>
+<p>如果连：</p>
+<blockquote>
+<ul>
+<li>评判模型性能的指标有哪些，如何计算；</li>
+<li>正在使用的模型是怎么工作的；</li>
+<li>这些超参数是什么含义，调整它们会产生哪些影响；</li>
+<li>特征选取有哪些原则、方法可运用……</li>
+</ul>
+</blockquote>
+<p>都不知道，又怎么优化模型？</p>
+<p><strong>针对问题实际问题定向建模</strong></p>
+<p>仅仅做到一个合格的调参工程师，固然可以在 AI 领域占据一个职位，但对于业务和团队而言，仍然是个可有可无的角色。</p>
+<p><strong>真正创造价值的，从来都是解决实际问题的人</strong>。</p>
+<p>这些经典的模型、算法，是前人在解决实际问题中所研究出的具备通行性的解决方案。我们应用它们去解决问题，因为它们所解决的目标问题总是持续出现。</p>
+<p>但是，新的问题也会随着新的需求涌现，并不是说我们只能用这些现有成果解决问题。</p>
+<p>面对新问题，调参工程师可能束手无策。但一个理论掌握得足够深的机器学习工程师完全有可能针对具体业务问题构造目标函数，甚至开发出符合自身软硬件资源特点的求解算法。</p>
+<p>到了这一步，即使还使用现成工具，也不是靠 Google 一下 Best Practice，Copy &amp; Paste 代码就能够解决的了。必须具备理论基础和数学层面的建模能力才行。</p>
+<hr>
+<p>本系列课程转载自Gitbook李烨的达人课——《机器学习极简入门》</p>
+<p>作者关在在机器学习行业的感悟见解独到，总结的很精炼，内容简洁排版优美。好东西就应该分享给更多人，下面是作者在 Gitbook 的主页。支持为知识付费，非常值得。</p>
+<p><a href="http://gitbook.cn/gitchat/author/58af84f50cfb23590c425a27" target="_blank" rel="noopener">李烨</a></p>
 
       
     </div>
@@ -406,6 +466,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习——李烨/" rel="tag"><i class="fa fa-tag"></i> 机器学习——李烨</a>
+          
+        </div>
+      
 
       
       
@@ -415,8 +481,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/strame.html" rel="next" title="流式处理框架 & Spark Streaming & Flume & Kafka">
-                <i class="fa fa-chevron-left"></i> 流式处理框架 & Spark Streaming & Flume & Kafka
+              <a href="/2018/Pyspark_Hive_Mysql.html" rel="next" title="Pyspark连接读取Hive和Mysql数据库">
+                <i class="fa fa-chevron-left"></i> Pyspark连接读取Hive和Mysql数据库
               </a>
             
           </div>
@@ -425,8 +491,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/DataPreprocessing1.html" rel="prev" title="spark数据预处理1">
-                spark数据预处理1 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/ML02.html" rel="prev" title="为什么要学原理和公式推导">
+                为什么要学原理和公式推导 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -599,7 +665,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-2-3-Strutured-Streaming"><span class="nav-number">1.</span> <span class="nav-text">Spark 2.3 Strutured Streaming</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#毫秒延迟的连续流处理"><span class="nav-number">1.1.</span> <span class="nav-text">毫秒延迟的连续流处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微批处理（micro-batch）"><span class="nav-number">1.1.1.</span> <span class="nav-text">微批处理（micro-batch）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续处理（Continuous-Processing）"><span class="nav-number">1.1.2.</span> <span class="nav-text">连续处理（Continuous Processing）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流与流进行Join"><span class="nav-number">1.2.</span> <span class="nav-text">流与流进行Join</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第01课：为什么要学原理和公式推导"><span class="nav-number">1.</span> <span class="nav-text">第01课：为什么要学原理和公式推导</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#学模型就要学公式推导吗？"><span class="nav-number">1.1.</span> <span class="nav-text">学模型就要学公式推导吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习原理的必要性"><span class="nav-number">1.2.</span> <span class="nav-text">学习原理的必要性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#功利层面"><span class="nav-number">1.2.1.</span> <span class="nav-text">功利层面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实用层面"><span class="nav-number">1.2.2.</span> <span class="nav-text">实用层面</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

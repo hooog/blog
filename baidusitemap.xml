@@ -4,8 +4,68 @@
 
     
   <url>
+    <loc>http://www.ihoge.cn/2018/ML03.html</loc>
+    <lastmod>2018-06-10T09:47:21.753Z</lastmod>
+    <data>
+        <display>
+        <title>为什么要学原理和公式推导</title>
+        <pubTime>2018-06-10T07:59:21.000Z</pubTime>
+        
+        <tag>机器学习——李烨</tag>
+         
+         
+           
+             
+              <breadCrumb title="转载专栏" url="http://www.ihoge.cn/categories/%E8%BD%AC%E8%BD%BD%E4%B8%93%E6%A0%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/ML02.html</loc>
+    <lastmod>2018-06-10T09:47:20.502Z</lastmod>
+    <data>
+        <display>
+        <title>为什么要学原理和公式推导</title>
+        <pubTime>2018-06-10T07:59:21.000Z</pubTime>
+        
+        <tag>机器学习——李烨</tag>
+         
+         
+           
+             
+              <breadCrumb title="转载专栏" url="http://www.ihoge.cn/categories/%E8%BD%AC%E8%BD%BD%E4%B8%93%E6%A0%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/ML01.html</loc>
+    <lastmod>2018-06-10T09:47:19.487Z</lastmod>
+    <data>
+        <display>
+        <title>为什么要学原理和公式推导</title>
+        <pubTime>2018-06-10T07:59:21.000Z</pubTime>
+        
+        <tag>机器学习——李烨</tag>
+         
+         
+           
+             
+              <breadCrumb title="转载专栏" url="http://www.ihoge.cn/categories/%E8%BD%AC%E8%BD%BD%E4%B8%93%E6%A0%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.ihoge.cn/2018/Pyspark_Hive_Mysql.html</loc>
-    <lastmod>2018-06-09T08:12:42.948Z</lastmod>
+    <lastmod>2018-06-09T10:56:05.005Z</lastmod>
     <data>
         <display>
         <title>Pyspark连接读取Hive和Mysql数据库</title>

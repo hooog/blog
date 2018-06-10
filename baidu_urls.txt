@@ -1,3 +1,6 @@
+http://www.ihoge.cn/2018/ML03.html
+http://www.ihoge.cn/2018/ML02.html
+http://www.ihoge.cn/2018/ML01.html
 http://www.ihoge.cn/2018/Pyspark_Hive_Mysql.html
 http://www.ihoge.cn/2018/Keras2.html
 http://www.ihoge.cn/2018/Keras.html
@@ -5,8 +8,8 @@ http://www.ihoge.cn/2018/BFNN.html
 http://www.ihoge.cn/2018/DL_BFNN.html
 http://www.ihoge.cn/2018/clustering.html
 http://www.ihoge.cn/2018/tensorflow1.html
-http://www.ihoge.cn/2018/boosting.html
 http://www.ihoge.cn/2018/XGBoost.html
+http://www.ihoge.cn/2018/boosting.html
 http://www.ihoge.cn/2018/XGBoost1.html
 http://www.ihoge.cn/2018/adaboost.html
 http://www.ihoge.cn/2018/newton1.html
@@ -18,8 +21,8 @@ http://www.ihoge.cn/2018/ML1.html
 http://www.ihoge.cn/2018/DataPreprocessing3.html
 http://www.ihoge.cn/2018/DataPreprocessing2.html
 http://www.ihoge.cn/2018/DataPreprocessing1.html
-http://www.ihoge.cn/2018/strame.html
 http://www.ihoge.cn/2018/StructuredStreaming.html
+http://www.ihoge.cn/2018/strame.html
 http://www.ihoge.cn/2018/IntroductionToSpark.html
 http://www.ihoge.cn/2018/hbase.html
 http://www.ihoge.cn/2018/Databrickes.html

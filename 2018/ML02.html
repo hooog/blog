@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="机器学习——李烨," />
 
 
 
@@ -83,26 +83,22 @@
 
 
 
-<meta name="description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
+<meta name="description" content="第02课：学习机器学习原理，改变看待世界的方式学习机器学习，除了有上一篇中讲述的那些务实的作用，在务虚方面同样有用。 学习一个个模型运作的原理，看到现实的事物如何转化为数字被计算，结果又如何映射回现实世界来影响我们的生活。 对机器学习的掌握，能为我们客观认识现实带来下面这些帮助。 破除迷信 在这个人工智能看起来要席卷一切的年代，不光是正在或者立志于在 AI 领域做技术工作的人，任何人都有必要从原">
+<meta name="keywords" content="机器学习——李烨">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Strutured Streaming(Spark 2.3)">
-<meta property="og:url" content="http://www.ihoge.cn/2018/StructuredStreaming.html">
+<meta property="og:title" content="为什么要学原理和公式推导">
+<meta property="og:url" content="http://www.ihoge.cn/2018/ML02.html">
 <meta property="og:site_name" content="Student">
-<meta property="og:description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
+<meta property="og:description" content="第02课：学习机器学习原理，改变看待世界的方式学习机器学习，除了有上一篇中讲述的那些务实的作用，在务虚方面同样有用。 学习一个个模型运作的原理，看到现实的事物如何转化为数字被计算，结果又如何映射回现实世界来影响我们的生活。 对机器学习的掌握，能为我们客观认识现实带来下面这些帮助。 破除迷信 在这个人工智能看起来要席卷一切的年代，不光是正在或者立志于在 AI 领域做技术工作的人，任何人都有必要从原">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241491220257.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241495217055.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241175216530.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241175635666.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241453518177.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241453673148.jpg">
-<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241457085725.jpg">
-<meta property="og:updated_time" content="2018-05-17T12:12:27.498Z">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286222113532.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286222922551.jpg">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/15286223556759.jpg">
+<meta property="og:updated_time" content="2018-06-10T09:47:20.502Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Strutured Streaming(Spark 2.3)">
-<meta name="twitter:description" content="Spark 2.3 Strutured Streaming为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持">
-<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg">
+<meta name="twitter:title" content="为什么要学原理和公式推导">
+<meta name="twitter:description" content="第02课：学习机器学习原理，改变看待世界的方式学习机器学习，除了有上一篇中讲述的那些务实的作用，在务虚方面同样有用。 学习一个个模型运作的原理，看到现实的事物如何转化为数字被计算，结果又如何映射回现实世界来影响我们的生活。 对机器学习的掌握，能为我们客观认识现实带来下面这些帮助。 破除迷信 在这个人工智能看起来要席卷一切的年代，不光是正在或者立志于在 AI 领域做技术工作的人，任何人都有必要从原">
+<meta name="twitter:image" content="http://www.ihoge.cn/2018/media/15286222113532.jpg">
 
 
 
@@ -132,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ihoge.cn/2018/StructuredStreaming.html"/>
+  <link rel="canonical" href="http://www.ihoge.cn/2018/ML02.html"/>
 
 
 
 
 
-  <title>Strutured Streaming(Spark 2.3) | Student</title>
+  <title>为什么要学原理和公式推导 | Student</title>
   
 
 
@@ -275,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/StructuredStreaming.html">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/ML02.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘知行">
@@ -292,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Strutured Streaming(Spark 2.3)</h1>
+          <h1 class="post-title" itemprop="name headline">为什么要学原理和公式推导</h1>
         
 
         <div class="post-meta">
@@ -304,8 +300,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-19T10:59:21+08:00">
-                2018-04-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T15:59:21+08:00">
+                2018-06-10
               </time>
             
 
@@ -327,8 +323,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
+                  <a href="/categories/转载专栏/" itemprop="url" rel="index">
+                    <span itemprop="name">转载专栏</span>
                   </a>
                 </span>
 
@@ -370,27 +366,76 @@
 
       
         <a id="more"></a>
-<h1 id="Spark-2-3-Strutured-Streaming"><a href="#Spark-2-3-Strutured-Streaming" class="headerlink" title="Spark 2.3 Strutured Streaming"></a>Spark 2.3 Strutured Streaming</h1><p>为了继续实现 Spark 更快，更轻松，更智能的目标，Spark 2.3 在许多模块都做了重要的更新，比如 Structured Streaming 引入了低延迟的连续处理（continuous processing）；支持 stream-to-stream joins；通过改善 pandas UDFs 的性能来提升 PySpark；支持第四种调度引擎 Kubernetes clusters（其他三种分别是自带的独立模式Standalone，YARN、Mesos）。除了这些比较具有里程碑的重要功能外，Spark  2.3 还有以下几个重要的更新：<br>引入 DataSource v2 APIs<br>矢量化(Vectorized)的 ORC reader<br>Spark History Server v2 with K-V store<br>基于 Structured Streaming 的机器学习管道API模型<br>MLlib 增强<br>Spark SQL 增强<br>这篇文章将简单地介绍上面一些高级功能和改进，更多的特性请参见 <a href="https://spark.apache.org/releases/spark-release-2-3-0.html" target="_blank" rel="noopener">Spark 2.3 release notes</a></p>
-<p>这里主要针对Spark2.3 对Structured Streaming的新特性进行描述。</p>
-<p>The simplest way to perform streaming analytics is not having to reason about streaming.</p>
-<h2 id="毫秒延迟的连续流处理"><a href="#毫秒延迟的连续流处理" class="headerlink" title="毫秒延迟的连续流处理"></a>毫秒延迟的连续流处理</h2><p>Apache Spark 2.0 的 Structured Streaming 将微批次处理(micro-batch processing)从它的高级 APIs 中解耦出去，原因有两个：首先，开发人员更容易学习这些 API，不需要考虑这些 APIs 的微批次处理情况;其次，它允许开发人员将一个流视为一个无限表，他们查询流的数据，就像他们查询静态表一样简便。<br>但是，为了给开发人员提供不同的流处理模式，社区引入了一种新的毫秒级低延迟(millisecond low-latency连续模式(continuous mode)。<br>在内部，结构化的流引擎逐步执行微批中的查询计算，执行周期由触发器间隔决定，这个延迟对大多数真实世界的流应用程序来说是可以容忍的。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241174964831.jpg" alt=""></p>
-<h3 id="微批处理（micro-batch）"><a href="#微批处理（micro-batch）" class="headerlink" title="微批处理（micro-batch）"></a>微批处理（micro-batch）</h3><p>Structured Streaming默认使用微量批处理执行模型。这意味着Spark流引擎会定期检查流源，并对自上次批量结束后到达的新数据运行批量查询。At a high-level, it looks like this:<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241491220257.jpg" alt=""></p>
-<p>在微批处理体系结构中，驱动程序通过将记录偏移量保存到<strong>预写的日志中（write-ahead-log）</strong>来检查进度，然后用它来重新启动查询。请注意，为了获得确定性的重新执行和端对端语义，在微批处理启动之前，要在下一个微批处理中处理的范围偏移保存到日志中。因此，数据源中可用的记录可能<strong>不得不等待当前的微批次在其偏移记录之前</strong>完成，并且在下一个微批中处理它。过程看起来像这样。</p>
-<p>In this architecture, the driver checkpoints the progress by saving the records offsets to a write-ahead-log, which may be then used to restart the query. Note that the range offsets to be processed in the next micro-batch is saved to the log before the micro-batch has started in order to get deterministic re-executions and end-to-end semantics. As a result, a record that is available at the source may have to wait for the current micro-batch to be completed before its offset is logged and the next micro-batch processes it. At the record level, the timeline looks like this.<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241495217055.jpg" alt=""><br>这会导致更多的延迟时间。</p>
-<h3 id="连续处理（Continuous-Processing）"><a href="#连续处理（Continuous-Processing）" class="headerlink" title="连续处理（Continuous Processing）"></a>连续处理（Continuous Processing）</h3><p>而对于连续模式，流读取器连续拉取源数据并处理数据，而不是按指定的触发时间间隔读取一批数据。通过不断地查询源数据和处理数据，新的记录在到达时立即被处理，将等待时间缩短到毫秒，满足低延迟的应用程序的需求，具体如下面图所示：</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241175216530.jpg" alt=""></p>
-<p>目前连续模式支持 map-like Dataset 操作，包括投影(projections)、selections以及其他 SQL 函数，但是不支持 current_timestamp(), current_date() 以及聚合函数。它还支持将 Kafka 作为数据源和数据存储目的地(sink)，也支持 console 和 memory sink。<br>现在，开发人员可以根据延迟要求选择模式连续或微量批处理，来构建大规模实时流式传输应用程序，同时这些系统还能够享受到 Structured Streaming 提供的 fault-tolerance 和 reliability guarantees 特性。<br>简单来说，Spark 2.3 中的连续模式是实验性的，它提供了以下特性：<br>端到端的毫秒级延迟<br>至少一次语义保证<br>支持 map-like 的 Dataset 操作</p>
-<h2 id="流与流进行Join"><a href="#流与流进行Join" class="headerlink" title="流与流进行Join"></a>流与流进行Join</h2><p>Spark 2.0 版本的 Structured Streaming 支持流 DataFrame/Dataset 和静态数据集之间的 join，但是 Spark 2.3 带来了期待已久的流和流的 Join 操作。支持内连接和外连接，可用在大量的实时场景中。<br>广告收益是流与流进行Join的典型用例。例如，展示广告流和广告点击流共享您希望进行流式分析的公共关键字(如adId)和相关数据，根据这些数据你可以分析出哪些广告更容易被点击。</p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241175635666.jpg" alt=""></p>
-<p>这个例子看起来很简单，但是实现流和流的Join需要解决很多技术难题，如下：</p>
-<ul>
-<li><strong>缓存处理延迟数据：</strong>需要缓存延迟的数据，直到从其他流中找到匹配的事件;</li>
-<li><strong>先置缓冲区大小：</strong>限制流式连接缓冲区大小的唯一方法是将延迟超过某个阈值的数据丢弃。此最大延迟阈值应由用户根据业务需求和系统资源限制之间的平衡进行配置。</li>
-<li><strong>明确定义的语义</strong>：在静态连接和流式连接之间保持一致的SQL连接语义，具有或不具有上述阈值。</li>
-</ul>
-<p>幸运的事Spark2.3解决了所有这些问题，因此我们使用SQL连接的清晰语义来表达计算，并控制相关事件之间的延迟容忍。<br>假设有两个不同的kafka流，我们要通过两个流中的共有的<code>adID</code>属性进行连接。让我们来看看代码是怎么实现的：<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241453518177.jpg" alt=""></p>
-<p><img src="http://p6rvh6ej2.bkt.clouddn.com/15241453673148.jpg" alt=""></p>
-<p>与所有的结构化数据流的查询相同，代码是完全一样的。将kafka流数据当作静态的Dataframe一样去定义。当执行此查询时，结构化流式处理引擎会根据需要将点击和展示作为流状态进行缓冲。对于特定广告，只要接收到两个相关事件（即收到第二个事件后），即会生成联合输出。随着数据到达，连接的输出将逐步生成并写入查询接收器（例如，另一个Kafka）。<br><img src="http://p6rvh6ej2.bkt.clouddn.com/15241457085725.jpg" alt=""></p>
+<h1 id="第02课：学习机器学习原理，改变看待世界的方式"><a href="#第02课：学习机器学习原理，改变看待世界的方式" class="headerlink" title="第02课：学习机器学习原理，改变看待世界的方式"></a>第02课：学习机器学习原理，改变看待世界的方式</h1><p>学习机器学习，除了有上一篇中讲述的那些务实的作用，在务虚方面同样有用。</p>
+<p>学习一个个模型运作的原理，看到现实的事物如何转化为数字被计算，结果又如何映射回现实世界来影响我们的生活。</p>
+<p>对机器学习的掌握，能为我们客观认识现实带来下面这些帮助。</p>
+<h2 id="破除迷信"><a href="#破除迷信" class="headerlink" title="破除迷信"></a>破除迷信</h2><p><img src="media/15286222113532.jpg" alt=""></p>
+<p>在这个人工智能看起来要席卷一切的年代，不光是正在或者立志于在 AI 领域做技术工作的人，任何人都有必要从原理角度了解一下机器学习、深度学习是干什么的，如何起到作用的。</p>
+<p>作为一个带有神秘色彩的热点概念，人工智能（AI）被热炒被歪曲被妖魔化是难免的。</p>
+<p><strong>了解原理，知道人工智能是一个学术研究领域，目前在工业界有一定的应用和探索。AI 归根到底是个技术问题，可学、可用、可研究亦可质疑，而不是只能顶礼膜拜的法术神功。</strong></p>
+<p>具备最基本的判断能力，才有可能不会被“神话”迷惑，不被“鬼话”恐吓。</p>
+<blockquote>
+<p>知道 ML/DL 模型是如何工作的，总不至于看了篇《AI 专业毕业生年薪50万》就慌慌忙忙报个2万块的培训班，学了 pip install tensorflow 和 C&amp;P 代码运行几个习题数据集，就以为能够找份年薪50万的工作了。</p>
+<p>知道 AI 有哪些落地点和局限，就不至于瞟了几眼《XX 职业要消失了》，《XXX 岗位将被人工智能取代》之类的网文就骤然开始仇视社会，好像自己明天就没有活路了似的。</p>
+</blockquote>
+<p>除了判断事，<strong>判断人可能更重要一些。</strong></p>
+<p>了解一件事的原理，自己有个基本的是非标准，再去看别人对它的评论，就不难看出评论者的“斤两”。也就不至于被其所说内容之外的语气、措辞，或者刻意的态度所误导。</p>
+<h2 id="追本溯源"><a href="#追本溯源" class="headerlink" title="追本溯源"></a>追本溯源</h2><p><img src="media/15286222922551.jpg" alt=""><br>人工智能从提出到现在几十年，已经数度沉浮。这些年间，模型、算法、实现技术更迭了几代，如今和当年已经是天壤之别。</p>
+<p>但所有的发展都不是凭空出现的，新的方法、技术都是在原有基础上的创新。每一个具体的进步，都仅仅是向前的一小步而已。</p>
+<p>最容易创新的是技巧和细节，越“大”的创新，出现的频率越低。而原理所揭示的，就是这种“大”的，相对稳定的东西。</p>
+<p>机器学习最经典的那几个模型，历史都不短，长则半世纪，短的也快20岁了。</p>
+<p>深度学习，早年是从属于机器学习的神经网络，因为运算能力不够而被束之高阁多年，近些年来借助计算机硬件和分布式计算的发展而大放异彩。</p>
+<p>虽然技术本身和应用结果产生了巨大的飞跃，但从根本的原理层面，却是有着紧密的传承。</p>
+<p>了解一件事是如何运行的；明晰事物发展的客观规律；知道从最简单的原理学起逐层推进，比从一个已经很复杂的状态入手一下子纠缠在各种不得要领的细节中要高效得多。</p>
+<p>有了这样的认识，也就不会被一些名词所局限。不会仅仅因为人家做了一些细节改变，或者换了个说法就以为天翻地覆了。</p>
+<p>具体到 AI 领域，真的了解了支柱技术的基本原理，总不至于：</p>
+<blockquote>
+<p>看了一篇《当这位70岁的 Hinton 老人还在努力推翻自己积累了30年的学术成果……》，便宣布再也不学 CNN、DNN、RNN 了（好像真的学过一样）。</p>
+</blockquote>
+<p>或者</p>
+<blockquote>
+<p>因为《深度学习已死，可微分编程万岁！》刷屏，就以为目前在视觉、语音、NLP 这些领域已经在创造价值的 DL 工具瞬间消失无用了。</p>
+</blockquote>
+<h2 id="精进看待世界的方法"><a href="#精进看待世界的方法" class="headerlink" title="精进看待世界的方法"></a>精进看待世界的方法</h2><p><img src="media/15286223556759.jpg" alt=""></p>
+<p>相较于仍然处于经验（“炼丹”）阶段的深度学习，传统的统计学习模型和方法已经具备了相对完善的理论基础。</p>
+<p>我强烈建议：即使目标岗位是“深度学习工程师”，也应该从统计学习方法学起。</p>
+<p>一方面深度学习与机器学习具有传承的关系，学习后者对于直观地理解前者有极大帮助。</p>
+<p>另一方面，统计学习方法建立在将概念“数字化”（向量化）的基础上，以数学公式和计算来表达概念之间的关联及转化关系——机器学习是一种认识世界的工具，借助它，我们可以从一个新的角度来看待世间万物。</p>
+<p>换句话说，当我们知道机器是怎样通过学习事物特征的概率分布和转换来掌握事物规律的时候，我们就有可能反过来审视自己看待世界的方法，发现其中不合理的部分，并主动优化自己的思维模型。</p>
+<p>比如，我在学习机器学习原理的过程中，对人类的思维方式产生了一些思考：</p>
+<blockquote>
+<p>人类的道德标准实际是一种社会层面的极大似然估计。</p>
+</blockquote>
+<blockquote>
+<p>遗忘是学习的一个步骤，是一种对信息的过滤方法，也是人类在脑力有限情况下对自身大脑的一种保护机制。</p>
+</blockquote>
+<blockquote>
+<p>人类的偏见是一种长期训练的结果，在信息极其匮乏的情况下，对人们做决定往往是有正向帮助的。信息越丰富，偏见的负面影响也就越严重。</p>
+</blockquote>
+<blockquote>
+<p>大多数人最常用的思维模型是 KV Pair，有些人似乎终身只有这一种思维模型。</p>
+</blockquote>
+<blockquote>
+<p>一般人往往默认一类事物的所有个体在概率空间是均匀分布的。在考虑某一个事物个体时，对其在同类事物中所处的位置——是小概率事件还是常态？发生概率相对之前是稳定、上升还是下降？——通常毫不在意，而一概认为被提及的个体很重要。</p>
+</blockquote>
+<blockquote>
+<p>对于原因和结果的关系，多数人根本没想过去探究其转换模型，而直接默认是线性关系。比如：A 地的年均 PM2.5 指数是 B 地的10倍，PM2.5 被认为与肺癌发病率有关，于是想当然以为 A 地肺癌发病率是 B 地10倍。</p>
+</blockquote>
+<blockquote>
+<p>当一件事物比较复杂，涉及多个方面的时候，要对它有一个全面的评价，目前最常用的方法是构建一个线性回归模型：选定一些特征，针对每个特征独立打分，最终加权求和（例如大学排名之类）。</p>
+</blockquote>
+<blockquote>
+<p>线性回归是一个非常简单的模型，往往无法达到很好效果。但即使这样简单的模型，很多人还是无法掌握。</p>
+</blockquote>
+<blockquote>
+<p>面对一项事物，既不能列举出其主要特征，也不知道如何评估每个特征，更不要提再加权求和。多数人最常用的全面评价标准，如果是一手资料则一般以某（几）个个例的某个特征来代替全集；如果是二手资料，则一般选择相信自己最先接触到的他人结论。</p>
+</blockquote>
+<p>以上这些仅是一些很初级的想法，并没有进一步的研究验证。</p>
+<p>我分享出来只是想说明：学习机器学习原理和公式推导，并非只是做一些无聊的数字变换。很可能<strong>由此为我们打开一扇窗，让我们从新的角度就看待世界，并为日常决定的思考过程提供更加可量化方法。</strong></p>
+<hr>
+<p>本系列课程转载自Gitbook李烨的达人课——《机器学习极简入门》</p>
+<p>作者关在在机器学习行业的感悟见解独到，总结的很精炼，内容简洁排版优美。好东西就应该分享给更多人，下面是作者在 Gitbook 的主页。支持为知识付费，非常值得。</p>
+<p><a href="http://gitbook.cn/gitchat/author/58af84f50cfb23590c425a27" target="_blank" rel="noopener">李烨</a></p>
 
       
     </div>
@@ -406,6 +451,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习——李烨/" rel="tag"><i class="fa fa-tag"></i> 机器学习——李烨</a>
+          
+        </div>
+      
 
       
       
@@ -415,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/strame.html" rel="next" title="流式处理框架 & Spark Streaming & Flume & Kafka">
-                <i class="fa fa-chevron-left"></i> 流式处理框架 & Spark Streaming & Flume & Kafka
+              <a href="/2018/ML01.html" rel="next" title="为什么要学原理和公式推导">
+                <i class="fa fa-chevron-left"></i> 为什么要学原理和公式推导
               </a>
             
           </div>
@@ -425,8 +476,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/DataPreprocessing1.html" rel="prev" title="spark数据预处理1">
-                spark数据预处理1 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/ML03.html" rel="prev" title="为什么要学原理和公式推导">
+                为什么要学原理和公式推导 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -599,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-2-3-Strutured-Streaming"><span class="nav-number">1.</span> <span class="nav-text">Spark 2.3 Strutured Streaming</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#毫秒延迟的连续流处理"><span class="nav-number">1.1.</span> <span class="nav-text">毫秒延迟的连续流处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微批处理（micro-batch）"><span class="nav-number">1.1.1.</span> <span class="nav-text">微批处理（micro-batch）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续处理（Continuous-Processing）"><span class="nav-number">1.1.2.</span> <span class="nav-text">连续处理（Continuous Processing）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流与流进行Join"><span class="nav-number">1.2.</span> <span class="nav-text">流与流进行Join</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第02课：学习机器学习原理，改变看待世界的方式"><span class="nav-number">1.</span> <span class="nav-text">第02课：学习机器学习原理，改变看待世界的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#破除迷信"><span class="nav-number">1.1.</span> <span class="nav-text">破除迷信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#追本溯源"><span class="nav-number">1.2.</span> <span class="nav-text">追本溯源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#精进看待世界的方法"><span class="nav-number">1.3.</span> <span class="nav-text">精进看待世界的方法</span></a></li></ol></li></ol></div>
             
 
           </div>
