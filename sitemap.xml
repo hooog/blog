@@ -2,23 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2018/Keras.html</loc>
+    
+    <lastmod>2018-06-21T15:30:05.924Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/confusion_matrix.html</loc>
     
     <lastmod>2018-06-21T15:05:14.714Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E5%88%86%E6%9E%90.html</loc>
-    
-    <lastmod>2018-06-15T01:27:54.700Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/test.html</loc>
-    
-    <lastmod>2018-06-12T04:28:26.778Z</lastmod>
     
   </url>
   
@@ -54,13 +47,6 @@
     <loc>http://www.ihoge.cn/2018/Keras2.html</loc>
     
     <lastmod>2018-06-07T16:20:09.650Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/Keras.html</loc>
-    
-    <lastmod>2018-06-07T15:24:52.309Z</lastmod>
     
   </url>
   
