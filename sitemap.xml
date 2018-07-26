@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2018/moviestatis.html</loc>
+    
+    <lastmod>2018-07-26T09:26:03.714Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/Pyspark_Hive_Mysql.html</loc>
+    
+    <lastmod>2018-06-27T09:20:02.934Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/2018/Keras.html</loc>
     
     <lastmod>2018-06-21T15:30:05.924Z</lastmod>
@@ -12,34 +26,6 @@
     <loc>http://www.ihoge.cn/confusion_matrix.html</loc>
     
     <lastmod>2018-06-21T15:05:14.714Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/ML02.html</loc>
-    
-    <lastmod>2018-06-10T16:42:53.822Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/ML01.html</loc>
-    
-    <lastmod>2018-06-10T16:42:34.749Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/ML03.html</loc>
-    
-    <lastmod>2018-06-10T16:42:04.479Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/Pyspark_Hive_Mysql.html</loc>
-    
-    <lastmod>2018-06-09T10:56:05.005Z</lastmod>
     
   </url>
   

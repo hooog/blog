@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Student" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一、准备数据12345import pandas as pddata = pd.DataFrame([])data[&apos;reviews&apos;] = pd.read_table(&apos;reviews.txt&apos;,header=None,names=[&apos;reviews&apos;])data[&apos;labels&apos;] = pd.read_table(&apos;labels.txt&apos;,header=None,names=[&apos;labels">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用BF神经网络进行基于影评的语义分析">
+<meta property="og:url" content="http://www.ihoge.cn/2018/moviestatis.html">
+<meta property="og:site_name" content="Student">
+<meta property="og:description" content="一、准备数据12345import pandas as pddata = pd.DataFrame([])data[&apos;reviews&apos;] = pd.read_table(&apos;reviews.txt&apos;,header=None,names=[&apos;reviews&apos;])data[&apos;labels&apos;] = pd.read_table(&apos;labels.txt&apos;,header=None,names=[&apos;labels">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.ihoge.cn/2018/media/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-07-26%20%E4%B8%8B%E5%8D%885.16.54.png">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/output_17_0.png">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/output_18_0.png">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/output_44_0.png">
+<meta property="og:updated_time" content="2018-07-26T09:26:03.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用BF神经网络进行基于影评的语义分析">
+<meta name="twitter:description" content="一、准备数据12345import pandas as pddata = pd.DataFrame([])data[&apos;reviews&apos;] = pd.read_table(&apos;reviews.txt&apos;,header=None,names=[&apos;reviews&apos;])data[&apos;labels&apos;] = pd.read_table(&apos;labels.txt&apos;,header=None,names=[&apos;labels">
+<meta name="twitter:image" content="http://www.ihoge.cn/2018/media/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-07-26%20%E4%B8%8B%E5%8D%885.16.54.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ihoge.cn/2018/moviestatis.html"/>
+
+
+
+
+
+  <title>使用BF神经网络进行基于影评的语义分析 | Student</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/hooog" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Student</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ihoge.cn/2018/moviestatis.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘知行">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Student">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用BF神经网络进行基于影评的语义分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-25T12:20:21+08:00">
+                2018-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>K
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="一、准备数据"><a href="#一、准备数据" class="headerlink" title="一、准备数据"></a>一、准备数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">data = pd.DataFrame([])</span><br><span class="line"></span><br><span class="line">data[<span class="string">'reviews'</span>] = pd.read_table(<span class="string">'reviews.txt'</span>,header=<span class="keyword">None</span>,names=[<span class="string">'reviews'</span>])</span><br><span class="line">data[<span class="string">'labels'</span>] = pd.read_table(<span class="string">'labels.txt'</span>,header=<span class="keyword">None</span>,names=[<span class="string">'labels'</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pos_data = data[data[<span class="string">'labels'</span>] == <span class="string">'positive'</span>].reset_index(drop=<span class="keyword">True</span>)</span><br><span class="line">neg_data = data[data[<span class="string">'labels'</span>] == <span class="string">'negative'</span>].reset_index(drop=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pos_data.iloc[:,<span class="number">0</span>][:<span class="number">3</span>]</span><br><span class="line">list(neg_data.iloc[:,<span class="number">0</span>][:<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>[&apos;story of a man who has unnatural feelings for a pig . starts out with a opening scene that is a terrific example of absurd comedy . a formal orchestra audience is turned into an insane  violent mob by the crazy chantings of it  s singers . unfortunately it stays absurd the whole time with no general narrative eventually making it just too off putting . even those from the era should be turned off . the cryptic dialogue would make shakespeare seem easy to a third grader . on a technical level it  s better than you might think with some good cinematography by future great vilmos zsigmond . future stars sally kirkland and frederic forrest can be seen briefly .  &apos;]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> Pie, Style</span><br><span class="line"></span><br><span class="line">pie = Pie(<span class="string">"正负样本占比"</span>, title_pos=<span class="string">'left'</span>)</span><br><span class="line">style = Style()</span><br><span class="line">pie_style = style.add(label_pos = <span class="string">'left'</span>,</span><br><span class="line">                      is_label_show = <span class="keyword">True</span>,</span><br><span class="line">                      label_text_color = <span class="keyword">True</span>,</span><br><span class="line">                      label_text_size = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">pie.add(<span class="string">"样例条数"</span>, [<span class="string">"positive"</span>,<span class="string">"negative"</span>],[len(pos_data), len(neg_data)], **pie_style)</span><br><span class="line">pie</span><br></pre></td></tr></table></figure>
+<p><img src="media/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-07-26%20%E4%B8%8B%E5%8D%885.16.54.png" alt="屏幕快照 2018-07-26 下午5.16.54"></p>
+<h2 id="二、理论验证"><a href="#二、理论验证" class="headerlink" title="二、理论验证"></a>二、理论验证</h2><p>通过观察发现正面评论里常出现些赞美的词汇，负面评论出现批判的词汇。考虑能否根据这个特征来对正负评论进行预测？</p>
+<p>根据这个想法进行一次快速的验证</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.iloc[<span class="number">1</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;story of a man who has unnatural feelings for a pig . starts out with a opening scene that is a terrific example of absurd comedy . a formal orchestra audience is turned into an insane  violent mob by the crazy chantings of it  s singers . unfortunately it stays absurd the whole time with no general narrative eventually making it just too off putting . even those from the era should be turned off . the cryptic dialogue would make shakespeare seem easy to a third grader . on a technical level it  s better than you might think with some good cinematography by future great vilmos zsigmond . future stars sally kirkland and frederic forrest can be seen briefly .  &apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">t0 = time()</span><br><span class="line"><span class="comment"># 创建计数器，分别把正负面评论进行词频统计并把它放在三个计数器里。</span></span><br><span class="line"></span><br><span class="line">positive_counts = Counter()</span><br><span class="line">negative_counts = Counter()</span><br><span class="line">total_counts = Counter()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> words <span class="keyword">in</span> pos_data[<span class="string">'reviews'</span>]:</span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> words.split(<span class="string">" "</span>):</span><br><span class="line">        positive_counts[word] += <span class="number">1</span></span><br><span class="line">        total_counts[word] += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">for</span> words <span class="keyword">in</span> neg_data[<span class="string">'reviews'</span>]:</span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> words.split(<span class="string">" "</span>):</span><br><span class="line">        negative_counts[word] += <span class="number">1</span></span><br><span class="line">        total_counts[word] += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">print(<span class="string">"处理完毕\n耗时&#123;&#125;秒。"</span>.format(time() - t0))</span><br></pre></td></tr></table></figure>
+<pre><code>处理完毕
+耗时5.25712513923645秒。
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># positive_counts.most_common()</span></span><br><span class="line"><span class="comment"># negative_counts.most_common()</span></span><br></pre></td></tr></table></figure>
+<p>通过观察发现无论是正样本还是负样本，词频最高的词汇大多是常用词汇如 a、the、and、of … 等单词。下面把正负计算器汇总起来一起观察</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这里计算的是词汇分别在好评中出现的次数与差评出现次数的比例然后取对数。</span></span><br><span class="line"></span><br><span class="line">pos_neg_ratios = Counter()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> term,cnt <span class="keyword">in</span> total_counts.most_common():</span><br><span class="line"><span class="comment">#     if cnt &gt; 100:</span></span><br><span class="line">        pos_neg_ratio = positive_counts[term] / float(negative_counts[term]+<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 加 1 为了避免分母为负</span></span><br><span class="line">        pos_neg_ratios[term] = pos_neg_ratio</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> word,ratio <span class="keyword">in</span> pos_neg_ratios.most_common():</span><br><span class="line">    <span class="keyword">if</span>(ratio &gt; <span class="number">1</span>):</span><br><span class="line">        pos_neg_ratios[word] = np.log(ratio)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        pos_neg_ratios[word] = -np.log((<span class="number">1</span> / (ratio + <span class="number">0.01</span>)))</span><br><span class="line"><span class="comment"># 如果比例小于 1 说明差评中词汇含量大，这里计算比例倒数的对数。加 0.01 同样为了避免分母为0。</span></span><br><span class="line"><span class="comment"># 最终得出的结果表示，某个单词的值越大则说明该词汇所能代表的正负面情绪越明显。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 正面词汇</span></span><br><span class="line">pos_neg_ratios.most_common()[:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>[(&apos;edie&apos;, 4.6913478822291435),
+ (&apos;antwone&apos;, 4.477336814478207),
+ (&apos;din&apos;, 4.406719247264253),
+ (&apos;gunga&apos;, 4.189654742026425),
+ (&apos;goldsworthy&apos;, 4.174387269895637)]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 负面词汇</span></span><br><span class="line">list(reversed(pos_neg_ratios.most_common()))[:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>[(&apos;whelk&apos;, -4.605170185988092),
+ (&apos;pressurized&apos;, -4.605170185988092),
+ (&apos;bellwood&apos;, -4.605170185988092),
+ (&apos;mwuhahahaa&apos;, -4.605170185988092),
+ (&apos;insulation&apos;, -4.605170185988092)]
+</code></pre><p>通过以上观测，初步验证了我们的想法是有效可行的。某些词汇在好评和差评中出现的次数明显差距很大</p>
+<h2 id="三、构建神经网络原型"><a href="#三、构建神经网络原型" class="headerlink" title="三、构建神经网络原型"></a>三、构建神经网络原型</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">review = <span class="string">"This is a horrible, terrible movie."</span></span><br><span class="line"></span><br><span class="line">Image(filename=<span class="string">'sentiment_network.png'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里是我们基于以上思想构建的简单神经网络原型</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/output_17_0.png" alt="output_17_0"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">review = <span class="string">'The movie was excellent.'</span></span><br><span class="line"></span><br><span class="line">Image(filename=<span class="string">'sentiment_network_pos.png'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/output_18_0.png" alt="output_18_0"></p>
+<h2 id="四、将每条评论转换为输入向量"><a href="#四、将每条评论转换为输入向量" class="headerlink" title="四、将每条评论转换为输入向量"></a>四、将每条评论转换为输入向量</h2><p>这里为了简单起见只是做了对每个出现的单词做个词频统计，但是实际情况往往比这个复杂，事实上大量无关单词的出现严重扰乱了数据的属性。针对这个情况后面会介绍一种简单的处理方式。更优化的处理方式可以参考TF—IDF。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vocab = set(total_counts.keys())</span><br><span class="line">vocab_size = len(vocab)</span><br><span class="line">print(<span class="string">"输入向量的维数："</span>,vocab_size)</span><br></pre></td></tr></table></figure>
+<pre><code>输入向量的维数： 74074
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个容器，这里注意是二维数据集</span></span><br><span class="line">layer_0 = np.zeros((<span class="number">1</span>, vocab_size))</span><br><span class="line">layer_0</span><br></pre></td></tr></table></figure>
+<pre><code>array([[0., 0., 0., ..., 0., 0., 0.]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个带索引的词汇字典</span></span><br><span class="line">word2index = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, word <span class="keyword">in</span> enumerate(vocab):</span><br><span class="line">    word2index[word] = i</span><br><span class="line"><span class="comment"># word2index</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_input_layer</span><span class="params">(review)</span>:</span></span><br><span class="line">    layer_0 = np.zeros((<span class="number">1</span>, vocab_size))    </span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">        layer_0[<span class="number">0</span>][word2index[word]] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> layer_0    </span><br><span class="line">layer_0 = update_input_layer(reviews[<span class="number">0</span>]) <span class="comment"># 测试reviews[0]这条评论转换成数值向量</span></span><br><span class="line">layer_0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为了计算效率高，可以考虑直接进行归一化操作</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([[18.,  0.,  0., ...,  0.,  0.,  0.]])
+</code></pre><p><strong>创建标签</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_target_for_label</span><span class="params">(label)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> label == <span class="string">'POSITIVE'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="comment"># X = layer_1   </span></span><br><span class="line"><span class="comment"># y = [*map(get_target_for_label, labels)]</span></span><br></pre></td></tr></table></figure>
+<h2 id="五、创建神经网络"><a href="#五、创建神经网络" class="headerlink" title="五、创建神经网络"></a>五、创建神经网络</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SentimentNetwork</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, reviews,labels,hidden_nodes = <span class="number">10</span>, learning_rate = <span class="number">0.1</span>)</span>:</span></span><br><span class="line">        </span><br><span class="line">        np.random.seed(<span class="number">1</span>)</span><br><span class="line">        self.pre_process_data(reviews, labels)</span><br><span class="line">        self.init_network(len(self.review_vocab),hidden_nodes, <span class="number">1</span>, learning_rate)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pre_process_data</span><span class="params">(self, reviews, labels)</span>:</span></span><br><span class="line">        </span><br><span class="line">        review_vocab = set()</span><br><span class="line">        <span class="keyword">for</span> review <span class="keyword">in</span> reviews:</span><br><span class="line">            <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">                review_vocab.add(word)</span><br><span class="line"></span><br><span class="line">        self.review_vocab = list(review_vocab)</span><br><span class="line">        label_vocab = set()</span><br><span class="line">        <span class="keyword">for</span> label <span class="keyword">in</span> labels:</span><br><span class="line">            label_vocab.add(label)</span><br><span class="line">        self.label_vocab = list(label_vocab)</span><br><span class="line">        self.review_vocab_size = len(self.review_vocab)</span><br><span class="line">        self.label_vocab_size = len(self.label_vocab)        </span><br><span class="line">        self.word2index = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i, word <span class="keyword">in</span> enumerate(self.review_vocab):</span><br><span class="line">            self.word2index[word] = i</span><br><span class="line">        </span><br><span class="line">        self.label2index = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i, label <span class="keyword">in</span> enumerate(self.label_vocab):</span><br><span class="line">            self.label2index[label] = i</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_network</span><span class="params">(self, input_nodes, hidden_nodes, output_nodes, learning_rate)</span>:</span></span><br><span class="line">        self.input_nodes = input_nodes</span><br><span class="line">        self.hidden_nodes = hidden_nodes</span><br><span class="line">        self.output_nodes = output_nodes</span><br><span class="line">        self.learning_rate = learning_rate</span><br><span class="line">        self.weights_0_1 = np.zeros((self.input_nodes,self.hidden_nodes))</span><br><span class="line">        self.weights_1_2 = np.random.normal(<span class="number">0.0</span>, self.output_nodes**<span class="number">-0.5</span>, </span><br><span class="line">                                                (self.hidden_nodes, self.output_nodes))</span><br><span class="line">        self.layer_0 = np.zeros((<span class="number">1</span>,input_nodes))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update_input_layer</span><span class="params">(self,review)</span>:</span></span><br><span class="line">        self.layer_0 *= <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">            <span class="keyword">if</span>(word <span class="keyword">in</span> self.word2index.keys()):</span><br><span class="line">                self.layer_0[<span class="number">0</span>][self.word2index[word]] += <span class="number">1</span></span><br><span class="line">                </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_target_for_label</span><span class="params">(self,label)</span>:</span></span><br><span class="line">        <span class="keyword">if</span>(label == <span class="string">'POSITIVE'</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(self,x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + np.exp(-x))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid_output_2_derivative</span><span class="params">(self,output)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> output * (<span class="number">1</span> - output)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, training_reviews, training_labels)</span>:</span></span><br><span class="line">        <span class="keyword">assert</span>(len(training_reviews) == len(training_labels))</span><br><span class="line">        correct_so_far = <span class="number">0</span></span><br><span class="line">        start = time.time()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(training_reviews)):</span><br><span class="line">            </span><br><span class="line">            review = training_reviews[i]</span><br><span class="line">            label = training_labels[i]</span><br><span class="line">            </span><br><span class="line">            self.update_input_layer(review)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Hidden layer</span></span><br><span class="line">            layer_1 = self.layer_0.dot(self.weights_0_1)</span><br><span class="line">            layer_2 = self.sigmoid(layer_1.dot(self.weights_1_2))</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Output error</span></span><br><span class="line">            layer_2_error = layer_2 - self.get_target_for_label(label) <span class="comment"># Output layer error is the difference between desired target and actual output.</span></span><br><span class="line">            layer_2_delta = layer_2_error * self.sigmoid_output_2_derivative(layer_2)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Backpropagated error</span></span><br><span class="line">            layer_1_error = layer_2_delta.dot(self.weights_1_2.T) <span class="comment"># errors propagated to the hidden layer</span></span><br><span class="line">            layer_1_delta = layer_1_error <span class="comment"># hidden layer gradients - no nonlinearity so it's the same as the error</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># Update the weights</span></span><br><span class="line">            self.weights_1_2 -= layer_1.T.dot(layer_2_delta) * self.learning_rate <span class="comment"># update hidden-to-output weights with gradient descent step</span></span><br><span class="line">            self.weights_0_1 -= self.layer_0.T.dot(layer_1_delta) * self.learning_rate <span class="comment"># update input-to-hidden weights with gradient descent step</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(layer_2 &gt;= <span class="number">0.5</span> <span class="keyword">and</span> label == <span class="string">'POSITIVE'</span>):</span><br><span class="line">                correct_so_far += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span>(layer_2 &lt; <span class="number">0.5</span> <span class="keyword">and</span> label == <span class="string">'NEGATIVE'</span>):</span><br><span class="line">                correct_so_far += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            elapsed_time = float(time.time() - start)</span><br><span class="line">            reviews_per_second = i / elapsed_time <span class="keyword">if</span> elapsed_time &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            sys.stdout.write(<span class="string">"\rProgress:"</span> + str(<span class="number">100</span> * i/float(len(training_reviews)))[:<span class="number">4</span>] \</span><br><span class="line">                             + <span class="string">"% Speed(reviews/sec):"</span> + str(reviews_per_second)[<span class="number">0</span>:<span class="number">5</span>] \</span><br><span class="line">                             + <span class="string">" #Correct:"</span> + str(correct_so_far) + <span class="string">" #Trained:"</span> + str(i+<span class="number">1</span>) \</span><br><span class="line">                             + <span class="string">" Training Accuracy:"</span> + str(correct_so_far * <span class="number">100</span> / float(i+<span class="number">1</span>))[:<span class="number">4</span>] + <span class="string">"%"</span>)</span><br><span class="line">            <span class="keyword">if</span>(i % <span class="number">2500</span> == <span class="number">0</span>):</span><br><span class="line">                print(<span class="string">""</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(self, testing_reviews, testing_labels)</span>:</span></span><br><span class="line"></span><br><span class="line">        correct = <span class="number">0</span></span><br><span class="line">        start = time.time()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(testing_reviews)):</span><br><span class="line">            pred = self.run(testing_reviews[i])</span><br><span class="line">            <span class="keyword">if</span>(pred == testing_labels[i]):</span><br><span class="line">                correct += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            elapsed_time = float(time.time() - start)</span><br><span class="line">            reviews_per_second = i / elapsed_time <span class="keyword">if</span> elapsed_time &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            sys.stdout.write(<span class="string">"\rProgress:"</span> + str(<span class="number">100</span> * i/float(len(testing_reviews)))[:<span class="number">4</span>] \</span><br><span class="line">                             + <span class="string">"% Speed(reviews/sec):"</span> + str(reviews_per_second)[<span class="number">0</span>:<span class="number">5</span>] \</span><br><span class="line">                             + <span class="string">" #Correct:"</span> + str(correct) + <span class="string">" #Tested:"</span> + str(i+<span class="number">1</span>) \</span><br><span class="line">                             + <span class="string">" Testing Accuracy:"</span> + str(correct * <span class="number">100</span> / float(i+<span class="number">1</span>))[:<span class="number">4</span>] + <span class="string">"%"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, review)</span>:</span></span><br><span class="line">        </span><br><span class="line">        self.update_input_layer(review.lower())</span><br><span class="line">        layer_1 = self.layer_0.dot(self.weights_0_1)</span><br><span class="line">        layer_2 = self.sigmoid(layer_1.dot(self.weights_1_2))</span><br><span class="line">        <span class="keyword">if</span>(layer_2[<span class="number">0</span>] &gt;= <span class="number">0.5</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"POSITIVE"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"NEGATIVE"</span></span><br></pre></td></tr></table></figure>
+<h2 id="六、初步测试"><a href="#六、初步测试" class="headerlink" title="六、初步测试"></a>六、初步测试</h2><p>1、首先训练之前先看下测试效果是否为50%</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mlp = SentimentNetwork(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>], learning_rate=<span class="number">0.1</span>)</span><br><span class="line">mlp.test(reviews[<span class="number">-1000</span>:],labels[<span class="number">-1000</span>:])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:99.9% Speed(reviews/sec):1553. #Correct:500 #Tested:1000 Testing Accuracy:50.0%
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlp.train(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:0.0% Speed(reviews/sec):0.0 #Correct:1 #Trained:1 Training Accuracy:100.%
+Progress:10.4% Speed(reviews/sec):367.6 #Correct:1251 #Trained:2501 Training Accuracy:50.0%
+Progress:20.8% Speed(reviews/sec):366.4 #Correct:2501 #Trained:5001 Training Accuracy:50.0%
+Progress:31.2% Speed(reviews/sec):367.6 #Correct:3751 #Trained:7501 Training Accuracy:50.0%
+Progress:41.6% Speed(reviews/sec):368.7 #Correct:5001 #Trained:10001 Training Accuracy:50.0%
+Progress:52.0% Speed(reviews/sec):368.5 #Correct:6251 #Trained:12501 Training Accuracy:50.0%
+Progress:62.5% Speed(reviews/sec):368.6 #Correct:7501 #Trained:15001 Training Accuracy:50.0%
+Progress:72.9% Speed(reviews/sec):368.6 #Correct:8751 #Trained:17501 Training Accuracy:50.0%
+Progress:83.3% Speed(reviews/sec):368.5 #Correct:10001 #Trained:20001 Training Accuracy:50.0%
+Progress:93.7% Speed(reviews/sec):368.7 #Correct:11251 #Trained:22501 Training Accuracy:50.0%
+Progress:99.9% Speed(reviews/sec):368.4 #Correct:12000 #Trained:24000 Training Accuracy:50.0%
+</code></pre><p>2、正式开始训练，发现准确率一直是50%没有提升，考虑是否因为学习率太高造成无法收敛。</p>
+<p>然后调小学习率重新测试</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mlp = SentimentNetwork(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>], learning_rate=<span class="number">0.01</span>)</span><br><span class="line">mlp.train(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:0.0% Speed(reviews/sec):0.0 #Correct:1 #Trained:1 Training Accuracy:100.%
+Progress:10.4% Speed(reviews/sec):334.6 #Correct:1248 #Trained:2501 Training Accuracy:49.9%
+Progress:20.8% Speed(reviews/sec):334.0 #Correct:2498 #Trained:5001 Training Accuracy:49.9%
+Progress:31.2% Speed(reviews/sec):340.9 #Correct:3748 #Trained:7501 Training Accuracy:49.9%
+Progress:41.6% Speed(reviews/sec):348.0 #Correct:4998 #Trained:10001 Training Accuracy:49.9%
+Progress:52.0% Speed(reviews/sec):348.3 #Correct:6248 #Trained:12501 Training Accuracy:49.9%
+Progress:62.5% Speed(reviews/sec):346.7 #Correct:7490 #Trained:15001 Training Accuracy:49.9%
+Progress:72.9% Speed(reviews/sec):348.8 #Correct:8746 #Trained:17501 Training Accuracy:49.9%
+Progress:83.3% Speed(reviews/sec):348.0 #Correct:9996 #Trained:20001 Training Accuracy:49.9%
+Progress:93.7% Speed(reviews/sec):346.8 #Correct:11246 #Trained:22501 Training Accuracy:49.9%
+Progress:99.9% Speed(reviews/sec):347.0 #Correct:11995 #Trained:24000 Training Accuracy:49.9%
+</code></pre><p>3、继续调小学习率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mlp = SentimentNetwork(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>], learning_rate=<span class="number">0.001</span>)</span><br><span class="line">mlp.train(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:0.0% Speed(reviews/sec):0.0 #Correct:1 #Trained:1 Training Accuracy:100.%
+Progress:10.4% Speed(reviews/sec):318.7 #Correct:1263 #Trained:2501 Training Accuracy:50.4%
+Progress:20.8% Speed(reviews/sec):319.5 #Correct:2615 #Trained:5001 Training Accuracy:52.2%
+Progress:31.2% Speed(reviews/sec):319.9 #Correct:4035 #Trained:7501 Training Accuracy:53.7%
+Progress:41.6% Speed(reviews/sec):320.5 #Correct:5566 #Trained:10001 Training Accuracy:55.6%
+Progress:52.0% Speed(reviews/sec):320.3 #Correct:7047 #Trained:12501 Training Accuracy:56.3%
+Progress:62.5% Speed(reviews/sec):320.1 #Correct:8658 #Trained:15001 Training Accuracy:57.7%
+Progress:72.9% Speed(reviews/sec):319.8 #Correct:10202 #Trained:17501 Training Accuracy:58.2%
+Progress:83.3% Speed(reviews/sec):319.5 #Correct:11889 #Trained:20001 Training Accuracy:59.4%
+Progress:93.7% Speed(reviews/sec):319.3 #Correct:13525 #Trained:22501 Training Accuracy:60.1%
+Progress:99.9% Speed(reviews/sec):319.2 #Correct:14574 #Trained:24000 Training Accuracy:60.7%
+</code></pre><p>4、增加隐藏层</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mlp = SentimentNetwork(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>], hidden_nodes=<span class="number">15</span>, learning_rate=<span class="number">0.0003</span>)</span><br><span class="line">mlp.train(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:0.0% Speed(reviews/sec):0.0 #Correct:1 #Trained:1 Training Accuracy:100.%
+Progress:10.4% Speed(reviews/sec):269.4 #Correct:1304 #Trained:2501 Training Accuracy:52.1%
+Progress:20.8% Speed(reviews/sec):269.0 #Correct:2765 #Trained:5001 Training Accuracy:55.2%
+Progress:31.2% Speed(reviews/sec):268.6 #Correct:4395 #Trained:7501 Training Accuracy:58.5%
+Progress:41.6% Speed(reviews/sec):268.5 #Correct:6083 #Trained:10001 Training Accuracy:60.8%
+Progress:52.0% Speed(reviews/sec):267.9 #Correct:7774 #Trained:12501 Training Accuracy:62.1%
+Progress:62.5% Speed(reviews/sec):267.2 #Correct:9483 #Trained:15001 Training Accuracy:63.2%
+Progress:72.9% Speed(reviews/sec):266.0 #Correct:11199 #Trained:17501 Training Accuracy:63.9%
+Progress:83.3% Speed(reviews/sec):265.0 #Correct:13023 #Trained:20001 Training Accuracy:65.1%
+Progress:93.7% Speed(reviews/sec):264.3 #Correct:14854 #Trained:22501 Training Accuracy:66.0%
+Progress:99.9% Speed(reviews/sec):263.7 #Correct:15993 #Trained:24000 Training Accuracy:66.6%
+</code></pre><p><strong>第一次训练总结：</strong></p>
+<p>通过以上训练效果发现，首先学习率过大时模型无法收敛。当取值为 0.001 时模型开始缓慢的提升。正常情况下模型在刚开始提升的速度很快到后面越来越慢。</p>
+<p>从以上效果来看，当模型准确率提升到60%时速度开始放缓，因此即使增加更多的迭代次数对效果的提升也不会很明显。因此我们考虑时哪些原因可能会造成这种情况。</p>
+<p><strong>需要解决的问题：</strong></p>
+<ul>
+<li>训练速度太慢</li>
+<li>准确度不高</li>
+</ul>
+<p><strong>可能的原因</strong>：</p>
+<ul>
+<li>模型隐藏层节点过少，过于简单</li>
+<li>数据本身存在噪音对模型影响较大</li>
+</ul>
+<p>经过第4步的测试，发现增加隐藏层为20对效果并没有提升，反而效果更差。考虑继续调小学习率到 0.0003 模型准确率得以提升。<br>发现：<em>增加节点数的同时需要调小学习率</em></p>
+<p>如果把神经网络比如成挖掘机，我们的目的时从数据里挖掘出有价值的金子。往往刚开始的时候很难挖到金子，可能并不是因为挖掘机挖的不够深而在于我们挖掘的位置或者操纵它的方式不对。所以我们从新回到数据集上考虑噪音和信号的问题。</p>
+<h2 id="七、关于噪音的分析"><a href="#七、关于噪音的分析" class="headerlink" title="七、关于噪音的分析"></a>七、关于噪音的分析</h2><p><strong>关于噪音</strong></p>
+<p>通过观察数据，发现在每一条评论中的空格字符，以及类似 a、the、at…这些字符占据了大多数甚至时几十个。这样的话放到模型里意味着我们给这些跟情绪不相关的词相当大的权重，而真正有价值的词被淹没了。有价值的情绪词汇出现的频率大多知识出现了1次。我们考虑一个最简单的方式是在评论转换为数值向量的时候不去累加词频而是简单的赋值为1，如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_input_layer</span><span class="params">(self,review)</span>:</span></span><br><span class="line">    self.layer_0 *= <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">        <span class="keyword">if</span>(word <span class="keyword">in</span> self.word2index.keys()):</span><br><span class="line">            self.layer_0[<span class="number">0</span>][self.word2index[word]] = <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>下面我们重新验证下我们的思路：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SentimentNetwork</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, reviews,labels,hidden_nodes = <span class="number">10</span>, learning_rate = <span class="number">0.1</span>)</span>:</span></span><br><span class="line">        </span><br><span class="line">        np.random.seed(<span class="number">1</span>)</span><br><span class="line">        self.pre_process_data(reviews, labels)</span><br><span class="line">        self.init_network(len(self.review_vocab),hidden_nodes, <span class="number">1</span>, learning_rate)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pre_process_data</span><span class="params">(self, reviews, labels)</span>:</span></span><br><span class="line">        </span><br><span class="line">        review_vocab = set()</span><br><span class="line">        <span class="keyword">for</span> review <span class="keyword">in</span> reviews:</span><br><span class="line">            <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">                review_vocab.add(word)</span><br><span class="line"></span><br><span class="line">        self.review_vocab = list(review_vocab)</span><br><span class="line">        label_vocab = set()</span><br><span class="line">        <span class="keyword">for</span> label <span class="keyword">in</span> labels:</span><br><span class="line">            label_vocab.add(label)</span><br><span class="line">        self.label_vocab = list(label_vocab)</span><br><span class="line">        self.review_vocab_size = len(self.review_vocab)</span><br><span class="line">        self.label_vocab_size = len(self.label_vocab)        </span><br><span class="line">        self.word2index = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i, word <span class="keyword">in</span> enumerate(self.review_vocab):</span><br><span class="line">            self.word2index[word] = i</span><br><span class="line">        </span><br><span class="line">        self.label2index = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i, label <span class="keyword">in</span> enumerate(self.label_vocab):</span><br><span class="line">            self.label2index[label] = i</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_network</span><span class="params">(self, input_nodes, hidden_nodes, output_nodes, learning_rate)</span>:</span></span><br><span class="line">        self.input_nodes = input_nodes</span><br><span class="line">        self.hidden_nodes = hidden_nodes</span><br><span class="line">        self.output_nodes = output_nodes</span><br><span class="line">        self.learning_rate = learning_rate</span><br><span class="line">        self.weights_0_1 = np.zeros((self.input_nodes,self.hidden_nodes))</span><br><span class="line">        self.weights_1_2 = np.random.normal(<span class="number">0.0</span>, self.output_nodes**<span class="number">-0.5</span>, </span><br><span class="line">                                                (self.hidden_nodes, self.output_nodes))</span><br><span class="line">        self.layer_0 = np.zeros((<span class="number">1</span>,input_nodes))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update_input_layer</span><span class="params">(self,review)</span>:</span></span><br><span class="line">        self.layer_0 *= <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">            <span class="keyword">if</span>(word <span class="keyword">in</span> self.word2index.keys()):</span><br><span class="line">                self.layer_0[<span class="number">0</span>][self.word2index[word]] = <span class="number">1</span></span><br><span class="line">                </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_target_for_label</span><span class="params">(self,label)</span>:</span></span><br><span class="line">        <span class="keyword">if</span>(label == <span class="string">'POSITIVE'</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(self,x)</span>:</span></span><br><span class="line"><span class="comment">#         return 1 / (1 + np.exp(-x))</span></span><br><span class="line">        <span class="keyword">return</span> (np.exp(x) - np.exp(-x)) / (np.exp(x) + np.exp(-x))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid_output_2_derivative</span><span class="params">(self,output)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> output * (<span class="number">1</span> - output)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, training_reviews, training_labels)</span>:</span></span><br><span class="line">        <span class="keyword">assert</span>(len(training_reviews) == len(training_labels))</span><br><span class="line">        correct_so_far = <span class="number">0</span></span><br><span class="line">        start = time.time()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(training_reviews)):</span><br><span class="line">            </span><br><span class="line">            review = training_reviews[i]</span><br><span class="line">            label = training_labels[i]</span><br><span class="line">            </span><br><span class="line">            self.update_input_layer(review)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Hidden layer</span></span><br><span class="line">            layer_1 = self.layer_0.dot(self.weights_0_1)</span><br><span class="line">            layer_2 = self.sigmoid(layer_1.dot(self.weights_1_2))</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Output error</span></span><br><span class="line">            layer_2_error = layer_2 - self.get_target_for_label(label) <span class="comment"># Output layer error is the difference between desired target and actual output.</span></span><br><span class="line">            layer_2_delta = layer_2_error * self.sigmoid_output_2_derivative(layer_2)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Backpropagated error</span></span><br><span class="line">            layer_1_error = layer_2_delta.dot(self.weights_1_2.T) <span class="comment"># errors propagated to the hidden layer</span></span><br><span class="line">            layer_1_delta = layer_1_error <span class="comment"># hidden layer gradients - no nonlinearity so it's the same as the error</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># Update the weights</span></span><br><span class="line">            self.weights_1_2 -= layer_1.T.dot(layer_2_delta) * self.learning_rate <span class="comment"># update hidden-to-output weights with gradient descent step</span></span><br><span class="line">            self.weights_0_1 -= self.layer_0.T.dot(layer_1_delta) * self.learning_rate <span class="comment"># update input-to-hidden weights with gradient descent step</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(layer_2 &gt;= <span class="number">0.5</span> <span class="keyword">and</span> label == <span class="string">'POSITIVE'</span>):</span><br><span class="line">                correct_so_far += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span>(layer_2 &lt; <span class="number">0.5</span> <span class="keyword">and</span> label == <span class="string">'NEGATIVE'</span>):</span><br><span class="line">                correct_so_far += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            elapsed_time = float(time.time() - start)</span><br><span class="line">            reviews_per_second = i / elapsed_time <span class="keyword">if</span> elapsed_time &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            sys.stdout.write(<span class="string">"\rProgress:"</span> + str(<span class="number">100</span> * i/float(len(training_reviews)))[:<span class="number">4</span>] \</span><br><span class="line">                             + <span class="string">"% Speed(reviews/sec):"</span> + str(reviews_per_second)[<span class="number">0</span>:<span class="number">5</span>] \</span><br><span class="line">                             + <span class="string">" #Correct:"</span> + str(correct_so_far) + <span class="string">" #Trained:"</span> + str(i+<span class="number">1</span>) \</span><br><span class="line">                             + <span class="string">" Training Accuracy:"</span> + str(correct_so_far * <span class="number">100</span> / float(i+<span class="number">1</span>))[:<span class="number">4</span>] + <span class="string">"%"</span>)</span><br><span class="line">            <span class="keyword">if</span>(i % <span class="number">2500</span> == <span class="number">0</span>):</span><br><span class="line">                print(<span class="string">""</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(self, testing_reviews, testing_labels)</span>:</span></span><br><span class="line"></span><br><span class="line">        correct = <span class="number">0</span></span><br><span class="line">        start = time.time()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(testing_reviews)):</span><br><span class="line">            pred = self.run(testing_reviews[i])</span><br><span class="line">            <span class="keyword">if</span>(pred == testing_labels[i]):</span><br><span class="line">                correct += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            elapsed_time = float(time.time() - start)</span><br><span class="line">            reviews_per_second = i / elapsed_time <span class="keyword">if</span> elapsed_time &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            sys.stdout.write(<span class="string">"\rProgress:"</span> + str(<span class="number">100</span> * i/float(len(testing_reviews)))[:<span class="number">4</span>] \</span><br><span class="line">                             + <span class="string">"% Speed(reviews/sec):"</span> + str(reviews_per_second)[<span class="number">0</span>:<span class="number">5</span>] \</span><br><span class="line">                             + <span class="string">" #Correct:"</span> + str(correct) + <span class="string">" #Tested:"</span> + str(i+<span class="number">1</span>) \</span><br><span class="line">                             + <span class="string">" Testing Accuracy:"</span> + str(correct * <span class="number">100</span> / float(i+<span class="number">1</span>))[:<span class="number">4</span>] + <span class="string">"%"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, review)</span>:</span></span><br><span class="line">        </span><br><span class="line">        self.update_input_layer(review.lower())</span><br><span class="line">        layer_1 = self.layer_0.dot(self.weights_0_1)</span><br><span class="line">        layer_2 = self.sigmoid(layer_1.dot(self.weights_1_2))</span><br><span class="line">        <span class="keyword">if</span>(layer_2[<span class="number">0</span>] &gt;= <span class="number">0.5</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"POSITIVE"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"NEGATIVE"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mlp = SentimentNetwork(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>], hidden_nodes=<span class="number">15</span>, learning_rate=<span class="number">0.0003</span>)</span><br><span class="line">mlp.train(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:0.0% Speed(reviews/sec):0.0 #Correct:1 #Trained:1 Training Accuracy:100.%
+Progress:10.4% Speed(reviews/sec):206.7 #Correct:1909 #Trained:2501 Training Accuracy:76.3%
+Progress:20.8% Speed(reviews/sec):207.2 #Correct:3917 #Trained:5001 Training Accuracy:78.3%
+Progress:31.2% Speed(reviews/sec):206.2 #Correct:5979 #Trained:7501 Training Accuracy:79.7%
+Progress:41.6% Speed(reviews/sec):204.5 #Correct:8068 #Trained:10001 Training Accuracy:80.6%
+Progress:52.0% Speed(reviews/sec):203.6 #Correct:10165 #Trained:12501 Training Accuracy:81.3%
+Progress:62.5% Speed(reviews/sec):203.1 #Correct:12236 #Trained:15001 Training Accuracy:81.5%
+Progress:72.9% Speed(reviews/sec):202.6 #Correct:14312 #Trained:17501 Training Accuracy:81.7%
+Progress:83.3% Speed(reviews/sec):202.2 #Correct:16455 #Trained:20001 Training Accuracy:82.2%
+Progress:93.7% Speed(reviews/sec):202.0 #Correct:18598 #Trained:22501 Training Accuracy:82.6%
+Progress:99.9% Speed(reviews/sec):201.8 #Correct:19894 #Trained:24000 Training Accuracy:82.8%
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mlp = SentimentNetwork(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>], hidden_nodes=<span class="number">10</span>, learning_rate=<span class="number">0.1</span>)</span><br><span class="line">mlp.train(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:0.0% Speed(reviews/sec):0.0 #Correct:1 #Trained:1 Training Accuracy:100.%
+Progress:10.4% Speed(reviews/sec):264.1 #Correct:1812 #Trained:2501 Training Accuracy:72.4%
+Progress:20.8% Speed(reviews/sec):264.1 #Correct:3802 #Trained:5001 Training Accuracy:76.0%
+Progress:31.2% Speed(reviews/sec):264.2 #Correct:5896 #Trained:7501 Training Accuracy:78.6%
+Progress:41.6% Speed(reviews/sec):264.2 #Correct:8045 #Trained:10001 Training Accuracy:80.4%
+Progress:52.0% Speed(reviews/sec):264.2 #Correct:10172 #Trained:12501 Training Accuracy:81.3%
+Progress:62.5% Speed(reviews/sec):264.2 #Correct:12319 #Trained:15001 Training Accuracy:82.1%
+Progress:72.9% Speed(reviews/sec):264.0 #Correct:14438 #Trained:17501 Training Accuracy:82.4%
+Progress:83.3% Speed(reviews/sec):263.7 #Correct:16615 #Trained:20001 Training Accuracy:83.0%
+Progress:93.7% Speed(reviews/sec):263.5 #Correct:18796 #Trained:22501 Training Accuracy:83.5%
+Progress:99.9% Speed(reviews/sec):263.5 #Correct:20117 #Trained:24000 Training Accuracy:83.8%
+</code></pre><ul>
+<li>看下在测试集的效果</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlp.test(reviews[<span class="number">-1000</span>:],labels[<span class="number">-1000</span>:])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:99.9% Speed(reviews/sec):1620. #Correct:849 #Tested:1000 Testing Accuracy:84.9%
+</code></pre><h2 id="八、关于网络计算效率低的分析"><a href="#八、关于网络计算效率低的分析" class="headerlink" title="八、关于网络计算效率低的分析"></a>八、关于网络计算效率低的分析</h2><p>通过上面的数据优化大大提升了模型的准确率，但是训练的速度还是很慢。所以我们考虑下这么才能提升训练的速度呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Image(filename=<span class="string">'sentiment_network.png'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/output_44_0.png" alt="output_44_0"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_input_layer</span><span class="params">(review)</span>:</span></span><br><span class="line">    layer_0 = np.zeros((<span class="number">1</span>, vocab_size))    </span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">        layer_0[<span class="number">0</span>][word2index[word]] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> layer_0    </span><br><span class="line">layer_0 = update_input_layer(reviews[<span class="number">0</span>]) <span class="comment"># 测试reviews[0]这条评论转换成数值向量</span></span><br><span class="line">layer_0.sum()</span><br></pre></td></tr></table></figure>
+<pre><code>93.0
+</code></pre><p>再次考虑我们的模型，这里我们的输入层节点个数为 vocab_size(74074) 个，在 <code>reviews[0]</code> 中有数值的词汇只有93个，是个极度稀疏的向量。其中大多数都为 0 ，在输入值为 0 的时候乘以权重得出结果仍然为0，这不仅没有任何意义还大大增加的计算量。 所以我们考虑用什么方式可以优化这个问题呢？</p>
+<p><strong>解决思路：</strong><br>我们记录下非 0 元素的索引，然后在计算输出层到隐藏层的时候，只在非 0 元素索引的位置乘以权重然后进行求和，这样就大大节省了计算量。</p>
+<p>示例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">layer_0 = np.zeros(<span class="number">10</span>)</span><br><span class="line">layer_0[<span class="number">4</span>] = <span class="number">1</span></span><br><span class="line">layer_0[<span class="number">9</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">weight_0_1 = np.random.randn(<span class="number">10</span>,<span class="number">5</span>)</span><br><span class="line">indexs = [<span class="number">4</span>,<span class="number">9</span>]</span><br><span class="line">layer_1 = np.zeros(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> indexs:</span><br><span class="line">    layer_1 += layer_0[index] * weight_0_1[index]</span><br><span class="line"></span><br><span class="line">layer_1.sum()</span><br></pre></td></tr></table></figure>
+<pre><code>-2.131818189044033
+</code></pre><p>进一步考虑，这里我们的输入值都为 1， 因此 1 乘以权值这个计算步骤也可以省略，只需要对索引位置的权值进行求和就好了。</p>
+<p>下面我们来实现这一思路：</p>
+<ul>
+<li>不再让隐藏层中做乘以 0 的步骤</li>
+<li>不再让隐藏层做权重乘以 1 的步骤</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SentimentNetwork</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, reviews,labels,hidden_nodes = <span class="number">10</span>, learning_rate = <span class="number">0.1</span>)</span>:</span></span><br><span class="line">        np.random.seed(<span class="number">1</span>)</span><br><span class="line">        self.pre_process_data(reviews, labels)</span><br><span class="line">        self.init_network(len(self.review_vocab),hidden_nodes, <span class="number">1</span>, learning_rate)</span><br><span class="line">        <span class="comment"># 输入层节点个数为词汇库长度</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pre_process_data</span><span class="params">(self, reviews, labels)</span>:</span></span><br><span class="line">        <span class="comment"># 提取出所有词汇</span></span><br><span class="line">        review_vocab = set()</span><br><span class="line">        <span class="keyword">for</span> review <span class="keyword">in</span> reviews:</span><br><span class="line">            <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">                review_vocab.add(word)</span><br><span class="line">        self.review_vocab = list(review_vocab)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 提取标签</span></span><br><span class="line">        label_vocab = set()</span><br><span class="line">        <span class="keyword">for</span> label <span class="keyword">in</span> labels:</span><br><span class="line">            label_vocab.add(label)</span><br><span class="line">        self.label_vocab = list(label_vocab)</span><br><span class="line">        </span><br><span class="line">        self.review_vocab_size = len(self.review_vocab)</span><br><span class="line">        self.label_vocab_size = len(self.label_vocab)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 创建词汇库字典</span></span><br><span class="line">        self.word2index = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i, word <span class="keyword">in</span> enumerate(self.review_vocab):</span><br><span class="line">            self.word2index[word] = i</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 创建标签索引字典</span></span><br><span class="line">        self.label2index = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i, label <span class="keyword">in</span> enumerate(self.label_vocab):</span><br><span class="line">            self.label2index[label] = i</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化模型，输入节点为词汇库长度，隐藏层节点默认为10，输出节点默认为1，学习率默认为0.1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_network</span><span class="params">(self, input_nodes, hidden_nodes, output_nodes, learning_rate)</span>:</span></span><br><span class="line">        self.input_nodes = input_nodes</span><br><span class="line">        self.hidden_nodes = hidden_nodes</span><br><span class="line">        self.output_nodes = output_nodes</span><br><span class="line">        self.learning_rate = learning_rate</span><br><span class="line"></span><br><span class="line">        self.weights_0_1 = np.zeros((self.input_nodes,self.hidden_nodes))</span><br><span class="line">        self.weights_1_2 = np.random.normal(<span class="number">0.0</span>, self.output_nodes**<span class="number">-0.5</span>, </span><br><span class="line">                                                (self.hidden_nodes, self.output_nodes))</span><br><span class="line">        </span><br><span class="line">        self.layer_1 = np.zeros((<span class="number">1</span>,hidden_nodes))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 定义标签转换函数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_target_for_label</span><span class="params">(self,label)</span>:</span></span><br><span class="line">        <span class="keyword">if</span>(label == <span class="string">'POSITIVE'</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(self,x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + np.exp(-x))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid_output_2_derivative</span><span class="params">(self,output)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> output * (<span class="number">1</span> - output)</span><br><span class="line">    </span><br><span class="line"><span class="comment">#=======================训练函数=============================    </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, training_reviews_raw, training_labels)</span>:</span></span><br><span class="line"></span><br><span class="line">        training_reviews = list()</span><br><span class="line">        <span class="keyword">for</span> review <span class="keyword">in</span> training_reviews_raw:</span><br><span class="line">            indices = set()</span><br><span class="line">            <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">                <span class="keyword">if</span>(word <span class="keyword">in</span> self.word2index.keys()):</span><br><span class="line">                    indices.add(self.word2index[word])</span><br><span class="line">            training_reviews.append(list(indices))</span><br><span class="line">        <span class="comment"># 以上代码记录下每条评论的每个词汇在对应字典中的位置索引，以此作为输入数据。</span></span><br><span class="line">        <span class="comment"># 最终这里生成的training_reviews里面存放的是每条影评的各个词汇在词汇字典里的索引。</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">assert</span>(len(training_reviews) == len(training_labels))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义一个容器计算正确的个数用以计算准确率</span></span><br><span class="line">        correct_so_far = <span class="number">0</span></span><br><span class="line">        start = time.time()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(training_reviews)):</span><br><span class="line">            review = training_reviews[i]</span><br><span class="line">            label = training_labels[i]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 输入层</span></span><br><span class="line">            self.layer_1 *= <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> review:</span><br><span class="line">                self.layer_1 += self.weights_0_1[index]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 输出层</span></span><br><span class="line">            layer_2 = self.sigmoid(self.layer_1.dot(self.weights_1_2))            </span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 输出层误差和梯度</span></span><br><span class="line">            layer_2_error = layer_2 - self.get_target_for_label(label) <span class="comment"># Output layer error is the difference between desired target and actual output.</span></span><br><span class="line">            layer_2_delta = layer_2_error * self.sigmoid_output_2_derivative(layer_2)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 反向传播误差和梯度</span></span><br><span class="line">            layer_1_error = layer_2_delta.dot(self.weights_1_2.T) <span class="comment"># errors propagated to the hidden layer</span></span><br><span class="line">            layer_1_delta = layer_1_error <span class="comment"># hidden layer gradients - no nonlinearity so it's the same as the error</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 更新权值</span></span><br><span class="line">            self.weights_1_2 -= self.layer_1.T.dot(layer_2_delta) * self.learning_rate <span class="comment"># update hidden-to-output weights with gradient descent step</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> review:</span><br><span class="line">                self.weights_0_1[index] -= layer_1_delta[<span class="number">0</span>] * self.learning_rate <span class="comment"># update input-to-hidden weights with gradient descent step</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(layer_2 &gt;= <span class="number">0.5</span> <span class="keyword">and</span> label == <span class="string">'POSITIVE'</span>):</span><br><span class="line">                correct_so_far += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span>(layer_2 &lt; <span class="number">0.5</span> <span class="keyword">and</span> label == <span class="string">'NEGATIVE'</span>):</span><br><span class="line">                correct_so_far += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            elapsed_time = float(time.time() - start)</span><br><span class="line">            reviews_per_second = i / elapsed_time <span class="keyword">if</span> elapsed_time &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            sys.stdout.write(<span class="string">"\rProgress:"</span> + str(<span class="number">100</span> * i/float(len(training_reviews)))[:<span class="number">4</span>] \</span><br><span class="line">                             + <span class="string">"% Speed(reviews/sec):"</span> + str(reviews_per_second)[<span class="number">0</span>:<span class="number">5</span>] \</span><br><span class="line">                             + <span class="string">" #Correct:"</span> + str(correct_so_far) + <span class="string">" #Trained:"</span> + str(i+<span class="number">1</span>) \</span><br><span class="line">                             + <span class="string">" Training Accuracy:"</span> + str(correct_so_far * <span class="number">100</span> / float(i+<span class="number">1</span>))[:<span class="number">4</span>] + <span class="string">"%"</span>)</span><br><span class="line">            <span class="keyword">if</span>(i % <span class="number">2500</span> == <span class="number">0</span>):</span><br><span class="line">                print(<span class="string">""</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(self, testing_reviews, testing_labels)</span>:</span></span><br><span class="line">        </span><br><span class="line">        correct = <span class="number">0</span></span><br><span class="line">        start = time.time()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(testing_reviews)):</span><br><span class="line">            pred = self.run(testing_reviews[i])</span><br><span class="line">            <span class="keyword">if</span>(pred == testing_labels[i]):</span><br><span class="line">                correct += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            elapsed_time = float(time.time() - start)</span><br><span class="line">            reviews_per_second = i / elapsed_time <span class="keyword">if</span> elapsed_time &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            sys.stdout.write(<span class="string">"\rProgress:"</span> + str(<span class="number">100</span> * i/float(len(testing_reviews)))[:<span class="number">4</span>] \</span><br><span class="line">                             + <span class="string">"% Speed(reviews/sec):"</span> + str(reviews_per_second)[<span class="number">0</span>:<span class="number">5</span>] \</span><br><span class="line">                             + <span class="string">" #Correct:"</span> + str(correct) + <span class="string">" #Tested:"</span> + str(i+<span class="number">1</span>) \</span><br><span class="line">                             + <span class="string">" Testing Accuracy:"</span> + str(correct * <span class="number">100</span> / float(i+<span class="number">1</span>))[:<span class="number">4</span>] + <span class="string">"%"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, review)</span>:</span></span><br><span class="line">        self.layer_1 *= <span class="number">0</span></span><br><span class="line">        unique_indices = set()</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> review.lower().split(<span class="string">" "</span>):</span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">in</span> self.word2index.keys():</span><br><span class="line">                unique_indices.add(self.word2index[word])</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> unique_indices:</span><br><span class="line">            self.layer_1 += self.weights_0_1[index]</span><br><span class="line">        </span><br><span class="line">        layer_2 = self.sigmoid(self.layer_1.dot(self.weights_1_2))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(layer_2[<span class="number">0</span>] &gt;= <span class="number">0.5</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"POSITIVE"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"NEGATIVE"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mlp = SentimentNetwork(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>], hidden_nodes=<span class="number">15</span>, learning_rate=<span class="number">0.003</span>)</span><br><span class="line">mlp.train(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:0.0% Speed(reviews/sec):0.0 #Correct:1 #Trained:1 Training Accuracy:100.%
+Progress:10.4% Speed(reviews/sec):1871. #Correct:1974 #Trained:2501 Training Accuracy:78.9%
+Progress:20.8% Speed(reviews/sec):1753. #Correct:4037 #Trained:5001 Training Accuracy:80.7%
+Progress:31.2% Speed(reviews/sec):1741. #Correct:6163 #Trained:7501 Training Accuracy:82.1%
+Progress:41.6% Speed(reviews/sec):1696. #Correct:8320 #Trained:10001 Training Accuracy:83.1%
+Progress:52.0% Speed(reviews/sec):1692. #Correct:10490 #Trained:12501 Training Accuracy:83.9%
+Progress:62.5% Speed(reviews/sec):1695. #Correct:12636 #Trained:15001 Training Accuracy:84.2%
+Progress:72.9% Speed(reviews/sec):1696. #Correct:14773 #Trained:17501 Training Accuracy:84.4%
+Progress:83.3% Speed(reviews/sec):1675. #Correct:16959 #Trained:20001 Training Accuracy:84.7%
+Progress:93.7% Speed(reviews/sec):1678. #Correct:19150 #Trained:22501 Training Accuracy:85.1%
+Progress:99.9% Speed(reviews/sec):1674. #Correct:20467 #Trained:24000 Training Accuracy:85.2%
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlp.test(reviews[<span class="number">-1000</span>:], labels[<span class="number">-1000</span>:])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:99.9% Speed(reviews/sec):2611. #Correct:857 #Tested:1000 Testing Accuracy:85.7%
+</code></pre><h2 id="九、进一步降低降低噪音"><a href="#九、进一步降低降低噪音" class="headerlink" title="九、进一步降低降低噪音"></a>九、进一步降低降低噪音</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 正面评论经常出现的词汇</span></span><br><span class="line">pos_neg_ratios.most_common()</span><br></pre></td></tr></table></figure>
+<pre><code>[(&apos;edie&apos;, 4.6913478822291435),
+ (&apos;antwone&apos;, 4.477336814478207),
+ (&apos;din&apos;, 4.406719247264253),
+ (&apos;gunga&apos;, 4.189654742026425),
+ (&apos;goldsworthy&apos;, 4.174387269895637),
+ (&apos;gypo&apos;, 4.0943445622221),
+ (&apos;yokai&apos;, 4.0943445622221),
+ (&apos;paulie&apos;, 4.07753744390572),
+ (&apos;visconti&apos;, 3.9318256327243257),
+ (&apos;flavia&apos;, 3.9318256327243257),
+ (&apos;blandings&apos;, 3.871201010907891),
+ (&apos;kells&apos;, 3.871201010907891),
+ (&apos;brashear&apos;, 3.8501476017100584),
+ ...]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 负面评论常出现词汇</span></span><br><span class="line">list(reversed(pos_neg_ratios.most_common()))[<span class="number">0</span>:<span class="number">30</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>[(&apos;whelk&apos;, -4.605170185988092),
+ (&apos;pressurized&apos;, -4.605170185988092),
+ (&apos;bellwood&apos;, -4.605170185988092),
+ (&apos;mwuhahahaa&apos;, -4.605170185988092),
+ (&apos;insulation&apos;, -4.605170185988092),
+ (&apos;hoodies&apos;, -4.605170185988092),
+ (&apos;yaks&apos;, -4.605170185988092),
+ (&apos;deamon&apos;, -4.605170185988092),
+ (&apos;ziller&apos;, -4.605170185988092),
+ (&apos;lagomorph&apos;, -4.605170185988092),
+ (&apos;marinaro&apos;, -4.605170185988092),
+ (&apos;accelerant&apos;, -4.605170185988092),
+ (&apos;yez&apos;, -4.605170185988092),
+ (&apos;superhu&apos;, -4.605170185988092),
+ (&apos;fastidiously&apos;, -4.605170185988092),
+ (&apos;spotlessly&apos;, -4.605170185988092),
+ (&apos;dahlink&apos;, -4.605170185988092),
+ (&apos;rebanished&apos;, -4.605170185988092),
+ (&apos;unmated&apos;, -4.605170185988092),
+ (&apos;wushu&apos;, -4.605170185988092),
+ (&apos;nix&apos;, -4.605170185988092),
+ (&apos;echance&apos;, -4.605170185988092),
+ (&apos;vannet&apos;, -4.605170185988092),
+ (&apos;hodet&apos;, -4.605170185988092),
+ (&apos;francie&apos;, -4.605170185988092),
+ (&apos;vivisects&apos;, -4.605170185988092),
+ (&apos;degeneration&apos;, -4.605170185988092),
+ (&apos;lowlight&apos;, -4.605170185988092),
+ (&apos;slackly&apos;, -4.605170185988092),
+ (&apos;unrurly&apos;, -4.605170185988092)]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bokeh.models <span class="keyword">import</span> ColumnDataSource, LabelSet</span><br><span class="line"><span class="keyword">from</span> bokeh.plotting <span class="keyword">import</span> figure, show, output_file</span><br><span class="line"><span class="keyword">from</span> bokeh.io <span class="keyword">import</span> output_notebook</span><br><span class="line">output_notebook()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;div class=&quot;bk-root&quot;&gt;
+    &lt;a href=&quot;https://bokeh.pydata.org&quot; target=&quot;_blank&quot; class=&quot;bk-logo bk-logo-small bk-logo-notebook&quot;&gt;&lt;/a&gt;
+    &lt;span id=&quot;98fe141d-97bd-4335-a540-473361f947a4&quot;&gt;Loading BokehJS ...&lt;/span&gt;
+&lt;/div&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">hist, edges = np.histogram(list(map(<span class="keyword">lambda</span> x:x[<span class="number">1</span>],</span><br><span class="line">                           pos_neg_ratios.most_common())), </span><br><span class="line">                           density=<span class="keyword">True</span>, bins=<span class="number">100</span>, normed=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">p = figure(tools=<span class="string">"pan,wheel_zoom,reset,save"</span>,</span><br><span class="line">           toolbar_location=<span class="string">"above"</span>,</span><br><span class="line">           title=<span class="string">"Word Positive/Negative Affinity Distribution"</span>)</span><br><span class="line">p.quad(top=hist, bottom=<span class="number">0</span>, left=edges[:<span class="number">-1</span>], right=edges[<span class="number">1</span>:], </span><br><span class="line">       line_color=<span class="string">"#555555"</span>)</span><br><span class="line">show(p)</span><br></pre></td></tr></table></figure>
+<div class="bk-root"><br>    <div class="bk-plotdiv" id="40753858-7472-4975-9133-4441fbe5c51e"></div><br></div>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">frequency_frequency = Counter()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> word, cnt <span class="keyword">in</span> total_counts.most_common():</span><br><span class="line">    frequency_frequency[cnt] += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hist, edges = np.histogram(list(map(<span class="keyword">lambda</span> x:x[<span class="number">1</span>],frequency_frequency.most_common())), density=<span class="keyword">True</span>, bins=<span class="number">100</span>, normed=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">p = figure(tools=<span class="string">"pan,wheel_zoom,reset,save"</span>,</span><br><span class="line">           toolbar_location=<span class="string">"above"</span>,</span><br><span class="line">           title=<span class="string">"The frequency distribution of the words in our corpus"</span>)</span><br><span class="line">p.quad(top=hist, bottom=<span class="number">0</span>, left=edges[:<span class="number">-1</span>], right=edges[<span class="number">1</span>:], line_color=<span class="string">"#555555"</span>)</span><br><span class="line">show(p)</span><br></pre></td></tr></table></figure>
+<div class="bk-root"><br>    <div class="bk-plotdiv" id="9a042fd8-c91e-401f-9639-5c7a92465777"></div><br></div>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SentimentNetwork</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, reviews,labels,min_count = <span class="number">10</span>,polarity_cutoff = <span class="number">0.1</span>,hidden_nodes = <span class="number">10</span>, learning_rate = <span class="number">0.1</span>)</span>:</span></span><br><span class="line">        np.random.seed(<span class="number">1</span>)</span><br><span class="line">        self.pre_process_data(reviews, labels, polarity_cutoff, min_count)</span><br><span class="line">        self.init_network(len(self.review_vocab),hidden_nodes, <span class="number">1</span>, learning_rate)</span><br><span class="line">        <span class="comment"># 输入层节点个数为词汇库长度</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pre_process_data</span><span class="params">(self, reviews, labels, polarity_cutoff, min_count)</span>:</span>        <span class="comment"># 提取出所有词汇</span></span><br><span class="line">        <span class="comment">#---------------进一步去除噪音-------------------</span></span><br><span class="line">        positive_counts = Counter()</span><br><span class="line">        negative_counts = Counter()</span><br><span class="line">        total_counts = Counter()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(reviews)):</span><br><span class="line">            <span class="keyword">if</span>(labels[i] == <span class="string">'POSITIVE'</span>):</span><br><span class="line">                <span class="keyword">for</span> word <span class="keyword">in</span> reviews[i].split(<span class="string">" "</span>):</span><br><span class="line">                    positive_counts[word] += <span class="number">1</span></span><br><span class="line">                    total_counts[word] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">for</span> word <span class="keyword">in</span> reviews[i].split(<span class="string">" "</span>):</span><br><span class="line">                    negative_counts[word] += <span class="number">1</span></span><br><span class="line">                    total_counts[word] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        pos_neg_ratios = Counter()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> term,cnt <span class="keyword">in</span> list(total_counts.most_common()):</span><br><span class="line">            <span class="keyword">if</span>(cnt &gt;= <span class="number">50</span>):</span><br><span class="line">                pos_neg_ratio = positive_counts[term] / float(negative_counts[term]+<span class="number">1</span>)</span><br><span class="line">                pos_neg_ratios[term] = pos_neg_ratio</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> word,ratio <span class="keyword">in</span> pos_neg_ratios.most_common():</span><br><span class="line">            <span class="keyword">if</span>(ratio &gt; <span class="number">1</span>):</span><br><span class="line">                pos_neg_ratios[word] = np.log(ratio)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                pos_neg_ratios[word] = -np.log((<span class="number">1</span> / (ratio + <span class="number">0.01</span>)))</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="comment"># populate review_vocab with all of the words in the given reviews</span></span><br><span class="line">        review_vocab = set()</span><br><span class="line">        <span class="keyword">for</span> review <span class="keyword">in</span> reviews:</span><br><span class="line">            <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">                <span class="comment">## New for Project 6: only add words that occur at least min_count times</span></span><br><span class="line">                <span class="comment">#                     and for words with pos/neg ratios, only add words</span></span><br><span class="line">                <span class="comment">#                     that meet the polarity_cutoff</span></span><br><span class="line">                <span class="keyword">if</span>(total_counts[word] &gt; min_count):</span><br><span class="line">                    <span class="keyword">if</span>(word <span class="keyword">in</span> pos_neg_ratios.keys()):</span><br><span class="line">                        <span class="keyword">if</span>((pos_neg_ratios[word] &gt;= polarity_cutoff) <span class="keyword">or</span> (pos_neg_ratios[word] &lt;= -polarity_cutoff)):</span><br><span class="line">                            review_vocab.add(word)</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        review_vocab.add(word)</span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment">## </span></span><br><span class="line">        <span class="comment">## ----------------------------------------</span></span><br><span class="line">        </span><br><span class="line">        self.review_vocab = list(review_vocab)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 提取标签</span></span><br><span class="line">        label_vocab = set()</span><br><span class="line">        <span class="keyword">for</span> label <span class="keyword">in</span> labels:</span><br><span class="line">            label_vocab.add(label)</span><br><span class="line">        self.label_vocab = list(label_vocab)</span><br><span class="line">        </span><br><span class="line">        self.review_vocab_size = len(self.review_vocab)</span><br><span class="line">        self.label_vocab_size = len(self.label_vocab)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 创建词汇库字典</span></span><br><span class="line">        self.word2index = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i, word <span class="keyword">in</span> enumerate(self.review_vocab):</span><br><span class="line">            self.word2index[word] = i</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 创建标签索引字典</span></span><br><span class="line">        self.label2index = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i, label <span class="keyword">in</span> enumerate(self.label_vocab):</span><br><span class="line">            self.label2index[label] = i</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化模型，输入节点为词汇库长度，隐藏层节点默认为10，输出节点默认为1，学习率默认为0.1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_network</span><span class="params">(self, input_nodes, hidden_nodes, output_nodes, learning_rate)</span>:</span></span><br><span class="line">        self.input_nodes = input_nodes</span><br><span class="line">        self.hidden_nodes = hidden_nodes</span><br><span class="line">        self.output_nodes = output_nodes</span><br><span class="line">        self.learning_rate = learning_rate</span><br><span class="line"></span><br><span class="line">        self.weights_0_1 = np.zeros((self.input_nodes,self.hidden_nodes))</span><br><span class="line">        self.weights_1_2 = np.random.normal(<span class="number">0.0</span>, self.output_nodes**<span class="number">-0.5</span>, </span><br><span class="line">                                                (self.hidden_nodes, self.output_nodes))</span><br><span class="line">        </span><br><span class="line">        self.layer_1 = np.zeros((<span class="number">1</span>,hidden_nodes))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 定义标签转换函数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_target_for_label</span><span class="params">(self,label)</span>:</span></span><br><span class="line">        <span class="keyword">if</span>(label == <span class="string">'POSITIVE'</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(self,x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + np.exp(-x))</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sigmoid_output_2_derivative</span><span class="params">(self,output)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> output * (<span class="number">1</span> - output)</span><br><span class="line">    </span><br><span class="line"><span class="comment">#=======================训练函数=============================    </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, training_reviews_raw, training_labels)</span>:</span></span><br><span class="line"></span><br><span class="line">        training_reviews = list()</span><br><span class="line">        <span class="keyword">for</span> review <span class="keyword">in</span> training_reviews_raw:</span><br><span class="line">            indices = set()</span><br><span class="line">            <span class="keyword">for</span> word <span class="keyword">in</span> review.split(<span class="string">" "</span>):</span><br><span class="line">                <span class="keyword">if</span>(word <span class="keyword">in</span> self.word2index.keys()):</span><br><span class="line">                    indices.add(self.word2index[word])</span><br><span class="line">            training_reviews.append(list(indices))</span><br><span class="line">        <span class="comment"># 以上代码记录下每条评论的每个词汇在对应字典中的位置索引，以此作为输入数据。</span></span><br><span class="line">        <span class="comment"># 最终这里生成的training_reviews里面存放的是每条影评的各个词汇在词汇字典里的索引。</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">assert</span>(len(training_reviews) == len(training_labels))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义一个容器计算正确的个数用以计算准确率</span></span><br><span class="line">        correct_so_far = <span class="number">0</span></span><br><span class="line">        start = time.time()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(training_reviews)):</span><br><span class="line">            review = training_reviews[i]</span><br><span class="line">            label = training_labels[i]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 输入层</span></span><br><span class="line">            self.layer_1 *= <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> review:</span><br><span class="line">                self.layer_1 += self.weights_0_1[index]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 输出层</span></span><br><span class="line">            layer_2 = self.sigmoid(self.layer_1.dot(self.weights_1_2))            </span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 输出层误差和梯度</span></span><br><span class="line">            layer_2_error = layer_2 - self.get_target_for_label(label) <span class="comment"># Output layer error is the difference between desired target and actual output.</span></span><br><span class="line">            layer_2_delta = layer_2_error * self.sigmoid_output_2_derivative(layer_2)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 反向传播误差和梯度</span></span><br><span class="line">            layer_1_error = layer_2_delta.dot(self.weights_1_2.T) <span class="comment"># errors propagated to the hidden layer</span></span><br><span class="line">            layer_1_delta = layer_1_error <span class="comment"># hidden layer gradients - no nonlinearity so it's the same as the error</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 更新权值</span></span><br><span class="line">            self.weights_1_2 -= self.layer_1.T.dot(layer_2_delta) * self.learning_rate <span class="comment"># update hidden-to-output weights with gradient descent step</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> review:</span><br><span class="line">                self.weights_0_1[index] -= layer_1_delta[<span class="number">0</span>] * self.learning_rate <span class="comment"># update input-to-hidden weights with gradient descent step</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(layer_2 &gt;= <span class="number">0.5</span> <span class="keyword">and</span> label == <span class="string">'POSITIVE'</span>):</span><br><span class="line">                correct_so_far += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span>(layer_2 &lt; <span class="number">0.5</span> <span class="keyword">and</span> label == <span class="string">'NEGATIVE'</span>):</span><br><span class="line">                correct_so_far += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            elapsed_time = float(time.time() - start)</span><br><span class="line">            reviews_per_second = i / elapsed_time <span class="keyword">if</span> elapsed_time &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            sys.stdout.write(<span class="string">"\rProgress:"</span> + str(<span class="number">100</span> * i/float(len(training_reviews)))[:<span class="number">4</span>] \</span><br><span class="line">                             + <span class="string">"% Speed(reviews/sec):"</span> + str(reviews_per_second)[<span class="number">0</span>:<span class="number">5</span>] \</span><br><span class="line">                             + <span class="string">" #Correct:"</span> + str(correct_so_far) + <span class="string">" #Trained:"</span> + str(i+<span class="number">1</span>) \</span><br><span class="line">                             + <span class="string">" Training Accuracy:"</span> + str(correct_so_far * <span class="number">100</span> / float(i+<span class="number">1</span>))[:<span class="number">4</span>] + <span class="string">"%"</span>)</span><br><span class="line">            <span class="keyword">if</span>(i % <span class="number">2500</span> == <span class="number">0</span>):</span><br><span class="line">                print(<span class="string">""</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(self, testing_reviews, testing_labels)</span>:</span></span><br><span class="line">        </span><br><span class="line">        correct = <span class="number">0</span></span><br><span class="line">        start = time.time()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(testing_reviews)):</span><br><span class="line">            pred = self.run(testing_reviews[i])</span><br><span class="line">            <span class="keyword">if</span>(pred == testing_labels[i]):</span><br><span class="line">                correct += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            elapsed_time = float(time.time() - start)</span><br><span class="line">            reviews_per_second = i / elapsed_time <span class="keyword">if</span> elapsed_time &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            sys.stdout.write(<span class="string">"\rProgress:"</span> + str(<span class="number">100</span> * i/float(len(testing_reviews)))[:<span class="number">4</span>] \</span><br><span class="line">                             + <span class="string">"% Speed(reviews/sec):"</span> + str(reviews_per_second)[<span class="number">0</span>:<span class="number">5</span>] \</span><br><span class="line">                             + <span class="string">" #Correct:"</span> + str(correct) + <span class="string">" #Tested:"</span> + str(i+<span class="number">1</span>) \</span><br><span class="line">                             + <span class="string">" Testing Accuracy:"</span> + str(correct * <span class="number">100</span> / float(i+<span class="number">1</span>))[:<span class="number">4</span>] + <span class="string">"%"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, review)</span>:</span></span><br><span class="line">        self.layer_1 *= <span class="number">0</span></span><br><span class="line">        unique_indices = set()</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> review.lower().split(<span class="string">" "</span>):</span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">in</span> self.word2index.keys():</span><br><span class="line">                unique_indices.add(self.word2index[word])</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> unique_indices:</span><br><span class="line">            self.layer_1 += self.weights_0_1[index]</span><br><span class="line">        </span><br><span class="line">        layer_2 = self.sigmoid(self.layer_1.dot(self.weights_1_2))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(layer_2[<span class="number">0</span>] &gt;= <span class="number">0.5</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"POSITIVE"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"NEGATIVE"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mlp = SentimentNetwork(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>],</span><br><span class="line">                       min_count=<span class="number">20</span>,polarity_cutoff=<span class="number">0.6</span>,</span><br><span class="line">                       learning_rate=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlp.train(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlp.test(reviews[<span class="number">-1000</span>:], labels[<span class="number">-1000</span>:])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:99.9% Speed(reviews/sec):5572. #Correct:845 #Tested:1000 Testing Accuracy:84.5%
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_most_similar_words</span><span class="params">(focus = <span class="string">"horrible"</span>)</span>:</span></span><br><span class="line">    most_similar = Counter()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> mlp_full.word2index.keys():</span><br><span class="line">        most_similar[word] = np.dot(mlp_full.weights_0_1[mlp_full.word2index[word]],mlp_full.weights_0_1[mlp_full.word2index[focus]])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> most_similar.most_common()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlp_full = SentimentNetwork(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>],min_count=<span class="number">0</span>,polarity_cutoff=<span class="number">0</span>,learning_rate=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlp_full.train(reviews[:<span class="number">-1000</span>],labels[:<span class="number">-1000</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Progress:0.0% Speed(reviews/sec):0.0 #Correct:1 #Trained:1 Training Accuracy:100.%
+Progress:10.4% Speed(reviews/sec):1712. #Correct:1962 #Trained:2501 Training Accuracy:78.4%
+Progress:20.8% Speed(reviews/sec):1646. #Correct:4002 #Trained:5001 Training Accuracy:80.0%
+Progress:31.2% Speed(reviews/sec):1545. #Correct:6120 #Trained:7501 Training Accuracy:81.5%
+Progress:41.6% Speed(reviews/sec):1571. #Correct:8271 #Trained:10001 Training Accuracy:82.7%
+Progress:52.0% Speed(reviews/sec):1560. #Correct:10431 #Trained:12501 Training Accuracy:83.4%
+Progress:62.5% Speed(reviews/sec):1573. #Correct:12565 #Trained:15001 Training Accuracy:83.7%
+Progress:72.9% Speed(reviews/sec):1567. #Correct:14670 #Trained:17501 Training Accuracy:83.8%
+Progress:83.3% Speed(reviews/sec):1531. #Correct:16833 #Trained:20001 Training Accuracy:84.1%
+Progress:93.7% Speed(reviews/sec):1512. #Correct:19015 #Trained:22501 Training Accuracy:84.5%
+Progress:99.9% Speed(reviews/sec):1504. #Correct:20335 #Trained:24000 Training Accuracy:84.7%
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># get_most_similar_words("excellent")</span></span><br><span class="line"><span class="comment"># get_most_similar_words("terrible")</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> colors</span><br><span class="line"></span><br><span class="line">words_to_visualize = list()</span><br><span class="line"><span class="keyword">for</span> word, ratio <span class="keyword">in</span> pos_neg_ratios.most_common(<span class="number">500</span>):</span><br><span class="line">    <span class="keyword">if</span>(word <span class="keyword">in</span> mlp_full.word2index.keys()):</span><br><span class="line">        words_to_visualize.append(word)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> word, ratio <span class="keyword">in</span> list(reversed(pos_neg_ratios.most_common()))[<span class="number">0</span>:<span class="number">500</span>]:</span><br><span class="line">    <span class="keyword">if</span>(word <span class="keyword">in</span> mlp_full.word2index.keys()):</span><br><span class="line">        words_to_visualize.append(word)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pos = <span class="number">0</span></span><br><span class="line">neg = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">colors_list = list()</span><br><span class="line">vectors_list = list()</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> words_to_visualize:</span><br><span class="line">    <span class="keyword">if</span> word <span class="keyword">in</span> pos_neg_ratios.keys():</span><br><span class="line">        vectors_list.append(mlp_full.weights_0_1[mlp_full.word2index[word]])</span><br><span class="line">        <span class="keyword">if</span>(pos_neg_ratios[word] &gt; <span class="number">0</span>):</span><br><span class="line">            pos+=<span class="number">1</span></span><br><span class="line">            colors_list.append(<span class="string">"#00ff00"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            neg+=<span class="number">1</span></span><br><span class="line">            colors_list.append(<span class="string">"#000000"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.manifold <span class="keyword">import</span> TSNE</span><br><span class="line">tsne = TSNE(n_components=<span class="number">2</span>, random_state=<span class="number">0</span>)</span><br><span class="line">words_top_ted_tsne = tsne.fit_transform(vectors_list)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">p = figure(tools=<span class="string">"pan,wheel_zoom,reset,save"</span>,</span><br><span class="line">           toolbar_location=<span class="string">"above"</span>,</span><br><span class="line">           title=<span class="string">"vector T-SNE for most polarized words"</span>)</span><br><span class="line"></span><br><span class="line">source = ColumnDataSource(data=dict(x1=words_top_ted_tsne[:,<span class="number">0</span>],</span><br><span class="line">                                    x2=words_top_ted_tsne[:,<span class="number">1</span>],</span><br><span class="line">                                    names=words_to_visualize,</span><br><span class="line">                                    color=colors_list))</span><br><span class="line"></span><br><span class="line">p.scatter(x=<span class="string">"x1"</span>, y=<span class="string">"x2"</span>, size=<span class="number">8</span>, source=source, fill_color=<span class="string">"color"</span>)</span><br><span class="line"></span><br><span class="line">word_labels = LabelSet(x=<span class="string">"x1"</span>, y=<span class="string">"x2"</span>, text=<span class="string">"names"</span>, y_offset=<span class="number">6</span>,</span><br><span class="line">                  text_font_size=<span class="string">"8pt"</span>, text_color=<span class="string">"#555555"</span>,</span><br><span class="line">                  source=source, text_align=<span class="string">'center'</span>)</span><br><span class="line">p.add_layout(word_labels)</span><br><span class="line"></span><br><span class="line">show(p)</span><br><span class="line"></span><br><span class="line"><span class="comment"># green indicates positive words, black indicates negative words</span></span><br></pre></td></tr></table></figure>
+<div class="bk-root"><br>    <div class="bk-plotdiv" id="d3918d6b-4bbe-44b0-9b84-9c4239966e87"></div><br></div>
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/Pyspark_Hive_Mysql.html" rel="next" title="Pyspark连接读取Hive和Mysql数据库">
+                <i class="fa fa-chevron-left"></i> Pyspark连接读取Hive和Mysql数据库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTIxOC8xMTc1NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘知行</p>
+              <p class="site-description motion-element" itemprop="description">机器学习</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hooog" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、准备数据"><span class="nav-number">1.</span> <span class="nav-text">一、准备数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、理论验证"><span class="nav-number">2.</span> <span class="nav-text">二、理论验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、构建神经网络原型"><span class="nav-number">3.</span> <span class="nav-text">三、构建神经网络原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、将每条评论转换为输入向量"><span class="nav-number">4.</span> <span class="nav-text">四、将每条评论转换为输入向量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、创建神经网络"><span class="nav-number">5.</span> <span class="nav-text">五、创建神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、初步测试"><span class="nav-number">6.</span> <span class="nav-text">六、初步测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、关于噪音的分析"><span class="nav-number">7.</span> <span class="nav-text">七、关于噪音的分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、关于网络计算效率低的分析"><span class="nav-number">8.</span> <span class="nav-text">八、关于网络计算效率低的分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、进一步降低降低噪音"><span class="nav-number">9.</span> <span class="nav-text">九、进一步降低降低噪音</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘知行</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+  </div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
