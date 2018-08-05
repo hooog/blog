@@ -1,3 +1,5 @@
+http://www.ihoge.cn/2018/EM.html
+http://www.ihoge.cn/2018/HMM.html
 http://www.ihoge.cn/2018/moviestatis.html
 http://www.ihoge.cn/2018/Pyspark_Hive_Mysql.html
 http://www.ihoge.cn/2018/Keras2.html
@@ -6,8 +8,8 @@ http://www.ihoge.cn/2018/BFNN.html
 http://www.ihoge.cn/2018/DL_BFNN.html
 http://www.ihoge.cn/2018/clustering.html
 http://www.ihoge.cn/2018/tensorflow1.html
-http://www.ihoge.cn/2018/XGBoost.html
 http://www.ihoge.cn/2018/boosting.html
+http://www.ihoge.cn/2018/XGBoost.html
 http://www.ihoge.cn/2018/XGBoost1.html
 http://www.ihoge.cn/2018/adaboost.html
 http://www.ihoge.cn/2018/newton1.html
@@ -19,8 +21,8 @@ http://www.ihoge.cn/2018/ML1.html
 http://www.ihoge.cn/2018/DataPreprocessing3.html
 http://www.ihoge.cn/2018/DataPreprocessing2.html
 http://www.ihoge.cn/2018/DataPreprocessing1.html
-http://www.ihoge.cn/2018/StructuredStreaming.html
 http://www.ihoge.cn/2018/strame.html
+http://www.ihoge.cn/2018/StructuredStreaming.html
 http://www.ihoge.cn/2018/IntroductionToSpark.html
 http://www.ihoge.cn/2018/hbase.html
 http://www.ihoge.cn/2018/Databrickes.html
@@ -37,6 +39,7 @@ http://www.ihoge.cn/2018/SVMPLOT.html
 http://www.ihoge.cn/2018/SVWSVC.html
 http://www.ihoge.cn/2018/sklearn-ensemble.html
 http://www.ihoge.cn/2018/SVM.html
+http://www.ihoge.cn/2018/基于计量经济学研究线性回归建模的一般步骤及模型优化.html
 http://www.ihoge.cn/2018/DecisionTree.html
 http://www.ihoge.cn/2018/Logistic-regression.html
 http://www.ihoge.cn/2018/githubhexos.html
@@ -44,7 +47,6 @@ http://www.ihoge.cn/2018/githubhexocodingbaidu.html
 http://www.ihoge.cn/2018/Recursive.html
 http://www.ihoge.cn/2018/sklearnLiner.html
 http://www.ihoge.cn/2018/scala1.html
-http://www.ihoge.cn/2018/基于计量经济学研究线性回归建模的一般步骤及模型优化.html
 http://www.ihoge.cn/2018/KNN.html
 http://www.ihoge.cn/2018/sklearn1.html
 http://www.ihoge.cn/2018/hadoop.html

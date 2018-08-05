@@ -2,9 +2,142 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2018/HMM.html</loc>
+    
+    <lastmod>2018-08-05T10:20:51.543Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/Keras2.html</loc>
+    
+    <lastmod>2018-08-05T10:20:19.272Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
+    
+    <lastmod>2018-08-05T10:19:56.154Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/%E5%9F%BA%E4%BA%8E%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6%E7%A0%94%E7%A9%B6%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%BB%BA%E6%A8%A1%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%E5%8F%8A%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96.html</loc>
+    
+    <lastmod>2018-08-05T10:19:37.238Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/StructuredStreaming.html</loc>
+    
+    <lastmod>2018-08-05T10:18:20.790Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/strame.html</loc>
+    
+    <lastmod>2018-08-05T10:18:18.462Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/ML2.html</loc>
+    
+    <lastmod>2018-08-05T10:17:53.984Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
+    
+    <lastmod>2018-08-05T10:17:29.003Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/GradientDescent.html</loc>
+    
+    <lastmod>2018-08-05T10:17:17.903Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/newton1.html</loc>
+    
+    <lastmod>2018-08-05T10:17:14.456Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/adaboost.html</loc>
+    
+    <lastmod>2018-08-05T10:17:10.896Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/XGBoost1.html</loc>
+    
+    <lastmod>2018-08-05T10:17:07.236Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/boosting.html</loc>
+    
+    <lastmod>2018-08-05T10:16:52.918Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/XGBoost.html</loc>
+    
+    <lastmod>2018-08-05T10:16:49.409Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/clustering.html</loc>
+    
+    <lastmod>2018-08-05T10:16:41.844Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/tensorflow1.html</loc>
+    
+    <lastmod>2018-08-05T10:16:31.444Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/BFNN.html</loc>
+    
+    <lastmod>2018-08-05T10:16:14.071Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/DL_BFNN.html</loc>
+    
+    <lastmod>2018-08-05T10:16:04.207Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/2018/moviestatis.html</loc>
     
-    <lastmod>2018-07-26T09:26:03.714Z</lastmod>
+    <lastmod>2018-08-05T10:14:28.415Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/EM.html</loc>
+    
+    <lastmod>2018-08-05T10:14:15.900Z</lastmod>
     
   </url>
   
@@ -26,41 +159,6 @@
     <loc>http://www.ihoge.cn/confusion_matrix.html</loc>
     
     <lastmod>2018-06-21T15:05:14.714Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/Keras2.html</loc>
-    
-    <lastmod>2018-06-07T16:20:09.650Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/BFNN.html</loc>
-    
-    <lastmod>2018-06-01T14:45:35.230Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/DL_BFNN.html</loc>
-    
-    <lastmod>2018-06-01T14:44:40.432Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/clustering.html</loc>
-    
-    <lastmod>2018-05-28T08:01:37.166Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/GradientDescent.html</loc>
-    
-    <lastmod>2018-05-28T07:59:23.932Z</lastmod>
     
   </url>
   
@@ -93,23 +191,9 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/DStream%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html</loc>
-    
-    <lastmod>2018-05-28T07:57:03.188Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/MLLearning.html</loc>
     
     <lastmod>2018-05-28T07:56:15.031Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/%E5%9F%BA%E4%BA%8E%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6%E7%A0%94%E7%A9%B6%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%BB%BA%E6%A8%A1%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4%E5%8F%8A%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96.html</loc>
-    
-    <lastmod>2018-05-28T07:56:07.396Z</lastmod>
     
   </url>
   
@@ -205,65 +289,9 @@
   </url>
   
   <url>
-    <loc>http://www.ihoge.cn/2018/KNN1.html</loc>
-    
-    <lastmod>2018-05-28T07:53:08.321Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/XGBoost.html</loc>
-    
-    <lastmod>2018-05-28T07:52:58.059Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/boosting.html</loc>
-    
-    <lastmod>2018-05-28T07:52:54.331Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/ML2.html</loc>
-    
-    <lastmod>2018-05-28T07:52:01.154Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.ihoge.cn/2018/SparkSQL1.html</loc>
     
     <lastmod>2018-05-28T07:51:54.349Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/newton1.html</loc>
-    
-    <lastmod>2018-05-28T07:51:08.123Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/adaboost.html</loc>
-    
-    <lastmod>2018-05-28T07:51:05.221Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/XGBoost1.html</loc>
-    
-    <lastmod>2018-05-28T07:46:01.812Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/tensorflow1.html</loc>
-    
-    <lastmod>2018-05-28T07:45:21.373Z</lastmod>
     
   </url>
   
@@ -418,20 +446,6 @@
     <loc>http://www.ihoge.cn/2018/pymysql.html</loc>
     
     <lastmod>2018-05-17T12:14:25.702Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/strame.html</loc>
-    
-    <lastmod>2018-05-17T12:12:42.787Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/StructuredStreaming.html</loc>
-    
-    <lastmod>2018-05-17T12:12:27.498Z</lastmod>
     
   </url>
   

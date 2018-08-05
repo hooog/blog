@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="案例," />
 
 
 
@@ -84,21 +84,22 @@
 
 
 <meta name="description" content="一、准备数据12345import pandas as pddata = pd.DataFrame([])data[&apos;reviews&apos;] = pd.read_table(&apos;reviews.txt&apos;,header=None,names=[&apos;reviews&apos;])data[&apos;labels&apos;] = pd.read_table(&apos;labels.txt&apos;,header=None,names=[&apos;labels">
+<meta name="keywords" content="案例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用BF神经网络进行基于影评的语义分析">
 <meta property="og:url" content="http://www.ihoge.cn/2018/moviestatis.html">
 <meta property="og:site_name" content="Student">
 <meta property="og:description" content="一、准备数据12345import pandas as pddata = pd.DataFrame([])data[&apos;reviews&apos;] = pd.read_table(&apos;reviews.txt&apos;,header=None,names=[&apos;reviews&apos;])data[&apos;labels&apos;] = pd.read_table(&apos;labels.txt&apos;,header=None,names=[&apos;labels">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.ihoge.cn/2018/media/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-07-26%20%E4%B8%8B%E5%8D%885.16.54.png">
+<meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/屏幕快照 2018-07-26 下午5.16.54.png">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/output_17_0.png">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/output_18_0.png">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/output_44_0.png">
-<meta property="og:updated_time" content="2018-07-26T09:26:03.714Z">
+<meta property="og:updated_time" content="2018-08-05T10:14:28.415Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用BF神经网络进行基于影评的语义分析">
 <meta name="twitter:description" content="一、准备数据12345import pandas as pddata = pd.DataFrame([])data[&apos;reviews&apos;] = pd.read_table(&apos;reviews.txt&apos;,header=None,names=[&apos;reviews&apos;])data[&apos;labels&apos;] = pd.read_table(&apos;labels.txt&apos;,header=None,names=[&apos;labels">
-<meta name="twitter:image" content="http://www.ihoge.cn/2018/media/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-07-26%20%E4%B8%8B%E5%8D%885.16.54.png">
+<meta name="twitter:image" content="http://p6rvh6ej2.bkt.clouddn.com/屏幕快照 2018-07-26 下午5.16.54.png">
 
 
 
@@ -371,7 +372,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pos_data.iloc[:,<span class="number">0</span>][:<span class="number">3</span>]</span><br><span class="line">list(neg_data.iloc[:,<span class="number">0</span>][:<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
 <pre><code>[&apos;story of a man who has unnatural feelings for a pig . starts out with a opening scene that is a terrific example of absurd comedy . a formal orchestra audience is turned into an insane  violent mob by the crazy chantings of it  s singers . unfortunately it stays absurd the whole time with no general narrative eventually making it just too off putting . even those from the era should be turned off . the cryptic dialogue would make shakespeare seem easy to a third grader . on a technical level it  s better than you might think with some good cinematography by future great vilmos zsigmond . future stars sally kirkland and frederic forrest can be seen briefly .  &apos;]
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> Pie, Style</span><br><span class="line"></span><br><span class="line">pie = Pie(<span class="string">"正负样本占比"</span>, title_pos=<span class="string">'left'</span>)</span><br><span class="line">style = Style()</span><br><span class="line">pie_style = style.add(label_pos = <span class="string">'left'</span>,</span><br><span class="line">                      is_label_show = <span class="keyword">True</span>,</span><br><span class="line">                      label_text_color = <span class="keyword">True</span>,</span><br><span class="line">                      label_text_size = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">pie.add(<span class="string">"样例条数"</span>, [<span class="string">"positive"</span>,<span class="string">"negative"</span>],[len(pos_data), len(neg_data)], **pie_style)</span><br><span class="line">pie</span><br></pre></td></tr></table></figure>
-<p><img src="media/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-07-26%20%E4%B8%8B%E5%8D%885.16.54.png" alt="屏幕快照 2018-07-26 下午5.16.54"></p>
+<p><img src="http://p6rvh6ej2.bkt.clouddn.com/屏幕快照 2018-07-26 下午5.16.54.png" alt="屏幕快照 2018-07-26 下午5.16.54"></p>
 <h2 id="二、理论验证"><a href="#二、理论验证" class="headerlink" title="二、理论验证"></a>二、理论验证</h2><p>通过观察发现正面评论里常出现些赞美的词汇，负面评论出现批判的词汇。考虑能否根据这个特征来对正负评论进行预测？</p>
 <p>根据这个想法进行一次快速的验证</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time</span><br></pre></td></tr></table></figure>
@@ -654,6 +655,12 @@ Progress:99.9% Speed(reviews/sec):1504. #Correct:20335 #Trained:24000 Training A
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/案例/" rel="tag"><i class="fa fa-tag"></i> 案例</a>
+          
+        </div>
+      
 
       
       
@@ -672,6 +679,10 @@ Progress:99.9% Speed(reviews/sec):1504. #Correct:20335 #Trained:24000 Training A
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/HMM.html" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -759,7 +770,7 @@ Progress:99.9% Speed(reviews/sec):1504. #Correct:20335 #Trained:24000 Training A
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -781,7 +792,7 @@ Progress:99.9% Speed(reviews/sec):1504. #Correct:20335 #Trained:24000 Training A
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
