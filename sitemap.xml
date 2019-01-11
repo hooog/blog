@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2018/EM.html</loc>
+    
+    <lastmod>2018-08-19T01:09:24.013Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/2018/HMM.html</loc>
     
-    <lastmod>2018-08-05T10:20:51.543Z</lastmod>
+    <lastmod>2018-08-05T10:24:01.463Z</lastmod>
     
   </url>
   
@@ -131,13 +138,6 @@
     <loc>http://www.ihoge.cn/2018/moviestatis.html</loc>
     
     <lastmod>2018-08-05T10:14:28.415Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/EM.html</loc>
-    
-    <lastmod>2018-08-05T10:14:15.900Z</lastmod>
     
   </url>
   

@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://www.ihoge.cn/2018/media/image1-1.png">
 <meta property="og:image" content="http://www.ihoge.cn/2018/media/jensen.jpg">
 <meta property="og:image" content="http://www.ihoge.cn/2018/media/EM.png">
-<meta property="og:updated_time" content="2018-08-05T10:14:15.900Z">
+<meta property="og:updated_time" content="2018-08-19T01:09:24.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EM 算法(Expectation Maximization Algorithm)">
 <meta name="twitter:description" content="EM 算法(Expectation Maximization Algorithm)   EM 算法简介    准备知识 2.1 极大似然估计 2.2 Jensen 不等式      EM 算法详解 3.1 问题描述 3.2 EM 算法推倒 3.3 EM 算法流程      EM 算法小结     1. EM 算法简介 EM算法是一种迭代优化策略，由于它的计算方法中每一次迭代都分两步，其中一个为期望">
@@ -432,8 +432,9 @@
 </li>
 </ul>
 <h2 id="3-EM-算法详解"><a href="#3-EM-算法详解" class="headerlink" title="3. EM 算法详解"></a>3. EM 算法详解</h2><h3 id="3-1-问题描述"><a href="#3-1-问题描述" class="headerlink" title="3.1 问题描述"></a>3.1 问题描述</h3><p>我们目前有100个男生和100个女生的身高，共200个数据，但是我们不知道这200个数据中哪个是男生的身高，哪个是女生的身高。假设男生、女生的身高分别服从正态分布，则每个样本是从哪个分布抽取的，我们目前是不知道的。这个时候，对于每一个样本，就有两个方面需要猜测或者估计： 这个身高数据是来自于男生还是来自于女生？男生、女生身高的正态分布的参数分别是多少？EM算法要解决的问题正是这两个问题：<br><img src="media/EM.png" alt="E"></p>
-<h3 id="3-2-EM-算法推导"><a href="#3-2-EM-算法推导" class="headerlink" title="3.2 EM 算法推导"></a>3.2 EM 算法推导</h3><p>样本集$X=(x_1,…,x_m)$，包含$m$各独立的样本；每个样本对应的类别$z_i$是未知的（即上文中每个样本属于哪个分布是未知的）；我们需要以及概率模型$p(x,z)$的参数 $\theta$，即需要找到适合的 $\theta$ 让 $:(\theta)$ 最大。根据上文 <strong>2.1 极大似然估计</strong> 中的似然函数取对数所得$\log L(\theta)$，可以得到如下式：</p>
-<p>$$\sum \log p(x_i;\theta)=\sum <em>i\log \sum</em>{z_i}p(x_i,z_i;\theta)$$<br>$$=\sum_i\log \sum_{z_i}Q_i(z_i)\frac{p(x_i,z_i;\theta)}{Q_i(z_i)}$$<br>$$≥\sum_i\sum_{z_i}Q_i(z_i)\log \frac{p(x_i,z_i;\theta)}{Q(z_i)}$$</p>
+<h3 id="3-2-EM-算法推导"><a href="#3-2-EM-算法推导" class="headerlink" title="3.2 EM 算法推导"></a>3.2 EM 算法推导</h3><p>样本集$X=(x_1,…,x_m)$，包含$m$各独立的样本；每个样本对应的类别$z_i$是未知的（即上文中每个样本属于哪个分布是未知的）；我们需要以及概率模型$p(x,z)$的参数 $\theta$，即需要找到适合的 $\theta$ 让 $:(\theta)$ 最大。根据上文 <strong>2.1 极大似然估计</strong> 中的似然函数取对数所得$\log L(\theta)$，可以得到如下式：<br>$$\sum\log p(x_i;\theta)=\sum_{i}\log{\sum_{z_i}p(x_i,z_i;\theta)}$$</p>
+<p>$$=\sum_i\log\sum_{z_i}Q_i(z_i)\frac{p(x_i,z_i;\theta)}{Q_i(z_i)}$$</p>
+<p>$$≥\sum_i\sum_{z_i}Q_i(z_i)\log\frac{p(x_i,z_i;\theta)}{Q(z_i)}$$</p>
 <p>其中，第一步是根据$x_i$的边缘概率计算得来，第二步是分子分母同乘一个数得到，第三步是根据Jensen不等式得到。<br>这里对第三步进行展开：由于$\sum Q_i(z_i)[\frac{p(x_i,z_i;\theta)}{Q_i(z_i)}]$为$\frac{p(x_i,z_i;\theta)}{Q(z_i)}$的期望，且$\log (x)$为凹函数，根据Jensen不等式（<em>当$f$为凹函数时:$E[f(X)]≤f(E[X])$</em>）。<a href="http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006936.html" target="_blank" rel="noopener">The EM Algorithm</a></p>
 <p>上述过程可以看作是对$\log L(\theta)$(即$L(\theta)$)求下界。对于$Q_i(z_i)$的钻则，有很多可能，那么哪种更好呢？ 假设$\theta$已经给定，那么$\log L(\theta)$的值就取决于$Q_i(z_i)$和$p(x_i,z_i;\theta)$了。我们可以通过调整这两个概率使下界不断上升，以逼近$\log L(\theta)$的真实值，那么什么时候算事调整好了呢？当不等式变成等式时说明我们调整后的概率能够等价于$\log L(\theta)$了。按照这个思路，我们要找到等式成立的条件。根据Jensen不等式，要想让等式成立，需要让随机变量变成常数值，这里得到：<br>$$\frac{p(x_i,z_i;\theta)}{Q_i(z_i)}=c $$<br>$c$ 为常数，不依赖于 $z_i$。对此式作进一步推到：由于$\sum_{z_i}Q_i(z_i)=1$，则有 $\sum_{z_i}p(x_i,z_i;\theta)=c$（多个等式分子分母相加不变，则认为每个样例的两个概率比值都是$c$），因此得到下式：<br>$$Q_i(z_i)=\frac{p(z_i,z_i;\theta)}{\sum _zp(x_i,z;\theta)}$$<br>$$=\frac {p(x_i,z_i;\theta)}{p(z_i;\theta)}$$<br>$$=p(z_i|x_i;\theta)$$<br>至此，我们推出了在固定其他参数$\theta$后，$Q_i(z_i)$的计算公式就是后验概率，解决了$Q_i(z_i)$如何选择的问题。这一步就是 E 步，建立$\log L(\theta)$的下界。接下来的 M 步，就是在给定 $Q_i(z_i)$后，调整 $\theta$，取极大化 $\log L(\theta)$ 的下界（在固定$Q_i(z_i)$后， 下界还可以调整的更大）。这里可以参考 <a href="https://wenku.baidu.com/view/3396bb4d6294dd88d0d26bee.html" target="_blank" rel="noopener">EM算法</a></p>
 <h3 id="3-3-EM-算法流程"><a href="#3-3-EM-算法流程" class="headerlink" title="3.3 EM 算法流程"></a>3.3 EM 算法流程</h3><ul>
@@ -478,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/HMM.html" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2018/HMM.html" rel="next" title="隐马尔可夫模型 (HMM)">
+                <i class="fa fa-chevron-left"></i> 隐马尔可夫模型 (HMM)
               </a>
             
           </div>
@@ -678,7 +679,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

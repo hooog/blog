@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="算法," />
 
 
 
@@ -83,14 +83,18 @@
 
 
 
+<meta name="description" content="一、基本概念###1.1 隐马尔可夫的定义隐马尔可夫模型是关于时序的概率模型，描述由一个隐藏的马尔可夫链随机生成不可观测的状态随机序列，再由各个状态生成一个观测而产生观测随机序列的过程。隐藏的马尔可夫链随机生成的状态的序列，称为状态序列（state sequence）；每个状态生成一个观测，而由此产生的观测的随机序列，称为观测序列（observation sequence）。序列的每一个位置又可">
+<meta name="keywords" content="算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Student">
+<meta property="og:title" content="隐马尔可夫模型 (HMM)">
 <meta property="og:url" content="http://www.ihoge.cn/2018/HMM.html">
 <meta property="og:site_name" content="Student">
+<meta property="og:description" content="一、基本概念###1.1 隐马尔可夫的定义隐马尔可夫模型是关于时序的概率模型，描述由一个隐藏的马尔可夫链随机生成不可观测的状态随机序列，再由各个状态生成一个观测而产生观测随机序列的过程。隐藏的马尔可夫链随机生成的状态的序列，称为状态序列（state sequence）；每个状态生成一个观测，而由此产生的观测的随机序列，称为观测序列（observation sequence）。序列的每一个位置又可">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-05T10:20:51.543Z">
+<meta property="og:updated_time" content="2018-08-05T10:24:01.463Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Student">
+<meta name="twitter:title" content="隐马尔可夫模型 (HMM)">
+<meta name="twitter:description" content="一、基本概念###1.1 隐马尔可夫的定义隐马尔可夫模型是关于时序的概率模型，描述由一个隐藏的马尔可夫链随机生成不可观测的状态随机序列，再由各个状态生成一个观测而产生观测随机序列的过程。隐藏的马尔可夫链随机生成的状态的序列，称为状态序列（state sequence）；每个状态生成一个观测，而由此产生的观测的随机序列，称为观测序列（observation sequence）。序列的每一个位置又可">
 
 
 
@@ -126,7 +130,7 @@
 
 
 
-  <title> | Student</title>
+  <title>隐马尔可夫模型 (HMM) | Student</title>
   
 
 
@@ -280,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">隐马尔可夫模型 (HMM)</h1>
         
 
         <div class="post-meta">
@@ -292,7 +296,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-04T12:48:50+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-04T12:20:21+08:00">
                 2018-08-04
               </time>
             
@@ -302,6 +306,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -335,16 +361,7 @@
       
 
       
-        <!---
-title: 隐马尔可夫模型
-date: 2018-8-4 12:20:21
-comments: true
-categories:
-  - 机器学习
-tags:
-  - 算法
---->
-<a id="more"></a>
+        <a id="more"></a>
 <h2 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h2><p>###1.1 隐马尔可夫的定义<br>隐马尔可夫模型是关于时序的概率模型，描述由一个隐藏的马尔可夫链随机生成不可观测的状态随机序列，再由各个状态生成一个观测而产生观测随机序列的过程。隐藏的马尔可夫链随机生成的状态的序列，称为状态序列（state sequence）；每个状态生成一个观测，而由此产生的观测的随机序列，称为观测序列（observation sequence）。序列的每一个位置又可以看作是一个时刻。</p>
 <p>隐马尔可夫模型有初始概率分布、状态转移概率分布一级观测概率分布确定。其形式定义如下：</p>
 <p>设 Q 是所有可能的状态的集合，V 是所有可能的观测的集合。</p>
@@ -369,6 +386,12 @@ tags:
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          
+        </div>
       
 
       
@@ -583,7 +606,7 @@ tags:
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

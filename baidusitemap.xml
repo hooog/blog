@@ -4,15 +4,40 @@
 
     
   <url>
-    <loc>http://www.ihoge.cn/2018/HMM.html</loc>
-    <lastmod>2018-08-05T10:20:51.543Z</lastmod>
+    <loc>http://www.ihoge.cn/2018/EM.html</loc>
+    <lastmod>2018-08-19T01:09:24.013Z</lastmod>
     <data>
         <display>
-        <title></title>
-        <pubTime>2018-08-04T04:48:50.835Z</pubTime>
+        <title>EM 算法(Expectation Maximization Algorithm)</title>
+        <pubTime>2018-08-04T10:20:21.000Z</pubTime>
         
+        <tag>算法</tag>
+         
          
            
+             
+              <breadCrumb title="机器学习" url="http://www.ihoge.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.ihoge.cn/2018/HMM.html</loc>
+    <lastmod>2018-08-05T10:24:01.463Z</lastmod>
+    <data>
+        <display>
+        <title>隐马尔可夫模型 (HMM)</title>
+        <pubTime>2018-08-04T04:20:21.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="机器学习" url="http://www.ihoge.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
         </display>
     </data>
     </url>
@@ -367,26 +392,6 @@
            
              
               <breadCrumb title="深度学习" url="http://www.ihoge.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.ihoge.cn/2018/EM.html</loc>
-    <lastmod>2018-08-05T10:14:15.900Z</lastmod>
-    <data>
-        <display>
-        <title>EM 算法(Expectation Maximization Algorithm)</title>
-        <pubTime>2018-08-04T10:20:21.000Z</pubTime>
-        
-        <tag>算法</tag>
-         
-         
-           
-             
-              <breadCrumb title="机器学习" url="http://www.ihoge.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
           
         </display>
     </data>
