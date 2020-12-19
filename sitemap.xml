@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ihoge.cn/2020/something.html</loc>
+    
+    <lastmod>2020-12-19T03:27:04.117Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ihoge.cn/2018/boosting.html</loc>
+    
+    <lastmod>2019-03-12T07:46:07.365Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ihoge.cn/2018/EM.html</loc>
     
     <lastmod>2018-08-19T01:09:24.013Z</lastmod>
@@ -89,13 +103,6 @@
     <loc>http://www.ihoge.cn/2018/XGBoost1.html</loc>
     
     <lastmod>2018-08-05T10:17:07.236Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ihoge.cn/2018/boosting.html</loc>
-    
-    <lastmod>2018-08-05T10:16:52.918Z</lastmod>
     
   </url>
   

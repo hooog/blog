@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15268013497837.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15268027278380.jpg">
 <meta property="og:image" content="http://p6rvh6ej2.bkt.clouddn.com/15267180767470.jpg">
-<meta property="og:updated_time" content="2018-08-05T10:16:52.918Z">
+<meta property="og:updated_time" content="2019-03-12T07:46:07.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="提升树（Boosting tree）算法总结">
 <meta name="twitter:description" content="本文是综合了之前的以往多个笔记汇总而成，内容包含： 一、Boosting基本概念 二、前向分步加法模型     1. 加法模型     2. 前向分步算法 三、AdaBoost     1. 算法解析     2. 模型构建     3. 算法缺点 四、二叉分类树 五、回归分类树     1. 算法解析     2. 模型构建 六、梯度提升树（GBDT）     1. 算法解析     2. 模">
@@ -634,7 +634,7 @@
 </ol>
 <p>XGBoost 算法对于中低维数据具有很好的处理速度和精度，但是对于例如大规模图像物体识别，或者是推荐算法的某些场景中会出现的超高维特征的数据就无能为力了，这时候我们就需要借助于深度学习等算法。</p>
 <h2 id="八、-总结"><a href="#八、-总结" class="headerlink" title="八、 总结"></a>八、 总结</h2><h3 id="1-Boosting家族"><a href="#1-Boosting家族" class="headerlink" title="1. Boosting家族"></a>1. Boosting家族</h3><p>提升(Boosting)是集成学习方法里的一个重要方法，其主要思想是将弱分类器组装成一个强分类器。在 PAC（概率近似正确）学习框架下，则一定可以将弱分类器组装成一个强分类器。</p>
-<p><strong>AdaBoost、GBDT、XGBoost</strong>都属于（加法模型、前向分步、指数损失函数）家族，都实现了通过将多个弱学习器组合成强学习器已达到提升预测准确度的目的。实现的过程略有不同且适用于不同场景。<br>Boosting并非是一个方法，而是一类方法。这里按照损失函数的不同，将其细分为若干类算法，下表给出了4种不同损失函数对应的Boosting方法：</p>
+<p><strong>AdaBoost、GBDT、XGBoost</strong>都属于（加法模型、前向分步、指数损失函数）Boosting家族，都实现了通过将多个弱学习器组合成强学习器已达到提升预测准确度的目的。实现的过程略有不同且适用于不同场景。<br>Boosting并非是一个方法，而是一类方法。这里按照损失函数的不同，将其细分为若干类算法，下表给出了4种不同损失函数对应的Boosting方法：</p>
 <p><img src="http://p6rvh6ej2.bkt.clouddn.com/15267180767470.jpg" alt=""></p>
 <h3 id="2-Adaboost"><a href="#2-Adaboost" class="headerlink" title="2. Adaboost"></a>2. Adaboost</h3><p><strong>AdaBoost</strong>是一种典型的分类回归树，适合解决二分类问题。多分类问题解决起来比较麻烦（参考上文）</p>
 <p><strong>AdaBoost</strong>是一种采用加法模型、前向分步算法、指数损失函数的提升树。可以表示为 Boosting 的前向分布算法的一个特例。 <a href="http://ihoge.cn/2018/adaboost.html" target="_blank" rel="noopener">更多内容请参考</a></p>
@@ -785,7 +785,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -889,7 +889,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
